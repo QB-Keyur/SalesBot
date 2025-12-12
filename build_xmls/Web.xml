@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Web scenarios" verbose="10" parallel="tests" allow-return-values="true">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+
+    <!-- Verify that the login page loads successfully.-->
+    <test name="Verify that the login page loads successfully">
+        <classes>
+            <class name="Tests.AdminTest">
+                <methods>
+                    <include name="verifyLoginPageIsLoadsSuccessfully"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify user can log-in with valid credentials.-->
+    <test name="Verify user can log-in with valid credentials">
+        <classes>
+            <class name="Tests.AdminTest">
+                <methods>
+                    <include name="VerifyUserCanLoginWthValidCredentials"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify error message for invalid credentials.-->
+    <test name="Verify error message for invalid credentials">
+        <classes>
+            <class name="Tests.AdminTest">
+                <methods>
+                    <include name="verifyErrorMessageForInvalidCredential"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify validation messages for empty fields.-->
+    <test name="Verify validation messages for empty fields">
+        <classes>
+            <class name="Tests.AdminTest">
+                <methods>
+                    <include name="verifyValidationMessageForBlankFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Forgot password link navigation.-->
+    <test name="Verify Forgot password link navigation">
+        <classes>
+            <class name="Tests.AdminTest">
+                <methods>
+                    <include name="verifyRedirectionOfForgotPassword"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify SignUp link navigation.-->
+    <test name="Verify SignUp link navigation">
+        <classes>
+            <class name="Tests.AdminTest">
+                <methods>
+                    <include name="verifyRedirectionOfSignUpPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify page load time.-->
+    <test name="Verify page load time">
+        <classes>
+            <class name="Tests.AdminTest">
+                <methods>
+                    <include name="verifyPageLoadTime"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify When Login With White SPace In EMail And Pass.-->
+    <test name="Verify When Login With White SPace In EMail And Pass">
+        <classes>
+            <class name="Tests.AdminTest">
+                <methods>
+                    <include name="verifyWhenLoginWithWhiteSPaceInEMailAndPass"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
