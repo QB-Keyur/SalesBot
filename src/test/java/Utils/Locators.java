@@ -17,6 +17,7 @@ public class Locators extends BasePage {
     public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
     public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
     public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
+    //public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
 
     //Locators for the validation messages
     public static String ERRORMESSAGEFORINVALIDEMAIL = "//div[contains(text(), 'Invalid Credentials.')]";
