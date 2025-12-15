@@ -2715,6 +2715,35 @@ public class Common extends Locators {
 
 
 
+//    public String fakeName(){
+//        Faker faker = new Faker();
+//        String Name = faker.name().firstName();
+//        return Name;
+//    }
+
+    public String fakeIndianMobileNumber() {
+        Faker faker = new Faker();
+        String number = "9" + faker.number().digits(9);  // Generates 10-digit Indian number
+        return number;
+    }
+
+    public String fakeDOB_MMDDYYYY() {
+        Faker faker = new Faker();
+
+        // Generate a random birthday for someone between 18 and 50 years old
+        Date dob = faker.date().birthday(18, 50);
+
+        // Format using MMddyyyy
+        SimpleDateFormat sdf = new SimpleDateFormat("MMddyyyy");
+        return sdf.format(dob);
+    }
+
+    public String fakeCompanyName() {
+        Faker faker = new Faker();
+        return faker.company().name();
+    }
+
+
 /* ---------------- Usage examples ----------------
    // explicit
    common.fillAgentName("//input[@name='agentName']", "My Agent");
