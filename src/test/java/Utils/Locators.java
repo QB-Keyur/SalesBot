@@ -14,6 +14,11 @@ public class Locators extends BasePage {
         this.driver = driver;
     }
 
+    public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
+    public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
+    public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
+    //public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
+
     //Locators for the validation messages
     public static String ERRORMESSAGEFORINVALIDEMAIL = "//div[contains(text(), 'Invalid Credentials.')]";
     public static String LOGINSUCCESSMESSAGE = "//div[contains(text(), 'Login successful')]";
@@ -197,5 +202,121 @@ public class Locators extends BasePage {
     public static String CUSTOMERSUPPORT = "//li[text()='CUSTOMER SUPPORT']";
     public static String HR = "//li[text()='HR']";
     public static String SALES = "//li[text()='SALES']";
+
+
+    //Contacts pages locators
+    //Grid page
+    public static String whatsAppContactHed= "//h6[text()='Whatsapp Contact']";
+    public static String searchInp= "//input[@placeholder='Search...']";
+    public static String importBtn = "//span[text()='Import']";
+    public static String exportBtn = "//span[text()='Export']";
+    public static String refreshBtn = "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-15wqzvf']";
+    public static String filterBtn = "//span[text()='Filters']";
+    public static String createContact= "(//span[contains(text(),'Create')])[1]";
+    public static String listViewBtn = "(//button[@role='tab'])[2]";
+    public static String gridViewBtn = "(//button[@role='tab'])[1]";
+    public static String GoToNextBtn = "//button[@title='Go to next page']";
+    public static String GoToPreviousBtn = "//button[@title='Go to previous page']";
+
+    //grid page headers
+    public static String nameHeader = "//div[@role='presentation']//span[text()='Name']";
+    public static String phoneNumHeader = "//div[@role='presentation']//span[text()='Phone Number']";
+    public static String DOBHeader = "//div[@role='presentation']//span[text()='Date of Birth']";
+    public static String emailHeader = "//div[@role='presentation']//span[text()='Email']";
+    public static String companyHeader = "//div[@role='presentation']//span[text()='Company ']";
+    public static String contactGroupHeader = "//div[@role='presentation']//span[text()='Contact Group']";
+    public static String createdDateHeader = "//div[@role='presentation']//span[text()='Created Date']";
+    public static String emailSubscriptionHeader = "//div[@role='presentation']//span[text()='Email Subscription']";
+    public static String actionHeader = "//div[@role='presentation']//span[text()='Actions']";
+
+    //Buttons
+    public static String saveButton = "//span[contains(text(),'Save')]";
+    public static String cancelButton = "//span[contains(text(),'Cancel')]";
+
+    //Inputs Fields
+    public static String Contact= "//span[contains(text(),'Contact')]";
+    public static String WhatsAppContact= "//button[contains(text(),'Whatsapp Contact')]";
+    public static String nameInp = "//input[@name='name']";
+    public static String EmailInp= "//input[@name='email']";
+    public static String dateOfBirthInp = "//input[@placeholder='Enter Date Of Birth']";
+    public static String contactGroup = "//input[@placeholder='Create or Select Contact Group']";
+    public static String phoneNumberInp = "//input[@placeholder='Enter phone number']";
+    public static String companyNameInp = "//input[@name='company_name']";
+    public static String selectCountryDropdown = "//input[@placeholder='Select Country']";
+    public static String SelectStateInp = "//input[@placeholder='Select State']";
+    public static String SelectCityInp = "//input[@placeholder='Select City']";
+
+    //Contacts labels
+    public static String nameLabel = "//span[text()='Name']";
+    public static String emailLabel = "//span[text()='Email']";
+    public static String dateOfBirthLabel = "//span[text()='Date Of Birth']";
+    public static String contactGroupLabel = "//span[text()='Contact Group']";
+    public static String phoneNumberLabel = "//label[text()='Phone Number']";
+    public static String companyNameLabel = "//span[text()='Company Name']";
+    public static String countryLabel = "//span[text()='Country']";
+    public static String stateLabel = "//span[text()='State']";
+    public static String cityLabel = "//span[text()='City']";
+
+    //Contact page creation page validation message for mandatory fields
+    public static String nameFieldMsg = "//span[text()='Name is required']";
+    public static String contactGroupMsg = "//span[text()='Please select a contact group']";
+    public static String phoneNumberMsg = "//div[text()='Phone number is required']";
+    public static String companyNameMsg = "//span[text()='Company Name is required']";
+
+    //Import page locators
+    public static String bulkUploadHeader= "//h6[text()='Bulk Upload Whatsapp Contacts']";
+    public static String downloadSampleTemplate = "//span[text()='Download sample template']";
+    public static String bulkUpload = "//button[text()='bulk_upload']";
+    public static String QueueDate = "//button[text()='Queue Data']";
+    public static String chooseUpload = "//span[text()='Choose Upload']";
+
+    //Grid locators
+    public static String viewButton = "(//button[@aria-label='View'])[1]";
+    public static String deleteButton = "(//button[@aria-label=\"Delete\"])[1]";
+    public static String editButton = "(//button[@aria-label='Edit'])[1]";
+    public static String viewHeader = "//h5[text()='Whatsapp Contact']";
+
+    //View page locators
+    //label
+    public static String nameLblView = "//input[@type='text']/ancestor::div//label//span[text()='Name']";
+    public static String emailLblView = "//input[@type='text']/ancestor::div//label//span[text()='Email']";
+    public static String dateOfBirthLbel = "//input[@type='text']/ancestor::div//label//span[text()='Date Of Birth']";
+    public static String contactGroupViewLbl = "//input[@type='text']/ancestor::div//label//span[text()='Contact Group']";
+    public static String phoneNumberViewLbl = "//input[@type='text']/ancestor::div//label//span[text()='Phone Number']";
+    public static String companyNameLbl = "//input[@type='text']/ancestor::div//label//span[text()='Company Name']";
+    public static String countryViewLbl = "//input[@type='text']/ancestor::div//label//span[text()='Country']";
+    public static String stateViewLbl = "//input[@type='text']/ancestor::div//label//span[text()='State']";
+    public static String cityViewLbl = "//input[@type='text']/ancestor::div//label//span[text()='City']";
+    public static String closeButtonView = "//span[text()='Close']/parent::button";
+    public static String closeIconView = "//button[@aria-label='close']";
+    //Input
+
+    //View page locators
+    public static String nameInpView = "(//span[text()='Name']/following-sibling::div/following::input)[1]";
+    public static String emailInpView = "(//span[text()='Name']/following-sibling::div/following::input)[2]";
+    public static String dateOfBirth = "(//span[text()='Name']/following-sibling::div/following::input)[3]";
+    public static String contactGroupView = "(//span[text()='Name']/following-sibling::div/following::input)[4]";
+    public static String phoneNumberView = "(//span[text()='Name']/following-sibling::div/following::input)[5]";
+    public static String companyName = "(//span[text()='Name']/following-sibling::div/following::input)[6]";
+    public static String countryView = "(//span[text()='Name']/following-sibling::div/following::input)[7]";
+    public static String stateView = "(//span[text()='Name']/following-sibling::div/following::input)[8]";
+    public static String cityView= "(//span[text()='Name']/following-sibling::div/following::input)[9]";
+
+    //Delete xpaths
+    public static String deletePopupHed = "//h6[text()='Delete Whatsapp Contact']";
+    public static String deleteButtonPopup = "//button//span[contains(text(),'Delete')]";
+    public static String closeBtnPopupDelete = "(//h6[text()='Delete Whatsapp Contact']/ancestor::div//button)[1]";
+
+    //List view
+    public static String listViewGetMobile = "//strong[text()='Phone:']/ancestor::p";
+    public static String NoRowsValidation = "//div[text()='No rows']";
+
+    //WhatsApp campaign
+    public static String SearchContact = "//input[@placeholder='Search contacts...']";
+    //public static String = "";
+    public static String HomeMenu = "//span[text()='Home']";
+    public static String CampaignMenu = "//span[text()='Campaign']";
+    public static String whatsappCampaign = "//button[text()='Whatsapp Campaign']";
+
 
 }
