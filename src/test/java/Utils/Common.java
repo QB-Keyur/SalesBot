@@ -86,49 +86,20 @@ public class Common extends Locators {
     }
 
     public WebElement waitUntilElementToBeClickable(String locator) {
-        final int maxAttempts = 3;
-        final long pollingMillis = 500; // adjust if you need faster/slower polling
-        int attempts = 0;
+        try {
+            return getWait()
+                    .pollingEvery(Duration.ofMillis(500))
+                    .ignoring(StaleElementReferenceException.class)
+                    .ignoring(NoSuchElementException.class)
+                    .ignoring(ElementClickInterceptedException.class)
+                    .until(ExpectedConditions.elementToBeClickable(findBy(locator)));
 
-        while (attempts < maxAttempts) {
-            try {
-                WebDriverWait wait = (WebDriverWait) getWait()
-                        .pollingEvery(Duration.ofMillis(pollingMillis))
-                        .ignoring(StaleElementReferenceException.class)
-                        .ignoring(NoSuchElementException.class)
-                        .ignoring(ElementClickInterceptedException.class);
-
-                // Wait for element to be clickable and return it
-                return wait.until(ExpectedConditions.elementToBeClickable(findBy(locator)));
-
-            } catch (StaleElementReferenceException | ElementClickInterceptedException ex) {
-                attempts++;
-                safeLog("WARN :: Attempt " + attempts + " - transient exception while waiting for clickable: " + ex.getClass().getSimpleName() + " - " + locator);
-                // small pause before retry
-                safePause(200);
-                // loop will retry
-            } catch (TimeoutException te) {
-                attempts++;
-                safeLog("WARN :: Attempt " + attempts + " - timeout waiting for clickable: " + locator);
-                if (attempts >= maxAttempts) {
-                    // rethrow with helpful message (preserve cause)
-                    throw new TimeoutException("Timed out after " + attempts + " attempts waiting for element to be clickable: " + locator, te);
-                }
-                safePause(300);
-            } catch (NoSuchElementException nse) {
-                // This is unlikely because we already ignore NoSuchElement in wait, but keep defensive handling
-                attempts++;
-                safeLog("WARN :: Attempt " + attempts + " - NoSuchElementException for locator: " + locator);
-                safePause(300);
-            } catch (Exception e) {
-                // For any unexpected exceptions, rethrow so callers can handle it
-                throw new RuntimeException("Unexpected error while waiting for clickable element: " + locator, e);
-            }
+        } catch (TimeoutException e) {
+            throw new TimeoutException(
+                    "Timed out waiting for element to be clickable: " + locator, e);
         }
-
-        // Should never reach here due to throws above, but keep a defensive fail
-        throw new RuntimeException("Unable to locate clickable element after retries: " + locator);
     }
+
 
     /* ---------- helper methods used above ---------- */
 
@@ -460,6 +431,7 @@ public class Common extends Locators {
      * @param element the locator of element to be checked
      */
     public void assertElementIsDisplayed(WebElement element) {
+
         waitUntilElementToBeClickable(element);
         Assert.assertTrue(isElementDisplayed(String.valueOf(element)));
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -2063,16 +2035,16 @@ public class Common extends Locators {
     }
 
     public void pressDownKeysByArgument(int downCount){
-            common.pause(1);
+        common.pause(1);
 
-            Actions actions = new Actions(driver);
+        Actions actions = new Actions(driver);
 
-            for (int i = 0; i < downCount; i++) {
-                actions.sendKeys(org.openqa.selenium.Keys.ARROW_DOWN);
-            }
-            actions.sendKeys(org.openqa.selenium.Keys.ENTER)
-                    .build()
-                    .perform();
+        for (int i = 0; i < downCount; i++) {
+            actions.sendKeys(org.openqa.selenium.Keys.ARROW_DOWN);
+        }
+        actions.sendKeys(org.openqa.selenium.Keys.ENTER)
+                .build()
+                .perform();
 
     }
 
@@ -2112,7 +2084,7 @@ public class Common extends Locators {
         }
 
         if (allFieldsEmpty) {
-           return System.out.printf("All input fields are empty after reset.").toString();
+            return System.out.printf("All input fields are empty after reset.").toString();
         } else {
             return System.out.printf("Some input fields are not empty after reset.").toString();
         }
@@ -2707,26 +2679,6 @@ public class Common extends Locators {
         return "";
     }
 
-
-}
-
-
-
-
-
-
-//    public String fakeName(){
-//        Faker faker = new Faker();
-//        String Name = faker.name().firstName();
-//        return Name;
-//    }
-
-    public String fakeIndianMobileNumber() {
-        Faker faker = new Faker();
-        String number = "9" + faker.number().digits(9);  // Generates 10-digit Indian number
-        return number;
-    }
-
     public String fakeDOB_MMDDYYYY() {
         Faker faker = new Faker();
 
@@ -2742,6 +2694,21 @@ public class Common extends Locators {
         Faker faker = new Faker();
         return faker.company().name();
     }
+
+    public String fakeIndianMobileNumber() {
+        Faker faker = new Faker();
+        String number = "9" + faker.number().digits(9);  // Generates 10-digit Indian number
+        return number;
+    }
+
+
+
+
+}
+
+
+
+
 
 
 /* ---------------- Usage examples ----------------

@@ -454,6 +454,97 @@ public class AgentConfigurationPage extends Locators {
 
     }
 
+    public void verifyEditPageElements(){
+        goToAgentConfigurationPage();
+        common.waitUntilElementToBeVisible(ACEDITBUTTON);
+        driver.findElement(By.xpath(ACEDITBUTTON)).click();
+
+        Map<String, String> columns = new LinkedHashMap<>();
+        columns.put(ACEDITHEADER, "Header");
+        columns.put(ACCCANCELBUTTON, "Cancel");
+        columns.put(ACRESETBUTTON, "Reset");
+        columns.put(ACCSAVEBUTTON, "Save");
+        columns.put(ACCPERSONA, "Persona");
+        columns.put(ACCSELECTPERSONA, "Select Persona");
+        columns.put(ACCPROMPT, "Prompt");
+        columns.put(ACCPERSONALITY1, "personality");
+        columns.put(ACCTEXTAREAPROMPT, "ACCTEXTAREAPROMPT");
+        columns.put(ACCRULES, "Rules");
+        columns.put(ACCRULESDROPDOWN, "Enter a new rule");
+        columns.put(ACCCUSTOMVARIABLE, "Custom Variables");
+        columns.put(ACCADDVARIABLE, "Add Variable");
+        columns.put(ACCAGENT, "Agent Info");
+        columns.put(ACCNAME, "Name");
+        columns.put(ACCNAMEINPUT, "Enter Name");
+        columns.put(ACCNAME2, "ACCNAME2");
+        columns.put(ACCCOMPANYNAME, "Company name");
+        columns.put(ACCCOMPANYNAME2, "{{company_name}}");
+        columns.put(ACCCOMPANYNAMEINPUT, "Enter Company Name");
+        columns.put(ACCGREETINGS, "Greeting Message");
+        columns.put(ACCGREETINGINPUT, "greeting_message");
+        columns.put(ACCTIMEZONE, "Timezone");
+        columns.put(ACCTIMEZONEINPUT, "Select Timezone");
+        columns.put(ACCPERSONALITY, "Personality & Goal");
+        columns.put(ACCPERSONALITY2, "Personality");
+        columns.put(ACCPERSONALITYINPUT, "personality");
+        columns.put(ACCGOAL, "Goal type");
+        columns.put(ACCGOAL1, "{{goal_type}}");
+        columns.put(ACCGOALINPUT, "goal_type");
+        columns.put(ACCLANG, "Language");
+        columns.put(ACCLANGINPUT, "Select Language");
+        columns.put(ACCALLOWEMOJI, "Allow Emojis");
+        columns.put(ACCRADIOYES1, "ACCRADIOYES1");
+        columns.put(ACCRADIOYES2, "ACCRADIOYES2");
+        columns.put(ACCRADIONO1, "ACCRADIONO1");
+        columns.put(ACCRADIONO2, "ACCRADIONO2");
+        columns.put(ACCBUSINESSDETAILS, "Business Details");
+        columns.put(ACCCOREUSP, "Core USP");
+        columns.put(ACCCOREUSP1, "{{core_usps}}");
+        columns.put(ACCCOREUSPINPUT, "Your unique selling proposition");
+        columns.put(ACCCOREFEATURES, "Core Features");
+        columns.put(ACCCOREFEATURES1, "{{core_features}}");
+        columns.put(ACCCOREFEATURESINPUT, "core_features");
+        columns.put(ACCCONTACTINFO, "Contact Info");
+        columns.put(ACCCONTACTINFO2, "{{contact_info}}");
+        columns.put(ACCCONTACTINFOINPUT, "contact_info");
+        columns.put(ACCCOMPANYDOMAIN, "Company Domain");
+        columns.put(ACCCOMPANYDOMAININPUT, "company_domain");
+        columns.put(ACCBUSINESSFOCUS, "Business focus");
+        columns.put(ACCBUSINESSFOCUINPUT, "business_focus");
+        columns.put(ACCBUSINESSFOCUS2, "{{business_focus}}");
+        columns.put(ACCOFFER, "Offer description");
+        columns.put(ACCOFFER1, "{{offer_description}}");
+        columns.put(ACCOFFERINPUT, "offer_description");
+        columns.put(ACCCOMPANY, "Company description");
+        columns.put(ACCCOMPANYINPUT, "company_description");
+
+
+        int failures = 0;
+
+        for (Map.Entry<String, String> entry : columns.entrySet()) {
+            String locator = entry.getKey();
+            String friendlyName = entry.getValue();
+            try {
+
+                common.assertElementPresent(locator);
+                common.logPrint("Step :: Verified presence of: " + friendlyName);
+            } catch (Exception e) {
+                failures++;
+                String msg = "Missing element -> " + friendlyName + " (" + locator + ")";
+                common.logPrint(msg);
+
+                common.logPrint("DEBUG :: " + e.toString());
+            }
+        }
+
+        if (failures == 0) {
+            common.logPrint("Step :: All columns verified successfully.");
+        } else {
+            common.logPrint("Step :: Column verification completed with " + failures + " missing element(s).");
+        }
+
+    }
+
     public void verifyCancelAndBackButton() {
 
         goToAgentConfigurationPage();
@@ -604,6 +695,9 @@ public class AgentConfigurationPage extends Locators {
         common.waitUntilElementToBeVisible(ACEDITBUTTON);
         common.click(ACEDITBUTTON);
 
+        common.assertElementPresent(ACEDITHEADER);
+
+
         Map<String, String> agent = common.fillAgentForm();
 
         common.click(SAVEBUTTON);
@@ -620,6 +714,44 @@ public class AgentConfigurationPage extends Locators {
 
 
 
+    }
+
+    public void verifyUsingTheResetButton() {
+
+        Map<String, String> agent = addANewAgentValidData();
+
+        String agentName          = agent.get("name");
+        String companyName        = agent.get("companyName");
+        String greeting           = agent.get("greeting");
+        String personality        = agent.get("personality");
+        String goalType           = agent.get("goalType");
+        String coreUSP            = agent.get("coreUSP");
+        String coreFeatures       = agent.get("coreFeatures");
+        String contactInfo        = agent.get("contactInfo");
+        String companyDomain      = agent.get("companyDomain");
+        String businessFocus      = agent.get("businessFocus");
+        String offerDescription   = agent.get("offerDescription");
+        String companyDescription = agent.get("companyDescription");
+
+        common.waitUntilElementToBeVisible(ACEDITBUTTON);
+        common.click(ACEDITBUTTON);
+
+        common.fillAgentForm();
+
+        common.click(ACRESETBUTTON);
+
+        assertInputValue(ACCNAMEINPUT, agentName, "Agent Name");
+        assertInputValue(ACCCOMPANYNAMEINPUT, companyName, "Company Name");
+        assertInputValue(ACCGREETINGINPUT, greeting, "Greeting");
+        assertInputValue(ACCPERSONALITYINPUT, personality, "Personality");
+        assertInputValue(ACCGOALINPUT, goalType, "Goal Type");
+        assertInputValue(ACCCOREUSPINPUT, coreUSP, "Core USP");
+        assertInputValue(ACCCOREFEATURESINPUT, coreFeatures, "Core Features");
+        assertInputValue(ACCCONTACTINFOINPUT, contactInfo, "Contact Info");
+        assertInputValue(ACCCOMPANYDOMAININPUT, companyDomain, "Company Domain");
+        assertInputValue(ACCBUSINESSFOCUINPUT, businessFocus, "Business Focus");
+        assertInputValue(ACCOFFERINPUT, offerDescription, "Offer Description");
+        assertInputValue(ACCCOMPANYINPUT, companyDescription, "Company Description");
     }
 
     public void deletingAnAgent(){
@@ -921,6 +1053,17 @@ public class AgentConfigurationPage extends Locators {
         return s == null ? "" : s.trim();
     }
 
+    public void assertInputValue(String locator, String expected, String fieldName) {
+        common.waitUntilElementToBeVisible(locator);
+        String actual = driver.findElement(By.xpath(locator))
+                .getAttribute("value")
+                .trim();
+
+        common.logPrint("Verifying " + fieldName +
+                " | Expected: [" + expected + "] | Actual: [" + actual + "]");
+
+        Assert.assertEquals(actual, expected, fieldName + " value mismatch");
+    }
 
 
 

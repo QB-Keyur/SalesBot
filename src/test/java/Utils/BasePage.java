@@ -239,7 +239,7 @@ public class BasePage {
 
         Common.printCurrentTime("Ending Time");
         driver.manage().deleteAllCookies();
-        //driver.quit();
+        driver.quit();
     }
 
     public void makeScreenshot(WebDriver driver, String screenshotName) {

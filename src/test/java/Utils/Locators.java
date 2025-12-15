@@ -204,6 +204,7 @@ public class Locators extends BasePage {
     public static String SALES = "//li[text()='SALES']";
     public static String ACSEARCHRESULT = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])[1]";
     public static String ACEDITBUTTON = "(//button[@aria-label=\"Edit\"])[1]";
+    public static String ACRESETBUTTON = "//button[@type='button']/following::span[text()='Reset']";
     public static String ACDELETEBUTTON = "(//button[@aria-label=\"Delete\"])[1]";
     public static String ACDELETECANCELBUTTON = "//button[@type=\"button\"]/following::span[text()='Cancel']";
     public static String ACACTIVATEBUTTON = "//button[@type=\"button\"]/following::span[text()='Activate']";
@@ -213,21 +214,22 @@ public class Locators extends BasePage {
     public static String ACINACTIVECB = "(//input[@type='checkbox'])[2]";
     public static String ACACTIVEINACTIVE = "//button[@type='button']//span[normalize-space()='Active']";
     public static String ACFILTERNAME = "//li[contains(text(),'Name')]";
-    public static String ACSEARCHRESULT = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])[1]";
-    public static String ACEDITBUTTON = "(//button[@aria-label=\"Edit\"])[1]";
-    public static String ACDELETEBUTTON = "(//button[@aria-label=\"Delete\"])[1]";
-    public static String ACDELETECANCELBUTTON = "//button[@type=\"button\"]/following::span[text()='Cancel']";
-    public static String ACACTIVATEBUTTON = "//button[@type=\"button\"]/following::span[text()='Activate']";
-    public static String ACINNERDELETE = "//button[@type=\"button\"]/following::span[text()='Delete']";
-    public static String ACINACTIVE = "//span[text()='Inactive']";
-    public static String ACACTIVE = "//span[text()='Active']";
-    public static String ACINACTIVECB = "(//input[@type='checkbox'])[2]";
-    public static String ACACTIVEINACTIVE = "//button[@type='button']//span[normalize-space()='Active']";
-    public static String ACFILTERNAME = "//li[contains(text(),'Name')]";
-
-    public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
-    public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
-    public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
+    public static String ACEDITHEADER = "//h6[text()='Update Agent Configuration']";
+//    public static String ACSEARCHRESULT = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])[1]";
+//    public static String ACEDITBUTTON = "(//button[@aria-label=\"Edit\"])[1]";
+//    public static String ACDELETEBUTTON = "(//button[@aria-label=\"Delete\"])[1]";
+//    public static String ACDELETECANCELBUTTON = "//button[@type=\"button\"]/following::span[text()='Cancel']";
+//    public static String ACACTIVATEBUTTON = "//button[@type=\"button\"]/following::span[text()='Activate']";
+//    public static String ACINNERDELETE = "//button[@type=\"button\"]/following::span[text()='Delete']";
+//    public static String ACINACTIVE = "//span[text()='Inactive']";
+//    public static String ACACTIVE = "//span[text()='Active']";
+//    public static String ACINACTIVECB = "(//input[@type='checkbox'])[2]";
+//    public static String ACACTIVEINACTIVE = "//button[@type='button']//span[normalize-space()='Active']";
+//    public static String ACFILTERNAME = "//li[contains(text(),'Name')]";
+//
+//    public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
+//    public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
+//    public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
 //public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
 
     //Contacts pages locators
@@ -344,9 +346,6 @@ public class Locators extends BasePage {
     public static String CampaignMenu = "//span[text()='Campaign']";
     public static String whatsappCampaign = "//button[text()='Whatsapp Campaign']";
 
-
-    public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
-    public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
-    public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
-//public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
 }
+
+

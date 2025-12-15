@@ -1,100 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Web scenarios" verbose="10" parallel="false" allow-return-values="true">
-    <listeners>
-        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
-        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
-    </listeners>
+<suite name="WhatsApp Contact Module Test Cases" verbose="10" parallel="false" allow-return-values="true">
+    <!--    <listeners>-->
+    <!--        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>-->
+    <!--    </listeners>-->
 
-<!--    &lt;!&ndash; Verify that the login page loads successfully.&ndash;&gt;-->
-<!--    <test name="Verify that the login page loads successfully">-->
-<!--        <classes>-->
-<!--            <class name="Tests.AdminTest">-->
-<!--                <methods>-->
-<!--                    <include name="verifyLoginPageIsLoadsSuccessfully"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
 
-<!--    &lt;!&ndash; Verify user can log-in with valid credentials.&ndash;&gt;-->
-<!--    <test name="Verify user can log-in with valid credentials">-->
-<!--        <classes>-->
-<!--            <class name="Tests.AdminTest">-->
-<!--                <methods>-->
-<!--                    <include name="VerifyUserCanLoginWthValidCredentials"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    &lt;!&ndash; Verify error message for invalid credentials.&ndash;&gt;-->
-<!--    <test name="Verify error message for invalid credentials">-->
-<!--        <classes>-->
-<!--            <class name="Tests.AdminTest">-->
-<!--                <methods>-->
-<!--                    <include name="verifyErrorMessageForInvalidCredential"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    &lt;!&ndash; Verify validation messages for empty fields.&ndash;&gt;-->
-<!--    <test name="Verify validation messages for empty fields">-->
-<!--        <classes>-->
-<!--            <class name="Tests.AdminTest">-->
-<!--                <methods>-->
-<!--                    <include name="verifyValidationMessageForBlankFields"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    &lt;!&ndash; Verify Forgot password link navigation.&ndash;&gt;-->
-<!--    <test name="Verify Forgot password link navigation">-->
-<!--        <classes>-->
-<!--            <class name="Tests.AdminTest">-->
-<!--                <methods>-->
-<!--                    <include name="verifyRedirectionOfForgotPassword"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    &lt;!&ndash; Verify SignUp link navigation.&ndash;&gt;-->
-<!--    <test name="Verify SignUp link navigation">-->
-<!--        <classes>-->
-<!--            <class name="Tests.AdminTest">-->
-<!--                <methods>-->
-<!--                    <include name="verifyRedirectionOfSignUpPage"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    &lt;!&ndash; Verify page load time.&ndash;&gt;-->
-<!--    <test name="Verify page load time">-->
-<!--        <classes>-->
-<!--            <class name="Tests.AdminTest">-->
-<!--                <methods>-->
-<!--                    <include name="verifyPageLoadTime"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    &lt;!&ndash; Verify When Login With White SPace In EMail And Pass.&ndash;&gt;-->
-<!--    <test name="Verify When Login With White SPace In EMail And Pass">-->
-<!--        <classes>-->
-<!--            <class name="Tests.AdminTest">-->
-<!--                <methods>-->
-<!--                    <include name="verifyWhenLoginWithWhiteSPaceInEMailAndPass"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--        Here below suits for the whatsapp contact-->
+    <!--    Here below suits for the WhatsApp contact-->
     <!-- Verify WhatsApp grid page elements -->
     <test name="Verify WhatsApp grid page elements">
         <classes>

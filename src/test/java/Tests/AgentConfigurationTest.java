@@ -41,7 +41,7 @@ public class AgentConfigurationTest extends BasePage {
     public void validateSorting(){
         loginWithAdminUser();
         agentConfigurationPage.goToAgentConfigurationPage();
-        agentConfigurationPage.validateSorting(3, "int", null, SortOrder.DESCENDING);
+        agentConfigurationPage.validateSorting(5, "int", null, SortOrder.DESCENDING);
 
     }
 
@@ -67,6 +67,18 @@ public class AgentConfigurationTest extends BasePage {
     public void verifyCreatePageElements(){
         loginWithAdminUser();
         agentConfigurationPage.verifyCreatePageElements();
+    }
+
+    @Test
+    public void verifyEditPageElements(){
+        loginWithAdminUser();
+        agentConfigurationPage.verifyEditPageElements();
+    }
+
+    @Test
+    public void verifyUsingTheResetButton(){
+        loginWithAdminUser();
+        agentConfigurationPage.verifyUsingTheResetButton();
     }
 
     @Test
@@ -124,13 +136,11 @@ public class AgentConfigurationTest extends BasePage {
     }
 
     @Test
-    public void filtes(){
+    public void filters(){
         loginWithAdminUser();
         agentConfigurationPage.filters();
 
 
     }
-
-
 
 }
