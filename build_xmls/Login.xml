@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Web scenarios" verbose="10" parallel="false" allow-return-values="true">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+
+<!--    &lt;!&ndash; Verify that the login page loads successfully.&ndash;&gt;-->
+<!--    <test name="Verify that the login page loads successfully">-->
+<!--        <classes>-->
+<!--            <class name="Tests.AdminTest">-->
+<!--                <methods>-->
+<!--                    <include name="verifyLoginPageIsLoadsSuccessfully"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    &lt;!&ndash; Verify user can log-in with valid credentials.&ndash;&gt;-->
+<!--    <test name="Verify user can log-in with valid credentials">-->
+<!--        <classes>-->
+<!--            <class name="Tests.AdminTest">-->
+<!--                <methods>-->
+<!--                    <include name="VerifyUserCanLoginWthValidCredentials"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    &lt;!&ndash; Verify error message for invalid credentials.&ndash;&gt;-->
+<!--    <test name="Verify error message for invalid credentials">-->
+<!--        <classes>-->
+<!--            <class name="Tests.AdminTest">-->
+<!--                <methods>-->
+<!--                    <include name="verifyErrorMessageForInvalidCredential"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    &lt;!&ndash; Verify validation messages for empty fields.&ndash;&gt;-->
+<!--    <test name="Verify validation messages for empty fields">-->
+<!--        <classes>-->
+<!--            <class name="Tests.AdminTest">-->
+<!--                <methods>-->
+<!--                    <include name="verifyValidationMessageForBlankFields"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    &lt;!&ndash; Verify Forgot password link navigation.&ndash;&gt;-->
+<!--    <test name="Verify Forgot password link navigation">-->
+<!--        <classes>-->
+<!--            <class name="Tests.AdminTest">-->
+<!--                <methods>-->
+<!--                    <include name="verifyRedirectionOfForgotPassword"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    &lt;!&ndash; Verify SignUp link navigation.&ndash;&gt;-->
+<!--    <test name="Verify SignUp link navigation">-->
+<!--        <classes>-->
+<!--            <class name="Tests.AdminTest">-->
+<!--                <methods>-->
+<!--                    <include name="verifyRedirectionOfSignUpPage"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    &lt;!&ndash; Verify page load time.&ndash;&gt;-->
+<!--    <test name="Verify page load time">-->
+<!--        <classes>-->
+<!--            <class name="Tests.AdminTest">-->
+<!--                <methods>-->
+<!--                    <include name="verifyPageLoadTime"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    &lt;!&ndash; Verify When Login With White SPace In EMail And Pass.&ndash;&gt;-->
+<!--    <test name="Verify When Login With White SPace In EMail And Pass">-->
+<!--        <classes>-->
+<!--            <class name="Tests.AdminTest">-->
+<!--                <methods>-->
+<!--                    <include name="verifyWhenLoginWithWhiteSPaceInEMailAndPass"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--        Here below suits for the whatsapp contact-->
+    <!-- Verify WhatsApp grid page elements -->
+    <test name="Verify WhatsApp grid page elements">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyWhatsAppGridPageElement"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify WhatsApp create page UI elements -->
+    <test name="Verify WhatsApp create page UI elements">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyWhatsAppCreatePageElement"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify validation messages on contact creation page -->
+    <test name="Verify validation messages for contact creation page">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyValidationMessagesForContactCreationPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Create new WhatsApp contact with all details -->
+    <test name="Create new WhatsApp contact with all details">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="createNewWhatsAppContactWithAllTheDetails"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify duplicate mobile number validation -->
+    <test name="Verify duplicate mobile number validation message">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyValidationMessageForDuplicateMobileNum"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify export functionality -->
+    <test name="Verify WhatsApp contact export functionality">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyExportFunctionality"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Create WhatsApp contact using POI -->
+    <test name="Create WhatsApp contact using POI">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="createWhatsAppContactUsingAnPOI"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify import page elements -->
+    <test name="Verify import page elements">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyTheElementIsPresentInTheImportModule"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify view page UI elements -->
+    <test name="Verify view page elements">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyViewPageElementsArePresent"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify view functionality -->
+    <test name="Verify view functionality">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyViewFunctionalityIsWorking"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify delete functionality -->
+    <test name="Verify delete functionality">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyDeleteFunctionalityIsWorkingFine"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify edit functionality -->
+    <test name="Verify edit functionality">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyEditFunctionalityOnWhatsAppContact"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify search functionality in list view -->
+    <test name="Verify search functionality in list view">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifySearchFunctionalityInListView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify view functionality on list view -->
+    <test name="Verify view functionality on list view">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyViewFunctionalityIsWorkingOnListView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify delete functionality on list view -->
+    <test name="Verify delete functionality on list view">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyDeleteFunctionalityOnListView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify no rows message on invalid search -->
+    <test name="Verify no rows message for invalid search">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyMessageWhenSearchValueIsNotInTheGrid"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify created contact reflects on WhatsApp campaign page -->
+    <test name="Verify contact reflection on WhatsApp campaign page">
+        <classes>
+            <class name="Tests.WhatsAppContactTest">
+                <methods>
+                    <include name="verifyCreatedContactReflectingOnTheWhatsAppCampaignPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+</suite>
