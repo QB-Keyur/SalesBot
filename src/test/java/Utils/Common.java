@@ -28,10 +28,7 @@ import java.awt.event.KeyEvent;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Clock;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.Year;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
@@ -1682,6 +1679,11 @@ public class Common extends Locators {
         String Name = faker.name().firstName();
         return Name;
     }
+    public String fakeEmail() {
+        Faker faker = new Faker();
+        String email = faker.internet().emailAddress();
+        return email;
+    }
 
     public String fakeProductName(){
         String name = faker.commerce().productName();
@@ -1769,6 +1771,53 @@ public class Common extends Locators {
         JavascriptExecutor jse = (JavascriptExecutor)driver;
         jse.executeScript("window.scrollBy(0,250)");
 
+    }
+    public void selectFutureDateTimeThisWeek(String xpath) {
+        Random random = new Random();
+
+        // 1. Current date-time
+        LocalDateTime now = LocalDateTime.now();
+
+        // 2. Days left in week (until Sunday)
+        int daysUntilEndOfWeek = DayOfWeek.SUNDAY.getValue() - now.getDayOfWeek().getValue();
+        if (daysUntilEndOfWeek < 0) daysUntilEndOfWeek += 7;
+
+        // 3. Random day in current week
+        int randomDaysAhead = random.nextInt(daysUntilEndOfWeek + 1);
+        LocalDateTime futureDate = now.plusDays(randomDaysAhead);
+
+        // 4. Generate random hour and minute within business hours
+        int businessStart = 9;
+        int businessEnd = 18; // 6 PM
+        int hour, minute;
+
+        if (randomDaysAhead == 0) {
+            // Today: ensure time is at least 2 hours ahead
+            int minHour = Math.max(now.getHour() + 2, businessStart);
+            if (minHour >= businessEnd) minHour = businessEnd - 1; // stay within business hours
+            hour = minHour + random.nextInt(businessEnd - minHour);
+        } else {
+            hour = businessStart + random.nextInt(businessEnd - businessStart);
+        }
+
+        minute = random.nextInt(60); // random minute
+
+        futureDate = futureDate.withHour(hour).withMinute(minute).withSecond(0).withNano(0);
+
+        // 5. Format for datetime-local (yyyy-MM-dd'T'HH:mm)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String dateTimeString = futureDate.format(formatter);
+
+        // 6. Set value using JavaScript (works with Material UI/React)
+        WebElement dateTimeInput = driver.findElement(By.xpath(xpath));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(
+                "arguments[0].value=arguments[1]; arguments[0].dispatchEvent(new Event('input'))",
+                dateTimeInput,
+                dateTimeString
+        );
+
+        System.out.println("Selected future date and time within business hours: " + dateTimeString);
     }
 
     public static List<String> readColumnDataFromExcel(String sheetName){
@@ -2701,7 +2750,20 @@ public class Common extends Locators {
         return number;
     }
 
+    public void assertElementText(String xpath, String expectedText) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 
+            String actualText = element.getText();
+            Assert.assertEquals(actualText, expectedText, "Text does not match for element: " + xpath);
+
+            System.out.println("Text verified successfully and lead managment header getting display on page: " + actualText);
+        } catch (Exception e) {
+            Assert.fail("Element not found or text not matched for XPath: " + xpath);
+        }
+
+    }
 
 
 }

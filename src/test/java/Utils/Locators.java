@@ -346,6 +346,33 @@ public class Locators extends BasePage {
     public static String CampaignMenu = "//span[text()='Campaign']";
     public static String whatsappCampaign = "//button[text()='Whatsapp Campaign']";
 
+
+    //Lead Managment
+    public static String LEADMANAGMENT = "//span[contains(text(),'Lead Management')]";
+    public static String LEAD = "//button[normalize-space()='Lead']";
+    public static String CREATEB = "//span[normalize-space()='Create']";
+    public static String LEADNAME = "//input[@placeholder='Enter customer email']";
+    public static String TYPE   = "//input[@placeholder='Select Type']";
+    public static String  CONTACTTYPE = "//input[@placeholder='Select Contact Type']";
+    public static String WHATSAPPCON ="//input[@role='combobox' and @placeholder='Select Whatsapp Contact']";
+    public static String PRODUCT = "//input[@placeholder=\"Select product\"]";
+    public static String SAVE_BTN = "//span[text()='Save']";
+    public static String DTAETIME = "//input[@placeholder='Enter Preferred Date and Time']\n";
+    public static String DELETEOTIN = "//div[@class='MuiDataGrid-row MuiDataGrid-row--firstVisible']//button[@aria-label='Delete']";
+    public static String CANCELDELETE = "//span[normalize-space()='Cancel']";
+    public static String LEADPBack ="//div[@class='MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-10 MuiGrid-grid-md-6 css-53mvl9']//button[@type='button']";
+    public static String CONFDELETE = "//span[normalize-space()='Delete']";
+    public static String LEADREFRESH = "//span[contains(@class,'MuiButton-startIcon')]";
+    public static String GRIDVIEWBTNL = "(//button[@role='tab'])[2]";
+    public static String LISTVIEWBTNL = "(//button[@role='tab'])[1]";
+    public static String  LEADHEADER = "//h6[normalize-space()='Lead Management']";
+    public static String LEADSEARCH = "//input[@placeholder='Search...']";
+    public static String LEADEDIT = "//button[@aria-label='Edit']";
+    public static String LEADUPDATEHEADER = "//h6[text()='Update Lead Management']";
+    public static String NoRows = "//div[text()='No rows']";
+    public static String NAME = "//input[@name='name']";
+
+
 }
 
 
