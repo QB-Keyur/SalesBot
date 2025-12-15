@@ -489,15 +489,12 @@ public class AgentConfigurationPage extends Locators {
     public void mandatoryFieldVerification() {
         goToAgentConfigurationPage();
 
-        // Open create modal/page
         common.waitUntilElementToBeClickable(CREATE);
         driver.findElement(By.xpath(CREATE)).click();
 
-        // Click save to trigger validation messages
         common.waitUntilElementToBeClickable(ACCSAVEBUTTON);
         driver.findElement(By.xpath(ACCSAVEBUTTON)).click();
 
-        // Map of xpath -> friendly name (so logs are readable)
         Map<String, String> validations = new LinkedHashMap<>();
         validations.put(ACCVALPERSONA,      "Persona is required");
         validations.put(ACCVALPROMPT,       "Prompt is required");
@@ -516,7 +513,6 @@ public class AgentConfigurationPage extends Locators {
 
         List<String> missing = new ArrayList<>();
 
-        // Wait/visibility timeout for each validation message (seconds)
         final int perValidationTimeoutSec = 5;
 
         for (Map.Entry<String, String> entry : validations.entrySet()) {
@@ -534,7 +530,6 @@ public class AgentConfigurationPage extends Locators {
             }
         }
 
-        // Final assertion: fail test if any validation message missing
         if (!missing.isEmpty()) {
             String summary = "Mandatory field validation FAILED. Missing: " + String.join(", ", missing);
             try { common.logPrint(summary); } catch (Exception ignored) { System.err.println(summary); }
@@ -555,7 +550,7 @@ public class AgentConfigurationPage extends Locators {
         }
     }
 
-    public void addANewAgentValidData() {
+    public Map<String, String> addANewAgentValidData() {
         goToAgentConfigurationPage();
         common.waitUntilElementToBeClickable(CREATE);
         driver.findElement(By.xpath(CREATE)).click();
@@ -565,6 +560,21 @@ public class AgentConfigurationPage extends Locators {
 
         Map<String, String> agent = common.fillAgentForm();
 
+
+       String agentName =  agent.get("name");
+        String companyName =   agent.get("companyName");
+        String greeting = agent.get("greeting");
+        String personality = agent.get("personality");
+        String goalType = agent.get("goalType");
+        String coreUSP = agent.get("coreUSP");
+        String coreFeatures = agent.get("coreFeatures");
+        String contactInfo = agent.get("contactInfo");
+        String companyDomain = agent.get("companyDomain");
+        String businessFocus = agent.get("businessFocus");
+        String offerDescription = agent.get("offerDescription");
+        String companyDescription = agent.get("companyDescription");
+       common.logPrint(agentName);
+
         common.waitUntilElementToBeClickable(ACCTIMEZONEINPUT).click();
         common.type(ACCTIMEZONEINPUT,"5:30");
         common.downKeyAndEnter();
@@ -573,10 +583,346 @@ public class AgentConfigurationPage extends Locators {
         common.waitUntilElementToBeClickable(ACCLANGINPUT).click();
         common.click(english);
 
+        common.click(SAVEBUTTON);
+
         System.out.println("Created agent: " + agent);
+
+        String searchXpath = "//input[@placeholder=\"Search...\"]";
+
+        common.waitUntilElementToBeVisible(searchXpath);
+        common.type(searchXpath, agentName);
+        common.waitUntilElementToBeVisible(ACSEARCHRESULT);
+        common.validateSearch(ACSEARCHRESULT, agentName);
+
+        return agent;
+    }
+
+    public void editingAnAgent(){
+        addANewAgentValidData();
+
+        String existingUser = common.getText(ACSEARCHRESULT);
+        common.waitUntilElementToBeVisible(ACEDITBUTTON);
+        common.click(ACEDITBUTTON);
+
+        Map<String, String> agent = common.fillAgentForm();
+
+        common.click(SAVEBUTTON);
+
+        System.out.println("Edited agent From: "+existingUser+" to: " + agent);
+        String agentName =  agent.get("name");
+
+        String searchXpath = "//input[@placeholder=\"Search...\"]";
+
+        common.waitUntilElementToBeVisible(searchXpath);
+        common.type(searchXpath, agentName);
+        common.waitUntilElementToBeVisible(ACSEARCHRESULT);
+        common.validateSearch(ACSEARCHRESULT, agentName);
+
 
 
     }
+
+    public void deletingAnAgent(){
+        Map<String, String> agent = addANewAgentValidData();
+       String existingAgentName =  agent.get("name");
+        common.waitUntilElementToBeVisible(ACDELETEBUTTON);
+        common.click(ACDELETEBUTTON);
+        WebElement cancelButton = driver.findElement(By.xpath(ACDELETECANCELBUTTON));
+        common.click(ACDELETECANCELBUTTON);
+
+        if(!cancelButton.isDisplayed()){
+            common.logPrint("Cancel Button works as expected");
+        }
+        else {
+            common.logPrint("Cancel button doesn't work");
+        }
+        common.pause(1);
+        common.waitUntilElementToBeVisible(ACDELETEBUTTON);
+        common.click(ACDELETEBUTTON);
+        common.waitUntilElementToBeVisible(ACINNERDELETE);
+        common.click(ACINNERDELETE);
+
+        String searchXpath = "//input[@placeholder=\"Search...\"]";
+        common.waitUntilElementToBeVisible(searchXpath);
+        common.type(searchXpath, existingAgentName);
+        common.waitUntilElementToBeVisible(ACSEARCHRESULT);
+        common.validateSearch(ACSEARCHRESULT, existingAgentName);
+
+        common.validateToaster(DeletedSuccessfully);
+
+
+
+    }
+
+    public void viewAddedAgent() {
+
+        Map<String, String> agent = addANewAgentValidData();
+
+        common.click(VIEWBUTTON);
+
+        validateInputValue(agent.get("name"));
+        validateInputValue(agent.get("greeting"));
+        validateInputValue(agent.get("personality"));
+        validateInputValue(agent.get("coreUSP"));
+        validateInputValue(agent.get("coreFeatures"));
+        validateInputValue(agent.get("contactInfo"));
+    }
+
+    public void validateInputValue(String expectedValue) {
+
+        String xpath = "//input[@value='" + expectedValue + "']";
+
+        common.waitUntilElementToBeVisible(xpath);
+        Assert.assertTrue(
+                common.isElementPresent(xpath),
+                "Expected value not found in input field: " + expectedValue
+        );
+
+        common.logPrint("Validated field value → " + expectedValue);
+    }
+
+    public void activeInactive(){
+        Map<String, String> agent = addANewAgentValidData();
+        String name = agent.get("name");
+        String searchXpath = "//input[@placeholder=\"Search...\"]";
+
+        common.waitUntilElementToBeVisible(searchXpath);
+        common.type(searchXpath,name);
+
+        common.selectCheckbox(ACINACTIVECB);
+
+        common.waitUntilElementToBeVisible(ACACTIVEINACTIVE);
+        common.highlightElement(ACACTIVEINACTIVE);
+        common.click(ACACTIVEINACTIVE);
+
+        common.waitUntilElementToBeVisible(ACDELETECANCELBUTTON);
+        common.click(ACDELETECANCELBUTTON);
+
+        common.waitUntilElementToBeVisible(ACACTIVEINACTIVE);
+        common.highlightElement(ACACTIVEINACTIVE);
+        common.click(ACACTIVEINACTIVE);
+
+        common.waitUntilElementToBeVisible(ACACTIVATEBUTTON);
+        common.highlightElement(ACACTIVATEBUTTON);
+        common.click(ACACTIVATEBUTTON);
+
+        common.waitUntilElementToBeVisible(searchXpath);
+        common.type(searchXpath,name);
+
+        common.pause(1);
+        WebElement ACACTIVEButton= driver.findElement(By.xpath(ACACTIVE));
+        if(ACACTIVEButton.isDisplayed()){
+            common.logPrint(name+ " : Agent activated successfully ");
+        }
+        else{
+            common.logPrint(name+ " Agent is not active ");
+        }
+    }
+
+    public void horizontalViews(){
+        goToAgentConfigurationPage();
+        common.validateHorizontalViewCardCount();
+
+    }
+
+    public void pagination(){
+        goToAgentConfigurationPage();
+        common.pagination();
+    }
+
+    public void filters() {
+
+        Map<String, String> agent = addANewAgentValidData();
+
+        String fullName = safeTrim(agent.get("name"));   // e.g. "Smart Home Device"
+
+        // Parse words safely (ensures at least 1 word)
+        String[] nameWords = splitWordsSafely(fullName);
+        String startsWith = nameWords[0];
+        String middleWord = nameWords.length > 1 ? nameWords[1] : nameWords[0];
+        String endsWith = nameWords[nameWords.length - 1];
+
+        common.logPrint("Full Name: " + fullName);
+        common.logPrint("Starts With: " + startsWith);
+        common.logPrint("Middle Word: " + middleWord);
+        common.logPrint("Ends With: " + endsWith);
+
+        // 1) EQUALS - PRODUCT NAME
+        openFilters();
+        selectField(ACFILTERNAME);
+        selectOperator(FILTEREQUALS);
+        common.type(PHFILTERVAL, fullName);
+        String resultEquals = applyAndGetFirstResult(ACSEARCHRESULT);
+        common.logPrint("1. EQUALS result: " + resultEquals);
+        Assert.assertEquals(resultEquals, fullName, "1. Product EQUALS filter failed");
+
+        // 2) NOT EQUALS - PRODUCT NAME
+        openFilters();
+        selectField(ACFILTERNAME);
+        selectOperator(FILTERNOTEQUALS);
+        common.type(PHFILTERVAL, fullName);
+        String resultNotEquals = applyAndGetFirstResult(ACSEARCHRESULT);
+        common.logPrint("2. NOT EQUALS result: " + resultNotEquals);
+        Assert.assertNotEquals(resultNotEquals, fullName, "2. Product NOT EQUALS filter failed");
+
+        // 3) CONTAINS - PRODUCT NAME (middle word)
+        openFilters();
+        selectField(ACFILTERNAME);
+        selectOperator(FILTERCONTAINS);
+        common.type(PHFILTERVAL, middleWord);
+        String resultContains = applyAndGetFirstResult(ACSEARCHRESULT);
+        common.logPrint("3. CONTAINS result: " + resultContains);
+        Assert.assertTrue(resultContains.contains(middleWord),
+                "3. Product CONTAINS filter failed: expected to contain '" + middleWord + "' but was '" + resultContains + "'");
+
+        // 4) BEGINS WITH - PRODUCT NAME
+        openFilters();
+        selectField(ACFILTERNAME);
+        selectOperator(FILTERBEGINSWITH);
+        common.type(PHFILTERVAL, startsWith);
+        String resultBegins = applyAndGetFirstResult(ACSEARCHRESULT);
+        common.logPrint("4. BEGINS WITH result: " + resultBegins);
+        Assert.assertTrue(resultBegins.startsWith(startsWith),
+                "4. Product BEGINS WITH filter failed: expected to start with '" + startsWith + "' but was '" + resultBegins + "'");
+
+        // 5) ENDS WITH - PRODUCT NAME
+        openFilters();
+        selectField(ACFILTERNAME);
+        selectOperator(FILTERENDSWITH);
+        common.type(PHFILTERVAL, endsWith);
+        String resultEnds = applyAndGetFirstResult(ACSEARCHRESULT);
+        common.logPrint("5. ENDS WITH result: " + resultEnds);
+        Assert.assertTrue(resultEnds.endsWith(endsWith),
+                "5. Product ENDS WITH filter failed: expected to end with '" + endsWith + "' but was '" + resultEnds + "'");
+ }
+
+    private void safeClick(String xpath) {
+        int attempts = 0;
+        int maxAttempts = 3;
+        while (attempts < maxAttempts) {
+            attempts++;
+            try {
+                // Use your stable wait helper to get the clickable element
+                WebElement el = common.waitUntilElementToBeClickable(xpath);
+                // Try normal click first
+                el.click();
+                // success
+                return;
+            } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+                common.logPrint(String.format("safeClick: attempt %d for '%s' failed with %s - retrying",
+                        attempts, xpath, e.getClass().getSimpleName()));
+                common.pause(1); // short pause before retry
+                // loop will retry and re-find
+            } catch (WebDriverException wde) {
+                // some other driver related issue (e.g. overlay). Try clicking via JS as fallback on last attempt.
+                common.logPrint(String.format("safeClick: WebDriverException on attempt %d for '%s': %s",
+                        attempts, xpath, wde.getMessage()));
+                common.pause(1);
+                if (attempts == maxAttempts) {
+                    // final fallback — attempt JS click then rethrow if still failing
+                    try {
+                        WebElement el = driver.findElement(By.xpath(xpath));
+                        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", el);
+                        return;
+                    } catch (Exception jsEx) {
+                        common.logPrint("safeClick: JS click also failed: " + jsEx.getMessage());
+                        throw wde;
+                    }
+                }
+            } catch (Exception e) {
+                // unexpected - log and rethrow after a small pause
+                common.logPrint("safeClick: unexpected error while clicking '" + xpath + "': " + e.getMessage());
+                common.pause(1);
+                throw e;
+            }
+        }
+
+        // If we exit loop without returning, throw a descriptive error
+        throw new RuntimeException("safeClick: Unable to click element after " + maxAttempts + " attempts: " + xpath);
+    }
+
+    /**
+     * Selects the field dropdown safely.
+     */
+    private void selectField(String fieldDropdownXpath) {
+        // Use safe click rather than direct driver click to handle intermittent stale/intercept issues.
+        common.waitUntilElementToBeClickable(fieldDropdownXpath);
+        safeClick(fieldDropdownXpath);
+    }
+
+    /**
+     * Select operator (Equals/Contains/StartsWith/EndsWith) safely.
+     */
+    private void selectOperator(String operatorXpath) {
+        // Click operator dropdown (the control that opens the operator list)
+        common.waitUntilElementToBeClickable(PHFILTEROPERATOR);
+        safeClick(PHFILTEROPERATOR);
+
+        // small pause to allow list rendering
+        common.pause(1);
+
+        // Now click the actual operator option safely
+        common.waitUntilElementToBeClickable(operatorXpath);
+        safeClick(operatorXpath);
+    }
+
+    /**
+     * Click apply and return the first result's text. Handles StaleElementReferenceException
+     * by retrying a couple of times to read text.
+     */
+    private String applyAndGetFirstResult(String resultXpath) {
+        common.waitUntilElementToBeClickable(APPLYFILTER);
+        safeClick(APPLYFILTER);
+
+        // Wait for UI to update
+        common.pause(1);
+
+        int attempts = 0;
+        int maxAttempts = 3;
+        while (attempts < maxAttempts) {
+            attempts++;
+            try {
+                common.waitUntilElementToBeVisible(resultXpath);
+                WebElement result = driver.findElement(By.xpath(resultXpath));
+                return safeTrim(result.getText());
+            } catch (StaleElementReferenceException sere) {
+                common.logPrint(String.format("applyAndGetFirstResult: stale element when reading result (attempt %d) for '%s'", attempts, resultXpath));
+                common.pause(1);
+                // loop will retry
+            } catch (NoSuchElementException nse) {
+                common.logPrint(String.format("applyAndGetFirstResult: result not found (attempt %d) for '%s'", attempts, resultXpath));
+                common.pause(1);
+            }
+        }
+
+        // If nothing returned, log and return empty string (test assertions will catch it)
+        common.logPrint("applyAndGetFirstResult: Unable to read result after retries for xpath: " + resultXpath);
+        return "";
+    }
+
+    private void openFilters() {
+        common.refreshPage();
+        common.waitUntilElementToBeClickable(FILTERS);
+        safeClick(FILTERS);
+        common.waitUntilElementToBeClickable(PHFILTERSEACRH);
+        safeClick(PHFILTERSEACRH);
+    }
+
+    private String[] splitWordsSafely(String input) {
+        input = safeTrim(input);
+        if (input.isEmpty()) {
+            return new String[] { "" };
+        }
+        String[] parts = input.split("\\s+");
+        return parts.length == 0 ? new String[] { input } : parts;
+    }
+
+    private String safeTrim(String s) {
+        return s == null ? "" : s.trim();
+    }
+
+
+
 
 
 }

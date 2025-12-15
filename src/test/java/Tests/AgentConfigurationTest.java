@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
+
 import javax.swing.*;
 
 public class AgentConfigurationTest extends BasePage {
@@ -84,10 +85,51 @@ public class AgentConfigurationTest extends BasePage {
     public void addANewAgentValidData(){
         loginWithAdminUser();
         agentConfigurationPage.addANewAgentValidData();
+    }
+
+    @Test
+    public void editingAnAgent(){
+        loginWithAdminUser();
+        agentConfigurationPage.editingAnAgent();
+    }
+
+    @Test
+    public void deletingAnAgent(){
+        loginWithAdminUser();
+        agentConfigurationPage.deletingAnAgent();
+    }
+
+    @Test
+    public void viewAnAgent(){
+        loginWithAdminUser();
+        agentConfigurationPage.viewAddedAgent();
+    }
+
+    @Test
+    public void activeInactive(){
+        loginWithAdminUser();
+        agentConfigurationPage.activeInactive();
+    }
+
+    @Test
+    public void horizontalViews(){
+        loginWithAdminUser();
+        agentConfigurationPage.horizontalViews();
+    }
+
+    @Test
+    public void pagination(){
+        loginWithAdminUser();
+        agentConfigurationPage.pagination();
+    }
+
+    @Test
+    public void filtes(){
+        loginWithAdminUser();
+        agentConfigurationPage.filters();
 
 
     }
-
 
 
 

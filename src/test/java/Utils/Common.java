@@ -1065,24 +1065,16 @@ public class Common extends Locators {
             logPrint(searchedTerm + " Equals "+ searched_result);
             logPrint("Search works as expected");
         }
+        else{
+            logPrint(searchedTerm+ " Not Found, Search Doesn't work as expected");
+        }
     }
 
-    /**
-     * Highlight given element
-     *
-     * @param locator the locator of element to be highlighted
-     */
     public void highlightElement(String locator) {
         WebElement element = waitUntilStringLocator(locator);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].style.border='4px solid yellow'", element);
     }
-
-    /**
-     * Highlight given element
-     *
-     * @param element the element to be highlighted
-     */
     public void highlightElement(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].style.border='3px solid yellow'", element);
@@ -2267,9 +2259,6 @@ public class Common extends Locators {
 
         Map<String, String> data = new LinkedHashMap<>();
 
-        // ---------------------------
-        // Generate all values first
-        // ---------------------------
 
         data.put("name",               generateAgentName());
         data.put("companyName",        generateCompanyName());
@@ -2283,10 +2272,6 @@ public class Common extends Locators {
         data.put("businessFocus",      generateBusinessFocus());
         data.put("offerDescription",   generateOfferDescription());
         data.put("companyDescription", generateCompanyDescription());
-
-        // ---------------------------
-        // Fill the form inputs
-        // ---------------------------
 
         waitUntilElementToBeClickable(ACCNAMEINPUT);
         type(ACCNAMEINPUT, data.get("name"));
@@ -2324,12 +2309,410 @@ public class Common extends Locators {
         waitUntilElementToBeClickable(ACCCOMPANYINPUT);
         type(ACCCOMPANYINPUT, data.get("companyDescription"));
 
-        // ---------------------------
-        // Return all generated values
-        // ---------------------------
-
         return data;
     }
+
+    public void validateToaster(String expectedMessage) {
+
+        String toasterXpath = "//div[contains(text(),'" + expectedMessage + "')]";
+
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement toaster = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(toasterXpath))
+            );
+
+            String actualMessage = toaster.getText().trim();
+            Assert.assertTrue(
+                    actualMessage.contains(expectedMessage),
+                    "Expected toaster message not found. Actual: " + actualMessage
+            );
+
+            common.logPrint("Step :: Toaster validated successfully → " + actualMessage);
+
+        } catch (TimeoutException e) {
+            Assert.fail("Toaster message not displayed: " + expectedMessage);
+        }
+    }
+
+    public void selectCheckbox(String inputXpath) {
+
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(20));
+
+        WebElement checkbox = wait.until(
+                ExpectedConditions.presenceOfElementLocated(By.xpath(inputXpath))
+        );
+
+        if (!checkbox.isSelected()) {
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].click();", checkbox);
+        }
+    }
+
+    public void validateHorizontalViewCardCount() {
+
+        // 1️⃣ Navigate to page
+        ;
+        common.pause(2);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // 2️⃣ Read pagination text (e.g. "1–8 of 8")
+        WebElement text = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
+                )
+        );
+
+        String paginationText = text.getText();
+
+        // 3️⃣ Extract total rows
+        String totalStr = paginationText.replaceAll(".*of\\s*", "").trim();
+        int totalRows;
+
+        try {
+            totalRows = Integer.parseInt(totalStr);
+        } catch (NumberFormatException nfe) {
+            java.util.regex.Matcher m = java.util.regex.Pattern
+                    .compile("(\\d+)$")
+                    .matcher(paginationText.trim());
+
+            if (m.find()) {
+                totalRows = Integer.parseInt(m.group(1));
+            } else {
+                throw new RuntimeException(
+                        "Failed to parse total rows from pagination text: '" + paginationText + "'"
+                );
+            }
+        }
+
+        // 4️⃣ Switch to horizontal view
+        common.waitUntilElementToBeVisible(MULTITABHOR);
+        common.click(MULTITABHOR);
+        common.pause(2);
+
+        // 5️⃣ Scroll till end (handle lazy loading)
+        scrollTillPageEnd();
+
+        // 6️⃣ Validate card count
+        By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
+
+        try {
+            WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            shortWait.until(
+                    ExpectedConditions.numberOfElementsToBe(cardLocator, totalRows)
+            );
+        } catch (Exception ignored) {
+        }
+
+        List<WebElement> cardList = driver.findElements(cardLocator);
+        int actualCount = cardList.size();
+
+        // 7️⃣ Logging
+        String msg1 = "Expected number of cards (pagination): " + totalRows;
+        String msg2 = "Actual number of cards displayed:      " + actualCount;
+
+        System.out.println("=======================================");
+        System.out.println(msg1);
+        System.out.println(msg2);
+        System.out.println("=======================================");
+
+        try {
+            common.logPrint(msg1);
+            common.logPrint(msg2);
+        } catch (Exception ignored) {
+        }
+
+        // 8️⃣ Assertion
+        Assert.assertEquals(
+                actualCount,
+                totalRows,
+                "Card count does not match pagination total!"
+        );
+    }
+
+    public void scrollTillPageEnd() {
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // 1️⃣ Try normal window scroll first
+        long lastHeight = ((Number) js.executeScript(
+                "return document.body.scrollHeight")).longValue();
+
+        for (int i = 0; i < 10; i++) {   // safety limit
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+            common.pause(1);
+
+            long newHeight = ((Number) js.executeScript(
+                    "return document.body.scrollHeight")).longValue();
+
+            if (newHeight == lastHeight) {
+                break;
+            }
+            lastHeight = newHeight;
+        }
+
+        // 2️⃣ Fallback: scroll inside visible scrollable containers
+        js.executeScript(
+                "document.querySelectorAll('*').forEach(el => {" +
+                        "  if (el.scrollHeight > el.clientHeight) {" +
+                        "    el.scrollTop = el.scrollHeight;" +
+                        "  }" +
+                        "});"
+        );
+
+        common.pause(1);
+    }
+
+    public void pagination() {
+
+        common.pause(2);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // 1️⃣ Read pagination text (e.g. "1–8 of 1,234")
+        WebElement text = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
+                )
+        );
+
+        String paginationText = safeTrim(text.getText());
+        String totalStrRaw = paginationText.replaceAll(".*of\\s*", "").trim();
+        int totalCount = Integer.parseInt(totalStrRaw.replaceAll("[^0-9]", ""));
+
+        common.logPrint("Target SR number: " + totalCount);
+
+        // Locators
+        final String NEXTPAGINATION =
+                "//button[@title='Go to next page' or contains(@aria-label,'next')]";
+
+        final String PAGINATIONROWS = "//div[@aria-haspopup='listbox']";
+
+        // Row options to test
+        int[] rowOptions = {10, 20, 30};
+
+        // 2️⃣ Loop for each rows-per-page option
+        for (int rows : rowOptions) {
+
+            common.logPrint("Validating SR with rows-per-page = " + rows);
+
+            // Change rows-per-page (skip for first/default)
+            try {
+                common.waitUntilElementToBeClickable(PAGINATIONROWS);
+                common.click(PAGINATIONROWS);
+
+                common.waitUntilElementToBeClickable("//li[@data-value='" + rows + "']");
+                common.click("//li[@data-value='" + rows + "']");
+
+                common.pause(2);
+            } catch (Exception ignored) {
+                // default row size may already be applied
+            }
+
+            boolean found = false;
+
+            // 3️⃣ Pagination loop
+            for (int page = 1; page <= 200; page++) {
+
+                common.logPrint("Checking page " + page + " for SR " + totalCount);
+
+                String PAGINATIONSR =
+                        "//div[@data-field='srNo' and normalize-space(text())='" + totalCount + "']";
+
+                List<WebElement> matches = driver.findElements(By.xpath(PAGINATIONSR));
+
+                for (WebElement el : matches) {
+                    try {
+                        if (el.isDisplayed()) {
+                            ((JavascriptExecutor) driver)
+                                    .executeScript("arguments[0].scrollIntoView({block:'center'});", el);
+                            found = true;
+                            break;
+                        }
+                    } catch (StaleElementReferenceException ignored) {
+                    }
+                }
+
+                if (found) {
+                    common.logPrint("Found SR " + totalCount + " with rows-per-page = " + rows);
+                    break;
+                }
+
+                // Check Next button
+                try {
+                    WebElement nextBtn = driver.findElement(By.xpath(NEXTPAGINATION));
+
+                    String ariaDisabled = nextBtn.getAttribute("aria-disabled");
+                    String disabledAttr = nextBtn.getAttribute("disabled");
+
+                    if ("true".equalsIgnoreCase(ariaDisabled) ||
+                            (disabledAttr != null && !disabledAttr.isEmpty())) {
+                        break;
+                    }
+
+                    safeClick(NEXTPAGINATION);
+                    common.pause(1);
+
+                } catch (Exception e) {
+                    break;
+                }
+            }
+
+            Assert.assertTrue(
+                    found,
+                    "SR " + totalCount + " not found with rows-per-page = " + rows
+            );
+        }
+
+        common.logPrint("Pagination validation completed successfully");
+    }
+
+    private String safeTrim(String s) {
+        return s == null ? "" : s.trim();
+    }
+
+    public void applyFilterAndValidate(
+            String filterDropdown,      // Product Name / Category / KB
+            String operatorXpath,        // Equals / Contains / Begins With
+            String inputValue,           // value typed in textbox
+            String resultXpath,          // result column xpath
+            FilterValidationType type    // EQUALS / NOT_EQUALS / CONTAINS / STARTS / ENDS
+    ) {
+
+        openFilters();
+
+        selectField(filterDropdown);
+        selectOperator(operatorXpath);
+
+        common.waitUntilElementToBeVisible(PHFILTERVAL);
+        common.clear(PHFILTERVAL);
+        common.type(PHFILTERVAL, inputValue);
+
+        String actualResult = applyAndGetFirstResult(resultXpath);
+
+        common.logPrint(
+                "Filter validation → Operator: " + type +
+                        " | Input: " + inputValue +
+                        " | Result: " + actualResult
+        );
+
+        switch (type) {
+            case EQUALS:
+                Assert.assertEquals(
+                        actualResult,
+                        inputValue,
+                        "EQUALS filter failed"
+                );
+                break;
+
+            case NOT_EQUALS:
+                Assert.assertNotEquals(
+                        actualResult,
+                        inputValue,
+                        "NOT EQUALS filter failed"
+                );
+                break;
+
+            case CONTAINS:
+                Assert.assertTrue(
+                        actualResult.contains(inputValue),
+                        "CONTAINS filter failed. Expected to contain '" +
+                                inputValue + "' but was '" + actualResult + "'"
+                );
+                break;
+
+            case BEGINS_WITH:
+                Assert.assertTrue(
+                        actualResult.startsWith(inputValue),
+                        "BEGINS WITH filter failed. Expected to start with '" +
+                                inputValue + "' but was '" + actualResult + "'"
+                );
+                break;
+
+            case ENDS_WITH:
+                Assert.assertTrue(
+                        actualResult.endsWith(inputValue),
+                        "ENDS WITH filter failed. Expected to end with '" +
+                                inputValue + "' but was '" + actualResult + "'"
+                );
+                break;
+
+            default:
+                throw new IllegalArgumentException("Unsupported filter validation type: " + type);
+        }
+    }
+
+    public enum FilterValidationType {
+        EQUALS,
+        NOT_EQUALS,
+        CONTAINS,
+        BEGINS_WITH,
+        ENDS_WITH
+    }
+    private void openFilters() {
+        common.refreshPage();
+        common.waitUntilElementToBeClickable(FILTERS);
+        safeClick(FILTERS);
+        common.waitUntilElementToBeClickable(PHFILTERSEACRH);
+        safeClick(PHFILTERSEACRH);
+    }
+
+    private void selectField(String fieldDropdownXpath) {
+        // Use safe click rather than direct driver click to handle intermittent stale/intercept issues.
+        common.waitUntilElementToBeClickable(fieldDropdownXpath);
+        safeClick(fieldDropdownXpath);
+    }
+
+    private void selectOperator(String operatorXpath) {
+        // Click operator dropdown (the control that opens the operator list)
+        common.waitUntilElementToBeClickable(PHFILTEROPERATOR);
+        safeClick(PHFILTEROPERATOR);
+
+        // small pause to allow list rendering
+        common.pause(1);
+
+        // Now click the actual operator option safely
+        common.waitUntilElementToBeClickable(operatorXpath);
+        safeClick(operatorXpath);
+    }
+
+    private String applyAndGetFirstResult(String resultXpath) {
+        common.waitUntilElementToBeClickable(APPLYFILTER);
+        safeClick(APPLYFILTER);
+
+        // Wait for UI to update
+        common.pause(1);
+
+        int attempts = 0;
+        int maxAttempts = 3;
+        while (attempts < maxAttempts) {
+            attempts++;
+            try {
+                common.waitUntilElementToBeVisible(resultXpath);
+                WebElement result = driver.findElement(By.xpath(resultXpath));
+                return safeTrim(result.getText());
+            } catch (StaleElementReferenceException sere) {
+                common.logPrint(String.format("applyAndGetFirstResult: stale element when reading result (attempt %d) for '%s'", attempts, resultXpath));
+                common.pause(1);
+                // loop will retry
+            } catch (NoSuchElementException nse) {
+                common.logPrint(String.format("applyAndGetFirstResult: result not found (attempt %d) for '%s'", attempts, resultXpath));
+                common.pause(1);
+            }
+        }
+
+        // If nothing returned, log and return empty string (test assertions will catch it)
+        common.logPrint("applyAndGetFirstResult: Unable to read result after retries for xpath: " + resultXpath);
+        return "";
+    }
+
+
+}
+
+
+
+
 
 
 /* ---------------- Usage examples ----------------
@@ -2340,7 +2723,7 @@ public class Common extends Locators {
    String generatedName = common.fillAgentName("//input[@name='agentName']");
 --------------------------------------------------*/
 
-}
+
 
 
 

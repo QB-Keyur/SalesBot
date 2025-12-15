@@ -403,14 +403,13 @@ public class ProductPage extends Locators {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // Use contains(@class, 'MuiTablePagination-displayedRows') to avoid fragile generated suffix
         WebElement text = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
         ));
 
         String paginationText = text.getText(); // example: "1–8 of 8"
 
-        // Extract the last number robustly. First try simple "of" approach, fallback to regex extracting last number.
+
         String totalStr = paginationText.replaceAll(".*of\\s*", "").trim();
         int totalRows;
         try {
@@ -425,25 +424,22 @@ public class ProductPage extends Locators {
             }
         }
 
-        // Switch to horizontal view and wait for UI to render
         common.waitUntilElementToBeVisible(MULTITABHOR);
         common.click(MULTITABHOR);
         common.pause(2); // small pause to let layout update
 
         By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
 
-        // Wait up to a short duration for the expected number of cards to appear (helps with async loading)
         try {
             WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
             shortWait.until(ExpectedConditions.numberOfElementsToBe(cardLocator, totalRows));
         } catch (Exception ignored) {
-            // ignore - we'll still fetch current number and assert (this avoids hard failure if wait timed out)
+
         }
 
         List<WebElement> cardList = driver.findElements(cardLocator);
         int actualCount = cardList.size();
 
-        // ALWAYS print Expected vs Actual
         String msg1 = "Expected number of cards (pagination): " + totalRows;
         String msg2 = "Actual number of cards displayed:      " + actualCount;
         System.out.println("=======================================");
@@ -451,16 +447,125 @@ public class ProductPage extends Locators {
         System.out.println(msg2);
         System.out.println("=======================================");
 
-        // If your Common has a logger helper, log there too
         try {
             common.logPrint(msg1);
             common.logPrint(msg2);
         } catch (Exception ignored) {
-            // ignore if common.logPrint isn't present / fails
+
+        }
+        Assert.assertEquals(actualCount, totalRows, "Card count does not match pagination total!");
+    }
+
+    public void pagination() {
+        goToProductPage();
+        common.pause(2);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Locate the pagination text (example "1–8 of 8" or "1–8 of 1,234")
+        WebElement text = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
+        ));
+
+        String paginationText = safeTrim(text.getText());
+        common.logPrint("Before trim: " + paginationText);
+
+        String totalStrRaw = paginationText.replaceAll(".*of\\s*", "").trim(); // "1,234" or "8"
+        String totalDigitsOnly = totalStrRaw.replaceAll("[^0-9]", "");         // "1234" or "8"
+        if (totalDigitsOnly.isEmpty()) {
+            throw new RuntimeException("Unable to parse total count from pagination text: '" + paginationText + "'");
+        }
+        int totalCount = Integer.parseInt(totalDigitsOnly);
+        common.logPrint("Total Number of Records parsed: " + totalCount + " (raw: '" + totalStrRaw + "')");
+
+        final String NEXTPAGINATION = "//button[@title='Go to next page' or contains(@aria-label,'next')]" ;
+
+        final String PAGINATIONSR = "//div[@data-field='srNo' and normalize-space(text()) = '" + totalCount + "']";
+
+        final int MAX_PAGES = 200;
+        boolean found = false;
+        int page = 1;
+
+        for (; page <= MAX_PAGES; page++) {
+            common.logPrint("pagination: checking page " + page + " for SR row = " + totalCount);
+
+            try {
+                // Short wait to see if the target SR cell is present/visible on this page
+                List<WebElement> candidates = driver.findElements(By.xpath(PAGINATIONSR));
+                if (!candidates.isEmpty()) {
+                    // Found — take the first visible one
+                    for (WebElement c : candidates) {
+                        try {
+                            if (c.isDisplayed()) {
+                                common.logPrint("pagination: found target SR row on page " + page);
+                                found = true;
+                                break;
+                            }
+                        } catch (StaleElementReferenceException sere) {
+                            // If stale, ignore and continue scanning; next loop will re-evaluate
+                        }
+                    }
+                    if (found) break;
+                }
+
+                // Not found — check if Next button is disabled (no further pages)
+                try {
+                    WebElement nextBtn = common.waitUntilElementToBeClickable(NEXTPAGINATION);
+                    // If the button is present but has aria-disabled='true' or disabled attribute, stop
+                    String ariaDisabled = nextBtn.getAttribute("aria-disabled");
+                    String disabledAttr = nextBtn.getAttribute("disabled");
+                    boolean isDisabled = "true".equalsIgnoreCase(ariaDisabled) || (disabledAttr != null && !disabledAttr.isEmpty());
+
+                    if (isDisabled) {
+                        common.logPrint("pagination: Next button is disabled on page " + page + " — reached last page.");
+                        break;
+                    }
+
+                    // Click next safely (use your safeClick or common.click with retry)
+                    safeClick(NEXTPAGINATION);
+
+                    // Wait a bit for the next page to load — prefer explicit wait for page table or spinner invisibility
+                    common.pause(1);
+                    // Optionally wait until the displayed rows text updates (detect change) - simple approach:
+                    String finalPaginationText = paginationText;
+                    wait.until(webDriver -> {
+                        String newText = safeTrim(webDriver.findElement(By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")).getText());
+                        return !newText.equals(finalPaginationText); // changed => new page loaded
+                    });
+
+                    // Update paginationText to new page's text
+                    try {
+                        WebElement newTextEl = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
+                        ));
+                        paginationText = safeTrim(newTextEl.getText());
+                    } catch (Exception ignore) {
+                        // ignore; we'll continue loop and try to find the SR
+                    }
+
+                } catch (TimeoutException te) {
+                    common.logPrint("pagination: Next button not clickable or not found on page " + page + " — stopping. " + te.getMessage());
+                    break;
+                }
+            } catch (Exception ex) {
+                common.logPrint("pagination: unexpected exception on page " + page + " -> " + ex.getMessage());
+                // small pause and retry
+                common.pause(1);
+            }
         }
 
-        // Final assertion
-        Assert.assertEquals(actualCount, totalRows, "Card count does not match pagination total!");
+        Assert.assertTrue(found, "Pagination: expected srNo '" + totalCount + "' to be present in the grid but it was not found after checking " + (page - 1) + " pages.");
+
+        if (found) {
+            WebElement target = driver.findElement(By.xpath(PAGINATIONSR));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", target);
+            common.logPrint("pagination: success — target srNo '" + totalCount + "' is visible.");
+            common.refreshPage();
+        }
+
+        String PAGINATIONROWS = "//div[@aria-haspopup=\"listbox\"]";
+
+        driver.findElement(By.xpath(PAGINATIONROWS)).click();
     }
 
     public void filters() {
@@ -584,118 +689,6 @@ public class ProductPage extends Locators {
         common.logPrint("10. Category ENDS WITH result: " + catEndsWithText);
         Assert.assertTrue(catEndsWithText.endsWith(catLastWord),
                 "10. Category ENDS WITH filter failed: expected to end with '" + catLastWord + "' but was '" + catEndsWithText + "'");
-    }
-
-    public void pagination() {
-        goToProductPage();
-        common.pause(2);
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        // Locate the pagination text (example "1–8 of 8" or "1–8 of 1,234")
-        WebElement text = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
-        ));
-
-        String paginationText = safeTrim(text.getText());
-        common.logPrint("Before trim: " + paginationText);
-
-        String totalStrRaw = paginationText.replaceAll(".*of\\s*", "").trim(); // "1,234" or "8"
-        String totalDigitsOnly = totalStrRaw.replaceAll("[^0-9]", "");         // "1234" or "8"
-        if (totalDigitsOnly.isEmpty()) {
-            throw new RuntimeException("Unable to parse total count from pagination text: '" + paginationText + "'");
-        }
-        int totalCount = Integer.parseInt(totalDigitsOnly);
-        common.logPrint("Total Number of Records parsed: " + totalCount + " (raw: '" + totalStrRaw + "')");
-
-        final String NEXTPAGINATION = "//button[@title='Go to next page' or contains(@aria-label,'next')]" ;
-
-        final String PAGINATIONSR = "//div[@data-field='srNo' and normalize-space(text()) = '" + totalCount + "']";
-
-        final int MAX_PAGES = 200;
-        boolean found = false;
-        int page = 1;
-
-        for (; page <= MAX_PAGES; page++) {
-            common.logPrint("pagination: checking page " + page + " for SR row = " + totalCount);
-
-            try {
-                // Short wait to see if the target SR cell is present/visible on this page
-                List<WebElement> candidates = driver.findElements(By.xpath(PAGINATIONSR));
-                if (!candidates.isEmpty()) {
-                    // Found — take the first visible one
-                    for (WebElement c : candidates) {
-                        try {
-                            if (c.isDisplayed()) {
-                                common.logPrint("pagination: found target SR row on page " + page);
-                                found = true;
-                                break;
-                            }
-                        } catch (StaleElementReferenceException sere) {
-                            // If stale, ignore and continue scanning; next loop will re-evaluate
-                        }
-                    }
-                    if (found) break;
-                }
-
-                // Not found — check if Next button is disabled (no further pages)
-                try {
-                    WebElement nextBtn = common.waitUntilElementToBeClickable(NEXTPAGINATION);
-                    // If the button is present but has aria-disabled='true' or disabled attribute, stop
-                    String ariaDisabled = nextBtn.getAttribute("aria-disabled");
-                    String disabledAttr = nextBtn.getAttribute("disabled");
-                    boolean isDisabled = "true".equalsIgnoreCase(ariaDisabled) || (disabledAttr != null && !disabledAttr.isEmpty());
-
-                    if (isDisabled) {
-                        common.logPrint("pagination: Next button is disabled on page " + page + " — reached last page.");
-                        break;
-                    }
-
-                    // Click next safely (use your safeClick or common.click with retry)
-                    safeClick(NEXTPAGINATION);
-
-                    // Wait a bit for the next page to load — prefer explicit wait for page table or spinner invisibility
-                    common.pause(1);
-                    // Optionally wait until the displayed rows text updates (detect change) - simple approach:
-                    String finalPaginationText = paginationText;
-                    wait.until(webDriver -> {
-                        String newText = safeTrim(webDriver.findElement(By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")).getText());
-                        return !newText.equals(finalPaginationText); // changed => new page loaded
-                    });
-
-                    // Update paginationText to new page's text
-                    try {
-                        WebElement newTextEl = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                                By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
-                        ));
-                        paginationText = safeTrim(newTextEl.getText());
-                    } catch (Exception ignore) {
-                        // ignore; we'll continue loop and try to find the SR
-                    }
-
-                } catch (TimeoutException te) {
-                    common.logPrint("pagination: Next button not clickable or not found on page " + page + " — stopping. " + te.getMessage());
-                    break;
-                }
-            } catch (Exception ex) {
-                common.logPrint("pagination: unexpected exception on page " + page + " -> " + ex.getMessage());
-                // small pause and retry
-                common.pause(1);
-            }
-        }
-
-        Assert.assertTrue(found, "Pagination: expected srNo '" + totalCount + "' to be present in the grid but it was not found after checking " + (page - 1) + " pages.");
-
-        if (found) {
-            WebElement target = driver.findElement(By.xpath(PAGINATIONSR));
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", target);
-            common.logPrint("pagination: success — target srNo '" + totalCount + "' is visible.");
-            common.refreshPage();
-        }
-
-        String PAGINATIONROWS = "//div[@aria-haspopup=\"listbox\"]";
-
-        driver.findElement(By.xpath(PAGINATIONROWS)).click();
     }
 
     /**
