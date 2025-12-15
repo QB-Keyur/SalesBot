@@ -69,7 +69,4 @@ public class AdminTest extends BasePage {
     }
 
 
-
-
-
 }
