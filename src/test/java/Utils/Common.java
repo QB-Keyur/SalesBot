@@ -38,6 +38,11 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+
 
 /**
  * Define Common Web driver
@@ -1029,6 +1034,8 @@ public class Common extends Locators {
     }
 
     public void validateSearch(String xpathVal, String searchedTerm){
+
+
         WebElement element = driver.findElement(By.xpath(xpathVal));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].style.border='4px solid yellow'", element);
@@ -1288,12 +1295,44 @@ public class Common extends Locators {
 
     private void logClickSuccess(WebElement element, String locator) {
         try {
-            String text = element.getText().trim();
-            logPrint("Step :: Clicked on: " + (text.isEmpty() ? locator : text));
-        } catch (Exception ignored) {
-            logPrint("Step :: Clicked on: " + locator);
+            String label = getReadableElementName(element);
+
+            logPrint("Step :: Clicked on: " + label);
+
+        } catch (Exception e) {
+            logPrint("Step :: Clicked on element");
         }
     }
+    private String getReadableElementName(WebElement element) {
+
+        String[] attributes = {
+                "aria-label",
+                "title",
+                "placeholder",
+                "value",
+                "title",
+                "name",
+                "label",
+                "data-name",
+                "data-label"
+        };
+
+        for (String attr : attributes) {
+            String val = element.getAttribute(attr);
+            if (val != null && !val.trim().isEmpty()) {
+                return val.trim();
+            }
+        }
+
+        String text = element.getText();
+        if (text != null && !text.trim().isEmpty()) {
+            return text.trim();
+        }
+
+        return "Unnamed element";
+    }
+
+
 
 
 
@@ -2323,117 +2362,109 @@ public class Common extends Locators {
 
     public void validateHorizontalViewCardCount() {
 
-        // 1️⃣ Navigate to page
-        ;
-        common.pause(2);
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // 2️⃣ Read pagination text (e.g. "1–8 of 8")
-        WebElement text = wait.until(
+        // 1️⃣ Read pagination text (e.g. "1–8 of 8")
+        WebElement pagination = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
                 )
         );
+        highlightElement(pagination);
+        String paginationText = pagination.getText();
+        int expectedCount = Integer.parseInt(
+                paginationText.replaceAll(".*of\\s*", "").trim()
+        );
 
-        String paginationText = text.getText();
-
-        // 3️⃣ Extract total rows
-        String totalStr = paginationText.replaceAll(".*of\\s*", "").trim();
-        int totalRows;
-
-        try {
-            totalRows = Integer.parseInt(totalStr);
-        } catch (NumberFormatException nfe) {
-            java.util.regex.Matcher m = java.util.regex.Pattern
-                    .compile("(\\d+)$")
-                    .matcher(paginationText.trim());
-
-            if (m.find()) {
-                totalRows = Integer.parseInt(m.group(1));
-            } else {
-                throw new RuntimeException(
-                        "Failed to parse total rows from pagination text: '" + paginationText + "'"
-                );
-            }
-        }
-
-        // 4️⃣ Switch to horizontal view
+        // 2️⃣ Switch to horizontal view
         common.waitUntilElementToBeVisible(MULTITABHOR);
         common.click(MULTITABHOR);
         common.pause(2);
 
-        // 5️⃣ Scroll till end (handle lazy loading)
-        scrollTillPageEnd();
-
-        // 6️⃣ Validate card count
+        // 3️⃣ Scroll ONLY the correct container (count-aware)
+        String SCROLL_CONTAINER = "//div[@class='infinite-scroll-component__outerdiv']";
         By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
 
-        try {
-            WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            shortWait.until(
-                    ExpectedConditions.numberOfElementsToBe(cardLocator, totalRows)
-            );
-        } catch (Exception ignored) {
-        }
+        highlightElement(SCROLL_CONTAINER);
 
-        List<WebElement> cardList = driver.findElements(cardLocator);
-        int actualCount = cardList.size();
+        scrollContainerRightUntilExpectedCount(
+                SCROLL_CONTAINER,
+                cardLocator,
+                expectedCount
+        );
 
-        // 7️⃣ Logging
-        String msg1 = "Expected number of cards (pagination): " + totalRows;
-        String msg2 = "Actual number of cards displayed:      " + actualCount;
+        // 4️⃣ Final card count
+        int actualCount = driver.findElements(cardLocator).size();
 
-        System.out.println("=======================================");
-        System.out.println(msg1);
-        System.out.println(msg2);
-        System.out.println("=======================================");
+        // 5️⃣ Logging
+        String msg1 = "Expected cards (pagination): " + expectedCount;
+        String msg2 = "Actual cards displayed:     " + actualCount;
 
-        try {
-            common.logPrint(msg1);
-            common.logPrint(msg2);
-        } catch (Exception ignored) {
-        }
+        common.logPrint(msg1);
+        common.logPrint(msg2);
 
-        // 8️⃣ Assertion
+        // 6️⃣ Assertion
         Assert.assertEquals(
                 actualCount,
-                totalRows,
+                expectedCount,
                 "Card count does not match pagination total!"
         );
     }
 
-    public void scrollTillPageEnd() {
+    public void scrollContainerRightUntilExpectedCount(
+            String containerXpath,
+            By cardLocator,
+            int expectedCount
+    ) {
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        // 1️⃣ Try normal window scroll first
-        long lastHeight = ((Number) js.executeScript(
-                "return document.body.scrollHeight")).longValue();
-
-        for (int i = 0; i < 10; i++) {   // safety limit
-            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-            common.pause(1);
-
-            long newHeight = ((Number) js.executeScript(
-                    "return document.body.scrollHeight")).longValue();
-
-            if (newHeight == lastHeight) {
-                break;
-            }
-            lastHeight = newHeight;
-        }
-
-        // 2️⃣ Fallback: scroll inside visible scrollable containers
-        js.executeScript(
-                "document.querySelectorAll('*').forEach(el => {" +
-                        "  if (el.scrollHeight > el.clientHeight) {" +
-                        "    el.scrollTop = el.scrollHeight;" +
-                        "  }" +
-                        "});"
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement container = wait.until(
+                ExpectedConditions.elementToBeClickable(By.xpath(containerXpath))
         );
 
-        common.pause(1);
+        // Focus the container
+        container.click();
+
+        Actions actions = new Actions(driver);
+
+        int previousCount = 0;
+        int sameCountTries = 0;
+
+        while (true) {
+
+            int currentCount = driver.findElements(cardLocator).size();
+            System.out.println("Cards loaded: " + currentCount);
+
+            // ✅ STOP when expected count is reached
+            if (currentCount >= expectedCount) {
+                System.out.println("Expected card count reached. Stop scrolling.");
+                break;
+            }
+
+            // 🛑 STOP if no new cards are loading anymore
+            if (currentCount == previousCount) {
+                sameCountTries++;
+                if (sameCountTries >= 3) {
+                    System.out.println("No new cards loading. Stop scrolling.");
+                    break;
+                }
+            } else {
+                sameCountTries = 0;
+            }
+
+            previousCount = currentCount;
+
+            // 🔥 Real user scroll
+            actions.sendKeys(Keys.PAGE_DOWN).perform();
+            common.pause(1);
+        }
+    }
+
+
+    public String fakeWebsite(){
+        Faker faker = new Faker();
+        String fakeSite = faker.internet().domainName();
+        return "https://www."+ fakeSite;
     }
 
     public void pagination() {
@@ -2700,6 +2731,44 @@ public class Common extends Locators {
         String number = "9" + faker.number().digits(9);  // Generates 10-digit Indian number
         return number;
     }
+
+    public void uploadFile(String fileInputLocator, String filePath) {
+
+        try {
+            WebElement fileInput = waitUntilElementToBeVisible(fileInputLocator);
+
+            fileInput.sendKeys(filePath);
+            logPrint("File uploaded using sendKeys: " + filePath);
+            return;
+
+        } catch (Exception e) {
+            logPrint("sendKeys upload failed. Falling back to Robot...");
+        }
+
+        try {
+            StringSelection selection = new StringSelection(filePath);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+
+            Robot robot = new Robot();
+            robot.setAutoDelay(300);
+
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+
+            logPrint("File uploaded using Robot fallback: " + filePath);
+
+        }
+        catch (Exception ex) {
+            logPrint("ERROR :: File upload failed completely: " + filePath);
+            throw new RuntimeException("File upload failed", ex);
+        }
+    }
+
 
 
 

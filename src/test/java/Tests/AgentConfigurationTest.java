@@ -143,4 +143,10 @@ public class AgentConfigurationTest extends BasePage {
 
     }
 
+    @Test
+    public void createAndViewReflectionInPlayground(){
+        loginWithAdminUser();
+        agentConfigurationPage.createAndViewReflectionInPlayground();
+    }
+
 }

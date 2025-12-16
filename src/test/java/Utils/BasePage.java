@@ -47,6 +47,7 @@ public class BasePage {
     public ProductPage productPage;
     public AgentConfigurationPage agentConfigurationPage;
     public WhatsAppContactPage whatsAppContactPage;
+    public KnowledgeBasePage knowledgeBasePage;
 
     protected List<String> stringList = new ArrayList<>();
 
@@ -152,6 +153,7 @@ public class BasePage {
         productPage = new ProductPage(driver);
         whatsAppContactPage = new WhatsAppContactPage(driver);
         agentConfigurationPage = new AgentConfigurationPage(driver);
+        knowledgeBasePage = new KnowledgeBasePage(driver);
         steps.set(1);
         Common.printCurrentTime("Starting Time");
         driver.get(url);

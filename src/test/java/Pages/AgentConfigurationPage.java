@@ -1,5 +1,6 @@
 package Pages;
 
+import Config.ReadProperties;
 import Utils.Common;
 import Utils.Locators;
 import org.openqa.selenium.*;
@@ -22,7 +23,7 @@ public class AgentConfigurationPage extends Locators {
     private final Common common;
     private final WebDriverWait wait;
     private static final Logger LOGGER = Logger.getLogger(AgentConfigurationPage.class.getName());
-
+    ReadProperties readProperties = new ReadProperties();
     public AgentConfigurationPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
@@ -853,6 +854,7 @@ public class AgentConfigurationPage extends Locators {
 
     public void horizontalViews(){
         goToAgentConfigurationPage();
+        common.pause(2);
         common.validateHorizontalViewCardCount();
 
     }
@@ -927,6 +929,35 @@ public class AgentConfigurationPage extends Locators {
         Assert.assertTrue(resultEnds.endsWith(endsWith),
                 "5. Product ENDS WITH filter failed: expected to end with '" + endsWith + "' but was '" + resultEnds + "'");
  }
+
+    public void createAndViewReflectionInPlayground(){
+
+        String url = readProperties.getWebUrl();
+        Map<String, String> agent = addANewAgentValidData();
+        String name = agent.get("name");
+        String playgroundURL = url+"playground";
+
+        common.openNewUrl(playgroundURL);
+        common.waitUntilElementToBeVisible(ACPLAYGROUNDHEADER);
+
+        String currentURL = driver.getCurrentUrl();
+        Assert.assertTrue(currentURL.contains("playground"), "Expected to navigate to Playground but landed on: " + currentURL);
+        common.highlightElement(ACPLAYGROUNDHEADER);
+        common.type(ACPLAYGROUNDSELECTAGENT,name);
+        common.downKeyAndEnter();
+
+        String validateCommon = common.getAttribute(ACPLAYGROUNDSELECTAGENT,"value");
+        common.pause(1);
+        common.logPrint("Selected Agent's name: "+ validateCommon);
+
+        if(validateCommon.equals(name)){
+            common.logPrint("Selected Agent Matches the newly created agent");
+        }
+        else{
+            common.logPrint("Selected agent is different than the created one");
+        }
+
+    }
 
     private void safeClick(String xpath) {
         int attempts = 0;
@@ -1064,9 +1095,6 @@ public class AgentConfigurationPage extends Locators {
 
         Assert.assertEquals(actual, expected, fieldName + " value mismatch");
     }
-
-
-
 
 }
 
