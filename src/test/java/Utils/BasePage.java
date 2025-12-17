@@ -29,6 +29,10 @@ import java.util.*;
 
 public class BasePage {
 
+    public static WebDriver getDriver() {
+        return driver.get();
+    }
+
     ReadProperties readProperties = new ReadProperties();
     String adminCredentials[] = readProperties.getDirectorCredentials();
     String username = adminCredentials[0];
@@ -37,30 +41,33 @@ public class BasePage {
     String url = readProperties.getWebUrl();
 
     static Properties configProperties = null;
-    protected static WebDriver driver;
-    public static Common common;
+    //protected static WebDriver driver;
+    public Common common;
     public static String currentTest; // current running test
     public static ThreadLocal<Integer> steps = new ThreadLocal<Integer>();
-    private ThreadLocal<WebDriver> threadLocal = new ThreadLocal();
-    public AdminPage adminPage;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal();
+    public loginPage loginPage;
     public OtherPage otherPage;
     public ProductPage productPage;
     public AgentConfigurationPage agentConfigurationPage;
     public WhatsAppContactPage whatsAppContactPage;
+    public LeadManagementPage lead;
+    public KnowledgeBasePage knowledgeBasePage;
 
     protected List<String> stringList = new ArrayList<>();
 
     public void loginWithAdminUser(){
 
-        common.logPrint("Step:: Enter email id");
+        Common common = new Common(getDriver());
+
+        common.logPrint("Login with valid username and pass");
+
         common.waitUntilElementToBeVisible("//input[@name='email']");
         common.type("//input[@name='email']",username);
 
-        common.logPrint("Step:: Enter the password ");
         common.waitUntilElementToBeVisible("//input[@name='password']");
         common.type("//input[@name='password']",password);
 
-        common.logPrint("Step:: Click on the Login button");
         common.waitUntilElementToBeVisible("//button[@type='submit']");
         common.click("//button[@type='submit']");
 
@@ -69,7 +76,6 @@ public class BasePage {
         common.logPrint("Login successfully.");
         String CLOSEBUTTON = "//button[@aria-label='Close alert']";
         common.click(CLOSEBUTTON);
-
     }
 
     /**
@@ -78,37 +84,36 @@ public class BasePage {
      */
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method method, ITestResult testResult) throws Exception {
-        Reporter.setCurrentTestResult(testResult);
 
+        System.out.println(
+                "THREAD ID = " + Thread.currentThread().getId()
+        );
+
+        Reporter.setCurrentTestResult(testResult);
         currentTest = method.getName();
 
         String browser = getPropertyValue("browser");
         String headless = getPropertyValue("headless");
-        String driverPathChrome = getPropertyValue("driverPathChrome");
-        String driverPathChromeMac = getPropertyValue("driverPathChromeMac");
-        String driverPathFirefox = getPropertyValue("driverFirefox");
-        String driverPathEdge = getPropertyValue("drivePathEdge");
 
         /*
          * Browser = Chrome
          */
         if (browser.equalsIgnoreCase("chrome")) {
-            //System.setProperty("webdriver.chrome.driver", driverPathChromeMac);
+
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
 
             if (headless.equals("true")) {
-                //Run browser in headless mode
                 options.addArguments("--headless");
             }
-            options.addArguments("start-maximized");            // open Browser in maximized mode
+            options.addArguments("start-maximized");
             options.addArguments("--incognito");
             options.addArguments("--disable-dev-shm-usage");    // overcome limited resource problems
             options.addArguments("--no-sandbox");               // Bypass an OS security model
             options.addArguments("--remote-allow-origins=*");
             options.addArguments(
                     "user-agent=Mozilla/5.0 (Linux; Android 8.0.0; TA-1053 Build/OPR1.170623.026) AppleWebKit/537.36 (HTML, like Gecko) Chrome/73.0.3683.0 Mobile Safari/537.36");
-            driver = new ChromeDriver(options);
+            driver.set(new ChromeDriver(options));
         }
         else if (browser.equalsIgnoreCase("edge")) {
 
@@ -134,7 +139,7 @@ public class BasePage {
 
             WebDriverManager.firefoxdriver().setup();
             FirefoxOptions options = new FirefoxOptions();
-              options.addArguments("-private");
+            options.addArguments("-private");
             //  options.addPreference("devtools.toolbox.selectedTool","netmonitor");
             if (headless.equals("true")) {
                 options.addArguments("--headless");
@@ -216,7 +221,7 @@ public class BasePage {
      */
     @AfterMethod(alwaysRun = true)
 //     public void tearDown(ITestResult testResult,String TestCycle, String TestCase) throws Exception {
-   public void tearDown(ITestResult testResult) throws Exception {
+    public void tearDown(ITestResult testResult) throws Exception {
 
         String testName = testResult.getName();
         Reporter.setCurrentTestResult(testResult);
@@ -243,7 +248,7 @@ public class BasePage {
         //driver.remove();
     }
 
-        public void makeScreenshot(WebDriver driver, String screenshotName) {
+    public void makeScreenshot(WebDriver driver, String screenshotName) {
 
         WebDriver augmentedDriver = new Augmenter().augment(driver);
         File screenshot = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.FILE);

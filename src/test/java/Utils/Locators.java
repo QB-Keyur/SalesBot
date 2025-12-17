@@ -399,6 +399,17 @@ public class Locators extends BasePage {
     public static String KBFILTERS = "//button[@type='button']/following::span[contains(text(),'Filters')]";
     public static String KBCREATE = "//button[@type='button']/following::span[text()='Create']";
     public static String KBSERACHRESULT = "//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"]";
+    public static String KBINPROGRESS = "(//div[@data-colindex='3' and @aria-colindex='4'])[1]//span[normalize-space()='In Progress']";
+    public static String KBCOMPLETED = "(//div[@data-colindex='3' and @aria-colindex='4'])[1]//span[normalize-space()='Completed']";
+    public static String KBFAILED = "(//div[@data-colindex='3' and @aria-colindex='4'])[1]//span[normalize-space()='Failed']";
+    public static String KBEDITBUTTON = "(//button[@aria-label=\"Edit\"])[1]";
+    public static String KBEDITHEADER = "//h6[text()='Update Knowledge Base']";
+    public static String KBEDITINFO = "//p[contains(text(),'You can delete files only when their status is')]";
+    public static String KBCOMPLETEDS = "(//span[text()='Completed'])[1]";
+    public static String KBEDITRESET = "//span[text()='Reset']";
+    public static String KBVIEW = "//button[@aria-label=\"View\"]";
+    public static String KBVIEWINPUTDATE = "(//input[@type='text'])[4]";
+    public static String KBVIEWINPUTNAME = "(//input[@type='text'])[2]";
     //KB Create
     public static String KBCHEADER = "//h6[text()='Create Knowledge Base']";
     public static String KBCBACKBUTTON = "//button[@class=\"MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-mfslm7\"]";
@@ -415,6 +426,7 @@ public class Locators extends BasePage {
     public static String KBCCANCELBUTTON = "//button[@type='button']/child::span[contains(text(),'Cancel')]";
     public static String KBCSAVEBUTTON = "//button[@type='button']/child::span[contains(text(),'Save')]";
     public static String KBCVALIDATE = "(//div[@data-colindex=\"3\"and @aria-colindex=\"4\"])[1]//span";
+    public static String KBUPLOADEDFILE = "\"//p[starts-with(normalize-space(text()),'\" + value + \"')]\";";
     //KB Create Text Mode
     public static String KBCTEXTHEADER = "//h6[text()='Add Text']";
     public static String KBCTEXTTITLELABEL = "//span[text()='Title']";
@@ -425,10 +437,15 @@ public class Locators extends BasePage {
     public static String KBCDESCINPUT2 = "(//div[@class=\"ql-editor ql-blank\"])[1]";
     public static String KBCDESCINPUT3 = "(//input[@data-link=\"https://quilljs.com\"])[2]";
     public static String KBCADDTEXT = "//button[@type='button']/following::span[text()='Add Text']";
+    public static String KBCADDTEXTVALIDATION = "//div[text()='Please fill all the fields']";
+    public static String KBCADDTEXTVALIDATIONCLOSE = "//button[@aria-label=\"Close alert\"]";
+    public static String KBDELETETEXT = "(//button[@class=\"MuiButtonBase-root MuiIconButton-root MuiIconButton-colorError MuiIconButton-sizeSmall css-2cca5\"])[1]";
+    public static String KBDELETEADDEDTEXT = "//button[@type=\"button\"]//span[text()='Delete']";
     //KB Website
     public static String KBCWEBHEADER = "//h6[text()='Add Links']";
     public static String KBCWEBINPUT = "//input[@placeholder=\"http://www.example.com/\"]";
     public static String KBCWEBADD = "//button[@type='button']/following::span[text()='Add Link']";
+    public static String KBCWEBADDEDDELETE = "(//button[@class=\"MuiButtonBase-root MuiIconButton-root MuiIconButton-colorError MuiIconButton-sizeSmall css-2cca5\"])[1]";
     //KB Q&A
     public static String KBCQAHEADER = "//h6[text()='Add Q&A']";
     public static String KBCQATITLE = "(//span[text()='Title'])[2]";
@@ -437,6 +454,11 @@ public class Locators extends BasePage {
     public static String KBCQATITLEQ1INPUT = "(//input[@placeholder=\"Ex: How do I request a refund?\"])[1]";
     public static String KBCADDBUTTON = "//button[@type='button']/following::span[text()='Add Question']";
     public static String KBCANSWER = "//p[text()='Answer']";
+    public static String KBCANSWERINPUT = "(//div[@class=\"ql-editor ql-blank\"])[2]";
+    public static String KBCQAADDBUTTON = "//button[@type='button']//span[text()='Add Q&A']";
+    //KB Mandatory Fields
+    public static String KBCNAMEVALIDATION = "//span[text()='Name is required']";
+
 
 
 }

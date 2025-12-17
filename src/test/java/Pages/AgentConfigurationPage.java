@@ -1,5 +1,6 @@
 package Pages;
 
+import Config.ReadProperties;
 import Utils.Common;
 import Utils.Locators;
 import org.openqa.selenium.*;
@@ -1095,13 +1096,4 @@ public class AgentConfigurationPage extends Locators {
         Assert.assertEquals(actual, expected, fieldName + " value mismatch");
     }
 
-
-
-
 }
-
-
-
-
-
-
