@@ -455,7 +455,7 @@ public class Common extends Locators {
      * set.
      */
     public String getValue(String locator) {
-         pause(1);
+        pause(1);
         WebElement element = waitUntilPresenceOfElementLocated(By.xpath(locator));
         return element.getAttribute("value");
     }
@@ -2423,15 +2423,16 @@ public class Common extends Locators {
         }
 
         // 4️⃣ Switch to horizontal view
-        common.waitUntilElementToBeVisible(MULTITABHOR);
-        common.click(MULTITABHOR);
+        waitUntilElementToBeVisible(MULTITABHOR);
+       click(MULTITABHOR);
         pause(2);
 
         // 5️⃣ Scroll till end (handle lazy loading)
-        scrollTillPageEnd();
+        By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
+        scrollTillPageEnd(totalRows, cardLocator);
 
         // 6️⃣ Validate card count
-        By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
+
 
         try {
             WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -2467,38 +2468,53 @@ public class Common extends Locators {
         );
     }
 
-    public void scrollTillPageEnd() {
+    public void scrollTillPageEnd(int totalRows, By cardLocator) {
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement container = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.xpath("//div[contains(@class,'infinite-scroll-component')]")
+                    )
+            );
 
-        // 1️⃣ Try normal window scroll first
-        long lastHeight = ((Number) js.executeScript(
-                "return document.body.scrollHeight")).longValue();
+            // ✅ Focus without triggering logging
+            new Actions(driver).moveToElement(container).click().perform();
 
-        for (int i = 0; i < 10; i++) {   // safety limit
-            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-            pause(1);
+            Actions actions = new Actions(driver);
 
-            long newHeight = ((Number) js.executeScript(
-                    "return document.body.scrollHeight")).longValue();
+            int previousCount = 0;
+            int sameCountTries = 0;
 
-            if (newHeight == lastHeight) {
-                break;
+            while (true) {
+
+                int actualCount = driver.findElements(cardLocator).size();
+                System.out.println("Cards loaded so far: " + actualCount);
+
+                // ✅ Stop when expected count reached
+                if (actualCount >= totalRows) {
+                    System.out.println("Expected card count reached. Stop scrolling.");
+                    break;
+                }
+
+                // 🛑 Safety stop if nothing new loads
+                if (actualCount == previousCount) {
+                    sameCountTries++;
+                    if (sameCountTries >= 3) {
+                        System.out.println("No new cards loading. Stop scrolling.");
+                        break;
+                    }
+                } else {
+                    sameCountTries = 0;
+                }
+
+                previousCount = actualCount;
+
+                // 🔥 Real user scroll
+                actions.sendKeys(Keys.PAGE_DOWN).perform();
+                pause(1);
             }
-            lastHeight = newHeight;
         }
 
-        // 2️⃣ Fallback: scroll inside visible scrollable containers
-        js.executeScript(
-                "document.querySelectorAll('*').forEach(el => {" +
-                        "  if (el.scrollHeight > el.clientHeight) {" +
-                        "    el.scrollTop = el.scrollHeight;" +
-                        "  }" +
-                        "});"
-        );
-
-        pause(1);
-    }
 
     public void pagination() {
 
@@ -2520,12 +2536,13 @@ public class Common extends Locators {
         logPrint("Target SR number: " + totalCount);
 
         // Locators
-        final String NEXTPAGINATION =
+        final String NEXT_PAGINATION =
                 "//button[@title='Go to next page' or contains(@aria-label,'next')]";
 
-        final String PAGINATIONROWS = "//div[@aria-haspopup='listbox']";
+        final String ROWS_PER_PAGE_DROPDOWN =
+                "//div[@aria-haspopup='listbox']";
 
-        // Row options to test
+        // Rows-per-page options to validate
         int[] rowOptions = {10, 20, 30};
 
         // 2️⃣ Loop for each rows-per-page option
@@ -2533,36 +2550,39 @@ public class Common extends Locators {
 
             logPrint("Validating SR with rows-per-page = " + rows);
 
-            // Change rows-per-page (skip for first/default)
-            try {
-                common.waitUntilElementToBeClickable(PAGINATIONROWS);
-                common.click(PAGINATIONROWS);
+            // 3️⃣ Open rows-per-page dropdown
+            waitUntilElementToBeClickable(ROWS_PER_PAGE_DROPDOWN);
+            click(ROWS_PER_PAGE_DROPDOWN);
 
-                common.waitUntilElementToBeClickable("//li[@data-value='" + rows + "']");
-                common.click("//li[@data-value='" + rows + "']");
+            // 4️⃣ Select row option by visible text (MUI-safe)
+            String ROW_OPTION =
+                    "//li[normalize-space()='" + rows + "']";
 
-                pause(2);
-            } catch (Exception ignored) {
-                // default row size may already be applied
-            }
+            waitUntilElementToBeClickable(ROW_OPTION);
+            click(ROW_OPTION);
+
+            // Wait for table refresh
+            pause(2);
 
             boolean found = false;
 
-            // 3️⃣ Pagination loop
+            // 5️⃣ Pagination loop
             for (int page = 1; page <= 200; page++) {
 
                 logPrint("Checking page " + page + " for SR " + totalCount);
 
-                String PAGINATIONSR =
+                String PAGINATION_SR =
                         "//div[@data-field='srNo' and normalize-space(text())='" + totalCount + "']";
 
-                List<WebElement> matches = driver.findElements(By.xpath(PAGINATIONSR));
+                List<WebElement> matches = driver.findElements(By.xpath(PAGINATION_SR));
 
                 for (WebElement el : matches) {
                     try {
                         if (el.isDisplayed()) {
                             ((JavascriptExecutor) driver)
-                                    .executeScript("arguments[0].scrollIntoView({block:'center'});", el);
+                                    .executeScript(
+                                            "arguments[0].scrollIntoView({block:'center'});", el
+                                    );
                             found = true;
                             break;
                         }
@@ -2575,9 +2595,9 @@ public class Common extends Locators {
                     break;
                 }
 
-                // Check Next button
+                // 6️⃣ Handle Next pagination
                 try {
-                    WebElement nextBtn = driver.findElement(By.xpath(NEXTPAGINATION));
+                    WebElement nextBtn = driver.findElement(By.xpath(NEXT_PAGINATION));
 
                     String ariaDisabled = nextBtn.getAttribute("aria-disabled");
                     String disabledAttr = nextBtn.getAttribute("disabled");
@@ -2587,7 +2607,7 @@ public class Common extends Locators {
                         break;
                     }
 
-                    safeClick(NEXTPAGINATION);
+                    click(NEXT_PAGINATION);
                     pause(1);
 
                 } catch (Exception e) {
@@ -2603,6 +2623,7 @@ public class Common extends Locators {
 
         logPrint("Pagination validation completed successfully");
     }
+
 
     private String safeTrim(String s) {
         return s == null ? "" : s.trim();
@@ -2891,8 +2912,3 @@ public class Common extends Locators {
    // using faker and capturing value for assertion
    String generatedName = common.fillAgentName("//input[@name='agentName']");
 --------------------------------------------------*/
-
-
-
-
-

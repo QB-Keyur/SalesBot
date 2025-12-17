@@ -44,8 +44,6 @@ public class ProductPage extends Locators {
         common.waitUntilElementToBeClickable(PRODUCTMENU);
         common.click(PRODUCTMENU);
 
-        common.waitForAppReady(5);
-
         common.logPrint("Navigated to Product Page and fully loaded.");
     }
 
@@ -154,7 +152,7 @@ public class ProductPage extends Locators {
     }
 
     public void validateSorting(int columnIndex, String type, String dateFormat, SortOrder order) {
-//        goToProductPage();
+        goToProductPage();
 //
         By header = By.xpath("//div[@aria-colindex=" + columnIndex + "]");
         By cellLocator = By.xpath("//div[@aria-colindex=" + columnIndex + "]");
@@ -398,61 +396,64 @@ public class ProductPage extends Locators {
     public void horizontalView() {
         goToProductPage();
         common.pause(2);
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        WebElement text = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
-        ));
-
-        String paginationText = text.getText(); // example: "1–8 of 8"
-
-
-        String totalStr = paginationText.replaceAll(".*of\\s*", "").trim();
-        int totalRows;
-        try {
-            totalRows = Integer.parseInt(totalStr);
-        } catch (NumberFormatException nfe) {
-            // fallback: extract last number via regex
-            java.util.regex.Matcher m = java.util.regex.Pattern.compile("(\\d+)$").matcher(paginationText.trim());
-            if (m.find()) {
-                totalRows = Integer.parseInt(m.group(1));
-            } else {
-                throw new RuntimeException("Failed to parse total rows from pagination text: '" + paginationText + "'");
-            }
-        }
-
-        common.waitUntilElementToBeVisible(MULTITABHOR);
-        common.click(MULTITABHOR);
-        common.pause(2); // small pause to let layout update
-
-        By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
-
-        try {
-            WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            shortWait.until(ExpectedConditions.numberOfElementsToBe(cardLocator, totalRows));
-        } catch (Exception ignored) {
-
-        }
-
-        List<WebElement> cardList = driver.findElements(cardLocator);
-        int actualCount = cardList.size();
-
-        String msg1 = "Expected number of cards (pagination): " + totalRows;
-        String msg2 = "Actual number of cards displayed:      " + actualCount;
-        System.out.println("=======================================");
-        System.out.println(msg1);
-        System.out.println(msg2);
-        System.out.println("=======================================");
-
-        try {
-            common.logPrint(msg1);
-            common.logPrint(msg2);
-        } catch (Exception ignored) {
-
-        }
-        Assert.assertEquals(actualCount, totalRows, "Card count does not match pagination total!");
-    }
+        common.validateHorizontalViewCardCount();
+//        common.pause(2);
+//
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//
+//        WebElement text = wait.until(ExpectedConditions.visibilityOfElementLocated(
+//                By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
+//        ));
+//
+//        String paginationText = text.getText(); // example: "1–8 of 8"
+//
+//
+//        String totalStr = paginationText.replaceAll(".*of\\s*", "").trim();
+//        int totalRows;
+//        try {
+//            totalRows = Integer.parseInt(totalStr);
+//        } catch (NumberFormatException nfe) {
+//            // fallback: extract last number via regex
+//            java.util.regex.Matcher m = java.util.regex.Pattern.compile("(\\d+)$").matcher(paginationText.trim());
+//            if (m.find()) {
+//                totalRows = Integer.parseInt(m.group(1));
+//            } else {
+//                throw new RuntimeException("Failed to parse total rows from pagination text: '" + paginationText + "'");
+//            }
+//        }
+//
+//        common.waitUntilElementToBeVisible(MULTITABHOR);
+//        common.click(MULTITABHOR);
+//        common.pause(2); // small pause to let layout update
+//
+//        By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
+//
+//        try {
+//            WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//            shortWait.until(ExpectedConditions.numberOfElementsToBe(cardLocator, totalRows));
+//        } catch (Exception ignored) {
+//
+//        }
+//
+//        List<WebElement> cardList = driver.findElements(cardLocator);
+//        int actualCount = cardList.size();
+//
+//        String msg1 = "Expected number of cards (pagination): " + totalRows;
+//        String msg2 = "Actual number of cards displayed:      " + actualCount;
+//        System.out.println("=======================================");
+//        System.out.println(msg1);
+//        System.out.println(msg2);
+//        System.out.println("=======================================");
+//
+//        try {
+//            common.logPrint(msg1);
+//            common.logPrint(msg2);
+//        } catch (Exception ignored) {
+//
+//        }
+//        Assert.assertEquals(actualCount, totalRows, "Card count does not match pagination total!");
+//    }
+}
 
     public void pagination() {
         goToProductPage();

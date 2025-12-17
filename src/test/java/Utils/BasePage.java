@@ -139,7 +139,7 @@ public class BasePage {
 
             WebDriverManager.firefoxdriver().setup();
             FirefoxOptions options = new FirefoxOptions();
-              options.addArguments("-private");
+            options.addArguments("-private");
             //  options.addPreference("devtools.toolbox.selectedTool","netmonitor");
             if (headless.equals("true")) {
                 options.addArguments("--headless");
@@ -221,7 +221,7 @@ public class BasePage {
      */
     @AfterMethod(alwaysRun = true)
 //     public void tearDown(ITestResult testResult,String TestCycle, String TestCase) throws Exception {
-   public void tearDown(ITestResult testResult) throws Exception {
+    public void tearDown(ITestResult testResult) throws Exception {
 
         String testName = testResult.getName();
         Reporter.setCurrentTestResult(testResult);
@@ -248,7 +248,7 @@ public class BasePage {
         //driver.remove();
     }
 
-        public void makeScreenshot(WebDriver driver, String screenshotName) {
+    public void makeScreenshot(WebDriver driver, String screenshotName) {
 
         WebDriver augmentedDriver = new Augmenter().augment(driver);
         File screenshot = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.FILE);
