@@ -1,6 +1,5 @@
 package Pages;
 
-import Config.ReadProperties;
 import Utils.Common;
 import Utils.Locators;
 import org.openqa.selenium.*;
@@ -19,16 +18,13 @@ import java.util.stream.Collectors;
 
 public class AgentConfigurationPage extends Locators {
 
-    private final WebDriver driver;
-    private final Common common;
-    private final WebDriverWait wait;
-    private static final Logger LOGGER = Logger.getLogger(AgentConfigurationPage.class.getName());
-    ReadProperties readProperties = new ReadProperties();
+    ReadProperties readProperties;
+    Common common;
+
     public AgentConfigurationPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
         this.common = new Common(driver);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.readProperties = new ReadProperties();
     }
 
     public void goToAgentConfigurationPage(){
@@ -147,7 +143,7 @@ public class AgentConfigurationPage extends Locators {
                             try {
                                 parsed.add(sdf.parse(v));
                             } catch (ParseException pe) {
-                                LOGGER.warning("Failed to parse date '" + v + "' with format " + dateFormat + " — treating as null.");
+                                common.logPrint(("Failed to parse date '" + v + "' with format " + dateFormat + " — treating as null."));
                                 parsed.add(null);
                             }
                         }
@@ -157,7 +153,7 @@ public class AgentConfigurationPage extends Locators {
                         parsed.add(v);
                 }
             } catch (NumberFormatException nfe) {
-                LOGGER.warning("Failed to parse numeric value '" + v + "' as " + type + ". Error: " + nfe.getMessage() + ". Treating as null.");
+                common.logPrint("Failed to parse numeric value '" + v + "' as " + type + ". Error: " + nfe.getMessage() + ". Treating as null.");
                 parsed.add(null);
             }
         }
@@ -172,8 +168,9 @@ public class AgentConfigurationPage extends Locators {
     }
 
     public void validateSorting(int columnIndex, String type, String dateFormat, SortOrder order) {
-//        goToProductPage();
-//
+
+        //goToProductPage();
+
         By header = By.xpath("//div[@aria-colindex=" + columnIndex + "]");
         By cellLocator = By.xpath("//div[@aria-colindex=" + columnIndex + "]");
 
@@ -202,6 +199,7 @@ public class AgentConfigurationPage extends Locators {
             } catch (Exception ignored) {
             }
 
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement headerEl = wait.until(ExpectedConditions.elementToBeClickable(header));
             headerEl.click();
 
@@ -344,7 +342,7 @@ public class AgentConfigurationPage extends Locators {
 
         List<WebElement> cardList = driver.findElements(cardLocator);
         int actualCount = cardList.size();
-       // common.highlightElements(cardList);
+        // common.highlightElements(cardList);
 
         // ALWAYS print Expected vs Actual
         String msg1 = "Expected number of cards (pagination): " + totalRows;
@@ -653,7 +651,7 @@ public class AgentConfigurationPage extends Locators {
         Map<String, String> agent = common.fillAgentForm();
 
 
-       String agentName =  agent.get("name");
+        String agentName =  agent.get("name");
         String companyName =   agent.get("companyName");
         String greeting = agent.get("greeting");
         String personality = agent.get("personality");
@@ -665,7 +663,7 @@ public class AgentConfigurationPage extends Locators {
         String businessFocus = agent.get("businessFocus");
         String offerDescription = agent.get("offerDescription");
         String companyDescription = agent.get("companyDescription");
-       common.logPrint(agentName);
+        common.logPrint(agentName);
 
         common.waitUntilElementToBeClickable(ACCTIMEZONEINPUT).click();
         common.type(ACCTIMEZONEINPUT,"5:30");
@@ -757,7 +755,7 @@ public class AgentConfigurationPage extends Locators {
 
     public void deletingAnAgent(){
         Map<String, String> agent = addANewAgentValidData();
-       String existingAgentName =  agent.get("name");
+        String existingAgentName =  agent.get("name");
         common.waitUntilElementToBeVisible(ACDELETEBUTTON);
         common.click(ACDELETEBUTTON);
         WebElement cancelButton = driver.findElement(By.xpath(ACDELETECANCELBUTTON));
@@ -928,11 +926,12 @@ public class AgentConfigurationPage extends Locators {
         common.logPrint("5. ENDS WITH result: " + resultEnds);
         Assert.assertTrue(resultEnds.endsWith(endsWith),
                 "5. Product ENDS WITH filter failed: expected to end with '" + endsWith + "' but was '" + resultEnds + "'");
- }
+    }
 
     public void createAndViewReflectionInPlayground(){
 
         String url = readProperties.getWebUrl();
+
         Map<String, String> agent = addANewAgentValidData();
         String name = agent.get("name");
         String playgroundURL = url+"playground";
@@ -1095,6 +1094,9 @@ public class AgentConfigurationPage extends Locators {
 
         Assert.assertEquals(actual, expected, fieldName + " value mismatch");
     }
+
+
+
 
 }
 

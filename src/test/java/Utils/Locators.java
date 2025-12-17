@@ -8,6 +8,8 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 public class Locators extends BasePage {
     int DRIVER_WAIT = 5;
 
+    protected WebDriver driver;
+
     public Locators(WebDriver driver) {
         ElementLocatorFactory finder = new AjaxElementLocatorFactory(driver, DRIVER_WAIT);
         PageFactory.initElements(finder, this);
@@ -348,6 +350,38 @@ public class Locators extends BasePage {
     public static String CampaignMenu = "//span[text()='Campaign']";
     public static String whatsappCampaign = "//button[text()='Whatsapp Campaign']";
 
+    //Lead Management
+    public static String LEADMANAGMENT = "//span[contains(text(),'Lead Management')]";
+    public static String LEAD = "//button[normalize-space()='Lead']";
+    public static String CREATEB = "//span[normalize-space()='Create']";
+    public static String LEADNAME = "//input[@placeholder='Enter customer email']";
+    public static String TYPE   = "//input[@placeholder='Select Type']";
+    public static String  CONTACTTYPE = "//input[@placeholder='Select Contact Type']";
+    public static String WHATSAPPCON ="//input[@role='combobox' and @placeholder='Select Whatsapp Contact']";
+    public static String PRODUCT = "//input[@placeholder=\"Select product\"]";
+    public static String SAVE_BTN = "//span[text()='Save']";
+    public static String DTAETIME = "//input[@placeholder='Enter Preferred Date and Time']\n";
+    public static String DELETEOTIN = "//div[@class='MuiDataGrid-row MuiDataGrid-row--firstVisible']//button[@aria-label='Delete']";
+    public static String CANCELDELETE = "//span[normalize-space()='Cancel']";
+    public static String LEADPBack ="//div[@class='MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-10 MuiGrid-grid-md-6 css-53mvl9']//button[@type='button']";
+    public static String CONFDELETE = "//span[normalize-space()='Delete']";
+    public static String LEADREFRESH = "//span[contains(@class,'MuiButton-startIcon')]";
+    public static String GRIDVIEWBTNL = "(//button[@role='tab'])[2]";
+    public static String LISTVIEWBTNL = "(//button[@role='tab'])[1]";
+    public static String  LEADHEADER = "//h6[normalize-space()='Lead Management']";
+    public static String LEADSEARCH = "//input[@placeholder='Search...']";
+    public static String LEADEDIT = "//button[@aria-label='Edit']";
+    public static String LEADUPDATEHEADER = "//h6[text()='Update Lead Management']";
+    public static String NoRows = "//div[text()='No rows']";
+    public static String NAME = "//input[@name='name']";
+    public static String ErrorOnName = "//span[text()='Name is required']";
+    public static String ErrorOnEmail ="//span[text()='Email is required']";
+    public static String ErrorOnType ="//span[text()='Type is required']";
+    public static String ErrorOnContactType ="//span[text()='Contact Type is required']";
+    public static String ErrorOnWhatsAppCOntact ="//span[text()='Whatsapp Contact is Required']";
+    public static String ErrorOnPrefrredDT ="//span[text()='Preferred Date and Time is required']";
+    public static String ErrorOnProduct ="//span[text()='Please select a product']";
+    public static String LEADCREATEDMSG = "//*[contains(text(),'Lead Created successfully')]";
 
     //Knowledge Base
     public static String KBMENU = "//span[text()='Knowledge Base']";
@@ -365,7 +399,6 @@ public class Locators extends BasePage {
     public static String KBFILTERS = "//button[@type='button']/following::span[contains(text(),'Filters')]";
     public static String KBCREATE = "//button[@type='button']/following::span[text()='Create']";
     public static String KBSERACHRESULT = "//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"]";
-
     //KB Create
     public static String KBCHEADER = "//h6[text()='Create Knowledge Base']";
     public static String KBCBACKBUTTON = "//button[@class=\"MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-mfslm7\"]";
@@ -382,7 +415,6 @@ public class Locators extends BasePage {
     public static String KBCCANCELBUTTON = "//button[@type='button']/child::span[contains(text(),'Cancel')]";
     public static String KBCSAVEBUTTON = "//button[@type='button']/child::span[contains(text(),'Save')]";
     public static String KBCVALIDATE = "(//div[@data-colindex=\"3\"and @aria-colindex=\"4\"])[1]//span";
-
     //KB Create Text Mode
     public static String KBCTEXTHEADER = "//h6[text()='Add Text']";
     public static String KBCTEXTTITLELABEL = "//span[text()='Title']";
@@ -393,12 +425,10 @@ public class Locators extends BasePage {
     public static String KBCDESCINPUT2 = "(//div[@class=\"ql-editor ql-blank\"])[1]";
     public static String KBCDESCINPUT3 = "(//input[@data-link=\"https://quilljs.com\"])[2]";
     public static String KBCADDTEXT = "//button[@type='button']/following::span[text()='Add Text']";
-
     //KB Website
     public static String KBCWEBHEADER = "//h6[text()='Add Links']";
     public static String KBCWEBINPUT = "//input[@placeholder=\"http://www.example.com/\"]";
     public static String KBCWEBADD = "//button[@type='button']/following::span[text()='Add Link']";
-
     //KB Q&A
     public static String KBCQAHEADER = "//h6[text()='Add Q&A']";
     public static String KBCQATITLE = "(//span[text()='Title'])[2]";
@@ -407,16 +437,6 @@ public class Locators extends BasePage {
     public static String KBCQATITLEQ1INPUT = "(//input[@placeholder=\"Ex: How do I request a refund?\"])[1]";
     public static String KBCADDBUTTON = "//button[@type='button']/following::span[text()='Add Question']";
     public static String KBCANSWER = "//p[text()='Answer']";
-    public static String KBCANSWERINPUT = "(//div[@class=\"ql-editor ql-blank\"])[2]";
-    public static String KBCQAADDBUTTON = "//button[@type='button']//span[text()='Add Q&A']";
-
-
-
-
-
-
 
 
 }
-
-

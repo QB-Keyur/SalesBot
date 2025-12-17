@@ -1,5 +1,6 @@
 package Tests;
 
+import Config.ReadProperties;
 import Utils.BasePage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,6 @@ public class AgentConfigurationTest extends BasePage {
     public void goToAgentConfigurationPage(){
         loginWithAdminUser();
         agentConfigurationPage.goToAgentConfigurationPage();
-
     }
 
     @Test
@@ -42,7 +42,6 @@ public class AgentConfigurationTest extends BasePage {
         loginWithAdminUser();
         agentConfigurationPage.goToAgentConfigurationPage();
         agentConfigurationPage.validateSorting(5, "int", null, SortOrder.DESCENDING);
-
     }
 
     @Test
@@ -139,8 +138,12 @@ public class AgentConfigurationTest extends BasePage {
     public void filters(){
         loginWithAdminUser();
         agentConfigurationPage.filters();
+    }
 
-
+    @Test
+    public void createAndViewReflectionInPlayground(){
+        loginWithAdminUser();
+        agentConfigurationPage.createAndViewReflectionInPlayground();
     }
 
     @Test

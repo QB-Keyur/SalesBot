@@ -28,17 +28,15 @@ import javax.swing.*;
 
 public class ProductPage extends Locators {
 
-    private final WebDriver driver;
-    private final Common common;
-    private final WebDriverWait wait;
-    private static final Logger LOGGER = Logger.getLogger(ProductPage.class.getName());
+    Common common;
 
     public ProductPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
         this.common = new Common(driver);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
+
+    private static final Logger LOGGER = Logger.getLogger(ProductPage.class.getName());
+
 
     public void goToProductPage() {
         loginWithAdminUser();
@@ -184,8 +182,8 @@ public class ProductPage extends Locators {
             } catch (Exception ignored) {
             }
 
-            WebElement headerEl = wait.until(ExpectedConditions.elementToBeClickable(header));
-            headerEl.click();
+//            WebElement headerEl = wait.until(ExpectedConditions.elementToBeClickable(header));
+//            headerEl.click();
 
             try {
                 WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));

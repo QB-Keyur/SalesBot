@@ -51,8 +51,7 @@ public class WhatsAppContactTest extends BasePage {
         whatsAppContactPage.createWhatsAppContactCreate(mobileNumber);
         whatsAppContactPage.verifySuccessMessageForWhatsAppContactCreation();
 
-        common.logPrint("Generate updated mobile number");
-        whatsAppContactPage.redirectsToWhatsAppContactCreatePage();
+        whatsAppContactPage.clickOnTheCreateButton();
         whatsAppContactPage.createWhatsAppContactCreate(mobileNumber);
         whatsAppContactPage.verifyErrorMessageForDuplicateMobileNumber(mobileNumber);
     }
@@ -63,13 +62,6 @@ public class WhatsAppContactTest extends BasePage {
         loginWithAdminUser();
         whatsAppContactPage.redirectsToWhatsAppContactPage();
         whatsAppContactPage.exportWhatsAppContact();
-    }
-
-    @Test
-    public void createWhatsAppContactUsingAnPOI() throws IOException {
-        common.logPrint("Verify create whatsapp contact using an POI excel sheet");
-        loginWithAdminUser();
-        whatsAppContactPage.createWhatsAppContact();
     }
 
     @Test
@@ -201,6 +193,12 @@ public class WhatsAppContactTest extends BasePage {
         whatsAppContactPage.verifyTheContactInWhatsAppCampaignPage(name, email);
     }
 
+    @Test
+    public void createWhatsAppContactUsingAnPOI() throws IOException {
+        common.logPrint("Verify create whatsapp contact using an POI excel sheet");
+        loginWithAdminUser();
+        whatsAppContactPage.createWhatsAppContact();
+    }
 
 
 

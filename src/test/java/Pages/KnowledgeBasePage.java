@@ -1,5 +1,6 @@
 package Pages;
 
+import Utils.Common;
 import Utils.Locators;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -8,8 +9,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class KnowledgeBasePage extends Locators {
+
+    Common common;
+
     public KnowledgeBasePage(WebDriver driver) {
         super(driver);
+        this.common = new Common(driver);
     }
 
     public void goToKnowledgeBasePage(){
@@ -193,18 +198,6 @@ public class KnowledgeBasePage extends Locators {
         common.assertElementPresent(KBCSAVEBUTTON);
         common.logPrint("Verified: Save button is visible");
 
-
-
-
-
-
-
-
-
-
-
-
-
         common.logPrint("Step :: Create page UI validation completed successfully");
     }
 
@@ -268,7 +261,6 @@ public class KnowledgeBasePage extends Locators {
         common.click(KBCDESCINPUT2);
         common.type(KBCDESCINPUT2, FakeDesc);
 
-
     }
 
     public void validateAddingWebsite(){
@@ -286,11 +278,6 @@ public class KnowledgeBasePage extends Locators {
         common.type(KBCWEBINPUT,FakeDomain);
 
         common.pause(5);
-
-
-
-
-
 
     }
 

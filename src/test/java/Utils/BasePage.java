@@ -47,7 +47,6 @@ public class BasePage {
     public ProductPage productPage;
     public AgentConfigurationPage agentConfigurationPage;
     public WhatsAppContactPage whatsAppContactPage;
-    public KnowledgeBasePage knowledgeBasePage;
 
     protected List<String> stringList = new ArrayList<>();
 
@@ -128,7 +127,7 @@ public class BasePage {
                 options.addArguments("user-agent=Mozilla/5.0 (Linux; Android 8.0.0; TA-1053 Build/OPR1.170623.026) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.0 Mobile Safari/537.36");
             }
 
-            driver = new EdgeDriver(options); // Pass options to EdgeDriver
+            driver.set(new EdgeDriver(options)); // Pass options to EdgeDriver
 
         }
         else if (browser.equals("firefox")) {
@@ -141,22 +140,21 @@ public class BasePage {
                 options.addArguments("--headless");
             }
 
-            driver = new FirefoxDriver(options);
+            driver.set(new FirefoxDriver(options));
         }
 
-        threadLocal.set(driver);
-        driver = threadLocal.get();
-        driver.manage().window().maximize();
-        common = new Common(driver);
-        adminPage = new AdminPage(driver);
-        otherPage = new OtherPage(driver);
-        productPage = new ProductPage(driver);
-        whatsAppContactPage = new WhatsAppContactPage(driver);
-        agentConfigurationPage = new AgentConfigurationPage(driver);
-        knowledgeBasePage = new KnowledgeBasePage(driver);
+        getDriver().manage().window().maximize();
+        common = new Common(getDriver());
+        loginPage = new loginPage(getDriver());
+        otherPage = new OtherPage(getDriver());
+        productPage = new ProductPage(getDriver());
+        whatsAppContactPage = new WhatsAppContactPage(getDriver());
+        agentConfigurationPage = new AgentConfigurationPage(getDriver());
+        lead = new LeadManagementPage(getDriver());
+        knowledgeBasePage = new KnowledgeBasePage(getDriver());
         steps.set(1);
         Common.printCurrentTime("Starting Time");
-        driver.get(url);
+        getDriver().get(url);
     }
     protected Properties getConfigProperties() {
         if (configProperties == null) {
@@ -180,7 +178,7 @@ public class BasePage {
 
     public boolean existsElement(String xpath) {
         try {
-            driver.findElement(By.xpath(xpath));
+            getDriver().findElement(By.xpath(xpath));
             return true;
         } catch (NoSuchElementException e) {
             return false;
@@ -225,8 +223,8 @@ public class BasePage {
 
         if (testResult.getStatus() == 2) {
             Reporter.log("<font color = 'red'><b><i><u><br>Fail :: " + testResult.getName() + "</u></i></b></font>");
-            makeScreenshot(driver, testName);
-            Reporter.log("Failed page URL: "+driver.getCurrentUrl());
+            makeScreenshot(getDriver(), testName);
+            Reporter.log("Failed page URL: "+getDriver().getCurrentUrl());
         }
         // MyScreenRecorder.stopRecording();
         if (testResult.getStatus() == 1) {
@@ -240,11 +238,12 @@ public class BasePage {
 //        }
 
         Common.printCurrentTime("Ending Time");
-        driver.manage().deleteAllCookies();
-        driver.quit();
+        getDriver().manage().deleteAllCookies();
+        //getDriver().quit();
+        //driver.remove();
     }
 
-    public void makeScreenshot(WebDriver driver, String screenshotName) {
+        public void makeScreenshot(WebDriver driver, String screenshotName) {
 
         WebDriver augmentedDriver = new Augmenter().augment(driver);
         File screenshot = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.FILE);
@@ -265,6 +264,4 @@ public class BasePage {
             System.out.println("Failed to capture screenshot: " + e.getMessage());
         }
     }
-
-
 }
