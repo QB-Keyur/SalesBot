@@ -5,47 +5,51 @@ import org.testng.annotations.Test;
 public class LeadManagementTest extends BasePage {
 
     @Test
-    public void VerifyLeadManagement() {
-        common.logPrint("Step:: click on lead managment");
+    public void verifyLeadIsCreatedSuccessfully() {
+        common.logPrint("Verify lead is created successfully");
         loginWithAdminUser();
         lead.VerifyCreateNewLead();
     }
 
     @Test
-    public void verifySearchDeletedLead() {
+    public void verifyDeletedLeadIsNotShowingInTheGrid() {
+        common.logPrint("Verify deleted lead is not displayed in the grid");
         loginWithAdminUser();
         String name = lead.VerifyCreateNewLead();
         lead.verifyDeleteLeadInSearch(name);
     }
 
     @Test
-    public void Verify_Cancel_BACK() {
-
+    public void verifyCancelAndBackButtonFunctionalityOnCreateLeadPage() {
+        common.logPrint("Verify cancel and back button functionality on lead management page");
         loginWithAdminUser();
-        lead.Verify_CancelAmdBackButtonOnCreateLeadPage();
+        lead.VerifyCancelAmdBackButtonOnCreateLeadPage();
     }
 
     @Test
-    public void Verify_Header() {
+    public void verifyLeadManagementHeaderIsShowing() {
+        common.logPrint("Verify Lead management header is showing on the page");
         loginWithAdminUser();
         lead.Verify_LeadPageHeader();
     }
 
     @Test
-    public void Verify_GridList() {
+    public void verifyGridListViewOnLeadManagementPage() {
+        common.logPrint("Verify Grid list view on lead management page");
         loginWithAdminUser();
         lead.Verify_Grid_List_view();
     }
 
     @Test
-    public void Edit() {
-        common.logPrint("Verify edit Functinality");
+    public void verifyEditFunctionalityOnLeadManagementPage() {
+        common.logPrint("Verify Edit Functionality on Lead Management page");
         loginWithAdminUser();
         lead.VerifyEdit();
     }
 
     @Test
-    public void VerifyFieldvalidation() {
+    public void verifyFieldValidationMessageOnCreateLeadPage() {
+        common.logPrint("Verify field validations message on create lead page");
         loginWithAdminUser();
         lead.verifyAllMandatoryValidations();
     }

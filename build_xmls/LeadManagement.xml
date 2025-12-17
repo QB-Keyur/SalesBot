@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Lead Management Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <!-- Verify lead creation -->
+    <test name="Verify Lead Is Created Successfully">
+        <classes>
+            <class name="Tests.LeadManagementTest">
+                <methods>
+                    <include name="verifyLeadIsCreatedSuccessfully"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify deleted lead is not displayed -->
+    <test name="Verify Deleted Lead Is Not Showing In Grid">
+        <classes>
+            <class name="Tests.LeadManagementTest">
+                <methods>
+                    <include name="verifyDeletedLeadIsNotShowingInTheGrid"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify cancel and back button functionality -->
+    <test name="Verify Cancel And Back Button On Create Lead Page">
+        <classes>
+            <class name="Tests.LeadManagementTest">
+                <methods>
+                    <include name="verifyCancelAndBackButtonFunctionalityOnCreateLeadPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify lead management header -->
+    <test name="Verify Lead Management Header Is Showing">
+        <classes>
+            <class name="Tests.LeadManagementTest">
+                <methods>
+                    <include name="verifyLeadManagementHeaderIsShowing"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify grid and list view -->
+    <test name="Verify Grid And List View On Lead Management Page">
+        <classes>
+            <class name="Tests.LeadManagementTest">
+                <methods>
+                    <include name="verifyGridListViewOnLeadManagementPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify edit functionality -->
+    <test name="Verify Edit Functionality On Lead Management Page">
+        <classes>
+            <class name="Tests.LeadManagementTest">
+                <methods>
+                    <include name="verifyEditFunctionalityOnLeadManagementPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify mandatory field validation messages -->
+    <test name="Verify Mandatory Field Validation Messages On Create Lead Page">
+        <classes>
+            <class name="Tests.LeadManagementTest">
+                <methods>
+                    <include name="verifyFieldValidationMessageOnCreateLeadPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

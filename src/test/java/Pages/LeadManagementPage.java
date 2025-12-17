@@ -64,7 +64,7 @@ public class LeadManagementPage extends Locators {
         common.logPrint("Steps:: verify the Lead created Successfully message ");
         common.waitUntilElementToBeVisible(LEADCREATEDMSG);
         String successMSG = common.getText(LEADCREATEDMSG);
-        common.logPrint("Steps:: getting message "+successMSG);
+        common.logPrint("Steps:: getting message "+ successMSG);
 
 //        common.logPrint("Step:: click on Confirm delete button"+name1);
 //        common.handleAlert();
@@ -79,6 +79,7 @@ public class LeadManagementPage extends Locators {
 
     }
     public void verifyDeleteLeadInSearch(String name1) {
+
         VerifyCreateNewLead();
 
         common.waitUntilElementToBeVisible(LEADSEARCH);
@@ -103,9 +104,10 @@ public class LeadManagementPage extends Locators {
         common.waitUntilElementToBeVisible(LEADSEARCH);
         common.type(LEADSEARCH,name1);
 
+        common.logPrint("Searched lead is not displayed in the grid");
         common.waitUntilElementToBeVisible(NoRows);
     }
-    public void Verify_CancelAmdBackButtonOnCreateLeadPage() {
+    public void VerifyCancelAmdBackButtonOnCreateLeadPage() {
         common.waitUntilElementToBeVisible(LEADMANAGMENT);
         common.click(LEADMANAGMENT);
 
@@ -125,7 +127,6 @@ public class LeadManagementPage extends Locators {
         common.waitUntilElementToBeVisible(LEADPBack);
         common.pause(2);
         common.click(LEADPBack);
-
 
     }
     public void Verify_LeadPageHeader() {
