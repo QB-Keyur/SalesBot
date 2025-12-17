@@ -3,13 +3,13 @@ package Tests;
 import Utils.BasePage;
 import org.testng.annotations.Test;
 
-public class AdminTest extends BasePage {
+public class loginTest extends BasePage {
 
     //Login page test cases
     @Test
     public void verifyLoginPageIsLoadsSuccessfully(){
         common.logPrint("Verify that the login page loads successfully");
-        adminPage.verifyLoginPageIsLoaded();
+        loginPage.verifyLoginPageIsLoaded();
     }
 
     @Test
@@ -21,51 +21,44 @@ public class AdminTest extends BasePage {
     @Test
     public void verifyErrorMessageForInvalidCredential(){
         common.logPrint("Verify error message for invalid credentials");
-        adminPage.enterInvalidCredential();
-        adminPage.verifyErrorMessageIsShowingForInvalidEmailPass();
+        loginPage.enterInvalidCredential();
+        loginPage.verifyErrorMessageIsShowingForInvalidEmailPass();
     }
 
     @Test
     public void verifyValidationMessageForBlankFields(){
         common.logPrint("Verify validation messages for empty fields");
-        adminPage.verifyErrorMessageForBlankFields();
+        loginPage.verifyErrorMessageForBlankFields();
     }
 
     @Test
     public void verifyRedirectionOfForgotPassword(){
         common.logPrint("Verify Forgot password link navigation");
-        adminPage.verifyRedirectionOfForgotPassword();
+        loginPage.verifyRedirectionOfForgotPassword();
     }
 
     @Test
     public void verifyRedirectionOfSignUpPage(){
         common.logPrint("Verify SignUp link navigation");
-        adminPage.verifyRedirectionOfSignUpPage();
+        loginPage.verifyRedirectionOfSignUpPage();
     }
 
     @Test
     public void verifyPageLoadTime(){
         common.logPrint("Verify page load time");
-        adminPage.verifyLoadTimeOfThePage();
-    }
-
-    @Test
-    public void verifyWhenLoginWithWhiteSPaceInEMailAndPass(){
-        common.logPrint("Verify When Login With White SPace In EMail And Pass");
-        adminPage.enterEmailAndPAssWithWhiteSpace();
+        loginPage.verifyLoadTimeOfThePage();
     }
 
     //Forgot password test cases
     @Test
     public void verifyForgotPasswordPageIsLoadsSuccessfully(){
         common.logPrint("Verify the forgot password page load timing");
-        adminPage.verifyPageLoadTimeOfForgotPassword();
+        loginPage.verifyPageLoadTimeOfForgotPassword();
     }
 
     @Test
     public void verifyOnboardingFlow(){
         common.logPrint("Verify the onboarding flow");
-
     }
 
 

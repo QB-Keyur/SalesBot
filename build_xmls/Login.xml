@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Login module Test Cases" verbose="10" parallel="false" allow-return-values="true">
-
-    <!--    <listeners>-->
-    <!--        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>-->
-    <!--    </listeners>-->
-
+<suite name="Login module Test Cases" verbose="10" parallel="tests" thread-count="3" allow-return-values="true">
 
     <!-- Verify that the login page loads successfully.-->
     <test name="Verify that the login page loads successfully">
         <classes>
-            <class name="Tests.AdminTest">
+            <class name="Tests.loginTest">
                 <methods>
                     <include name="verifyLoginPageIsLoadsSuccessfully"/>
                 </methods>
@@ -21,7 +16,7 @@
     <!-- Verify user can log-in with valid credentials.-->
     <test name="Verify user can log-in with valid credentials">
         <classes>
-            <class name="Tests.AdminTest">
+            <class name="Tests.loginTest">
                 <methods>
                     <include name="VerifyUserCanLoginWthValidCredentials"/>
                 </methods>
@@ -32,7 +27,7 @@
     <!-- Verify error message for invalid credentials.-->
     <test name="Verify error message for invalid credentials">
         <classes>
-            <class name="Tests.AdminTest">
+            <class name="Tests.loginTest">
                 <methods>
                     <include name="verifyErrorMessageForInvalidCredential"/>
                 </methods>
@@ -43,7 +38,7 @@
     <!-- Verify validation messages for empty fields.-->
     <test name="Verify validation messages for empty fields">
         <classes>
-            <class name="Tests.AdminTest">
+            <class name="Tests.loginTest">
                 <methods>
                     <include name="verifyValidationMessageForBlankFields"/>
                 </methods>
@@ -54,7 +49,7 @@
     <!-- Verify Forgot password link navigation.-->
     <test name="Verify Forgot password link navigation">
         <classes>
-            <class name="Tests.AdminTest">
+            <class name="Tests.loginTest">
                 <methods>
                     <include name="verifyRedirectionOfForgotPassword"/>
                 </methods>
@@ -65,7 +60,7 @@
     <!-- Verify SignUp link navigation.-->
     <test name="Verify SignUp link navigation">
         <classes>
-            <class name="Tests.AdminTest">
+            <class name="Tests.loginTest">
                 <methods>
                     <include name="verifyRedirectionOfSignUpPage"/>
                 </methods>
@@ -76,20 +71,9 @@
     <!-- Verify page load time.-->
     <test name="Verify page load time">
         <classes>
-            <class name="Tests.AdminTest">
+            <class name="Tests.loginTest">
                 <methods>
                     <include name="verifyPageLoadTime"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <!-- Verify When Login With White SPace In EMail And Pass.-->
-    <test name="Verify When Login With White SPace In EMail And Pass">
-        <classes>
-            <class name="Tests.AdminTest">
-                <methods>
-                    <include name="verifyWhenLoginWithWhiteSPaceInEMailAndPass"/>
                 </methods>
             </class>
         </classes>

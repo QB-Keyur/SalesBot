@@ -17,10 +17,12 @@ import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class OtherPage extends Locators {
-    Common common = new Common(driver);
+
+    Common common;
 
     public OtherPage(WebDriver driver) {
         super(driver);
+        this.common = new Common(driver);
     }
 
 }
