@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Agent Configuration Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <!-- Verify Agent Configuration page navigation -->
+    <test name="Verify Agent Configuration page navigation">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="goToAgentConfigurationPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify columns and elements -->
+    <test name="Verify columns and elements">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="verifyColumns"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify search functionality -->
+    <test name="Verify search functionality">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="verifySearch"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify refresh functionality -->
+    <test name="Verify refresh functionality">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="verifyRefresh"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify sorting functionality -->
+    <test name="Verify sorting functionality">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="validateSorting"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify activate button -->
+    <test name="Verify activate button">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="verifyActivateButton"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify activate button negative scenario -->
+    <test name="Verify activate button negative scenario">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="verifyActiveButtonNegative"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify horizontal view -->
+    <test name="Verify horizontal view">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="horizontalView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify create page elements -->
+    <test name="Verify create page elements">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="verifyCreatePageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify edit page elements -->
+    <test name="Verify edit page elements">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="verifyEditPageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify reset button -->
+    <test name="Verify reset button functionality">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="verifyUsingTheResetButton"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify cancel and back button -->
+    <test name="Verify cancel and back button">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="verifyCancelAndBackButton"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify mandatory field validation -->
+    <test name="Verify mandatory field validation">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="mandatoryFieldVerification"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify add new agent with valid data -->
+    <test name="Verify add new agent with valid data">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="addANewAgentValidData"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify editing an agent -->
+    <test name="Verify editing an agent">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="editingAnAgent"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify deleting an agent -->
+    <test name="Verify deleting an agent">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="deletingAnAgent"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify view agent details -->
+    <test name="Verify view agent details">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="viewAnAgent"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify active and inactive flow -->
+    <test name="Verify active and inactive flow">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="activeInactive"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify multiple horizontal views -->
+    <test name="Verify multiple horizontal views">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="horizontalViews"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify pagination -->
+    <test name="Verify pagination">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="pagination"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify filters -->
+    <test name="Verify filters">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="filters"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify reflection in playground -->
+    <test name="Verify reflection in playground">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="createAndViewReflectionInPlayground"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

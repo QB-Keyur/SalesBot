@@ -7,8 +7,6 @@ import org.testng.annotations.Test;
 
 public class KnowledgeBaseTest extends BasePage {
 
-    private static final Logger log = LoggerFactory.getLogger(KnowledgeBaseTest.class);
-
     @Test
     public void goToKnowledgeBasePage(){
         loginWithAdminUser();
@@ -56,34 +54,5 @@ public class KnowledgeBaseTest extends BasePage {
         loginWithAdminUser();
         knowledgeBasePage.validateAddingWebsite();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
