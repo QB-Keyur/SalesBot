@@ -105,9 +105,7 @@ public class Common extends Locators {
         }
     }
 
-
     /* ---------- helper methods used above ---------- */
-
     private void safeLog(String message) {
         try {
             // If you have a common logger, use it
@@ -129,7 +127,6 @@ public class Common extends Locators {
             }
         }
     }
-
 
     /**
      * Wait until the app is "ready" — DOM complete + no active XHR/fetch + jQuery finished (if present).
@@ -245,7 +242,6 @@ public class Common extends Locators {
         common.logPrint("waitForAppReady: TIMEOUT after " + timeoutSeconds + "s. Proceeding anyway.");
         // Optionally: you can take a screenshot here for debugging
     }
-
 
     public WebElement waitUntilStringLocator(String locator){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));

@@ -296,6 +296,26 @@ public class KnowledgeBasePage extends Locators {
 
     public void validateQA(){
         goToKnowledgeBasePage();
+        common.waitUntilElementToBeClickable(KBCREATE);
+        common.click(KBCREATE);
+
+        common.waitUntilElementToBeVisible(KBCQABUTTON);
+        common.click(KBCQABUTTON);
+
+        common.waitUntilElementToBeVisible(KBCQATITLEINPUT);
+        common.type(KBCQATITLEINPUT,"Test");
+
+        common.waitUntilElementToBeVisible(KBCQATITLEQ1INPUT);
+        common.type(KBCQATITLEQ1INPUT,"Question Test");
+
+        common.waitUntilElementToBeVisible(KBCANSWERINPUT);
+        common.type(KBCANSWERINPUT, "Answer Test");
+
+        common.waitUntilElementToBeVisible(KBCQAADDBUTTON);
+        common.click(KBCQAADDBUTTON);
+
+        common.pause(5);
+
 
     }
 

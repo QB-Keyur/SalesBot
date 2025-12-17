@@ -407,6 +407,8 @@ public class Locators extends BasePage {
     public static String KBCQATITLEQ1INPUT = "(//input[@placeholder=\"Ex: How do I request a refund?\"])[1]";
     public static String KBCADDBUTTON = "//button[@type='button']/following::span[text()='Add Question']";
     public static String KBCANSWER = "//p[text()='Answer']";
+    public static String KBCANSWERINPUT = "(//div[@class=\"ql-editor ql-blank\"])[2]";
+    public static String KBCQAADDBUTTON = "//button[@type='button']//span[text()='Add Q&A']";
 
 
 

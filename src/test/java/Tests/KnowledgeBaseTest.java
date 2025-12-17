@@ -60,8 +60,8 @@ public class KnowledgeBaseTest extends BasePage {
 
     @Test
     public void validateQA(){
-
-
+        loginWithAdminUser();
+        knowledgeBasePage.validateQA();
     }
 
 
