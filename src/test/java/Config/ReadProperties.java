@@ -4,9 +4,10 @@
     import java.util.Properties;
 
     public class ReadProperties  {
+
         public Properties properties;
 
-        private final String filePath = "src/test/java/Config/Config.properties";
+        public final String filePath = "src/test/java/Config/Config.properties";
 
         public ReadProperties() {
             BufferedReader reader;

@@ -28,10 +28,7 @@ import java.awt.event.KeyEvent;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Clock;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.Year;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
@@ -47,11 +44,11 @@ import java.util.concurrent.TimeUnit;
 public class Common extends Locators {
     private static final Logger log = LoggerFactory.getLogger(Common.class);
 
-//	protected static WebDriver driver;
+    WebDriver driver;
 
     public Common(WebDriver driver) {
-
         super(driver);
+        this.driver = driver;
     }
 
     public WebDriverWait getWait() {
@@ -106,7 +103,7 @@ public class Common extends Locators {
     private void safeLog(String message) {
         try {
             // If you have a common logger, use it
-            common.logPrint(message);
+            logPrint(message);
         } catch (Exception ignored) {
             System.out.println(message);
         }
@@ -115,7 +112,7 @@ public class Common extends Locators {
     private void safePause(long millis) {
         try {
             // if common.pause exists use it
-            common.pause((int) millis);
+            pause((int) millis);
         } catch (Exception e) {
             try {
                 Thread.sleep(millis);
@@ -173,7 +170,7 @@ public class Common extends Locators {
             js.executeScript(inject);
         } catch (Exception e) {
             // instrumentation failed — we still continue but won't be able to detect fetch/xhr reliably
-            common.logPrint("waitForAppReady: instrumentation injection failed: " + e.getMessage());
+            logPrint("waitForAppReady: instrumentation injection failed: " + e.getMessage());
         }
 
         // 2) Poll until stable or timeout
@@ -211,7 +208,7 @@ public class Common extends Locators {
                 boolean jqueryIdle = (jqueryActive == 0);
 
                 // Debug logging — helpful when timeout occurs
-                common.logPrint(String.format("waitForAppReady: readyState=%s, activeRequests=%d, jqueryActive=%d, stableCount=%d",
+                logPrint(String.format("waitForAppReady: readyState=%s, activeRequests=%d, jqueryActive=%d, stableCount=%d",
                         readyState, activeRequests, jqueryActive, stableCount));
 
                 if (docReady && networkIdle && jqueryIdle) {
@@ -219,7 +216,7 @@ public class Common extends Locators {
                     if (stableCount >= stableRequired) {
                         // short buffer to let UI finalise
                         try { Thread.sleep(200); } catch (InterruptedException ignored) {}
-                        common.logPrint("waitForAppReady: page stable and ready.");
+                        logPrint("waitForAppReady: page stable and ready.");
                         return;
                     }
                 } else {
@@ -227,7 +224,7 @@ public class Common extends Locators {
                 }
             } catch (Exception ex) {
                 // JS execution can fail intermittently — log and continue polling until timeout
-                common.logPrint("waitForAppReady: polling script error: " + ex.getMessage());
+                logPrint("waitForAppReady: polling script error: " + ex.getMessage());
                 stableCount = 0;
             }
 
@@ -237,7 +234,7 @@ public class Common extends Locators {
         }
 
         // Timeout reached — don't hang. Log helpful diagnostics.
-        common.logPrint("waitForAppReady: TIMEOUT after " + timeoutSeconds + "s. Proceeding anyway.");
+        logPrint("waitForAppReady: TIMEOUT after " + timeoutSeconds + "s. Proceeding anyway.");
         // Optionally: you can take a screenshot here for debugging
     }
 
@@ -331,7 +328,7 @@ public class Common extends Locators {
 
             // If the window title matches "Plaid flow", break the loop and stay in this window
             if (windowTitle.equals(title)) {
-                common.logPrint("Switched to window with title: " + windowTitle);
+                logPrint("Switched to window with title: " + windowTitle);
                 break;
             }
         }
@@ -458,7 +455,7 @@ public class Common extends Locators {
      * set.
      */
     public String getValue(String locator) {
-        // pause(1);
+         pause(1);
         WebElement element = waitUntilPresenceOfElementLocated(By.xpath(locator));
         return element.getAttribute("value");
     }
@@ -583,38 +580,38 @@ public class Common extends Locators {
     /**
      *  Common method to log response details
      */
-    public static void logResponseDetails(JsonObject jsonResponse) {
-        JsonObject executionResult = jsonResponse.getAsJsonObject("executionResult");
-
-        // Create a new JSON object to store the filtered fields
-        JsonObject filteredResult = new JsonObject();
-        filteredResult.add("status", executionResult.get("status"));
-        filteredResult.add("discreteCriteriaVersion", executionResult.get("discreteCriteriaVersion"));
-        filteredResult.add("criteriaStage", executionResult.getAsJsonObject("criteriaStage"));
-
-        JsonArray offers = jsonResponse.getAsJsonArray("offers");
-        JsonElement mck3ScoreElement = executionResult.has("mck3Score") ? executionResult.get("mck3Score") : JsonNull.INSTANCE;
-
-        // Initialize Gson object for pretty printing
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        common.logPrint("Step :: <b>Execution Result = " +"</b>" + gson.toJson(filteredResult));
-        common.logPrint("Step :: <b>Offer Result = " +"</b>"+ gson.toJson(offers));
-        common.logPrint("Step :: <b>MCK3 Score = " +"</b>" + mck3ScoreElement.toString());
-        common.logPrint("Step :: <b>Full Response = "  +"</b>"+ jsonResponse);
-
-
-        // Extract 'criteriaStage' and 'failedCriterias'
-        JsonObject executionResult1 = jsonResponse.getAsJsonObject("executionResult");
-        JsonObject criteriaStage = executionResult1.getAsJsonObject("criteriaStage");
-        JsonArray failedCriterias = criteriaStage.getAsJsonArray("failedCriterias");
-
-        // Convert 'failedCriterias' to a list of strings
-        List<String> failedCriteriasList = new ArrayList<>();
-        for (JsonElement criteria : failedCriterias) {
-            failedCriteriasList.add(criteria.getAsString());
-        }
-    }
+//    public static void logResponseDetails(JsonObject jsonResponse) {
+//        JsonObject executionResult = jsonResponse.getAsJsonObject("executionResult");
+//
+//        // Create a new JSON object to store the filtered fields
+//        JsonObject filteredResult = new JsonObject();
+//        filteredResult.add("status", executionResult.get("status"));
+//        filteredResult.add("discreteCriteriaVersion", executionResult.get("discreteCriteriaVersion"));
+//        filteredResult.add("criteriaStage", executionResult.getAsJsonObject("criteriaStage"));
+//
+//        JsonArray offers = jsonResponse.getAsJsonArray("offers");
+//        JsonElement mck3ScoreElement = executionResult.has("mck3Score") ? executionResult.get("mck3Score") : JsonNull.INSTANCE;
+//
+//        // Initialize Gson object for pretty printing
+//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//
+//        common.logPrint("Step :: <b>Execution Result = " +"</b>" + gson.toJson(filteredResult));
+//        common.logPrint("Step :: <b>Offer Result = " +"</b>"+ gson.toJson(offers));
+//        common.logPrint("Step :: <b>MCK3 Score = " +"</b>" + mck3ScoreElement.toString());
+//        common.logPrint("Step :: <b>Full Response = "  +"</b>"+ jsonResponse);
+//
+//
+//        // Extract 'criteriaStage' and 'failedCriterias'
+//        JsonObject executionResult1 = jsonResponse.getAsJsonObject("executionResult");
+//        JsonObject criteriaStage = executionResult1.getAsJsonObject("criteriaStage");
+//        JsonArray failedCriterias = criteriaStage.getAsJsonArray("failedCriterias");
+//
+//        // Convert 'failedCriterias' to a list of strings
+//        List<String> failedCriteriasList = new ArrayList<>();
+//        for (JsonElement criteria : failedCriterias) {
+//            failedCriteriasList.add(criteria.getAsString());
+//        }
+//    }
 
     /**
      * Check that given element is present or not.
@@ -687,8 +684,7 @@ public class Common extends Locators {
                             ? element.getAttribute("innerText")
                             : "No readable text/value";
 
-            logPrint("Step :: Asserted: " + text);
-
+            logPrint("Asserted: " + text +" is displayed.");
 
         } catch (Exception e) {
             logPrint("Assertion FAILED for locator: " + locator + " | Error: " + e.getMessage());
@@ -1068,13 +1064,13 @@ public class Common extends Locators {
                         "arguments[0].scrollIntoView({behavior:'auto', block:'center'});",
                         element
                 );
-                common.pause(200);
+                pause(2);
 
                 // Use your highlight method
                 highlightElementClick(element);
 
                 System.out.println("Highlighted element " + index + " of " + elements.size());
-                try { common.logPrint("Highlighted element " + index + " of " + elements.size()); }
+                try { logPrint("Highlighted element " + index + " of " + elements.size()); }
                 catch (Exception ignored) {}
 
                 common.pause(200);
@@ -1211,17 +1207,59 @@ public class Common extends Locators {
      * If given element is a form entry element, this will reset its value first
      * then simulate typing into an element, which may set its value.
      *
-     * @param locator    The locator of element where to send keys
-     * @param keysToSend the character sequence to send to the element
      */
-    public void type(String locator, String keysToSend) {
+    private String getSafeValue(WebElement element, String value) {
+        String label = getReadableElementName(element).toLowerCase();
 
-        WebElement element = waitUntilElementToBeClickable(findBy(locator));
-        highlightElementClick(element);
-        scroll_To_Element(element);
-        element.clear();
-        element.sendKeys(keysToSend);
-        //element.sendKeys(Keys.TAB);
+        if (label.contains("password") || label.contains("pin") || label.contains("otp")) {
+            return "******";
+        }
+        return value;
+    }
+
+    private void jsType(WebElement element, String value) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].value=''; arguments[0].value=arguments[1];",
+                element, value);
+    }
+
+    private void logTypeSuccess(WebElement element, String value) {
+        try {
+            String label = getReadableElementName(element);
+            String safeValue = getSafeValue(element, value);
+            logPrint("Step :: Entered value '" + safeValue + "' in: " + label);
+        } catch (Exception e) {
+            logPrint("Step :: Entered value in input field");
+        }
+    }
+
+    public void type(String locator, String keysToSend) {
+        By by = findBy(locator);
+
+        for (int i = 0; i < 3; i++) {
+            try {
+                WebElement element = waitUntilElementToBeClickable(by);
+                highlightElementClick(element);
+                scroll_To_Element(element);
+                element.clear();
+                element.sendKeys(keysToSend);
+                logTypeSuccess(element, keysToSend);
+                return;
+
+            } catch (Exception e) {
+                try {
+                    // JS fallback typing
+                    WebElement el = driver.findElement(by);
+                    jsType(el, keysToSend);
+                    logTypeSuccess(el, keysToSend);
+                    return;
+                } catch (Exception ignored) {
+                    common.pause(200); // retry
+                }
+            }
+        }
+
+        throw new RuntimeException("FAILED :: Unable to type into → " + locator);
     }
 
     public void typeAndTab(String locator, String keysToSend) {
@@ -1278,7 +1316,7 @@ public class Common extends Locators {
                     logClickSuccess(el, locator);
                     return;
                 } catch (Exception ignored) {
-                    common.pause(200); // retry
+                    pause(20); // retry
                 }
             }
         }
@@ -1288,14 +1326,40 @@ public class Common extends Locators {
 
     private void logClickSuccess(WebElement element, String locator) {
         try {
-            String text = element.getText().trim();
-            logPrint("Step :: Clicked on: " + (text.isEmpty() ? locator : text));
-        } catch (Exception ignored) {
-            logPrint("Step :: Clicked on: " + locator);
+            String label = getReadableElementName(element);
+            logPrint("Step :: Clicked on: " + label);
+        } catch (Exception e) {
+            logPrint("Step :: Clicked on element");
         }
     }
+    private String getReadableElementName(WebElement element) {
 
+        String[] attributes = {
+                "aria-label",
+                "title",
+                "placeholder",
+                "value",
+                "title",
+                "name",
+                "label",
+                "data-name",
+                "data-label"
+        };
 
+        for (String attr : attributes) {
+            String val = element.getAttribute(attr);
+            if (val != null && !val.trim().isEmpty()) {
+                return val.trim();
+            }
+        }
+
+        String text = element.getText();
+        if (text != null && !text.trim().isEmpty()) {
+            return text.trim();
+        }
+
+        return "Unnamed element";
+    }
 
     public void clickAndClear(String locator) {
         WebElement element = waitUntilElementToBeClickable(locator);
@@ -1582,7 +1646,7 @@ public class Common extends Locators {
         boolean bool = false;
         try {
             if (findElement(element).isDisplayed()) {
-                common.logPrint("Element Is displayed - PASS");
+                logPrint("Element Is displayed - PASS");
                 bool = true;
             } else {
                 bool = false;
@@ -1590,13 +1654,13 @@ public class Common extends Locators {
         } catch (Exception e) {
         }
         if (!bool) {
-            common.logPrint("Element is displayed - failed");
+            logPrint("Element is displayed - failed");
             Assert.assertTrue(false);
         }
     }
 
     public void downKeyAndEnter(){
-        common.pause(1);
+
         // Create Actions instance
         Actions actions = new Actions(driver);
 
@@ -1614,7 +1678,7 @@ public class Common extends Locators {
 
     public void twoDownKeyAndEnter(){
 
-        common.pause(1);
+        pause(1);
 
         Actions actions = new Actions(driver);
 
@@ -1743,7 +1807,7 @@ public class Common extends Locators {
             e.printStackTrace();
         }
 
-        common.logPrint("New incognito browser opened, maximized, and focused - PASS");
+        logPrint("New incognito browser opened, maximized, and focused - PASS");
 
         return incognitoDriver;
     }
@@ -1809,9 +1873,9 @@ public class Common extends Locators {
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitSeconds));
                 return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
             } catch (StaleElementReferenceException e) {
-                common.logPrint("StaleElementReferenceException caught. Retrying... Attempt: " + (attempts + 1));
+                logPrint("StaleElementReferenceException caught. Retrying... Attempt: " + (attempts + 1));
             } catch (TimeoutException e) {
-                common.logPrint("Timeout waiting for element: " + locator);
+                logPrint("Timeout waiting for element: " + locator);
                 break; // No point in retrying if element never appeared
             }
             attempts++;
@@ -2017,7 +2081,7 @@ public class Common extends Locators {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         element.click();
 
-        common.pause(1);
+        pause(1);
 
         //generate random index between 1 and optionCount -1
         Random random = new Random();
@@ -2031,11 +2095,11 @@ public class Common extends Locators {
 
         actions.sendKeys(Keys.ENTER).build().perform();
 
-        common.logPrint("Selected random index from dropdown: " + randomIndex);
+        logPrint("Selected random index from dropdown: " + randomIndex);
     }
 
     public void pressDownKeysByArgument(int downCount){
-        common.pause(1);
+        pause(1);
 
         Actions actions = new Actions(driver);
 
@@ -2051,17 +2115,17 @@ public class Common extends Locators {
     public void selectDateFromDynamicCalendar(By calendarIcon, String dateToSelect) {
 
         driver.findElement(calendarIcon).click();
-        common.pause(1); // give time to render
+        pause(1); // give time to render
 
         try {
             // Re-fetch every time to avoid stale references
             WebElement dateElement = driver.findElement(By.xpath("//td[normalize-space()='" + dateToSelect + "']"));
             dateElement.click();
-            common.logPrint("Selected date from calendar: " + dateToSelect);
+            logPrint("Selected date from calendar: " + dateToSelect);
         } catch (NoSuchElementException e) {
-            common.logPrint("Calendar popup didn't render as expected. Retrying...");
+            logPrint("Calendar popup didn't render as expected. Retrying...");
             driver.findElement(calendarIcon).click();
-            common.pause(1);
+            pause(1);
             WebElement dateElement = driver.findElement(By.xpath("//td[normalize-space()='" + dateToSelect + "']"));
             dateElement.click();
         }
@@ -2099,7 +2163,7 @@ public class Common extends Locators {
         element.clear();
         element.sendKeys(dateValue);
         element.sendKeys(Keys.TAB); // or ENTER
-        common.logPrint("Date entered manually and confirmed: " + dateValue);
+        logPrint("Date entered manually and confirmed: " + dateValue);
     }
 
     public static String convertDateFormat(String inputDate){
@@ -2124,16 +2188,16 @@ public class Common extends Locators {
 
         String line;
         while((line = bufferedReader.readLine()) !=null){
-            common.logPrint(line);
+            logPrint(line);
         }
     }
 
     public void addDate(String sentDateAndMonth, String element){
-        common.logPrint("Step :: Adding the daily tour plan date");
+        logPrint("Step :: Adding the daily tour plan date");
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.TAB).perform();
 
-        common.pause(1);
+        pause(1);
 
         common.waitUntilElementToBeVisible(element);
         common.type(element, sentDateAndMonth);
@@ -2300,7 +2364,7 @@ public class Common extends Locators {
                     "Expected toaster message not found. Actual: " + actualMessage
             );
 
-            common.logPrint("Step :: Toaster validated successfully → " + actualMessage);
+            logPrint("Step :: Toaster validated successfully → " + actualMessage);
 
         } catch (TimeoutException e) {
             Assert.fail("Toaster message not displayed: " + expectedMessage);
@@ -2325,7 +2389,7 @@ public class Common extends Locators {
 
         // 1️⃣ Navigate to page
         ;
-        common.pause(2);
+        pause(2);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -2361,7 +2425,7 @@ public class Common extends Locators {
         // 4️⃣ Switch to horizontal view
         common.waitUntilElementToBeVisible(MULTITABHOR);
         common.click(MULTITABHOR);
-        common.pause(2);
+        pause(2);
 
         // 5️⃣ Scroll till end (handle lazy loading)
         scrollTillPageEnd();
@@ -2390,8 +2454,8 @@ public class Common extends Locators {
         System.out.println("=======================================");
 
         try {
-            common.logPrint(msg1);
-            common.logPrint(msg2);
+            logPrint(msg1);
+            logPrint(msg2);
         } catch (Exception ignored) {
         }
 
@@ -2413,7 +2477,7 @@ public class Common extends Locators {
 
         for (int i = 0; i < 10; i++) {   // safety limit
             js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-            common.pause(1);
+            pause(1);
 
             long newHeight = ((Number) js.executeScript(
                     "return document.body.scrollHeight")).longValue();
@@ -2433,12 +2497,12 @@ public class Common extends Locators {
                         "});"
         );
 
-        common.pause(1);
+        pause(1);
     }
 
     public void pagination() {
 
-        common.pause(2);
+        pause(2);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -2453,7 +2517,7 @@ public class Common extends Locators {
         String totalStrRaw = paginationText.replaceAll(".*of\\s*", "").trim();
         int totalCount = Integer.parseInt(totalStrRaw.replaceAll("[^0-9]", ""));
 
-        common.logPrint("Target SR number: " + totalCount);
+        logPrint("Target SR number: " + totalCount);
 
         // Locators
         final String NEXTPAGINATION =
@@ -2467,7 +2531,7 @@ public class Common extends Locators {
         // 2️⃣ Loop for each rows-per-page option
         for (int rows : rowOptions) {
 
-            common.logPrint("Validating SR with rows-per-page = " + rows);
+            logPrint("Validating SR with rows-per-page = " + rows);
 
             // Change rows-per-page (skip for first/default)
             try {
@@ -2477,7 +2541,7 @@ public class Common extends Locators {
                 common.waitUntilElementToBeClickable("//li[@data-value='" + rows + "']");
                 common.click("//li[@data-value='" + rows + "']");
 
-                common.pause(2);
+                pause(2);
             } catch (Exception ignored) {
                 // default row size may already be applied
             }
@@ -2487,7 +2551,7 @@ public class Common extends Locators {
             // 3️⃣ Pagination loop
             for (int page = 1; page <= 200; page++) {
 
-                common.logPrint("Checking page " + page + " for SR " + totalCount);
+                logPrint("Checking page " + page + " for SR " + totalCount);
 
                 String PAGINATIONSR =
                         "//div[@data-field='srNo' and normalize-space(text())='" + totalCount + "']";
@@ -2507,7 +2571,7 @@ public class Common extends Locators {
                 }
 
                 if (found) {
-                    common.logPrint("Found SR " + totalCount + " with rows-per-page = " + rows);
+                    logPrint("Found SR " + totalCount + " with rows-per-page = " + rows);
                     break;
                 }
 
@@ -2524,7 +2588,7 @@ public class Common extends Locators {
                     }
 
                     safeClick(NEXTPAGINATION);
-                    common.pause(1);
+                    pause(1);
 
                 } catch (Exception e) {
                     break;
@@ -2537,7 +2601,7 @@ public class Common extends Locators {
             );
         }
 
-        common.logPrint("Pagination validation completed successfully");
+        logPrint("Pagination validation completed successfully");
     }
 
     private String safeTrim(String s) {
@@ -2563,7 +2627,7 @@ public class Common extends Locators {
 
         String actualResult = applyAndGetFirstResult(resultXpath);
 
-        common.logPrint(
+        logPrint(
                 "Filter validation → Operator: " + type +
                         " | Input: " + inputValue +
                         " | Result: " + actualResult
@@ -2642,7 +2706,7 @@ public class Common extends Locators {
         safeClick(PHFILTEROPERATOR);
 
         // small pause to allow list rendering
-        common.pause(1);
+        pause(1);
 
         // Now click the actual operator option safely
         common.waitUntilElementToBeClickable(operatorXpath);
@@ -2654,7 +2718,7 @@ public class Common extends Locators {
         safeClick(APPLYFILTER);
 
         // Wait for UI to update
-        common.pause(1);
+        pause(1);
 
         int attempts = 0;
         int maxAttempts = 3;
@@ -2665,17 +2729,17 @@ public class Common extends Locators {
                 WebElement result = driver.findElement(By.xpath(resultXpath));
                 return safeTrim(result.getText());
             } catch (StaleElementReferenceException sere) {
-                common.logPrint(String.format("applyAndGetFirstResult: stale element when reading result (attempt %d) for '%s'", attempts, resultXpath));
-                common.pause(1);
+                logPrint(String.format("applyAndGetFirstResult: stale element when reading result (attempt %d) for '%s'", attempts, resultXpath));
+                pause(1);
                 // loop will retry
             } catch (NoSuchElementException nse) {
-                common.logPrint(String.format("applyAndGetFirstResult: result not found (attempt %d) for '%s'", attempts, resultXpath));
-                common.pause(1);
+                logPrint(String.format("applyAndGetFirstResult: result not found (attempt %d) for '%s'", attempts, resultXpath));
+                pause(1);
             }
         }
 
         // If nothing returned, log and return empty string (test assertions will catch it)
-        common.logPrint("applyAndGetFirstResult: Unable to read result after retries for xpath: " + resultXpath);
+        logPrint("applyAndGetFirstResult: Unable to read result after retries for xpath: " + resultXpath);
         return "";
     }
 
@@ -2701,8 +2765,117 @@ public class Common extends Locators {
         return number;
     }
 
+    public void assertElementText(String xpath, String expectedText) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 
+            String actualText = element.getText();
+            Assert.assertEquals(actualText, expectedText, "Text does not match for element: " + xpath);
 
+            System.out.println("Text verified successfully and lead managment header getting display on page: " + actualText);
+        } catch (Exception e) {
+            Assert.fail("Element not found or text not matched for XPath: " + xpath);
+        }
+
+    }
+    public boolean isValidationMessageDisplayed(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(locator)
+        ).isDisplayed();
+    }
+
+    public void selectFutureDateTimeThisWeek(String xpath) {
+        Random random = new Random();
+
+        // 1. Current date-time
+        LocalDateTime now = LocalDateTime.now();
+
+        // 2. Days left in week (until Sunday)
+        int daysUntilEndOfWeek = DayOfWeek.SUNDAY.getValue() - now.getDayOfWeek().getValue();
+        if (daysUntilEndOfWeek < 0) daysUntilEndOfWeek += 7;
+
+        // 3. Random day in current week
+        int randomDaysAhead = random.nextInt(daysUntilEndOfWeek + 1);
+        LocalDateTime futureDate = now.plusDays(randomDaysAhead);
+
+        // 4. Generate random hour and minute within business hours
+        int businessStart = 9;
+        int businessEnd = 18; // 6 PM
+        int hour, minute;
+
+        if (randomDaysAhead == 0) {
+            // Today: ensure time is at least 2 hours ahead
+            int minHour = Math.max(now.getHour() + 2, businessStart);
+            if (minHour >= businessEnd) minHour = businessEnd - 1; // stay within business hours
+            hour = minHour + random.nextInt(businessEnd - minHour);
+        } else {
+            hour = businessStart + random.nextInt(businessEnd - businessStart);
+        }
+
+        minute = random.nextInt(60); // random minute
+
+        futureDate = futureDate.withHour(hour).withMinute(minute).withSecond(0).withNano(0);
+
+        // 5. Format for datetime-local (yyyy-MM-dd'T'HH:mm)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String dateTimeString = futureDate.format(formatter);
+
+        // 6. Set value using JavaScript (works with Material UI/React)
+        WebElement dateTimeInput = driver.findElement(By.xpath(xpath));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(
+                "arguments[0].value=arguments[1]; arguments[0].dispatchEvent(new Event('input'))",
+                dateTimeInput,
+                dateTimeString
+        );
+
+        System.out.println("Selected future date and time within business hours: " + dateTimeString);
+    }
+
+    public String fakeWebsite(){
+        Faker faker = new Faker();
+        String fakeSite = faker.internet().domainName();
+        return "https://www."+ fakeSite;
+    }
+
+    public void uploadFile(String fileInputLocator, String filePath) {
+
+        try {
+            WebElement fileInput = waitUntilElementToBeVisible(fileInputLocator);
+
+            fileInput.sendKeys(filePath);
+            logPrint("File uploaded using sendKeys: " + filePath);
+            return;
+
+        } catch (Exception e) {
+            logPrint("sendKeys upload failed. Falling back to Robot...");
+        }
+
+        try {
+            StringSelection selection = new StringSelection(filePath);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+
+            Robot robot = new Robot();
+            robot.setAutoDelay(300);
+
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+
+            logPrint("File uploaded using Robot fallback: " + filePath);
+
+        }
+        catch (Exception ex) {
+            logPrint("ERROR :: File upload failed completely: " + filePath);
+            throw new RuntimeException("File upload failed", ex);
+        }
+    }
 
 }
 
