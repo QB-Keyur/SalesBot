@@ -34,7 +34,7 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
-
+import java.nio.file.Paths;
 
 /**
  * Define Common Web driver
@@ -997,6 +997,7 @@ public class Common extends Locators {
         }
         search.clear();
         search.sendKeys(randomValue);
+        pause(2);
 
         // 5. Build result XPath dynamically based on argument
         String SEARCHRESULT = baseXPath + "[contains(text(),'" + randomValue + "')]";
@@ -2863,20 +2864,44 @@ public class Common extends Locators {
 
     public void uploadFile(String fileInputLocator, String filePath) {
 
+        By by = findBy(fileInputLocator);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+
         try {
-            WebElement fileInput = waitUntilElementToBeVisible(fileInputLocator);
+            // ✅ DO NOT CLICK FILE INPUT
+            WebElement fileInput = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(by)
+            );
 
             fileInput.sendKeys(filePath);
-            logPrint("File uploaded using sendKeys: " + filePath);
+            logPrint("File path sent: " + filePath);
+
+            // ✅ WAIT until browser confirms upload completion
+            wait.until(driver -> {
+                String value = fileInput.getAttribute("value");
+                return value != null
+                        && !value.isEmpty()
+                        && value.toLowerCase().contains(
+                        Paths.get(filePath)
+                                .getFileName()
+                                .toString()
+                                .toLowerCase()
+                );
+            });
+
+            logPrint("File upload completed successfully");
             return;
 
         } catch (Exception e) {
             logPrint("sendKeys upload failed. Falling back to Robot...");
         }
 
+        // 🚨 Robot fallback ONLY if sendKeys fails
         try {
             StringSelection selection = new StringSelection(filePath);
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+            Toolkit.getDefaultToolkit()
+                    .getSystemClipboard()
+                    .setContents(selection, null);
 
             Robot robot = new Robot();
             robot.setAutoDelay(300);
@@ -2889,14 +2914,14 @@ public class Common extends Locators {
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
 
-            logPrint("File uploaded using Robot fallback: " + filePath);
+            logPrint("File uploaded using Robot fallback");
 
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             logPrint("ERROR :: File upload failed completely: " + filePath);
             throw new RuntimeException("File upload failed", ex);
         }
     }
+
 
 }
 
