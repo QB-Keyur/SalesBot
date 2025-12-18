@@ -141,4 +141,9 @@ public class loginTest extends BasePage {
         common.logPrint("Forgot password functionality is working fine");
     }
 
+    @Test
+    public void onboardingFlow(){
+
+    }
+
 }
