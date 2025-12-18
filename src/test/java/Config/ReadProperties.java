@@ -40,6 +40,7 @@
             else
                 throw new RuntimeException("web url not specified in the Configuration.properties file.");
         }
+
         public String[] getDirectorCredentials() {
 
             String user = properties.getProperty("DirectorUser");
@@ -47,6 +48,18 @@
 
             if( (user != null) && (password != null)) {
                 String credentials[] = new String[] {user,password};
+                return credentials;
+            }else
+                throw new RuntimeException("url not specified in the Configuration.properties file.");
+        }
+
+        public String[] getCredentialForForgotPassword() {
+
+            String userForgotPass = properties.getProperty("userForForgotPass");
+            String passwordForgotPass = properties.getProperty("PasswordForgotPass");
+
+            if( (userForgotPass != null) && (passwordForgotPass != null)) {
+                String credentials[] = new String[] {userForgotPass,passwordForgotPass};
                 return credentials;
             }else
                 throw new RuntimeException("url not specified in the Configuration.properties file.");

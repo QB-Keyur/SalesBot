@@ -19,6 +19,10 @@ public class Locators extends BasePage {
     public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
     public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
     public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
+    public static String passwordHasBeenUpdated = "//div[contains(text(), 'Password has been updated')]";
+    public static String invalidOtpValidation = "//div[contains(text(), 'Invalid OTP or OTP is expired! Please Try Again.')]";
+    public static String passwordResetLinkSuccess = "//div[contains(text(), 'Password reset link has been sent to your email')]";
+    public static String otpSentSuccessfully = "//div[contains(text(), 'An OTP is sent to p******t@yopmail.com. Please Verify your email.')]";
     //public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
 
     //Locators for the validation messages
@@ -30,8 +34,27 @@ public class Locators extends BasePage {
     public static String ERROREMAILBLANK = "//span[contains(text(),'Email is required')]";
     public static String ERRORPASSWORDBLANK = "//span[contains(text(),'Password is required')]";
     public static String FORGOTPASSWORD = "//a[contains(text(),'Forgot password?')]";
-    public static String ENTEREMAILINPFORGOT = "//input[@placeholder='Enter email']";
+
     public static String SIGNUPLINK = "//span[contains(text(),'Sign Up')]";
+    public static String enterPasswordInp = "//input[@placeholder='Enter Password']";
+    public static String confirmPasswordInp = "//input[@placeholder='Confirm Password']";
+
+    //Locators for the Forgot password
+    public static String ENTEREMAILINPFORGOT = "//input[@placeholder='Enter email']";
+    public static String GETOTPBTN = "//span[contains(text(),'Get OTP')]/ancestor::button";
+    public static String BACKTOLOGINBTN = "//span[contains(text(),'Log In')]/ancestor::a";
+
+    //Locators for the yopmail
+    public static String emailInpYopMail = "//input[@placeholder='Enter your inbox here']";
+    public static String enterArrowBtn = "//button[@title='Check Inbox @yopmail.com']";
+    public static String otpGetYopmail = "(//h2/following-sibling::p)[2]";
+    public static String refreshButtonYopmail = "//button[@id='refresh']";
+    public static String resetPassword = "//a[contains(text(),'Reset Password')]";
+    public static String otpInp1 = "(//input[contains(@class,'MuiInputBase-input MuiOutlinedInput-input css-1pk1fka')])[1]";
+    public static String otpInp2 = "(//input[contains(@class,'MuiInputBase-input MuiOutlinedInput-input css-1pk1fka')])[2]";
+    public static String otpInp3 = "(//input[contains(@class,'MuiInputBase-input MuiOutlinedInput-input css-1pk1fka')])[3]";
+    public static String otpInp4 = "(//input[contains(@class,'MuiInputBase-input MuiOutlinedInput-input css-1pk1fka')])[4]";
+    public static String otpInp5 = "(//input[contains(@class,'MuiInputBase-input MuiOutlinedInput-input css-1pk1fka')])[5]";
 
     //Locators for the Onboarding
     public static String SELECTPLANGROWTH = "(//h6[contains(text(),'Growth')]/following::button)[1]";
