@@ -107,7 +107,7 @@ public class BasePage {
             ChromeOptions options = new ChromeOptions();
 
             if (headless.equals("true")) {
-                options.addArguments("--headless");
+//                options.addArguments("--headless");
             }
             options.addArguments("start-maximized");
             options.addArguments("--incognito");
