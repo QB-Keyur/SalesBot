@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="WhatsApp Template Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <!-- Navigate to WhatsApp Template Page -->
+    <test name="Verify navigation to WhatsApp Template page">
+        <classes>
+            <class name="Tests.WhatsAppTemplateTest">
+                <methods>
+                    <include name="goToWhatsAppTemplatePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify all UI elements on Template page -->
+    <test name="Verify WhatsApp Template page UI elements">
+        <classes>
+            <class name="Tests.WhatsAppTemplateTest">
+                <methods>
+                    <include name="verifyAllTheUIElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Create Template page UI elements -->
+    <test name="Verify Create WhatsApp Template page UI elements">
+        <classes>
+            <class name="Tests.WhatsAppTemplateTest">
+                <methods>
+                    <include name="verifyAllTheCreateUIElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify How To Create Template dropdown -->
+    <test name="Verify How To Create WhatsApp Template dropdown">
+        <classes>
+            <class name="Tests.WhatsAppTemplateTest">
+                <methods>
+                    <include name="verifyHowToCreateWhatsAppTemplateDropdown"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify mandatory field validation -->
+    <test name="Verify mandatory field validation on WhatsApp Template creation">
+        <classes>
+            <class name="Tests.WhatsAppTemplateTest">
+                <methods>
+                    <include name="verifyMandatoryFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify adding a new WhatsApp Template -->
+    <test name="Verify adding a new WhatsApp Template">
+        <classes>
+            <class name="Tests.WhatsAppTemplateTest">
+                <methods>
+                    <include name="verifyAddingANewTemplate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Live Preview -->
+    <test name="Verify Live Preview of WhatsApp Template">
+        <classes>
+            <class name="Tests.WhatsAppTemplateTest">
+                <methods>
+                    <include name="verifyingPreviewTemplate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Horizontal View -->
+    <test name="Verify Horizontal View of WhatsApp Templates">
+        <classes>
+            <class name="Tests.WhatsAppTemplateTest">
+                <methods>
+                    <include name="verifyingHorizontalView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Search functionality -->
+    <test name="Verify search functionality on WhatsApp Templates">
+        <classes>
+            <class name="Tests.WhatsAppTemplateTest">
+                <methods>
+                    <include name="verifyingSearch"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Add Variable functionality -->
+    <test name="Verify Add Variable functionality in Template editor">
+        <classes>
+            <class name="Tests.WhatsAppTemplateTest">
+                <methods>
+                    <include name="verifyingAddVariable"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Pagination -->
+    <test name="Verify pagination on WhatsApp Templates">
+        <classes>
+            <class name="Tests.WhatsAppTemplateTest">
+                <methods>
+                    <include name="verifyingPagination"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
