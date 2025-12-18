@@ -220,6 +220,12 @@ public class loginPage extends Locators {
         common.waitUntilElementToBeVisible(enterArrowBtn);
         common.click(enterArrowBtn);
 
+        common.waitUntilElementToBeVisible(refreshButtonYopmail);
+        common.click(refreshButtonYopmail);
+        common.pause(1);
+        common.waitUntilElementToBeVisible(refreshButtonYopmail);
+        common.click(refreshButtonYopmail);
+
         common.switchToFrameWithName("ifmail");
         common.logPrint("Step:: Get OTP from the mail");
         common.waitUntilElementToBeVisible(otpGetYopmail);
@@ -285,6 +291,110 @@ public class loginPage extends Locators {
         return newPass;
     }
 
+    public String[] addPersonalInformation(){
+
+        common.waitUntilElementToBeVisible(startFreeTrialBtn);
+        common.click(startFreeTrialBtn);
+
+        String name = common.fakeName();
+        common.waitUntilElementToBeVisible(firstNameInp);
+        common.type(firstNameInp, name);
+
+        String lastName = common.fakeName();
+        common.waitUntilElementToBeVisible(lastNameInp);
+        common.type(lastNameInp, lastName);
+
+        String email = name+"123@yopmail.com";
+        common.waitUntilElementToBeVisible(emailInp);
+        common.type(emailInp, email);
+
+        String mobileNum = common.fakeIndianMobileNumber();
+        common.waitUntilElementToBeVisible(phoneNumInp);
+        common.type(phoneNumInp, mobileNum);
+
+        String password = "Admin@1234";
+        common.waitUntilElementToBeVisible(enterPasswordInp);
+        common.type(enterPasswordInp, password);
+
+        common.waitUntilElementToBeVisible(confirmPasswordInp);
+        common.type(confirmPasswordInp, password);
+
+        common.waitUntilElementToBeVisible(nextBtn);
+        common.click(nextBtn);
+
+        return new String[] {name, lastName, email, mobileNum, password};
+
+    }
+
+    public void addBusinessInformation(){
+
+        String companyName = common.generateRandomChars(10).toLowerCase();
+        common.waitUntilElementToBeVisible(businessNameInp);
+        common.type(businessNameInp, companyName);
+
+        common.logPrint("Step:: Select business strength");
+        common.waitUntilElementToBeVisible(selectBusinessStrengthInp);
+        common.click(selectBusinessStrengthInp);
+        common.downKeyAndEnter();
+
+        common.logPrint("Step:: Select business type");
+        common.waitUntilElementToBeVisible(businessType);
+        common.click(businessType);
+        common.downKeyAndEnter();
+
+        common.logPrint("Step:: Select business category");
+        common.waitUntilElementToBeVisible(selectCategory);
+        common.click(selectCategory);
+        common.downKeyAndEnter();
+
+        common.waitUntilElementToBeVisible(createAccountBtn);
+        common.click(createAccountBtn);
+    }
+
+    public void completePayment(){
+
+        String address = common.generateRandomChars(8);
+        common.waitUntilElementToBeVisible(addressLineInp);
+        common.type(addressLineInp, address);
+
+        String area = common.generateRandomChars(8);
+        common.waitUntilElementToBeVisible(addressAreaInp);
+        common.type(addressAreaInp, area);
+
+        common.waitUntilElementToBeVisible(selectCountryDropdown);
+        common.click(selectCountryDropdown);
+        common.downKeyAndEnter();
+
+        common.waitUntilElementToBeVisible(SelectStateInp);
+        common.click(SelectStateInp);
+        common.type(SelectStateInp, "gujarat");
+        common.downKeyAndEnter();
+
+        common.waitUntilElementToBeVisible(SelectCityInp);
+        common.click(SelectCityInp);
+        common.type(SelectCityInp, "Ahmedabad");
+        common.downKeyAndEnter();
+
+        String pincode = "362220";
+        common.waitUntilElementToBeVisible(pinCodeInp);
+        common.type(pinCodeInp, pincode);
+
+        WebElement element = driver.findElement(By.xpath(agreeCheckbox));
+        element.click();
+//        common.waitUntilElementToBeVisible(agreeCheckbox);
+//        common.click(agreeCheckbox);
+
+        common.waitUntilElementToBeVisible(startFreeTrialBtnLastPage);
+        common.click(startFreeTrialBtnLastPage);
+
+    }
+
+    public void verifySuccessMessageForCompleteSignUp(){
+
+        common.logPrint("Steps:: Verify success message is showing");
+        common.assertElementPresent(congratulationMessage);
+
+    }
 }
 
 
