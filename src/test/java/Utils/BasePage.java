@@ -53,6 +53,7 @@ public class BasePage {
     public WhatsAppContactPage whatsAppContactPage;
     public LeadManagementPage lead;
     public KnowledgeBasePage knowledgeBasePage;
+    public WhatsAppTemplatePage whatsAppTemplatePage;
 
     protected List<String> stringList = new ArrayList<>();
 
@@ -77,6 +78,8 @@ public class BasePage {
         String CLOSEBUTTON = "//button[@aria-label='Close alert']";
         common.click(CLOSEBUTTON);
     }
+
+
 
     /**
      * Setup Method
@@ -104,7 +107,7 @@ public class BasePage {
             ChromeOptions options = new ChromeOptions();
 
             if (headless.equals("true")) {
-                options.addArguments("--headless");
+//                options.addArguments("--headless");
             }
             options.addArguments("start-maximized");
             options.addArguments("--incognito");
@@ -157,6 +160,7 @@ public class BasePage {
         agentConfigurationPage = new AgentConfigurationPage(getDriver());
         lead = new LeadManagementPage(getDriver());
         knowledgeBasePage = new KnowledgeBasePage(getDriver());
+        whatsAppTemplatePage = new WhatsAppTemplatePage(getDriver());
         steps.set(1);
         Common.printCurrentTime("Starting Time");
         getDriver().get(url);

@@ -149,6 +149,7 @@
                         <suiteXmlFile>build_xmls/AgentConfiguration.xml</suiteXmlFile>
                         <suiteXmlFile>build_xmls/KnowledgeBase.xml</suiteXmlFile>
                         <suiteXmlFile>build_xmls/LeadManagement.xml</suiteXmlFile>
+                        <suiteXmlFile>build_xmls/WhatsAppTemplate.xml</suiteXmlFile>
                     </suiteXmlFiles>
 
                     <systemPropertyVariables>
