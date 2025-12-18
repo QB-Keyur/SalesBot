@@ -19,6 +19,7 @@ public class Locators extends BasePage {
     public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
     public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
     public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
+    public static String yourAccountIsVerified = "//div[contains(text(), 'Your account is verified.')]";
     public static String passwordHasBeenUpdated = "//div[contains(text(), 'Password has been updated')]";
     public static String invalidOtpValidation = "//div[contains(text(), 'Invalid OTP or OTP is expired! Please Try Again.')]";
     public static String passwordResetLinkSuccess = "//div[contains(text(), 'Password reset link has been sent to your email')]";
@@ -30,7 +31,7 @@ public class Locators extends BasePage {
     public static String LOGINSUCCESSMESSAGE = "//div[contains(text(), 'Login successful')]";
     public static String EMAILINP = "//input[@name='email']";
     public static String PASSWORDINP = "//input[@name='password']";
-    public static String LOGINBTN = "//button[@type='submit']";
+    public static String LOGINBTN = "//span[contains(text(),'Submit')]/ancestor::button";
     public static String ERROREMAILBLANK = "//span[contains(text(),'Email is required')]";
     public static String ERRORPASSWORDBLANK = "//span[contains(text(),'Password is required')]";
     public static String FORGOTPASSWORD = "//a[contains(text(),'Forgot password?')]";
@@ -47,7 +48,7 @@ public class Locators extends BasePage {
     //Locators for the yopmail
     public static String emailInpYopMail = "//input[@placeholder='Enter your inbox here']";
     public static String enterArrowBtn = "//button[@title='Check Inbox @yopmail.com']";
-    public static String otpGetYopmail = "(//h2/following-sibling::p)[2]";
+    public static String otpGetYopmail = "(//td[contains(text(),'This code is ')]/ancestor::td//tbody)[2]//td";
     public static String refreshButtonYopmail = "//button[@id='refresh']";
     public static String resetPassword = "//a[contains(text(),'Reset Password')]";
     public static String otpInp1 = "(//input[contains(@class,'MuiInputBase-input MuiOutlinedInput-input css-1pk1fka')])[1]";
@@ -57,19 +58,7 @@ public class Locators extends BasePage {
     public static String otpInp5 = "(//input[contains(@class,'MuiInputBase-input MuiOutlinedInput-input css-1pk1fka')])[5]";
 
     //Locators for the Onboarding
-    public static String SELECTPLANGROWTH = "(//h6[contains(text(),'Growth')]/following::button)[1]";
-    public static String FIRSTNAMEINP = "//input[@name='first_name']";
-    public static String LASTNAMEINP = "//input[@name='last_name']";
-    public static String EMAILINPPERSONALINFO = "//input[@name='email']";
-    public static String PHONENUMINP = "//input[@name='phone_number']";
-    public static String PASSWORDINPPERSONALINFO = "//input[@name='password']";
-    public static String CONFIRMPASSWORD = "//input[@name='confirmPassword']";
-    public static String SUBMITBTN = "//span[contains(text(),'Next')]";
-    public static String BUSINESSNAMEINP = "//input[@name='business_name']";
-    public static String SELECTBUSINESSSTRENGTH = "//input[@placeholder='Select Business Strength']";
-    public static String SELECTBUSINESSTYPE = "//input[@placeholder='Select Business Type']";
-    public static String SELECTBUSINESSSCATEGORY = "//input[@placeholder='Select Category']";
-    public static String CREATEACCOUNTBTN = "//span[contains(text(),'Create Account')]";
+
 
     //Locators for the Product Page
     public static String PRODUCTMENU = "//span[text() ='Product']";
@@ -482,6 +471,29 @@ public class Locators extends BasePage {
     //KB Mandatory Fields
     public static String KBCNAMEVALIDATION = "//span[text()='Name is required']";
 
+    //Signup page xpath
 
+    public static String monthlyBtn = "//span[contains(text(),'Monthly')]/ancestor::button";
+    public static String YearlyBtn = "//span[contains(text(),'Yearly')]/ancestor::button";
+    public static String loginBtnPlan = "//span[contains(text(),'Login')]/ancestor::button";
+    public static String backToChangePlanBtn = "//span[contains(text(),'Back to Change Plan')]/ancestor::button";
+    public static String selectPlanGrowth = "(//h6[contains(text(),'Growth')]/following::button)[1]";
+    public static String firstNameInp = "//input[@name='first_name']";
+    public static String lastNameInp = "//input[@name='last_name']";
+    public static String emailInp = "//input[@name='email']";
+    public static String phoneNumInp = "//input[@name='phone_number']";
+    public static String nextBtn = "//span[contains(text(),'Next')]/ancestor::button";
+    public static String businessNameInp = "//input[@name='business_name']";
+    public static String selectBusinessStrengthInp = "//input[@placeholder='Select Business Strength']";
+    public static String businessType = "//input[@placeholder='Select Business Type']";
+    public static String selectCategory = "//input[@placeholder='Select Category']";
+    public static String createAccountBtn = "//span[contains(text(),'Create Account')]/ancestor::button";
+    public static String addressLineInp = "//input[@placeholder='Enter Address Line']";
+    public static String addressAreaInp = "//input[@placeholder='Enter Area']";
+    public static String pinCodeInp = "//input[@name='pincode']";
+    public static String agreeCheckbox= "//input[@type='checkbox']";
+    public static String startFreeTrialBtn = "//span[contains(text(),'Start Trial')]/ancestor::button";
+    public static String startFreeTrialBtnLastPage = "//span[contains(text(),'Start Free Plan')]/ancestor::button";
+    public static String congratulationMessage = "//h6[contains(text(),'Congratulations!')]";
 
 }

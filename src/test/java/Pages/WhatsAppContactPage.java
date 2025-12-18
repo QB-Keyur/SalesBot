@@ -368,6 +368,13 @@ public class WhatsAppContactPage extends Locators {
 
     }
 
+    public void verifySuccessMessageForYourAccountIsVerified(){
+
+        common.logPrint("Step:: Verify success message is showing");
+        common.assertElementPresent(yourAccountIsVerified);
+
+    }
+
     public void verifyErrorMessageForInvalidOtp(){
 
         common.logPrint("Step:: Verify success message is showing");
