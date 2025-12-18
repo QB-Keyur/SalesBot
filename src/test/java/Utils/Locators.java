@@ -482,6 +482,91 @@ public class Locators extends BasePage {
     //KB Mandatory Fields
     public static String KBCNAMEVALIDATION = "//span[text()='Name is required']";
 
+    //WhatsApp Template
+    public static String TEMPLATEMENU = "//span[text()='Templates']";
+    public static String WHATSAPPTEMPLATEMENU = "//button[text()='Whatsapp Template']";
+    public static String WTHEADER = "//h6[text()='Whatsapp Template']";
+    public static String WTSEARCH = "//input[@placeholder=\"Search...\"]";
+    public static String WTREFRESH = "//button[@class=\"MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-15wqzvf\"]";
+    public static String WTFILTERS = "//button[@type='button']/following::span[contains(text(),'Filters')]";
+    public static String WTCREATE = "//button[@type='button']/following::span[text()='Create']";
+    public static String WTNAME = "//span[text()=\"Name\"]";
+    public static String WTLANGUAGE = "//span[text()=\"Language\"]";
+    public static String WTHEADERTEXT = "//span[text()=\"Header Text\"]";
+    public static String WTCATEGORY = "//span[text()=\"Category\"]";
+    public static String WTTEMPLATEMETASTATUS = "//span[text()=\"Template Meta Status\"]";
+    public static String WTBUTTONCOUNT = "//span[text()=\"Button Count\"]";
+    public static String WTACTIONS = "//span[text()=\"Actions\"]";
+    //WhatsApp
+    public static String WTCHEADER = "//h6[text()='Create Whatsapp Template']";
+    public static String WTCBANNERTEXT = "//p[@class=\"MuiTypography-root MuiTypography-body1 css-igfty4\"]";
+    public static String WTCTEMPLATEDETAILS = "//p[text()='Template Details']";
+    public static String WTCTEMPLATENAME = "//span[text()='Template Name']";
+    public static String WTCTEMPLATENAMEINPUT = "//input[@placeholder=\"Enter Template Name\"]";
+    public static String WTCCATEGORY = "//span[text()='Category']";
+    public static String WTCCATEGORYINPUT = "//input[@placeholder=\"Select Category\"]";
+    public static String WTCLANGUAGE = "//span[text()='Language']";
+    public static String WTCLANGUAGEINPUT = "//input[@placeholder=\"Select Language\"]";
+    public static String WTCHEADERTYPE = "//span[text()='Header Type']";
+    public static String WTCHEADERTYPEINPUT = "//input[@placeholder=\"Select Header Type\"]";
+    public static String WTCHEADERTYPEINPUTTEXT = "//input[@placeholder=\"Enter Header Text\"]";
+    public static String WTCMESSAGECONTENT = "//p[text()='Message Content']";
+    public static String WTCUPLOADFILES = "//span[text()='Upload File']";
+    public static String WTCFILEINPUT = "//input[@placeholder=\"No file selected\"]";
+    public static String WTCFILEINPUT2 = "//button[@type=\"button\"]/span[text()='Upload']";
+    public static String WTCBODY = "//p[text()='Body']";
+    public static String WTCADDVARIABLES = "//span[@class=\"MuiChip-label MuiChip-labelMedium css-14vsv3w\"]";
+    public static String WTCBODYINPUT = "//div[starts-with(@class,'ql-editor')]";
+    public static String WTCFOOTER = "//p[text()='Footer (Optional)']";
+    public static String WTCFOOTERINPUT = "//input[@placeholder=\"Enter Footer Text\"]";
+    public static String WTCBUTTONS = "//p[text()='Buttons']";
+    public static String WTCBUTTONTYPE = "//span[text()='Button Type']";
+    public static String WTCSELECTTYPE = "//input[@placeholder=\"Select Type\"]";
+    public static String WTCBUTTONTEXT = "//span[text()='Button Text']";
+    public static String WTCBUTTONTEXTINPUT = "//input[@placeholder=\"Enter button text\"]";
+    public static String WTCADDBUTTON = "//button[@type='button']/following::span[text()='+ Add Button']";
+    public static String WTCTEMPLATEPREVIEW = "//p[text()='See how your template will appear']";
+    public static String WTCMESSAGEICON = "//p[@class=\"MuiTypography-root MuiTypography-body1 css-1ba1cez\"]";
+    public static String WTCTEMPLATEPREVIEW2 = "//p[text()='Start filling the form to see your template preview']";
+    public static String WTCTEMPLATEPREVIEW3 = "//p[contains(normalize-space(),'Live Preview')]";
+    public static String WTCNAMEMANDATORY = "//span[text()='Name is required']";
+    public static String WTCCATEGORYMANDATORY = "//span[text()='Category is required']";
+    public static String WTCLANGUAGEMANDATORY = "//span[text()='Language is required']";
+    public static String WTCHEADERTYPEMANDATORY = "//span[text()='Header Type is required']";
+    public static String WTCBODYOFTEMPMANDATORY = "//span[text()='Body Of Template is required']";
+    public static String WTCENTERURL = "//input[@name=\"button_url\"]";
+    public static String WTCENTERPHONE = "//input[@placeholder=\"Enter mobile number\"]";
+    public static String WTSEARCHRESULT = "(//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //How to create WhatsApp Template
+    public static String FIRST = "//h2[contains(text(),'WhatsApp Template Creation — Rules & Regulations')]";
+    public static String SEC = "//h2[contains(text(),'General Template Rules')]";
+    public static String THIRD = "//h2[contains(text(),'HEADER Component')]";
+    public static String FOURTH = "//h2[contains(text(),'BODY Component')]";
+    public static String FIFTH = "//h2[contains(text(),'FOOTER Component')]";
+    public static String SIXTH = "//h2[contains(text(),'BUTTONS Component')]";
+    public static String SEVENTH = "//h2[contains(text(),'QUICK_REPLY Buttons')]";
+    public static String EIGHTH = "//h2[contains(text(),'URL Buttons')]";
+    public static String NINTH = "//h2[contains(text(),'PHONE_NUMBER Buttons')]";
+    public static String TENTH = "//h2[contains(text(),' Template Rejection Reasons')]";
+
+
 
 
 }
