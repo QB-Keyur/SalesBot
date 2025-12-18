@@ -368,6 +368,36 @@ public class WhatsAppContactPage extends Locators {
 
     }
 
+    public void verifyErrorMessageForInvalidOtp(){
+
+        common.logPrint("Step:: Verify success message is showing");
+        common.assertElementPresent(invalidOtpValidation);
+
+        String CLOSEBUTTON = "//button[@aria-label='Close alert']";
+        common.click(CLOSEBUTTON);
+
+    }
+
+    public void verifySuccessMessageForPasswordResetLink(){
+
+        common.logPrint("Step:: Verify success message is showing");
+        common.assertElementPresent(passwordResetLinkSuccess);
+
+        String CLOSEBUTTON = "//button[@aria-label='Close alert']";
+        common.click(CLOSEBUTTON);
+
+    }
+
+    public void verifySuccessMessageForPasswordUpdated(){
+
+        common.logPrint("Step:: Verify success message is showing");
+        common.assertElementPresent(passwordHasBeenUpdated);
+
+        String CLOSEBUTTON = "//button[@aria-label='Close alert']";
+        common.click(CLOSEBUTTON);
+
+    }
+
 
     public void verifyDeleteSuccessfullyMessageForWhatsAppContactCreation(){
 

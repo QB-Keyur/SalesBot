@@ -52,7 +52,7 @@ public class Common extends Locators {
     }
 
     public WebDriverWait getWait() {
-        return new WebDriverWait(driver, Duration.ofSeconds(60));
+        return new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     public WebDriverWait getWait(long time) {
@@ -121,123 +121,6 @@ public class Common extends Locators {
             }
         }
     }
-
-
-    /**
-     * Wait until the app is "ready" — DOM complete + no active XHR/fetch + jQuery finished (if present).
-     * This method will not hang: it returns after timeoutSeconds even if not stable, and logs debug info.
-     *
-     * @param timeoutSeconds maximum seconds to wait before returning
-     */
-    public void waitForAppReady(int timeoutSeconds) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        long end = System.currentTimeMillis() + timeoutSeconds * 1000L;
-        final int stableRequired = 3;        // require N consecutive stable polls
-        final long pollIntervalMs = 250L;    // poll every 250ms
-        int stableCount = 0;
-
-        // 1) Inject instrumentation for XHR and fetch once
-        try {
-            String inject = "if (window.__webdriver_activeRequests === undefined) {" +
-                    "  window.__webdriver_activeRequests = 0;" +
-                    "  (function() {" +
-                    "    try {" +
-                    "      var origOpen = XMLHttpRequest.prototype.open;" +
-                    "      var origSend = XMLHttpRequest.prototype.send;" +
-                    "      XMLHttpRequest.prototype.open = function() { origOpen.apply(this, arguments); };" +
-                    "      XMLHttpRequest.prototype.send = function() {" +
-                    "        try { window.__webdriver_activeRequests++; } catch(e) {}" +
-                    "        var that = this;" +
-                    "        var onreadystatechange = that.onreadystatechange;" +
-                    "        that.onreadystatechange = function() {" +
-                    "          try { if (that.readyState === 4) { window.__webdriver_activeRequests--; } } catch(e) {}" +
-                    "          if (onreadystatechange) { onreadystatechange.apply(that, arguments); }" +
-                    "        };" +
-                    "        try { origSend.apply(that, arguments); } catch(e) { try { window.__webdriver_activeRequests--; } catch(ignore) {} throw e; }" +
-                    "      };" +
-                    "    } catch(e) { /* older browsers */ }" +
-                    "    try {" +
-                    "      if (window.fetch) {" +
-                    "        var origFetch = window.fetch;" +
-                    "        window.fetch = function() {" +
-                    "          try { window.__webdriver_activeRequests++; } catch(e) {}" +
-                    "          return origFetch.apply(this, arguments).finally(function() { try { window.__webdriver_activeRequests--; } catch(e) {} });" +
-                    "        }" +
-                    "      }" +
-                    "    } catch(e) { /* ignore */ }" +
-                    "  })();" +
-                    "}";
-            js.executeScript(inject);
-        } catch (Exception e) {
-            // instrumentation failed — we still continue but won't be able to detect fetch/xhr reliably
-            logPrint("waitForAppReady: instrumentation injection failed: " + e.getMessage());
-        }
-
-        // 2) Poll until stable or timeout
-        while (System.currentTimeMillis() < end) {
-            try {
-                // return object with three fields
-                String script =
-                        "return {" +
-                                " readyState: document.readyState || ''," +
-                                " jqueryActive: (window.jQuery ? window.jQuery.active : 0)," +
-                                " activeRequests: (window.__webdriver_activeRequests || 0)" +
-                                "};";
-
-                @SuppressWarnings("unchecked")
-                Map<String, Object> status = (Map<String, Object>) js.executeScript(script);
-
-                String readyState = (status.get("readyState") != null) ? status.get("readyState").toString() : "";
-                long jqueryActive = 0;
-                long activeRequests = 0;
-
-                try {
-                    jqueryActive = status.get("jqueryActive") instanceof Long ?
-                            (Long) status.get("jqueryActive") :
-                            Long.parseLong(status.get("jqueryActive").toString());
-                } catch (Exception ignore) {}
-
-                try {
-                    activeRequests = status.get("activeRequests") instanceof Long ?
-                            (Long) status.get("activeRequests") :
-                            Long.parseLong(status.get("activeRequests").toString());
-                } catch (Exception ignore) {}
-
-                boolean docReady = "complete".equalsIgnoreCase(readyState);
-                boolean networkIdle = (activeRequests == 0);
-                boolean jqueryIdle = (jqueryActive == 0);
-
-                // Debug logging — helpful when timeout occurs
-                logPrint(String.format("waitForAppReady: readyState=%s, activeRequests=%d, jqueryActive=%d, stableCount=%d",
-                        readyState, activeRequests, jqueryActive, stableCount));
-
-                if (docReady && networkIdle && jqueryIdle) {
-                    stableCount++;
-                    if (stableCount >= stableRequired) {
-                        // short buffer to let UI finalise
-                        try { Thread.sleep(200); } catch (InterruptedException ignored) {}
-                        logPrint("waitForAppReady: page stable and ready.");
-                        return;
-                    }
-                } else {
-                    stableCount = 0; // reset consecutive stability
-                }
-            } catch (Exception ex) {
-                // JS execution can fail intermittently — log and continue polling until timeout
-                logPrint("waitForAppReady: polling script error: " + ex.getMessage());
-                stableCount = 0;
-            }
-
-            try {
-                Thread.sleep(pollIntervalMs);
-            } catch (InterruptedException ignored) {}
-        }
-
-        // Timeout reached — don't hang. Log helpful diagnostics.
-        logPrint("waitForAppReady: TIMEOUT after " + timeoutSeconds + "s. Proceeding anyway.");
-        // Optionally: you can take a screenshot here for debugging
-    }
-
 
     public WebElement waitUntilStringLocator(String locator){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -1768,13 +1651,13 @@ public class Common extends Locators {
     }
 
     public void openNewWindow(){
+
         ((JavascriptExecutor) driver).executeScript("window.open();");
 
         //Switch to a new tab
         for (String tab: driver.getWindowHandles()){
             driver.switchTo().window(tab);
         }
-
     }
 
     public void openNewUrl(String linkUrl){
@@ -1783,6 +1666,10 @@ public class Common extends Locators {
 
     public void switchToFrameWithId(String idString){
         driver.switchTo().frame(idString);
+    }
+
+    public void switchToFrameWithName(String name){
+        driver.switchTo().frame(name);
     }
 
     public void switchToDefaultContent(){
@@ -2876,6 +2763,28 @@ public class Common extends Locators {
             throw new RuntimeException("File upload failed", ex);
         }
     }
+
+    public void switchToWindowByIndex(int windowNumber) {
+
+        Set<String> windowHandles = driver.getWindowHandles();
+        List<String> windows = new ArrayList<>(windowHandles);
+
+        // Convert 1-based index to 0-based index
+        int index = windowNumber - 1;
+
+        if (index < 0 || index >= windows.size()) {
+            throw new RuntimeException(
+                    "Invalid window number: " + windowNumber +
+                            ". Total windows available: " + windows.size()
+            );
+        }
+
+        driver.switchTo().window(windows.get(index));
+
+        logPrint("Step :: Switched to window number " + windowNumber +
+                " | Title: " + driver.getTitle());
+    }
+
 
 }
 

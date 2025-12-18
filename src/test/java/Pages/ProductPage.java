@@ -44,8 +44,6 @@ public class ProductPage extends Locators {
         common.waitUntilElementToBeClickable(PRODUCTMENU);
         common.click(PRODUCTMENU);
 
-        common.waitForAppReady(5);
-
         common.logPrint("Navigated to Product Page and fully loaded.");
     }
 
