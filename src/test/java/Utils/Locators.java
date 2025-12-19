@@ -363,6 +363,7 @@ public class Locators extends BasePage {
     public static String whatsappCampaign = "//button[text()='Whatsapp Campaign']";
 
     //Lead Management
+    //Lead Management
     public static String LEADMANAGMENT = "//span[contains(text(),'Lead Management')]";
     public static String LEAD = "//button[normalize-space()='Lead']";
     public static String CREATEB = "//span[normalize-space()='Create']";

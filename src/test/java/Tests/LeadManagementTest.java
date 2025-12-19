@@ -6,17 +6,23 @@ public class LeadManagementTest extends BasePage {
 
     @Test
     public void verifyLeadIsCreatedSuccessfully() {
-        common.logPrint("Verify lead is created successfully");
         loginWithAdminUser();
         lead.VerifyCreateNewLead();
     }
 
+
     @Test
-    public void verifyDeletedLeadIsNotShowingInTheGrid() {
-        common.logPrint("Verify deleted lead is not displayed in the grid");
+    public void VerifycreateLeadSearch() {
+
         loginWithAdminUser();
-        String name = lead.VerifyCreateNewLead();
-        lead.verifyDeleteLeadInSearch(name);
+        String CLead = lead.VerifyCreateNewLeadandreturnname().toString();
+        lead.VerifyCreateLeadAndSearch(CLead);
+    }
+    @Test
+    public void verifyDeletedLeadIsNotShowingInTheGrid()   {
+        loginWithAdminUser();
+        String DLead = lead.VerifyCreateNewLeadandreturnname().toString();
+        lead.verifyDeleteLeadInSearch(DLead);
     }
 
     @Test
@@ -42,17 +48,30 @@ public class LeadManagementTest extends BasePage {
 
     @Test
     public void verifyEditFunctionalityOnLeadManagementPage() {
+
         common.logPrint("Verify Edit Functionality on Lead Management page");
         loginWithAdminUser();
-        lead.VerifyEdit();
+        lead.VerifyUpdateLead();
     }
 
     @Test
     public void verifyFieldValidationMessageOnCreateLeadPage() {
         common.logPrint("Verify field validations message on create lead page");
         loginWithAdminUser();
-        lead.verifyAllMandatoryValidations();
+        lead.verifyAllMandatoryFieldValidations();
     }
+    @Test
+    public void verifyHeaderNamesOfCreatedLead(){
+        loginWithAdminUser();
+        lead.VerifyHeadesForCreatedLead();
+    }
+
+    @Test
+    public void verifyLeadView(){
+        loginWithAdminUser();
+        lead.verifyViewLead();
+    }
+
 
 }
 
