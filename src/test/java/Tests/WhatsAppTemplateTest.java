@@ -86,8 +86,4 @@ public class WhatsAppTemplateTest extends BasePage {
         whatsAppTemplatePage.verifyingPagination();
     }
 
-
-
-
-
 }
