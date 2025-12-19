@@ -846,49 +846,59 @@ public class Common extends Locators {
 
     public void searchCommon(String baseXPath) {
 
-        // 1. Click Search button (ignore failures)
+        // 1️⃣ Click Search button (best-effort)
         try {
             common.click(SEARCH);
         } catch (Exception ignored) {}
 
-        // 2. Use the provided XPATH
-        String xpath = baseXPath;
-
-        List<WebElement> elements = waitForElements(xpath, 8);
-        System.out.println("XPath: " + xpath + " -> matched count: " + elements.size());
+        // 2️⃣ Collect grid values
+        List<WebElement> elements = waitForElements(baseXPath, 8);
+        System.out.println("XPath: " + baseXPath + " -> matched count: " + elements.size());
 
         List<String> values = collectTextsFromElements(elements);
-        System.out.println("Collected values: " + values);
 
         if (values.isEmpty()) {
-            System.err.println("No values collected for xpath: " + xpath +
-                    ". Check DOM, iframe/shadow-root, or increase wait time.");
-            return;
+            throw new AssertionError(
+                    "No values collected for xpath: " + baseXPath +
+                            ". Check DOM, iframe/shadow-root, or waits."
+            );
         }
 
-        // 3. Pick a random value
-        Random rand = new Random();
-        String randomValue = values.get(rand.nextInt(values.size()));
+        // 3️⃣ Pick random value
+        String randomValue = values
+                .get(new Random().nextInt(values.size()))
+                .trim();
+
         System.out.println("Random Value Selected = " + randomValue);
 
-        // 4. Type value into search box
+        // 4️⃣ Type into search box
         By searchBy = By.xpath("//input[@placeholder='Search...']");
         WebElement search = waitForElementVisible(searchBy, 8);
-        if (search == null) {
-            System.err.println("Search input not found or not visible: " + searchBy);
-            return;
-        }
+
         search.clear();
         search.sendKeys(randomValue);
-        pause(2);
+        pause(2); // allow grid refresh
 
-        // 5. Build result XPath dynamically based on argument
-        String SEARCHRESULT = baseXPath + "[contains(text(),'" + randomValue + "')]";
+        // 5️⃣ Build SMART rich-text-safe XPath
+        String[] tokens = randomValue.split("\\s+");
+        StringBuilder searchResultXPath = new StringBuilder(baseXPath);
 
-        System.out.println("Final Search Result XPATH = " + SEARCHRESULT);
+        for (String token : tokens) {
+            token = token.replaceAll("[^a-zA-Z0-9]", ""); // remove punctuation
+            if (token.length() > 3) { // ignore small/noise words
+                searchResultXPath
+                        .append("[contains(normalize-space(.), '")
+                        .append(token)
+                        .append("')]");
+            }
+        }
 
-        assertElementPresent(SEARCHRESULT);
+        System.out.println("Final Search Result XPATH = " + searchResultXPath);
+
+        // 6️⃣ Assertion (re-locate after grid refresh)
+        assertElementPresent(searchResultXPath.toString());
     }
+
 
 
     public String selectDropdownAndGetSelectedText(By dropdownActivator, By optionLocator) {
@@ -1635,6 +1645,11 @@ public class Common extends Locators {
         String name = faker.commerce().productName();
         return name;
 
+    }
+
+    public String fakeSubject(){
+        String subject = faker.book().title();
+        return subject;
     }
 
     public void openNewIncognitoBrowser(){

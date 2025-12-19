@@ -55,6 +55,7 @@ public class BasePage {
     public KnowledgeBasePage knowledgeBasePage;
     public WhatsAppTemplatePage whatsAppTemplatePage;
     public profilePage profilePage;
+    public EmailTemplatePage emailTemplatePage;
 
     protected List<String> stringList = new ArrayList<>();
 
@@ -163,6 +164,7 @@ public class BasePage {
         knowledgeBasePage = new KnowledgeBasePage(getDriver());
         whatsAppTemplatePage = new WhatsAppTemplatePage(getDriver());
         profilePage = new profilePage(getDriver());
+        emailTemplatePage = new EmailTemplatePage(getDriver());
         steps.set(1);
         Common.printCurrentTime("Starting Time");
         getDriver().get(url);
