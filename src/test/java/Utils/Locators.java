@@ -507,7 +507,7 @@ public class Locators extends BasePage {
     public static String WTHEADERTEXT = "//span[text()=\"Header Text\"]";
     public static String WTCATEGORY = "//span[text()=\"Category\"]";
     public static String WTTEMPLATEMETASTATUS = "//span[text()=\"Template Meta Status\"]";
-    public static String WTBUTTONCOUNT = "//span[text()=\"Button Count\"]";
+    public static String WTQUALITYSCORE = "//span[text()=\"Quality Score\"]";
     public static String WTACTIONS = "//span[text()=\"Actions\"]";
     //WhatsApp
     public static String WTCHEADER = "//h6[text()='Create Whatsapp Template']";
@@ -549,22 +549,7 @@ public class Locators extends BasePage {
     public static String WTCENTERURL = "//input[@name=\"button_url\"]";
     public static String WTCENTERPHONE = "//input[@placeholder=\"Enter mobile number\"]";
     public static String WTSEARCHRESULT = "(//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public static String WTMETASTATUS = "(//div[@aria-colindex=\"6\" and @aria-rowspan=\"1\"])[1]";
 
     //How to create WhatsApp Template
     public static String FIRST = "//h2[contains(text(),'WhatsApp Template Creation — Rules & Regulations')]";
@@ -578,8 +563,86 @@ public class Locators extends BasePage {
     public static String NINTH = "//h2[contains(text(),'PHONE_NUMBER Buttons')]";
     public static String TENTH = "//h2[contains(text(),' Template Rejection Reasons')]";
 
+    //Email Template
+    public static String EMAILTEMPLATEMENU = "//button[text()='Email Template']";
+    public static String ETHEADER = "//h6[text()='Email Template']";
+    public static String ETSEARCH = "//input[@placeholder=\"Search...\"]";
+    public static String ETSR = "//span[normalize-space()='#']";
+    public static String ETNAME = "//span[text()=\"Name\"]";
+    public static String ETSUBJECT = "//span[text()=\"Subject\"]";
+    public static String ETSERVERSYNCED = "//span[text()=\"Server Synced\"]";
+    public static String ETCREATEDDATE = "//span[text()=\"Created Date\"]";
+    public static String ETACTIONS = "//span[text()=\"Actions\"]";
+    public static String ETREFRESH = "//button[@class=\"MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-15wqzvf\"]";
+    public static String ETFILTERS = "//button[@type='button']/following::span[contains(text(),'Filters')]";
+    public static String ETCREATE = "//button[@type='button']/following::span[text()='Create']";
+    public static String ETVIEW = "(//button[@aria-label=\"View\"])[1]";
+    public static String ETSEARCHRESULTS = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])";
+    public static String ETASTATUS = "//div[@aria-colindex=\"4\" and @aria-rowspan=\"1\"]//span";
+
+    //Email Template Create
+    public static String ETCREATEHEADER = "//h6[text()='Create Email Template']";
+    public static String ETCTD = "//p[text()='Template Details']";
+    public static String ETCTNAME = "//span[text()='Template Name']";
+    public static String ETCTNAMEINPUT = "//input[@placeholder=\"Enter Template Name\"]";
+    public static String ETCCBTEXT = "//p[text()='Can be send from whatsapp']";
+    public static String ETCCBINPUT = "//input[@type=\"checkbox\"]";
+    public static String ETCUPLOAD = "//h6[text()='Upload Attachments']";
+    public static String ETCUPLOADINPUT = "//p[contains(text(),'Select your file or drag and drop')]";
+    public static String ETCSAVE = "//button[@type='button']/following::span[text()='Save']";
+    public static String ETCCANCEL = "//button[@type='button']/following::span[text()='Cancel']";
+    public static String ETCTNVALIDATION = "//span[text()='Template name is required']";
+    public static String ETCSUBJECTVALIDATION = "//span[text()='Subject is required']";
+    public static String ETCBODYVALIDATION = "//p[text()='Body is required']";
+    public static String ETCUPLOADEDFILE = "//div[@class=\"mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3\"]/child::div";
+    public static String ETCEMAILBODY = "//p[text()='Email Body']";
+    public static String ETCVAREMAIL = "//span[text()='{{email}}']";
+    public static String ETCVARPHONE = "//span[text()='{{phone_number}}']";
+    public static String ETCVARNAME = "//span[text()='{{name}}']";
+    public static String ETCVARCNAME = "//span[text()='{{company_name}}']";
+    public static String ETCVARNEW = "//span[text()='{{%%%%%}}']";
+    public static String ETCVARINFO = "//p[text()='Click any variable to insert it in the subject or body.']";
+    public static String ETCSUBJECT = "//span[text()='Subject']";
+    public static String ETCSUBJECTINPUT = "//input[@placeholder=\"Enter Subject\"]";
+    public static String ETCBODYTEXT = "//p[contains(text(),'Use variables from the top right panel to personalize your email.')]";
+    public static String ETCBODYTOOL = "//div[@role='toolbar']";
+    public static String ETCBODYINPUT = "//div[@data-placeholder=\"Start writing your email content...\"]";
+    public static String ETCLIVEPREVIEW = "//p[text()='Live Preview']";
+    public static String ETCLPSUB = "//b[text()='Subject:']";
+    public static String ETCLPINFO = "//p[contains(text(),'You are receiving this communication from')]";
+//    public static String ETCREATEHEADER = "//p[contains(text(),'To stop receiving future emails, please click')]";
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //OnBoarding
     public static String monthlyBtn = "//span[contains(text(),'Monthly')]/ancestor::button";
     public static String YearlyBtn = "//span[contains(text(),'Yearly')]/ancestor::button";
     public static String loginBtnPlan = "//span[contains(text(),'Login')]/ancestor::button";

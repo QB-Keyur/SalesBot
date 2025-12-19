@@ -82,12 +82,16 @@ public class WhatsAppTemplateTest extends BasePage {
 
     @Test
     public void verifyingPagination(){
+        common.logPrint("Verifying Pagination functionality in WhatsApp Template editor");
         loginWithAdminUser();
         whatsAppTemplatePage.verifyingPagination();
     }
 
-
-
-
+    @Test
+    public void verifyRefreshButtonUpdatesTheServerSyncStatus(){
+        common.logPrint("Verifying Meta Status Sync functionality in WhatsApp Template editor");
+        loginWithAdminUser();
+        whatsAppTemplatePage.verifyRefreshButtonUpdatesTheServerSyncStatus();
+    }
 
 }
