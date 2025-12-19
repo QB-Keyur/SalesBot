@@ -578,8 +578,7 @@ public class Locators extends BasePage {
     public static String NINTH = "//h2[contains(text(),'PHONE_NUMBER Buttons')]";
     public static String TENTH = "//h2[contains(text(),' Template Rejection Reasons')]";
 
-
-
+    //Onboarding module xpath
     public static String monthlyBtn = "//span[contains(text(),'Monthly')]/ancestor::button";
     public static String YearlyBtn = "//span[contains(text(),'Yearly')]/ancestor::button";
     public static String loginBtnPlan = "//span[contains(text(),'Login')]/ancestor::button";
@@ -602,5 +601,38 @@ public class Locators extends BasePage {
     public static String startFreeTrialBtn = "//span[contains(text(),'Start Trial')]/ancestor::button";
     public static String startFreeTrialBtnLastPage = "//span[contains(text(),'Start Free Plan')]/ancestor::button";
     public static String congratulationMessage = "//h6[contains(text(),'Congratulations!')]";
+
+    //Profile page xpath
+    public static String profileIcon = "//button[@aria-label=\"Settings\"]";
+    public static String accountHeader = "//span[contains(text(),'Account')]";
+    public static String billingAndPlan = "//span[contains(text(),'Billing & Plans')]";
+    public static String profileMenuOnProfile = "//a[contains(text(),'Profile')]";
+    public static String changePassword = "//a[contains(text(),'Change Password')]";
+    public static String plansMenu = "//a[contains(text(),'Plans')]";
+    public static String invoiceMenu = "//a[contains(text(),'Invoice')]";
+    public static String TransactionMenu = "//a[contains(text(),'Transaction')]";
+    public static String UsageMenu = "//a[contains(text(),'Usage')]";
+    public static String updateProfileBtn = "//span[contains(text(),'Update Profile')]/ancestor::button";
+    public static String personalDetailHead = "//h6[contains(text(),'Personal Details')]";
+    public static String firstNameLbl = "//h6[contains(text(),'First Name')]";
+    public static String emailLabelProfile = "//h6[contains(text(),'Email')]";
+    public static String lastNameLbl = "//h6[contains(text(),'Last Name')]";
+    public static String mobileNumberLabel = "//h6[contains(text(),'Mobile No')]";
+    public static String timezoneLabel = "//h6[contains(text(),'TimeZone')]";
+    public static String businessHeader = "//h6[contains(text(),'Business Information')]";
+    public static String categoryHeader = "//h6[contains(text(),'Category')]";
+    public static String businessNameLabel = "//h6[contains(text(),'Business Name')]";
+    public static String businessTypeLabel = "//h6[contains(text(),'Business Type')]";
+    public static String getSelectBusinessStrengthInp = "//h6[contains(text(),'Business Strength')]";
+    public static String gstNumberLabel = "//h6[contains(text(),'GST Number')]";
+    public static String addressLabel = "//h6[contains(text(),'Address')]";
+
+    public static String currentPasswordLbl = "//span[contains(text(),'Current Password')]";
+    public static String newPasswordLbl = "//span[contains(text(),'New Password')]";
+    public static String confirmPasswordLbl = "//span[contains(text(),'Confirm Password')]";
+    public static String currentPasswordInp = "//input[@placeholder='Enter Current Password']";
+    public static String newPasswordInp = "//input[@placeholder='Enter New Password']";
+    public static String confirmPasswordInpProfile = "//input[@placeholder='Enter Confirm Password']";
+    public static String changePasswordBtn = "//span[contains(text(),'Change Password')]/ancestor::button";
 
 }
