@@ -10,10 +10,8 @@ public class LeadManagementTest extends BasePage {
         lead.VerifyCreateNewLead();
     }
 
-
     @Test
     public void VerifycreateLeadSearch() {
-
         loginWithAdminUser();
         String CLead = lead.VerifyCreateNewLeadandreturnname().toString();
         lead.VerifyCreateLeadAndSearch(CLead);
@@ -48,7 +46,6 @@ public class LeadManagementTest extends BasePage {
 
     @Test
     public void verifyEditFunctionalityOnLeadManagementPage() {
-
         common.logPrint("Verify Edit Functionality on Lead Management page");
         loginWithAdminUser();
         lead.VerifyUpdateLead();
