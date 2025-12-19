@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Knowledge Base Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <test name="Go To Knowledge Base Page">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="goToKnowledgeBasePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify Columns And Elements">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="verifyColumnsAndElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Search">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateSearch"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Horizontal View">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateHorizontalView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Create Page Elements">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateCreatePageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate File Upload">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateFileUpload"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Adding Text">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateAddingText"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Adding Website">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateAddingWebsite"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate QA">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateQA"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Adding All KB Types">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateAddingAllTheKBTypes"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate KB Shows Up In Product">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateKBShowsUpInTheProduct"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Editing A KB">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateEditingAKB"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Mandatory Field">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validatingMandatoryField"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Multiple File Uploads">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validatingMultipleFileUploads"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Adding Multiple Texts">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateAddingMultipleTexts"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify Edit Elements">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="verifyEditElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Deleting Multiple Texts">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateDeletingMultipleTexts"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Deleting Multiple Websites">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateDeletingMultipleWebsites"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Deleting Multiple QA">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateDeletingMultipleQA"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Pagination">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validatePagination"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate View">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Validate Reset Button">
+        <classes>
+            <class name="Tests.KnowledgeBaseTest">
+                <methods>
+                    <include name="validateResetButton"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

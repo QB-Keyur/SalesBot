@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Product Module Test Cases" verbose="10" parallel="tests" thread-count="3" allow-return-values="true">
+
+    <!-- Go to Product page -->
+    <test name="Go to Product page">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="goToProductPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify product grid columns -->
+    <test name="Verify product grid columns">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="verifyColumns"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify product page elements -->
+    <test name="Verify product page elements">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="verifyElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify product search functionality -->
+    <test name="Verify product search functionality">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="verifySearch"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify refresh functionality -->
+    <test name="Verify product refresh functionality">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="verifyRefresh"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify product sorting -->
+    <test name="Verify product sorting">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="validateSorting"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify input placeholders -->
+    <test name="Verify product placeholders">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="validatePlaceHolders"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify add new product with valid data -->
+    <test name="Verify add new product with valid data">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="verifyAddingANewProductWithValidData"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify edit product functionality -->
+    <test name="Verify edit product functionality">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="editingAProduct"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify delete product functionality -->
+    <test name="Verify delete product functionality">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="deletingAProduct"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify view product functionality -->
+    <test name="Verify view product functionality">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="viewProduct"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify horizontal view functionality -->
+    <test name="Verify horizontal view functionality">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="horizontalView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify filters functionality -->
+    <test name="Verify filters functionality">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="filters"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify pagination functionality -->
+    <test name="Verify pagination functionality">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="pagination"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
