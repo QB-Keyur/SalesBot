@@ -18,7 +18,7 @@
 
         <selenium.version>4.12.0</selenium.version>
         <testng.version>7.8.0</testng.version>
-        <webdrivermanager.version>5.4.1</webdrivermanager.version>
+        <webdrivermanager.version>5.8.0</webdrivermanager.version>
 
         <allure.version>2.25.0</allure.version>
         <log4j.version>2.20.0</log4j.version>
