@@ -363,6 +363,7 @@ public class Locators extends BasePage {
     public static String whatsappCampaign = "//button[text()='Whatsapp Campaign']";
 
     //Lead Management
+    //Lead Management
     public static String LEADMANAGMENT = "//span[contains(text(),'Lead Management')]";
     public static String LEAD = "//button[normalize-space()='Lead']";
     public static String CREATEB = "//span[normalize-space()='Create']";
@@ -372,6 +373,7 @@ public class Locators extends BasePage {
     public static String WHATSAPPCON ="//input[@role='combobox' and @placeholder='Select Whatsapp Contact']";
     public static String PRODUCT = "//input[@placeholder=\"Select product\"]";
     public static String SAVE_BTN = "//span[text()='Save']";
+    public static String  LEADVIEW ="//button[@aria-label='View']";
     public static String DTAETIME = "//input[@placeholder='Enter Preferred Date and Time']\n";
     public static String DELETEOTIN = "//div[@class='MuiDataGrid-row MuiDataGrid-row--firstVisible']//button[@aria-label='Delete']";
     public static String CANCELDELETE = "//span[normalize-space()='Cancel']";
@@ -394,6 +396,27 @@ public class Locators extends BasePage {
     public static String ErrorOnPrefrredDT ="//span[text()='Preferred Date and Time is required']";
     public static String ErrorOnProduct ="//span[text()='Please select a product']";
     public static String LEADCREATEDMSG = "//*[contains(text(),'Lead Created successfully')]";
+    public static String LEADDELETED = "//div[text()='Deleted Successfully']";
+    public static String LEADRESET ="//span[text()='Reset']";
+    public static String Header_NAME = "//span[text()='Name']";
+    public static String Header_EMAIL = "//span[text()='Email']";
+    public static String Header_CONTYPE = "//span[text()='Contact Type']";
+    public static String Header_TYPE = "//span[text()='Type']";
+    public static String Header_WHATSCONT = "//span[text()='Whatsapp Contact']";
+    public static String Header_Product = "//div[@role='presentation']//span[normalize-space()='Product']";
+    public static String Header_PreferredDT = "//span[text()='Preferred Date / Time']";
+    public static String Header_CREATEDAT= "//span[text()='Created At']";
+    public static String Header_Actions= "//span[text()='Actions']";
+    //Lead view
+    public static String VType = "//label[.//span[text()='Type']]/following::input[1]";
+    public static String VContactType = "//label[.//span[text()='Contact Type']]/following::input[1]";
+    public static String VWhatsAppContact ="//label[.//span[text()='Whatsapp Contact']]/following::input[1]";
+    public static String VPoduct = "//label[.//span[text()='Product']]/following::input[1]";
+    public static String VContactNo = "//label[.//span[text()='Contact Number']]/following::input[1]";
+    public static String VPreDT = "//label[.//span[text()='Preferred Date & Time']]/following::input[1]";
+    public static String VCREATEAT ="//label[.//span[text()='Created At']]/following::input[1]";
+    public static String VClose ="//span[text()='Close']";
+
 
     //Knowledge Base
     public static String KBMENU = "//span[text()='Knowledge Base']";
