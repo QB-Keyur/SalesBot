@@ -356,11 +356,7 @@ public class Locators extends BasePage {
     public static String NoRowsValidation = "//div[text()='No rows']";
 
     //WhatsApp campaign
-    public static String SearchContact = "//input[@placeholder='Search contacts...']";
-    //public static String = "";
-    public static String HomeMenu = "//span[text()='Home']";
-    public static String CampaignMenu = "//span[text()='Campaign']";
-    public static String whatsappCampaign = "//button[text()='Whatsapp Campaign']";
+
 
     //Lead Management
     //Lead Management
@@ -665,5 +661,36 @@ public class Locators extends BasePage {
     public static String startFreeTrialBtn = "//span[contains(text(),'Start Trial')]/ancestor::button";
     public static String startFreeTrialBtnLastPage = "//span[contains(text(),'Start Free Plan')]/ancestor::button";
     public static String congratulationMessage = "//h6[contains(text(),'Congratulations!')]";
+
+
+
+    //WhatsAppCampaign locators
+    public static String SearchContact = "//input[@placeholder='Search contacts...']";
+    //public static String = "";
+    public static String HomeMenu = "//span[text()='Home']";
+    public static String CampaignMenu = "//span[text()='Campaign']";
+    public static String whatsappCampaign = "//button[text()='Whatsapp Campaign']";
+
+    public static String WC_REFRESH = "//button[contains(@class,'MuiButton-root')] ";
+    public static String WC_PAGEHEADER ="//h6[normalize-space()='WhatsApp Campaign']";
+    public static String WCH_NAME ="//span[normalize-space()='Name']";
+    public static String WCH_WhatsAppTem = "//span[contains(text(),'Whatsapp Template Name')]";
+    public static String WCH_WhatsAppCategorName = "//span[normalize-space()='Template Category Name']";
+    public static String WCH_ProductName = "//span[normalize-space()='Product Name']";
+    public static String WCH_ScheduleTime= "//span[normalize-space()='Schedule Time']";
+    public static String WCH_Status = "//span[text()='Status']";
+    public static String WCH_Action = "//span[text()='Actions']";
+    //Create WhatsApp Campaign
+    public static String CWC_Back = "//div[@class='MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-10 MuiGrid-grid-md-6 css-53mvl9']//button[@type='button']";
+    public static String CWC_Cancel = "//span[normalize-space()='Cancel']";
+    public static String CWC_View = "//span[text()='View']";
+
+
+
+
+
+//
+
+
 
 }

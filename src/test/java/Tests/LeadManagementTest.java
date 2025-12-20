@@ -16,12 +16,14 @@ public class LeadManagementTest extends BasePage {
         String CLead = lead.VerifyCreateNewLeadandreturnname().toString();
         lead.VerifyCreateLeadAndSearch(CLead);
     }
+
     @Test
     public void verifyDeletedLeadIsNotShowingInTheGrid()   {
         loginWithAdminUser();
         String DLead = lead.VerifyCreateNewLeadandreturnname().toString();
         lead.verifyDeleteLeadInSearch(DLead);
     }
+
 
     @Test
     public void verifyCancelAndBackButtonFunctionalityOnCreateLeadPage() {
@@ -30,12 +32,14 @@ public class LeadManagementTest extends BasePage {
         lead.VerifyCancelAmdBackButtonOnCreateLeadPage();
     }
 
+
     @Test
     public void verifyLeadManagementHeaderIsShowing() {
         common.logPrint("Verify Lead management header is showing on the page");
         loginWithAdminUser();
         lead.Verify_LeadPageHeader();
     }
+
 
     @Test
     public void verifyGridListViewOnLeadManagementPage() {
@@ -68,7 +72,5 @@ public class LeadManagementTest extends BasePage {
         loginWithAdminUser();
         lead.verifyViewLead();
     }
-
-
 }
 
