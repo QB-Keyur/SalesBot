@@ -51,7 +51,7 @@ public class WhatsAppTemplatePage extends Locators {
         columns.put(WTHEADERTEXT, "WT Status");
         columns.put(WTCATEGORY, "WT Created Date");
         columns.put(WTTEMPLATEMETASTATUS, "WT Actions");
-        columns.put(WTBUTTONCOUNT, "WT Total");
+        columns.put(WTQUALITYSCORE, "WT Score");
         columns.put(WTACTIONS, "WT Rows per page");
         columns.put(WTREFRESH, "WT Refresh");
         columns.put(WTFILTERS, "WT Filters");
@@ -403,5 +403,18 @@ public class WhatsAppTemplatePage extends Locators {
     public void verifyingPagination(){
         goToWhatsAppTemplatePage();
         common.pagination();
+    }
+
+    public void verifyRefreshButtonUpdatesTheServerSyncStatus(){
+        verifyAddingANewTemplate("Marketing","English","Text","Phone Number");
+
+        String synced= common.getText(WTMETASTATUS).trim();
+
+//        while(synced.equals("Synced")){
+//            common.pause(2);
+//            common.click(ETREFRESH);
+//        }
+
+
     }
 }

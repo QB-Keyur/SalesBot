@@ -55,6 +55,7 @@ public class BasePage {
     public KnowledgeBasePage knowledgeBasePage;
     public WhatsAppTemplatePage whatsAppTemplatePage;
     public WhatsAppCampaignPage WhatsAppCPage;
+    public EmailTemplatePage emailTemplatePage;
 
     protected List<String> stringList = new ArrayList<>();
 
@@ -163,6 +164,7 @@ public class BasePage {
         knowledgeBasePage = new KnowledgeBasePage(getDriver());
         whatsAppTemplatePage = new WhatsAppTemplatePage(getDriver());
         WhatsAppCPage = new WhatsAppCampaignPage(getDriver());
+        emailTemplatePage = new EmailTemplatePage(getDriver());
         steps.set(1);
         Common.printCurrentTime("Starting Time");
         getDriver().get(url);
@@ -250,8 +252,8 @@ public class BasePage {
 
         Common.printCurrentTime("Ending Time");
         getDriver().manage().deleteAllCookies();
-        getDriver().quit();
-        driver.remove();
+//        getDriver().quit();
+//        driver.remove();
     }
 
     public void makeScreenshot(WebDriver driver, String screenshotName) {
