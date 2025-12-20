@@ -28,6 +28,8 @@ public class api extends BasePage {
     private static final String BASE_URI = "https://api.salesbot.cloud";
     // private static final String BASE_URI = "https://api.yourdomain.com";
 
+    String name = "TYe";
+
     @BeforeClass
     public void setUp() {
         // Base URI set karo (change to your API)

@@ -54,6 +54,7 @@ public class BasePage {
     public LeadManagementPage lead;
     public KnowledgeBasePage knowledgeBasePage;
     public WhatsAppTemplatePage whatsAppTemplatePage;
+    public profilePage profilePage;
     public WhatsAppCampaignPage WhatsAppCPage;
     public EmailTemplatePage emailTemplatePage;
 
@@ -163,6 +164,7 @@ public class BasePage {
         lead = new LeadManagementPage(getDriver());
         knowledgeBasePage = new KnowledgeBasePage(getDriver());
         whatsAppTemplatePage = new WhatsAppTemplatePage(getDriver());
+        profilePage = new profilePage(getDriver());
         WhatsAppCPage = new WhatsAppCampaignPage(getDriver());
         emailTemplatePage = new EmailTemplatePage(getDriver());
         steps.set(1);
