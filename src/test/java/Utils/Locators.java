@@ -739,6 +739,44 @@ public class Locators extends BasePage {
     public static String ECSTATUS = "//span[text()=\"Status\"]";
     public static String ECACTION = "//span[text()=\"Actions\"]";
 
+    //EMAIL CAMPAIGN CREATE PAGE
+    public static String ECCHEADER= "//h6[text()='Create Email Campaign']";
+    public static String ECCCAMPAIGNDETAILS= "//p[text()='Campaign Details']";
+    public static String ECCCAMPAIGNNAME= "//span[text()='Campaign Name']";
+    public static String ECCCAMPAIGNTEMPLATE= "//span[text()='Email Template']";
+    public static String ECCCAMPAIGNCATEGORY= "//span[text()='Category']";
+    public static String ECCCAMPAIGNPRODUCT= "//span[text()='Product']";
+    public static String ECCNAMEINPUT= "//input[@placeholder=\"Enter campaign name\"]";
+    public static String ECCTEMPLATEINPUT= "//input[@placeholder=\"Select template\"]";
+    public static String ECCCATEGORYINPUT= "//input[@placeholder=\"Create or Select Category\"]";
+    public static String ECCPRODUCTINPUT= "//input[@placeholder=\"Select product\"]";
+    public static String ECCCAMPAIGNCONTACTGROUP= "//input[@placeholder=\"Select contact groups\"]";
+    public static String ECCVIEW= "//button[@type='button']/following::span[text()='View']";
+    public static String ECCMESSAGECONTENT= "//p[text()='Message Content']";
+    public static String ECCSUBJECT= "//span[text()='Subject']";
+    public static String ECCSUBJECTNPUT= "//input[@placeholder=\"Email subject\"]";
+    public static String ECCBODY= "//p[text()='Body']";
+    public static String ECCBODYTOOLBAR= "//div[@class=\"ql-toolbar ql-snow\"]";
+    public static String ECCTEMPLATEBODY= "//div[@data-placeholder=\"Email template body will appear here\"]";
+    public static String ECCENABLEAI= "//p[text()='Enable AI']";
+    public static String ECCENABLEAIYES= "//div[contains(@class,'css-1fw1vid')]";
+    public static String ECCENABLEAINO= "//div[contains(@class,'css-yf7rws')]";
+    public static String ECCCONTACTS= "//p[text()='Contacts']";
+    public static String ECCSEARCHCONTACTS= "//input[@placeholder=\"Search contacts...\"]";
+    public static String ECCCHECKBOX= "(//span[@class=\"css-ysvidx\"])[1]";
+    public static String ECCSRNO= "//span[text()='#']";
+    public static String ECCNAME= "//span[text()='Name']";
+    public static String ECCCONTACTGROUP= "//span[text()='Contact group']";
+    public static String ECCPHONE= "//span[text()='Phone Number']";
+    public static String ECCEMAIL= "//span[text()='Email']";
+    public static String ECCTOTALROWS= "//div[text()='Total Rows: ']";
+    public static String ECCROWSPERPAGE= "//p[text()='Rows per page:']";
+    public static String ECCPREVIOUSPAGE= "//button[@aria-label=\"Go to previous page\"]";
+    public static String ECCNEXTPAGE= "//button[@aria-label=\"Go to next page\"]";
+    public static String ECCSEARCHRESULT= "(//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
+    public static String ECCDROPDOWNLIST= "//ul[@class='MuiAutocomplete-listbox css-1sg36vf']";
+    public static String ECCBODYVALUE= "//div[@data-placeholder=\"Email template body will appear here\"]/child::p";
+
 
 
 
