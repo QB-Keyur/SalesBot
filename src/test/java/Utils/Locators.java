@@ -717,6 +717,26 @@ public class Locators extends BasePage {
     public static String CWC_Back = "//div[@class='MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-10 MuiGrid-grid-md-6 css-53mvl9']//button[@type='button']";
     public static String CWC_Cancel = "//span[normalize-space()='Cancel']";
     public static String CWC_View = "//span[text()='View']";
+    public static String V_Name = "//span[text()='Name']";
+    public static String VContactG = "//span[text()='Contact Group']";
+    public static String VEmail = "//span[text()='Email']";
+    public static String VPhoneNo = "//span[text()='Phone Number']";
+    public static String VDandB = "//span[text()='Date of Birth']";
+
+
+
+    public static String CWC_RunCamBTN = "//span[text()='Run Campaign']";
+    public static String RC_PopupNo="//span[text()='No']";
+    public static String RC_PopupYes="//span[text()='Yes']";
+
+    //Field Validations  xpath for whatsappcampagin
+    public static String Req_CampaginName="//span[text()='Name is required']";
+    public static String Req_WhatsappTemp="//span[text()='WhatsApp template is required']";
+    public static String Req_Category="//span[text()='Category is required']";
+    public static String Req_Product="//span[text()='Product is required']";
+
+
+
 
 
 

@@ -27,8 +27,27 @@ public class WhatsAppCampaignTest extends BasePage {
     {
         loginWithAdminUser();
         WhatsAppCPage.goToWhatsAppCampaignPage();
-        WhatsAppCPage.VerifyCreateWhatsAppCampaignPage();
+//        WhatsAppCPage.VerifyCreateWhatsAppCampaignPage();
+        WhatsAppCPage.verifyViewContactListHeader();
+
     }
+    @Test
+    public void VerifyRunCampaignPopup(){
+        loginWithAdminUser();
+        WhatsAppCPage.goToWhatsAppCampaignPage();
+        WhatsAppCPage.VerifyRunCampaignPopup();
+
+    }
+    @Test
+    public void verifyFieldvalidation()
+    {
+        loginWithAdminUser();
+        WhatsAppCPage.goToWhatsAppCampaignPage();
+        WhatsAppCPage.VerifyFieldValidationsMessageOnCampaignPage();
+
+
+    }
+
 
 
 }
