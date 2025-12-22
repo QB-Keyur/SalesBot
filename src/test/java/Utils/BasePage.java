@@ -1,5 +1,6 @@
 package Utils;
 
+import Config.EnvConfig;
 import Config.ReadProperties;
 import Pages.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -29,23 +30,19 @@ import java.util.*;
 
 public class BasePage {
 
+    // ================= DRIVER =================
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal();
+
     public static WebDriver getDriver() {
         return driver.get();
     }
 
-    ReadProperties readProperties = new ReadProperties();
-    String adminCredentials[] = readProperties.getDirectorCredentials();
-    String username = adminCredentials[0];
-    String password = adminCredentials[1];
-
-    String url = readProperties.getWebUrl();
-
-    static Properties configProperties = null;
-    //protected static WebDriver driver;
+    // ================= COMMON OBJECTS =================
     public Common common;
     public static String currentTest; // current running test
     public static ThreadLocal<Integer> steps = new ThreadLocal<Integer>();
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal();
+
+    // ================= PAGE OBJECTS =================
     public loginPage loginPage;
     public OtherPage otherPage;
     public ProductPage productPage;
@@ -60,29 +57,35 @@ public class BasePage {
 
     protected List<String> stringList = new ArrayList<>();
 
-    public void loginWithAdminUser(){
-
-        Common common = new Common(getDriver());
-
-        common.logPrint("Login with valid username and pass");
-
+    // CORE login logic (never call this directly from tests)
+    public void loginWithAdminUser(String username, String password) {
         common.waitUntilElementToBeVisible("//input[@name='email']");
         common.type("//input[@name='email']",username);
-
         common.waitUntilElementToBeVisible("//input[@name='password']");
         common.type("//input[@name='password']",password);
-
         common.waitUntilElementToBeVisible("//button[@type='submit']");
         common.click("//button[@type='submit']");
-
         common.assertElementPresent("//div[contains(text(), 'Login successful')]");
-
         common.logPrint("Login successfully.");
         String CLOSEBUTTON = "//button[@aria-label='Close alert']";
         common.click(CLOSEBUTTON);
     }
+    // ================= LOGIN METHODS =================
+    public void loginWithAdminUser() {
+        loginWithAdminUser(
+                EnvConfig.getDirectorUser(),
+                EnvConfig.getDirectorPass()
+        );
+    }
 
+    public void loginForForgotPassword() {
+        loginWithAdminUser(
+                EnvConfig.getForgotUser(),
+                EnvConfig.getForgotPass()
+        );
+    }
 
+    public String forgotEmail = EnvConfig.getForgotUser();
 
     /**
      * Setup Method
@@ -98,19 +101,17 @@ public class BasePage {
         Reporter.setCurrentTestResult(testResult);
         currentTest = method.getName();
 
-        String browser = getPropertyValue("browser");
-        String headless = getPropertyValue("headless");
+        String browser = ReadProperties.getBrowser();
+        boolean headless = ReadProperties.isHeadless();
 
-        /*
-         * Browser = Chrome
-         */
+        // ----------- CHROME -----------
         if (browser.equalsIgnoreCase("chrome")) {
 
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
 
-            if (headless.equals("true")) {
-//                options.addArguments("--headless");
+            if (headless) {
+                options.addArguments("--headless");
             }
             options.addArguments("start-maximized");
             options.addArguments("--incognito");
@@ -123,14 +124,12 @@ public class BasePage {
         }
         else if (browser.equalsIgnoreCase("edge")) {
 
-            //System.setProperty("webdriver.edge.driver", driverPathEdge);
-            WebDriverManager.edgedriver().setup();
             WebDriverManager.edgedriver().setup();
             EdgeOptions options = new EdgeOptions();
             options.addArguments("-private");
             options.addArguments("start-maximized");
 
-            if (headless.equals("true")) {
+            if (headless) {
                 options.addArguments("--headless");
                 options.addArguments("--disable-gpu");
                 options.addArguments("--no-sandbox");
@@ -147,7 +146,7 @@ public class BasePage {
             FirefoxOptions options = new FirefoxOptions();
             options.addArguments("-private");
             //  options.addPreference("devtools.toolbox.selectedTool","netmonitor");
-            if (headless.equals("true")) {
+            if (headless) {
                 options.addArguments("--headless");
             }
 
@@ -169,18 +168,7 @@ public class BasePage {
         emailTemplatePage = new EmailTemplatePage(getDriver());
         steps.set(1);
         Common.printCurrentTime("Starting Time");
-        getDriver().get(url);
-    }
-    protected Properties getConfigProperties() {
-        if (configProperties == null) {
-            configProperties = this.loadProperties(Paths.get("src/test/java/Config").toAbsolutePath().normalize() + "//config.properties");
-        }
-        return configProperties;
-    }
-
-    protected String getPropertyValue(String value) {
-        Properties properties = getConfigProperties();
-        return properties.getProperty(value);
+        getDriver().get(EnvConfig.getWebUrl());
     }
 
     /**
@@ -198,32 +186,6 @@ public class BasePage {
         } catch (NoSuchElementException e) {
             return false;
         }
-
-    }
-
-    /**
-     * Load Properties
-     * @return properties
-     */
-    private Properties loadProperties(String filePath) {
-        File file = new File(filePath);
-        FileInputStream fileInput = null;
-
-        try {
-            fileInput = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        Properties properties = new Properties();
-
-        try {
-            properties.load(fileInput);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return properties;
     }
 
     /**
@@ -254,8 +216,8 @@ public class BasePage {
 
         Common.printCurrentTime("Ending Time");
         getDriver().manage().deleteAllCookies();
-//        getDriver().quit();
-//        driver.remove();
+        getDriver().quit();
+        driver.remove();
     }
 
     public void makeScreenshot(WebDriver driver, String screenshotName) {

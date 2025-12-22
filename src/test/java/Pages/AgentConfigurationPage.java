@@ -1,5 +1,6 @@
 package Pages;
 
+import Config.EnvConfig;
 import Config.ReadProperties;
 import Utils.Common;
 import Utils.Locators;
@@ -19,13 +20,11 @@ import java.util.stream.Collectors;
 
 public class AgentConfigurationPage extends Locators {
 
-    ReadProperties readProperties;
     Common common;
 
     public AgentConfigurationPage(WebDriver driver) {
         super(driver);
         this.common = new Common(driver);
-        this.readProperties = new ReadProperties();
     }
 
     public void goToAgentConfigurationPage(){
@@ -931,7 +930,7 @@ public class AgentConfigurationPage extends Locators {
 
     public void createAndViewReflectionInPlayground(){
 
-        String url = readProperties.getWebUrl();
+        String url = EnvConfig.getWebUrl();
 
         Map<String, String> agent = addANewAgentValidData();
         String name = agent.get("name");

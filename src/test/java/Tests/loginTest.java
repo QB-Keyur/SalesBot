@@ -1,14 +1,13 @@
 package Tests;
 
+import Config.EnvConfig;
 import Config.ReadProperties;
 import Utils.BasePage;
 import org.testng.annotations.Test;
 
 public class loginTest extends BasePage {
 
-    ReadProperties properties = new ReadProperties();
-    String[] forgotPasswordCred = properties.getCredentialForForgotPassword();
-    String emailForgot = forgotPasswordCred[0];
+
 
     //Login page test cases
     @Test
@@ -80,14 +79,14 @@ public class loginTest extends BasePage {
     public void verifySuccessMessageIsShowingForOTPSent(){
         common.logPrint("Verify success message is showing for otp sent");
         loginPage.clickOnTheForgotPasswordBtn();
-        loginPage.successMessageForOTPSent(emailForgot);
+        loginPage.successMessageForOTPSent(forgotEmail);
     }
 
     @Test
     public void verifyValidationMessageForInvalidOtp(){
         common.logPrint("Verify validation Message for invalid otp");
         loginPage.clickOnTheForgotPasswordBtn();
-        loginPage.successMessageForOTPSent(emailForgot);
+        loginPage.successMessageForOTPSent(forgotEmail);
         common.pause(2);
         loginPage.enterOtpInInputField("12345");
         whatsAppContactPage.verifyErrorMessageForInvalidOtp();
@@ -97,9 +96,9 @@ public class loginTest extends BasePage {
     public void verifySuccessMessageForPasswordResetLink(){
         common.logPrint("Verify success message for password reset link");
         loginPage.clickOnTheForgotPasswordBtn();
-        loginPage.successMessageForOTPSent(emailForgot);
+        loginPage.successMessageForOTPSent(forgotEmail);
         common.openNewWindow();
-        String otp = loginPage.getOtpFromYopmail(emailForgot);
+        String otp = loginPage.getOtpFromYopmail(forgotEmail);
         common.switchToWindowByIndex(1);
         loginPage.enterOtpInInputField(otp);
         whatsAppContactPage.verifySuccessMessageForPasswordResetLink();
@@ -109,9 +108,9 @@ public class loginTest extends BasePage {
     public void verifySuccessMessageForPasswordUpdatedSuccessfully(){
         common.logPrint("Verify success message for password update");
         loginPage.clickOnTheForgotPasswordBtn();
-        loginPage.successMessageForOTPSent(emailForgot);
+        loginPage.successMessageForOTPSent(forgotEmail);
         common.openNewWindow();
-        String otp = loginPage.getOtpFromYopmail(emailForgot);
+        String otp = loginPage.getOtpFromYopmail(forgotEmail);
         common.switchToWindowByIndex(1);
         loginPage.enterOtpInInputField(otp);
         whatsAppContactPage.verifySuccessMessageForPasswordResetLink();
@@ -126,9 +125,9 @@ public class loginTest extends BasePage {
     public void verifyForgotPasswordFlowIsWorkingFine(){
         common.logPrint("Verify forgot password flow is working fine");
         loginPage.clickOnTheForgotPasswordBtn();
-        loginPage.successMessageForOTPSent(emailForgot);
+        loginPage.successMessageForOTPSent(forgotEmail);
         common.openNewWindow();
-        String otp = loginPage.getOtpFromYopmail(emailForgot);
+        String otp = loginPage.getOtpFromYopmail(forgotEmail);
         common.switchToWindowByIndex(1);
         loginPage.enterOtpInInputField(otp);
         whatsAppContactPage.verifySuccessMessageForPasswordResetLink();
@@ -137,7 +136,7 @@ public class loginTest extends BasePage {
         common.switchToWindowByIndex(3);
         String updatedPassword = loginPage.enterNewPassword();
         whatsAppContactPage.verifySuccessMessageForPasswordUpdated();
-        loginPage.loginWithValidUserNameAndPass(emailForgot, updatedPassword);
+        loginPage.loginWithValidUserNameAndPass(forgotEmail, updatedPassword);
         common.logPrint("Forgot password functionality is working fine");
     }
 
