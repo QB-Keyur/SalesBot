@@ -720,6 +720,28 @@ public class Locators extends BasePage {
 
 
 
+    //Email Campaign
+    public static String CAMPAIGNMENU = "//span[text()='Campaign']";
+    public static String EMIALCAMPAIGNMENU = "//button[text()='Email Campaign']";
+    public static String ECHEADER = "//h6[text()='Email Campaign']";
+    public static String ECSEARCHBAR = "//input[@placeholder=\"Search...\"]";
+    public static String ECREFRESHBUTTON = "//button[contains(@class,'5wqzvf')]";
+    public static String ECREFILTERBUTTON = "//button[contains(@class,'1wkzwh7')]";
+    public static String ECCREATEBUTTON = "//button[@type='button']/following::span[text()='Create']";
+    public static String ECNAME = "//span[text()=\"Name\"]";
+    public static String ECSR = "//span[text()=\"#\"]";
+    public static String ECCATEGORY = "//span[text()=\"Category\"]";
+    public static String ECPRODUCT = "//span[text()=\"Product\"]";
+    public static String ECEMAIL = "//span[text()=\"Integration Email\"]";
+    public static String ECCONTACT = "//span[text()=\"Contact\"]";
+    public static String ECCONTACTGROUP = "//span[text()=\"Contact Group\"]";
+    public static String ECAI = "//span[text()=\"Enable AI\"]";
+    public static String ECSTATUS = "//span[text()=\"Status\"]";
+    public static String ECACTION = "//span[text()=\"Actions\"]";
+
+
+
+
 
 
 //
