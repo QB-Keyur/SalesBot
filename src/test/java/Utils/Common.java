@@ -2438,38 +2438,40 @@ public class Common extends Locators {
 
         logPrint("Target SR number: " + totalCount);
 
-        // Locators
         final String NEXT_PAGINATION =
                 "//button[@title='Go to next page' or contains(@aria-label,'next')]";
 
         final String ROWS_PER_PAGE_DROPDOWN =
                 "//div[@aria-haspopup='listbox']";
 
-        // Rows-per-page options to validate
-        int[] rowOptions = {10, 20, 30};
+        // 2️⃣ Decide rows-per-page dynamically
+        int[] rowOptions = totalCount < 10
+                ? new int[]{10}
+                : new int[]{10, 20, 30};
 
-        // 2️⃣ Loop for each rows-per-page option
+        // 3️⃣ Loop for each rows-per-page option
         for (int rows : rowOptions) {
 
             logPrint("Validating SR with rows-per-page = " + rows);
 
-            // 3️⃣ Open rows-per-page dropdown
-            waitUntilElementToBeClickable(ROWS_PER_PAGE_DROPDOWN);
-            click(ROWS_PER_PAGE_DROPDOWN);
+            // Open rows-per-page dropdown
+            WebElement rowsDropdown =
+                    waitUntilElementToBeClickable(ROWS_PER_PAGE_DROPDOWN);
+            highlightElement(rowsDropdown);
+            rowsDropdown.click();
 
-            // 4️⃣ Select row option by visible text (MUI-safe)
-            String ROW_OPTION =
-                    "//li[normalize-space()='" + rows + "']";
+            // Select row option
+            String ROW_OPTION = "//li[normalize-space()='" + rows + "']";
+            WebElement rowOption =
+                    waitUntilElementToBeClickable(ROW_OPTION);
+            highlightElement(rowOption);
+            rowOption.click();
 
-            waitUntilElementToBeClickable(ROW_OPTION);
-            click(ROW_OPTION);
-
-            // Wait for table refresh
             pause(2);
 
             boolean found = false;
 
-            // 5️⃣ Pagination loop
+            // 4️⃣ Pagination loop
             for (int page = 1; page <= 200; page++) {
 
                 logPrint("Checking page " + page + " for SR " + totalCount);
@@ -2482,6 +2484,7 @@ public class Common extends Locators {
                 for (WebElement el : matches) {
                     try {
                         if (el.isDisplayed()) {
+                            highlightElement(el);
                             ((JavascriptExecutor) driver)
                                     .executeScript(
                                             "arguments[0].scrollIntoView({block:'center'});", el
@@ -2498,7 +2501,7 @@ public class Common extends Locators {
                     break;
                 }
 
-                // 6️⃣ Handle Next pagination
+                // 5️⃣ Handle Next pagination
                 try {
                     WebElement nextBtn = driver.findElement(By.xpath(NEXT_PAGINATION));
 
@@ -2510,7 +2513,8 @@ public class Common extends Locators {
                         break;
                     }
 
-                    click(NEXT_PAGINATION);
+                    highlightElement(nextBtn);
+                    nextBtn.click();
                     pause(1);
 
                 } catch (Exception e) {
@@ -2526,6 +2530,8 @@ public class Common extends Locators {
 
         logPrint("Pagination validation completed successfully");
     }
+
+
 
 
     private String safeTrim(String s) {
@@ -2843,6 +2849,62 @@ public class Common extends Locators {
 
         logPrint("Step :: Switched to window number " + windowNumber +
                 " | Title: " + driver.getTitle());
+    }
+
+    public void selectRandomDropDownValue(String ulXpath) {
+
+        List<WebElement> options = driver.findElements(
+                By.xpath(ulXpath + "/li[not(@aria-disabled='true')]")
+        );
+
+        // ✅ If options not visible → keyboard fallback
+        if (options.isEmpty()) {
+            logPrint("Dropdown list not found. Using keyboard fallback.");
+            downKeyAndEnter();
+            return;
+        }
+
+        int randomIndex = new Random().nextInt(options.size());
+        WebElement randomOption = options.get(randomIndex);
+
+        String selectedText = randomOption.getText().trim();
+
+        try {
+            highlightElementClick(randomOption);
+            randomOption.click();
+        } catch (Exception e) {
+            logPrint("Click failed. Falling back to keyboard selection.");
+            downKeyAndEnter();
+            return;
+        }
+
+        logPrint("Selected random option: " + selectedText);
+    }
+
+    public void selectRandomRowCheckbox() {
+
+        List<WebElement> rows = driver.findElements(
+                By.xpath("//div[@role='rowgroup']//div[@data-rowindex]")
+        );
+
+        if (rows.isEmpty()) {
+            throw new RuntimeException("No rows found inside rowgroup");
+        }
+
+        int randomIndex = new Random().nextInt(rows.size());
+        WebElement randomRow = rows.get(randomIndex);
+
+        // Read attribute before DOM update
+        String rowIndex = randomRow.getAttribute("data-rowindex");
+
+        // Build row-scoped checkbox XPath (STRING)
+        String checkboxXpath =
+                "//div[@role='rowgroup']//div[@data-rowindex='" + rowIndex + "']" +
+                        "//input[contains(@class,'css-j8yymo')]";
+
+        selectCheckbox(checkboxXpath);
+
+        logPrint("Checkbox selected for row index: " + rowIndex);
     }
 
 

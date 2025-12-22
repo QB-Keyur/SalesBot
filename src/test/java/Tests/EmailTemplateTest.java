@@ -96,6 +96,4 @@ public class EmailTemplateTest extends BasePage {
         emailTemplatePage.verifyViewButton();
     }
 
-
-
 }
