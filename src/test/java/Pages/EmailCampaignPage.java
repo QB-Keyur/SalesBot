@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class EmailCampaignPage extends Locators {
-    ReadProperties readProperties;
+
     Common common;
 
     public EmailCampaignPage(WebDriver driver) {
