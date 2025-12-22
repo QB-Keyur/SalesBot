@@ -44,6 +44,8 @@ import java.nio.file.Paths;
 public class Common extends Locators {
     private static final Logger log = LoggerFactory.getLogger(Common.class);
 
+
+
     WebDriver driver;
 
     public Common(WebDriver driver) {
@@ -2531,6 +2533,113 @@ public class Common extends Locators {
         logPrint("Pagination validation completed successfully");
     }
 
+    public void paginationInsideActiveModal() {
+
+        pause(2);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // 1️⃣ Read pagination text (SECOND pagination only)
+        WebElement text = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("(//p[contains(@class,'MuiTablePagination-displayedRows')])[2]")
+                )
+        );
+
+        String paginationText = safeTrim(text.getText());
+        String totalStrRaw = paginationText.replaceAll(".*of\\s*", "").trim();
+        int totalCount = Integer.parseInt(totalStrRaw.replaceAll("[^0-9]", ""));
+
+        logPrint("Modal Target SR number: " + totalCount);
+
+        // 2️⃣ SECOND rows-per-page dropdown
+        final String ROWS_PER_PAGE_DROPDOWN =
+                "(//div[@aria-haspopup='listbox'])[2]";
+
+        final String NEXT_PAGINATION =
+                "(//button[@title='Go to next page' or contains(@aria-label,'next')])[2]";
+
+        int[] rowOptions = totalCount < 10
+                ? new int[]{10}
+                : new int[]{10, 20, 30};
+
+        for (int rows : rowOptions) {
+
+            logPrint("Modal :: Validating SR with rows-per-page = " + rows);
+
+            WebElement rowsDropdown =
+                    wait.until(ExpectedConditions.elementToBeClickable(
+                            By.xpath(ROWS_PER_PAGE_DROPDOWN)
+                    ));
+            highlightElement(rowsDropdown);
+            rowsDropdown.click();
+
+            WebElement rowOption =
+                    wait.until(ExpectedConditions.elementToBeClickable(
+                            By.xpath("//li[normalize-space()='" + rows + "']")
+                    ));
+            highlightElement(rowOption);
+            rowOption.click();
+
+            pause(2);
+
+            boolean found = false;
+
+            for (int page = 1; page <= 200; page++) {
+
+                List<WebElement> matches = driver.findElements(
+                        By.xpath("//div[@data-field='srNo' and normalize-space(text())='" + totalCount + "']")
+                );
+
+                for (WebElement el : matches) {
+                    try {
+                        if (el.isDisplayed()) {
+                            highlightElement(el);
+                            ((JavascriptExecutor) driver)
+                                    .executeScript(
+                                            "arguments[0].scrollIntoView({block:'center'});", el
+                                    );
+                            found = true;
+                            break;
+                        }
+                    } catch (StaleElementReferenceException ignored) {}
+                }
+
+                if (found) {
+                    break;
+                }
+
+                WebElement nextBtn = driver.findElement(By.xpath(NEXT_PAGINATION));
+
+                String ariaDisabled = nextBtn.getAttribute("aria-disabled");
+                String disabledAttr = nextBtn.getAttribute("disabled");
+
+                if ("true".equalsIgnoreCase(ariaDisabled) ||
+                        (disabledAttr != null && !disabledAttr.isEmpty())) {
+                    break;
+                }
+
+                highlightElement(nextBtn);
+                nextBtn.click();
+                pause(1);
+            }
+
+            Assert.assertTrue(
+                    found,
+                    "Modal :: SR " + totalCount + " not found with rows-per-page = " + rows
+            );
+        }
+
+        logPrint("Modal pagination validation completed successfully");
+    }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2905,6 +3014,18 @@ public class Common extends Locators {
         selectCheckbox(checkboxXpath);
 
         logPrint("Checkbox selected for row index: " + rowIndex);
+    }
+    private String activeContext = "";
+
+    public void setActiveContext(String contextXpath) {
+        this.activeContext = contextXpath;
+    }
+
+    public By resolveBy(String locator) {
+        if (activeContext == null || activeContext.isEmpty()) {
+            return findBy(locator);
+        }
+        return findBy(activeContext + locator);
     }
 
 
