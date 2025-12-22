@@ -39,7 +39,6 @@ public class ProductPage extends Locators {
 
 
     public void goToProductPage() {
-        loginWithAdminUser();
 
         common.waitUntilElementToBeClickable(PRODUCTMENU);
         common.click(PRODUCTMENU);
