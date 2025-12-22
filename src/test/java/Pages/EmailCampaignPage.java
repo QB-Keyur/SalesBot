@@ -1,5 +1,6 @@
 package Pages;
 
+import Config.EnvConfig;
 import Config.ReadProperties;
 import Utils.Common;
 import Utils.Locators;
@@ -9,17 +10,16 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class EmailCampaignPage extends Locators {
-    ReadProperties readProperties;
+
     Common common;
 
     public EmailCampaignPage(WebDriver driver) {
         super(driver);
         this.common = new Common(driver);
-        this.readProperties = new ReadProperties();
     }
 
     public void goToEmailCampaignPage() {
-        String expectedURL = readProperties.getWebUrl() + "email-campaign";
+        String expectedURL = EnvConfig.getWebUrl() + "email-campaign";
 
         common.waitUntilElementToBeVisible(CAMPAIGNMENU);
         common.click(CAMPAIGNMENU);

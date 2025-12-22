@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="WhatsApp Campaign Module Test Cases" verbose="10" parallel="tests" thread-count="3" allow-return-values="true">
+
+    <!-- Verify WhatsApp contact campaign page-->
+    <test name="Verify WhatsApp contact campaign page elements, button and etc.">
+        <classes>
+            <class name="Tests.WhatsAppCampaignTest">
+                <methods>
+                    <include name="verifyWhatsAppCampaignPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify WhatsApp contact campaign List of headers-->
+    <test name="Verify WhatsApp contact campaign List of headers">
+        <classes>
+            <class name="Tests.WhatsAppCampaignTest">
+                <methods>
+                    <include name="VerifyWhatsAppContactListHeaders"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify WhatsApp campaign create functionality-->
+    <test name="Verify WhatsApp campaign create functionality">
+        <classes>
+            <class name="Tests.WhatsAppCampaignTest">
+                <methods>
+                    <include name="VerifyCreateWhatsAppCampaign"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+</suite>
