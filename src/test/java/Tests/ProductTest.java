@@ -10,18 +10,19 @@ public class ProductTest extends BasePage {
 
     @Test
     public void goToProductPage() {
-
+        loginWithAdminUser();
         productPage.goToProductPage();
     }
 
     @Test
     public void verifyColumns() {
+        loginWithAdminUser();
         productPage.verifyColumns();
-
     }
 
     @Test
     public void verifyElements() {
+        loginWithAdminUser();
         productPage.verifyElements();
     }
 
@@ -58,7 +59,6 @@ public class ProductTest extends BasePage {
 
     @Test
     public void deletingAProduct() {
-
         productPage.deletingAProduct();
     }
 

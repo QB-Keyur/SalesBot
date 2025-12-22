@@ -29,6 +29,7 @@ allure-report/
 extent-reports/
 html-report/
 emailable-report/
+.allure
 
 ################################
 # Logs
