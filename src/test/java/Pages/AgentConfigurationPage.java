@@ -550,7 +550,7 @@ public class AgentConfigurationPage extends Locators {
         common.waitUntilElementToBeClickable(CREATE);
         driver.findElement(By.xpath(CREATE)).click();
 
-        String expectedURL = "https://salesbot.cloud/agent-configuration";
+        String expectedURL = EnvConfig.getWebUrl() + "/agent-configuration";
 
         clickAndVerifyNavigation(ACCCANCELBUTTON, expectedURL, "Cancel Button");
 

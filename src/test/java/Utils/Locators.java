@@ -763,6 +763,7 @@ public class Locators extends BasePage {
     public static String ECCENABLEAINO= "//div[contains(@class,'css-yf7rws')]";
     public static String ECCCONTACTS= "//p[text()='Contacts']";
     public static String ECCSEARCHCONTACTS= "//input[@placeholder=\"Search contacts...\"]";
+    public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
     public static String ECCCHECKBOX= "(//span[@class=\"css-ysvidx\"])[1]";
     public static String ECCSRNO= "//span[text()='#']";
     public static String ECCNAME= "//span[text()='Name']";
@@ -776,6 +777,16 @@ public class Locators extends BasePage {
     public static String ECCSEARCHRESULT= "(//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
     public static String ECCDROPDOWNLIST= "//ul[@class='MuiAutocomplete-listbox css-1sg36vf']";
     public static String ECCBODYVALUE= "//div[@data-placeholder=\"Email template body will appear here\"]/child::p";
+    public static String ECCRUNCAMPAIGN= "//button[@type='button']/following::span[text()='Run Campaign']";
+    public static String ECCCANCEL= "//button[@type='button']/following::span[text()='Cancel']";
+    public static String ECCPOPUPTEXT1= "//h2[text()='Run Campaign']";
+    public static String ECCPOPUPTEXT2= "//p[text()='Are you sure you want to run this email campaign? This action will start sending emails to your selected contacts.']";
+    public static String ECCPOPUPNO= "//button[@type='button']/following::span[text()='No']";
+    public static String ECCPOPUPYES= "//button[@type='button']/following::span[text()='Yes']";
+    public static String ECCNAMEVAL= "//span[text()='Name is required']";
+    public static String ECCEMAILVAL= "//span[text()='Email template is required']";
+    public static String ECCCATEGORYVAL= "//span[text()='Category is required']";
+    public static String ECCPRODUCTVAL= "//span[text()='Product is required']";
 
 
 

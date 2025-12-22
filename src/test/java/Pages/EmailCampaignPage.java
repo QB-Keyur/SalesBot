@@ -4,10 +4,15 @@ import Config.EnvConfig;
 import Config.ReadProperties;
 import Utils.Common;
 import Utils.Locators;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class EmailCampaignPage extends Locators {
 
@@ -207,6 +212,28 @@ public class EmailCampaignPage extends Locators {
         common.pagination();
     }
 
+    public void verifyPaginationInsideCreate(){
+        goToEmailCampaignPage();
+
+        common.waitUntilElementToBeVisible(ECCREATEBUTTON);
+        common.click(ECCREATEBUTTON);
+
+        common.scroll_To_Element(ECCROWSPERPAGE);
+        common.pagination();
+    }
+
+    public void verifyPaginationInsideViewContact() {
+
+        goToEmailCampaignPage();
+
+        common.waitUntilElementToBeVisible(ECCREATEBUTTON);
+        common.click(ECCREATEBUTTON);
+
+        common.waitUntilElementToBeVisible(ECCVIEW);
+        common.click(ECCVIEW);
+        common.paginationInsideActiveModal();
+    }
+
     public void verifyRunningANewEmailCampaign(){
         goToEmailCampaignPage();
 
@@ -250,8 +277,97 @@ public class EmailCampaignPage extends Locators {
 
     }
 
+    public void verifySearchInsideCreate() {
 
+        goToEmailCampaignPage();
+
+        common.waitUntilElementToBeVisible(ECCREATEBUTTON);
+        common.click(ECCREATEBUTTON);
+
+        common.scroll_To_Element(ECCSEARCHCONTACTS);
+        common.waitUntilElementToBeVisible(ECCSEARCHCONTACTS);
+        By ROW_LOCATOR = By.xpath(
+                "//div[@role='rowgroup']//div[@data-rowindex]//div[@data-field='name']"
+        );
+
+        common.waitUntilElementToBeVisible(ROW_LOCATOR);
+
+        List<WebElement> rows = driver.findElements(ROW_LOCATOR);
+
+        if (rows.isEmpty()) {
+            throw new RuntimeException("No contact rows found in Create Email Campaign grid");
+        }
+
+        int randomIndex = new Random().nextInt(rows.size());
+        String rowText = rows.get(randomIndex).getText().trim();
+
+        common.type(ECCSEARCHCONTACTS,rowText);
+        common.pause(1);
+        common.waitUntilElementToBeVisible(ECCSEARCHCONTACTSVALUE);
+        common.validateSearch(ECCSEARCHCONTACTSVALUE, rowText);
+    }
+
+    public void verifyRunningABlankCampaign(){
+        goToEmailCampaignPage();
+
+        common.waitUntilElementToBeVisible(ECCREATEBUTTON);
+        common.click(ECCREATEBUTTON);
+
+        common.waitUntilElementToBeVisible(ECCRUNCAMPAIGN);
+        common.click(ECCRUNCAMPAIGN);
+
+        common.assertElementPresent(ECCPOPUPTEXT1);
+        common.assertElementPresent(ECCPOPUPTEXT2);
+        common.assertElementPresent(ECCPOPUPNO);
+        common.assertElementPresent(ECCPOPUPYES);
+
+        common.click(ECCPOPUPNO);
+
+        if(common.isElementDisplayed(ECCRUNCAMPAIGN)){
+            common.logPrint("No button from pop-up works");
+        }
+
+        common.waitUntilElementToBeVisible(ECCRUNCAMPAIGN);
+        common.click(ECCRUNCAMPAIGN);
+
+        common.click(ECCPOPUPYES);
+
+        common.waitUntilElementToBeVisible(ECCNAMEVAL);
+        common.assertElementPresent(ECCNAMEVAL);
+        common.assertElementPresent(ECCEMAILVAL);
+        common.assertElementPresent(ECCCATEGORYVAL);
+        common.assertElementPresent(ECCPRODUCTVAL);
+
+    }
+
+    public void verifyCancelButton() {
+
+        goToEmailCampaignPage();
+
+        String expectedURL = EnvConfig.getWebUrl() + "/email-campaign";
+
+        common.waitUntilElementToBeClickable(ECCREATEBUTTON);
+        common.click(ECCREATEBUTTON);
+
+        common.waitUntilElementToBeClickable(ECCCANCEL);
+        common.click(ECCCANCEL);
+
+        common.pause2Sec();
+
+        String currentURL = driver.getCurrentUrl();
+
+        Assert.assertEquals(
+                currentURL,
+                expectedURL,
+                "Cancel button did NOT navigate back to Email Campaign page"
+        );
+
+        common.logPrint(
+                "Email Campaign Page Successfully loaded after Cancel. URL: " + currentURL
+        );
+    }
 
 
 
 }
+
