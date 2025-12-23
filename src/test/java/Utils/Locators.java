@@ -70,7 +70,7 @@ public class Locators extends BasePage {
     public static String CREATEDDATE = "//span[text() ='Created Date']";
     public static String ACTIONS = "//span[text() ='Actions']";
     public static String SEARCH = "//input[@placeholder='Search...']";
-    public static String REFRESH = "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-15wqzvf']";
+    public static String REFRESH = "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-15wqzvf'] | //span[contains(@class,'css-1sh91j5')]/parent::button[contains(@class,'css-q8p1uw')]";
     public static String FILTERS = "//button[@type='button']//span[normalize-space(.)='Filters']";
     public static String CREATE = "//button[@type='button']//span[normalize-space(.)='Create']";
     public static String MULTITABHOR = "(//button[@role='tab'])[2]";
@@ -140,7 +140,7 @@ public class Locators extends BasePage {
     public static String ACNEXTPAGE = "//button[@title='Go to next page']";
     public static String ACNAMEINDEX = "//div[@aria-rowspan='1']/preceding-sibling::div[@aria-colindex='3']";
     public static String ACINACTIVEGRIDSTATUS = "(//span[text()='Inactive'])[1]";
-    public static String ACACTIVEGRIDSTATUS = "//span[@class=\"MuiChip-label MuiChip-labelSmall css-oruufx\" and contains(text(),'Active')][1]";
+    public static String ACACTIVEGRIDSTATUS = "//span[@class=\"MuiChip-label MuiChip-labelSmall css-oruufx\" and contains(text(),'Active')][1] | (//span[contains(text(),'Status')]/following::span[text()='Active'])[1]";
     public static String ACINACTIVEGRIDSTATUSGRID = "(//span[text()='Inactive'])[1]/preceding::input[@type='checkbox'][1]";
     public static String ACACTIVTEBUTTON = "//button[@type='button']/child::span[contains(text(),'Active')]";
     public static String ACCHEADER = "//h6[normalize-space()='Create Agent Configuration']";
@@ -726,8 +726,8 @@ public class Locators extends BasePage {
     public static String EMIALCAMPAIGNMENU = "//button[text()='Email Campaign']";
     public static String ECHEADER = "//h6[text()='Email Campaign']";
     public static String ECSEARCHBAR = "//input[@placeholder=\"Search...\"]";
-    public static String ECREFRESHBUTTON = "//button[contains(@class,'5wqzvf')]";
-    public static String ECREFILTERBUTTON = "//button[contains(@class,'1wkzwh7')]";
+    public static String ECREFRESHBUTTON = "//button[contains(@class,'5wqzvf')] | //button[contains(@class,'css-q8p1uw')]";
+    public static String ECREFILTERBUTTON = "//button[contains(@class,'1wkzwh7')] | //button[contains(@class,'css-1yfm8su')]";
     public static String ECCREATEBUTTON = "//button[@type='button']/following::span[text()='Create']";
     public static String ECNAME = "//span[text()=\"Name\"]";
     public static String ECSR = "//span[text()=\"#\"]";
@@ -760,8 +760,8 @@ public class Locators extends BasePage {
     public static String ECCBODYTOOLBAR= "//div[@class=\"ql-toolbar ql-snow\"]";
     public static String ECCTEMPLATEBODY= "//div[@data-placeholder=\"Email template body will appear here\"]";
     public static String ECCENABLEAI= "//p[text()='Enable AI']";
-    public static String ECCENABLEAIYES= "//div[contains(@class,'css-1fw1vid')]";
-    public static String ECCENABLEAINO= "//div[contains(@class,'css-yf7rws')]";
+    public static String ECCENABLEAIYES= "//div[contains(@class,'css-1fw1vid')] | //div[contains(@class,'css-kg2as0')]";
+    public static String ECCENABLEAINO= "//div[contains(@class,'css-yf7rws')] | //div[contains(@class,'css-12xpge1')]";
     public static String ECCCONTACTS= "//p[text()='Contacts']";
     public static String ECCSEARCHCONTACTS= "//input[@placeholder=\"Search contacts...\"]";
     public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
@@ -771,8 +771,8 @@ public class Locators extends BasePage {
     public static String ECCCONTACTGROUP= "//span[text()='Contact group']";
     public static String ECCPHONE= "//span[text()='Phone Number']";
     public static String ECCEMAIL= "//span[text()='Email']";
-    public static String ECCTOTALROWS= "//div[text()='Total Rows: ']";
-    public static String ECCROWSPERPAGE= "//p[text()='Rows per page:']";
+    public static String ECCTOTALROWS= "//div[text()='Total Rows: '] | //div[@class='MuiBox-root css-10u381a']";
+    public static String ECCROWSPERPAGE= "//p[text()='Rows per page:'] | //p[text()='Show']";
     public static String ECCPREVIOUSPAGE= "//button[@aria-label=\"Go to previous page\"]";
     public static String ECCNEXTPAGE= "//button[@aria-label=\"Go to next page\"]";
     public static String ECCSEARCHRESULT= "(//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";

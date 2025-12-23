@@ -366,7 +366,7 @@ public class WhatsAppTemplatePage extends Locators {
 
     public void verifyingHorizontalView(){
         goToWhatsAppTemplatePage();
-        common.validateHorizontalViewCardCount();
+        common.validateHorizontalViewCardCount("MuiBox-root css-a7l4db");
     }
 
     public void verifyingSearch(){
@@ -400,7 +400,7 @@ public class WhatsAppTemplatePage extends Locators {
 
     public void verifyingPagination(){
         goToWhatsAppTemplatePage();
-        common.pagination();
+        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
 
     public void verifyRefreshButtonUpdatesTheServerSyncStatus(){

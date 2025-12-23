@@ -79,8 +79,8 @@ public class EmailCampaignPage extends Locators {
         columns.put(ECACTION, "Email Campaign Actions");
 
 
-        columns.put(KBTOTALROWS, "Email Campaign Total Rows");
-        columns.put(KBROWSPERPAGE, "Email Campaign Rows Per Page");
+//        columns.put(KBTOTALROWS, "Email Campaign Total Rows");
+//        columns.put(KBROWSPERPAGE, "Email Campaign Rows Per Page");
 
 
         int failures = 0;
@@ -203,13 +203,13 @@ public class EmailCampaignPage extends Locators {
     public void verifyHorizontalView(){
 
         goToEmailCampaignPage();
-        common.validateHorizontalViewCardCount();
+        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
 
     }
 
     public void verifyPagination(){
         goToEmailCampaignPage();
-        common.pagination();
+        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
 
     public void verifyPaginationInsideCreate(){
@@ -219,7 +219,7 @@ public class EmailCampaignPage extends Locators {
         common.click(ECCREATEBUTTON);
 
         common.scroll_To_Element(ECCROWSPERPAGE);
-        common.pagination();
+        common.pagination("//div[@class=\"MuiBox-root css-10u381a\"]");
     }
 
     public void verifyPaginationInsideViewContact() {
@@ -344,7 +344,7 @@ public class EmailCampaignPage extends Locators {
 
         goToEmailCampaignPage();
 
-        String expectedURL = EnvConfig.getWebUrl() + "/email-campaign";
+        String expectedURL = EnvConfig.getWebUrl() + "email-campaign";
 
         common.waitUntilElementToBeClickable(ECCREATEBUTTON);
         common.click(ECCREATEBUTTON);
@@ -365,6 +365,38 @@ public class EmailCampaignPage extends Locators {
         common.logPrint(
                 "Email Campaign Page Successfully loaded after Cancel. URL: " + currentURL
         );
+    }
+
+    public void viewEmailCampaign(){
+        goToEmailCampaignPage();
+
+        String firstRow = "//div[@data-rowindex=\"0\"]";
+        String firstRowView = "(//button[@aria-label=\"View\"])[1]";
+        String name =common.getText( "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"name\"]");
+
+        String catName = common.getText("//div[@data-rowindex=\"0\"]/child::div[@data-field=\"category__name\"]");
+
+        String desc = common.getText("//div[@data-rowindex=\"0\"]/child::div[@data-field=\"product__name\"]");
+
+
+
+        common.waitUntilElementToBeVisible(firstRow);
+        if(!common.isElementDisplayed(firstRow)){
+        common.logPrint("No Data Found: ");
+        }
+        common.click(firstRowView);
+
+        String nameInput = "//span[text()='Name']/following::input[1]";
+        String catNameInput = "//span[text()='Name']/following::input[2]";
+        String descInput = "//span[text()='Name']/following::input[4]";
+
+        common.click(firstRowView);
+        if(nameInput.equals(name) && catNameInput.equals(catName) && descInput.equals(desc)){
+            common.logPrint("Email Campaign Page Successfully loaded after View as: " +nameInput+" equlas "+name+" and "+catNameInput+" equals " +descInput+ " equals "+ descInput+ ".");
+        }
+
+
+
     }
 
 

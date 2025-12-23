@@ -103,7 +103,7 @@ public class KnowledgeBasePage extends Locators {
     public void validateHorizontalView(){
         goToKnowledgeBasePage();
         common.pause(3);
-        common.validateHorizontalViewCardCount();
+        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
 
     public void validateCreatePageElements() {
@@ -725,7 +725,7 @@ public class KnowledgeBasePage extends Locators {
 
     public void validatePagination() {
         goToKnowledgeBasePage();
-        common.pagination();
+        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
 
     public void validateView(){
