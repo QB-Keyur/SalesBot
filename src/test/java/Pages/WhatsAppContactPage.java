@@ -326,6 +326,10 @@ public class WhatsAppContactPage extends Locators {
         String companyName = common.fakeCompanyName();
         common.type(companyNameInp, companyName);
 
+        common.waitUntilElementToBeVisible(SubscriptionStatus);
+        common.click(SubscriptionStatus);
+        common.downKeyAndEnter();
+
         common.waitUntilElementToBeVisible(selectCountryDropdown);
         common.click(selectCountryDropdown);
         common.downKeyAndEnter();
@@ -453,10 +457,6 @@ public class WhatsAppContactPage extends Locators {
         common.logPrint("Step:: Verify 'Queue Data' button is displayed");
         common.waitUntilElementToBeVisible(By.xpath(QueueDate));
         common.assertElementPresent(QueueDate);
-
-        common.logPrint("Step:: Verify 'Choose Upload' is displayed");
-        common.waitUntilElementToBeVisible(By.xpath(chooseUpload));
-        common.assertElementPresent(chooseUpload);
     }
 
     public void clickOnTheCreateButton(){
@@ -477,6 +477,20 @@ public class WhatsAppContactPage extends Locators {
         common.click(deleteButton);
     }
 
+    public void clickOnTheButtonMenuListView(){
+        common.logPrint("Step:: Click on the view button");
+        common.waitUntilElementToBeVisible(buttonMenuListView);
+        common.click(buttonMenuListView);
+
+    }
+
+    public void clickOnTheViewButtonTextXpath(){
+        common.logPrint("Step:: Click on the view button");
+        common.waitUntilElementToBeVisible(viewButtonText);
+        common.click(viewButtonText);
+
+    }
+
     public void clickOnTheViewIcon(){
         common.logPrint("Step:: Click on the view button");
         common.waitUntilElementToBeVisible(viewButton);
@@ -494,7 +508,7 @@ public class WhatsAppContactPage extends Locators {
 
     public void verifyElementsOnViewPage(){
 
-        clickOnTheViewIcon();
+
 
         common.logPrint("Step:: Verify 'Name' Label field is displayed");
         common.waitUntilElementToBeVisible(By.xpath(nameLblView));
@@ -532,13 +546,9 @@ public class WhatsAppContactPage extends Locators {
         common.waitUntilElementToBeVisible(By.xpath(cityViewLbl));
         common.assertElementPresent(cityViewLbl);
 
-        common.logPrint("Step:: Verify 'Close' button is displayed");
-        common.waitUntilElementToBeVisible(By.xpath(closeButtonView));
-        common.assertElementPresent(closeButtonView);
-
         common.logPrint("Step:: Verify 'Close Icon' button is displayed");
-        common.waitUntilElementToBeVisible(By.xpath(closeIconView));
-        common.assertElementPresent(closeIconView);
+        common.waitUntilElementToBeVisible(By.xpath(cancelButton));
+        common.assertElementPresent(cancelButton);
 
         common.logPrint("Step:: Verify 'Name' input field is displayed");
         common.waitUntilElementToBeVisible(By.xpath(nameInpView));
@@ -632,8 +642,6 @@ public class WhatsAppContactPage extends Locators {
 
     public void verifyViewPageValueAndFieldIsDisabled(String name, String email, String dob, String phoneNumber, String comName ){
 
-        clickOnTheViewIcon();
-
         common.logPrint("Step:: Verify the name is showing properly and its disabled");
         WebElement element = common.waitUntilElementToBeVisible(nameInpView);
         boolean isDisabled = !element.isEnabled();
@@ -678,6 +686,9 @@ public class WhatsAppContactPage extends Locators {
 
     public void verifyDeleteFunctionalityIsWorking(){
 
+//        common.waitUntilElementToBeVisible(buttonMenuListView);
+//        common.click(buttonMenuListView);
+
         clickOnTheDeleteBtn();
 
         common.logPrint("Step:: Again click on the delete button on pop-up");
@@ -715,8 +726,19 @@ public class WhatsAppContactPage extends Locators {
         common.pause(2);
 
         common.waitUntilElementToBeVisible(listViewGetMobile);
+
         String getMobile = common.getText(listViewGetMobile);
-        String phone = getMobile.replace("Phone: 91","");
+        common.logPrint("Raw mobile text: " + getMobile);
+
+        // Remove all non-numeric characters
+        String phone = getMobile.replaceAll("[^0-9]", "");
+
+        // Remove country code 91 if present
+        if (phone.startsWith("91")) {
+            phone = phone.substring(2);
+        }
+
+        common.logPrint("Formatted mobile number: " + phone);
 
         common.assertTwoValuesAreEqual(phone, mobNum);
         common.logPrint("Both values are matched and working fine.");

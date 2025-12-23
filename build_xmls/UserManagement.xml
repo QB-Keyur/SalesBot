@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="User Management Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <!-- Verify User management menu and sub-menu are displayed -->
+    <test name="Verify User management menu and sub-menu are displayed">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifyUserManagementMenuAndSubMenuAreDisplayed"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify User Invitation page elements -->
+    <test name="Verify User Invitation page elements">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifyUserInvitationPageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify User page elements -->
+    <test name="Verify User page elements">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifyUserPageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Role and Permission page elements -->
+    <test name="Verify Role and Permission page elements">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifyRolePermissionPageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

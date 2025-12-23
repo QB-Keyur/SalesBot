@@ -2,13 +2,7 @@ package Pages;
 
 import Utils.Common;
 import Utils.Locators;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-
-import java.util.ArrayList;
 
 public class profilePage extends Locators {
 
@@ -157,7 +151,7 @@ public class profilePage extends Locators {
 
         // ================== CHANGE PASSWORD BUTTON ==================
         common.logPrint("Step:: Verify 'Change Password' button is displayed");
-        common.assertElementPresent(changePasswordBtn);
+        common.assertElementPresent(savePassword);
         common.logPrint("'Change Password' button is displayed");
     }
 
