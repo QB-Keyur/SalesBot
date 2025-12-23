@@ -1651,6 +1651,11 @@ public class Common extends Locators {
         String subject = faker.book().title();
         return subject;
     }
+    public String fakeCampaignName() {
+        Faker faker = new Faker();
+        String campaignName = faker.company().name();
+        return campaignName;
+    }
 
     public void openNewIncognitoBrowser(){
         // Initialize ChromeOptions to configure browser settings

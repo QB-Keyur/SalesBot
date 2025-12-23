@@ -141,14 +141,6 @@ public class LeadManagementPage extends Locators {
         return nam;
     }
 
-    public Map<String, String> getLeadDetailsAfterSave() {
-        Map<String, String> actualData = new HashMap<>();
-        actualData.put("Type", common.getText(VType));
-        actualData.put("ContactType", common.getText(VContactType));
-        actualData.put("DateTime", common.getText(VPreDT));
-        actualData.put("Product", common.getText(VPoduct));
-        return actualData;
-    }
     public void verifyViewLead() {
         Map<String, String> expected = VerifyCreateNewLead();
         common.waitUntilElementToBeVisible(LEADVIEW);
@@ -162,7 +154,6 @@ public class LeadManagementPage extends Locators {
         common.waitUntilElementToBeVisible(VClose);
         common.click(VClose);
     }
-
     public void verifyDeleteLeadInSearch(String name1) {
         common.waitUntilElementToBeVisible(DELETEOTIN);
         common.click(DELETEOTIN);
@@ -191,6 +182,15 @@ public class LeadManagementPage extends Locators {
 
         common.logPrint("Searched lead is not displayed in the grid");
         common.waitUntilElementToBeVisible(NoRows);
+    }
+
+    public Map<String, String> getLeadDetailsAfterSave() {
+        Map<String, String> actualData = new HashMap<>();
+        actualData.put("Type", common.getText(VType));
+        actualData.put("ContactType", common.getText(VContactType));
+        actualData.put("DateTime", common.getText(VPreDT));
+        actualData.put("Product", common.getText(VPoduct));
+        return actualData;
     }
     public void VerifyCancelAmdBackButtonOnCreateLeadPage() {
         common.waitUntilElementToBeVisible(LEADMANAGMENT);

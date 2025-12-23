@@ -27,7 +27,6 @@ public class LeadManagementTest extends BasePage {
 
     @Test
     public void verifyCancelAndBackButtonFunctionalityOnCreateLeadPage() {
-        common.logPrint("Verify cancel and back button functionality on lead management page");
         loginWithAdminUser();
         lead.VerifyCancelAmdBackButtonOnCreateLeadPage();
     }
@@ -65,11 +64,7 @@ public class LeadManagementTest extends BasePage {
     public void verifyHeaderNamesOfCreatedLead(){
         loginWithAdminUser();
         lead.VerifyHeadesForCreatedLead();
-    }
-
-    @Test
-    public void verifyLeadView(){
-        loginWithAdminUser();
+    loginWithAdminUser();
         lead.verifyViewLead();
     }
 }

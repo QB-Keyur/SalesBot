@@ -20,6 +20,7 @@ import org.openqa.selenium.remote.Augmenter;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import java.io.*;
@@ -92,6 +93,7 @@ public class BasePage {
      * Setup Method
      *
      */
+
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method method, ITestResult testResult) throws Exception {
 
