@@ -185,7 +185,7 @@ public class EmailTemplatePage extends Locators {
 
     public void verifyingHorizontalView(){
         goToEmailTemplatePage();
-        common.validateHorizontalViewCardCount();
+        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
 
     public void verifyingSearch(){
@@ -256,7 +256,7 @@ public class EmailTemplatePage extends Locators {
 
     public void verifyPagination(){
         goToEmailTemplatePage();
-        common.pagination();
+        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
 
     public void verifyAddingVariables(){

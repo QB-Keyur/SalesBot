@@ -857,13 +857,13 @@ public class AgentConfigurationPage extends Locators {
     public void horizontalViews(){
         goToAgentConfigurationPage();
         common.pause(2);
-        common.validateHorizontalViewCardCount();
+        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
 
     }
 
     public void pagination(){
         goToAgentConfigurationPage();
-        common.pagination();
+        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
 
     public void filters() {

@@ -2290,88 +2290,166 @@ public class Common extends Locators {
         }
     }
 
-    public void validateHorizontalViewCardCount() {
+//    public void validateHorizontalViewCardCount() {
+//
+//        // 1️⃣ Navigate to page
+//        ;
+//        pause(2);
+//
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//
+//        // 2️⃣ Read pagination text (e.g. "1–8 of 8")
+//        WebElement text = wait.until(
+//                ExpectedConditions.visibilityOfElementLocated(
+//                        By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
+//                )
+//        );
+//
+//        String paginationText = text.getText();
+//
+//        // 3️⃣ Extract total rows
+//        String totalStr = paginationText.replaceAll(".*of\\s*", "").trim();
+//        int totalRows;
+//
+//        try {
+//            totalRows = Integer.parseInt(totalStr);
+//        } catch (NumberFormatException nfe) {
+//            java.util.regex.Matcher m = java.util.regex.Pattern
+//                    .compile("(\\d+)$")
+//                    .matcher(paginationText.trim());
+//
+//            if (m.find()) {
+//                totalRows = Integer.parseInt(m.group(1));
+//            } else {
+//                throw new RuntimeException(
+//                        "Failed to parse total rows from pagination text: '" + paginationText + "'"
+//                );
+//            }
+//        }
+//
+//        // 4️⃣ Switch to horizontal view
+//        waitUntilElementToBeVisible(MULTITABHOR);
+//       click(MULTITABHOR);
+//        pause(2);
+//
+//        // 5️⃣ Scroll till end (handle lazy loading)
+//        By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
+//        scrollTillPageEnd(totalRows, cardLocator);
+//
+//        // 6️⃣ Validate card count
+//        try {
+//            WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//            shortWait.until(
+//                    ExpectedConditions.numberOfElementsToBe(cardLocator, totalRows)
+//            );
+//        } catch (Exception ignored) {
+//        }
+//
+//        List<WebElement> cardList = driver.findElements(cardLocator);
+//        int actualCount = cardList.size();
+//
+//        // 7️⃣ Logging
+//        String msg1 = "Expected number of cards (pagination): " + totalRows;
+//        String msg2 = "Actual number of cards displayed:      " + actualCount;
+//
+//        System.out.println("=======================================");
+//        System.out.println(msg1);
+//        System.out.println(msg2);
+//        System.out.println("=======================================");
+//
+//        try {
+//            logPrint(msg1);
+//            logPrint(msg2);
+//        } catch (Exception ignored) {
+//        }
+//
+//        // 8️⃣ Assertion
+//        Assert.assertEquals(
+//                actualCount,
+//                totalRows,
+//                "Card count does not match pagination total!"
+//        );
+//    }
+public void validateHorizontalViewCardCount(String fallbackCountXpath) {
 
-        // 1️⃣ Navigate to page
-        ;
-        pause(2);
+    pause(2);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // 2️⃣ Read pagination text (e.g. "1–8 of 8")
+    int totalRows = 0;
+
+    // 1️⃣ Try reading from pagination text (PRIMARY)
+    try {
         WebElement text = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
                 )
         );
 
-        String paginationText = text.getText();
-
-        // 3️⃣ Extract total rows
+        String paginationText = text.getText(); // e.g. "1–8 of 8"
         String totalStr = paginationText.replaceAll(".*of\\s*", "").trim();
-        int totalRows;
+        totalRows = Integer.parseInt(totalStr.replaceAll("[^0-9]", ""));
 
-        try {
-            totalRows = Integer.parseInt(totalStr);
-        } catch (NumberFormatException nfe) {
-            java.util.regex.Matcher m = java.util.regex.Pattern
-                    .compile("(\\d+)$")
-                    .matcher(paginationText.trim());
+        logPrint("Total rows from pagination text: " + totalRows);
 
-            if (m.find()) {
-                totalRows = Integer.parseInt(m.group(1));
-            } else {
-                throw new RuntimeException(
-                        "Failed to parse total rows from pagination text: '" + paginationText + "'"
-                );
-            }
-        }
-
-        // 4️⃣ Switch to horizontal view
-        waitUntilElementToBeVisible(MULTITABHOR);
-       click(MULTITABHOR);
-        pause(2);
-
-        // 5️⃣ Scroll till end (handle lazy loading)
-        By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
-        scrollTillPageEnd(totalRows, cardLocator);
-
-        // 6️⃣ Validate card count
-
-
-        try {
-            WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            shortWait.until(
-                    ExpectedConditions.numberOfElementsToBe(cardLocator, totalRows)
-            );
-        } catch (Exception ignored) {
-        }
-
-        List<WebElement> cardList = driver.findElements(cardLocator);
-        int actualCount = cardList.size();
-
-        // 7️⃣ Logging
-        String msg1 = "Expected number of cards (pagination): " + totalRows;
-        String msg2 = "Actual number of cards displayed:      " + actualCount;
-
-        System.out.println("=======================================");
-        System.out.println(msg1);
-        System.out.println(msg2);
-        System.out.println("=======================================");
-
-        try {
-            logPrint(msg1);
-            logPrint(msg2);
-        } catch (Exception ignored) {
-        }
-
-        // 8️⃣ Assertion
-        Assert.assertEquals(
-                actualCount,
-                totalRows,
-                "Card count does not match pagination total!"
-        );
+    } catch (Exception e) {
+        logPrint("Pagination text parsing failed. Trying fallback count...");
     }
+
+    // 2️⃣ Fallback: read direct number using passed XPath
+    if (totalRows <= 0) {
+        try {
+            WebElement fallbackCount = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.xpath(fallbackCountXpath)
+                    )
+            );
+
+            totalRows = Integer.parseInt(
+                    fallbackCount.getText().replaceAll("[^0-9]", "")
+            );
+
+            logPrint("Total rows from fallback XPath: " + totalRows);
+
+        } catch (Exception ex) {
+            throw new RuntimeException(
+                    "Unable to determine total row count from both pagination and fallback XPath: "
+                            + fallbackCountXpath
+            );
+        }
+    }
+
+    // 3️⃣ Switch to horizontal view
+    waitUntilElementToBeVisible(MULTITABHOR);
+    click(MULTITABHOR);
+    pause(2);
+
+    // 4️⃣ Scroll till end (handle lazy loading)
+    By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
+    scrollTillPageEnd(totalRows, cardLocator);
+
+    // 5️⃣ Validate card count
+    try {
+        WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        shortWait.until(
+                ExpectedConditions.numberOfElementsToBe(cardLocator, totalRows)
+        );
+    } catch (Exception ignored) {}
+
+    List<WebElement> cardList = driver.findElements(cardLocator);
+    int actualCount = cardList.size();
+
+    logPrint("Expected number of cards: " + totalRows);
+    logPrint("Actual number of cards: " + actualCount);
+
+    // 6️⃣ Assertion
+    Assert.assertEquals(
+            actualCount,
+            totalRows,
+            "Card count does not match pagination total!"
+    );
+}
+
 
     public void scrollTillPageEnd(int totalRows, By cardLocator) {
 
@@ -2420,25 +2498,166 @@ public class Common extends Locators {
             }
         }
 
+//    public void pagination() {
+//
+//        pause(2);
+//
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//
+//        // 1️⃣ Read pagination text (e.g. "1–8 of 1,234")
+//        WebElement text = wait.until(
+//                ExpectedConditions.visibilityOfElementLocated(
+//                        By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
+//                )
+//        );
+//
+//        String paginationText = safeTrim(text.getText());
+//        String totalStrRaw = paginationText.replaceAll(".*of\\s*", "").trim();
+//        int totalCount = Integer.parseInt(totalStrRaw.replaceAll("[^0-9]", ""));
+//
+//        logPrint("Target SR number: " + totalCount);
+//
+//        final String NEXT_PAGINATION =
+//                "//button[@title='Go to next page' or contains(@aria-label,'next')]";
+//
+//        final String ROWS_PER_PAGE_DROPDOWN =
+//                "//div[@aria-haspopup='listbox']";
+//
+//        // 2️⃣ Decide rows-per-page dynamically
+//        int[] rowOptions = totalCount < 10
+//                ? new int[]{10}
+//                : new int[]{10, 20, 30};
+//
+//        // 3️⃣ Loop for each rows-per-page option
+//        for (int rows : rowOptions) {
+//
+//            logPrint("Validating SR with rows-per-page = " + rows);
+//
+//            // Open rows-per-page dropdown
+//            WebElement rowsDropdown =
+//                    waitUntilElementToBeClickable(ROWS_PER_PAGE_DROPDOWN);
+//            highlightElement(rowsDropdown);
+//            rowsDropdown.click();
+//
+//            // Select row option
+//            String ROW_OPTION = "//li[normalize-space()='" + rows + "']";
+//            WebElement rowOption =
+//                    waitUntilElementToBeClickable(ROW_OPTION);
+//            highlightElement(rowOption);
+//            rowOption.click();
+//
+//            pause(2);
+//
+//            boolean found = false;
+//
+//            // 4️⃣ Pagination loop
+//            for (int page = 1; page <= 200; page++) {
+//
+//                logPrint("Checking page " + page + " for SR " + totalCount);
+//
+//                String PAGINATION_SR =
+//                        "//div[@data-field='srNo' and normalize-space(text())='" + totalCount + "']";
+//
+//                List<WebElement> matches = driver.findElements(By.xpath(PAGINATION_SR));
+//
+//                for (WebElement el : matches) {
+//                    try {
+//                        if (el.isDisplayed()) {
+//                            highlightElement(el);
+//                            ((JavascriptExecutor) driver)
+//                                    .executeScript(
+//                                            "arguments[0].scrollIntoView({block:'center'});", el
+//                                    );
+//                            found = true;
+//                            break;
+//                        }
+//                    } catch (StaleElementReferenceException ignored) {
+//                    }
+//                }
+//
+//                if (found) {
+//                    logPrint("Found SR " + totalCount + " with rows-per-page = " + rows);
+//                    break;
+//                }
+//
+//                // 5️⃣ Handle Next pagination
+//                try {
+//                    WebElement nextBtn = driver.findElement(By.xpath(NEXT_PAGINATION));
+//
+//                    String ariaDisabled = nextBtn.getAttribute("aria-disabled");
+//                    String disabledAttr = nextBtn.getAttribute("disabled");
+//
+//                    if ("true".equalsIgnoreCase(ariaDisabled) ||
+//                            (disabledAttr != null && !disabledAttr.isEmpty())) {
+//                        break;
+//                    }
+//
+//                    highlightElement(nextBtn);
+//                    nextBtn.click();
+//                    pause(1);
+//
+//                } catch (Exception e) {
+//                    break;
+//                }
+//            }
+//
+//            Assert.assertTrue(
+//                    found,
+//                    "SR " + totalCount + " not found with rows-per-page = " + rows
+//            );
+//        }
+//
+//        logPrint("Pagination validation completed successfully");
+//    }
 
-    public void pagination() {
+    public void pagination(String fallbackMaxSrXpath) {
 
         pause(2);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // 1️⃣ Read pagination text (e.g. "1–8 of 1,234")
-        WebElement text = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
-                )
-        );
+        int totalCount = 0;
 
-        String paginationText = safeTrim(text.getText());
-        String totalStrRaw = paginationText.replaceAll(".*of\\s*", "").trim();
-        int totalCount = Integer.parseInt(totalStrRaw.replaceAll("[^0-9]", ""));
+        // 1️⃣ PRIMARY: Read pagination text (e.g. "1–8 of 1,234")
+        try {
+            WebElement text = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
+                    )
+            );
 
-        logPrint("Target SR number: " + totalCount);
+            String paginationText = safeTrim(text.getText());
+            String totalStrRaw = paginationText.replaceAll(".*of\\s*", "").trim();
+            totalCount = Integer.parseInt(totalStrRaw.replaceAll("[^0-9]", ""));
+
+            logPrint("Target SR from pagination text: " + totalCount);
+
+        } catch (Exception e) {
+            logPrint("Pagination text parsing failed. Trying fallback SR...");
+        }
+
+        // 2️⃣ FALLBACK: Read max SR directly using provided XPath
+        if (totalCount <= 0) {
+            try {
+                WebElement fallbackSr = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath(fallbackMaxSrXpath)
+                        )
+                );
+
+                totalCount = Integer.parseInt(
+                        fallbackSr.getText().replaceAll("[^0-9]", "")
+                );
+
+                logPrint("Target SR from fallback XPath: " + totalCount);
+
+            } catch (Exception ex) {
+                throw new RuntimeException(
+                        "Unable to determine max SR from both pagination and fallback XPath: "
+                                + fallbackMaxSrXpath
+                );
+            }
+        }
 
         final String NEXT_PAGINATION =
                 "//button[@title='Go to next page' or contains(@aria-label,'next')]";
@@ -2446,26 +2665,22 @@ public class Common extends Locators {
         final String ROWS_PER_PAGE_DROPDOWN =
                 "//div[@aria-haspopup='listbox']";
 
-        // 2️⃣ Decide rows-per-page dynamically
+        // 3️⃣ Decide rows-per-page dynamically
         int[] rowOptions = totalCount < 10
                 ? new int[]{10}
                 : new int[]{10, 20, 30};
 
-        // 3️⃣ Loop for each rows-per-page option
+        // 4️⃣ Loop for each rows-per-page option
         for (int rows : rowOptions) {
 
             logPrint("Validating SR with rows-per-page = " + rows);
 
-            // Open rows-per-page dropdown
-            WebElement rowsDropdown =
-                    waitUntilElementToBeClickable(ROWS_PER_PAGE_DROPDOWN);
+            WebElement rowsDropdown = waitUntilElementToBeClickable(ROWS_PER_PAGE_DROPDOWN);
             highlightElement(rowsDropdown);
             rowsDropdown.click();
 
-            // Select row option
             String ROW_OPTION = "//li[normalize-space()='" + rows + "']";
-            WebElement rowOption =
-                    waitUntilElementToBeClickable(ROW_OPTION);
+            WebElement rowOption = waitUntilElementToBeClickable(ROW_OPTION);
             highlightElement(rowOption);
             rowOption.click();
 
@@ -2473,7 +2688,7 @@ public class Common extends Locators {
 
             boolean found = false;
 
-            // 4️⃣ Pagination loop
+            // 5️⃣ Pagination traversal
             for (int page = 1; page <= 200; page++) {
 
                 logPrint("Checking page " + page + " for SR " + totalCount);
@@ -2494,8 +2709,7 @@ public class Common extends Locators {
                             found = true;
                             break;
                         }
-                    } catch (StaleElementReferenceException ignored) {
-                    }
+                    } catch (StaleElementReferenceException ignored) {}
                 }
 
                 if (found) {
@@ -2503,7 +2717,7 @@ public class Common extends Locators {
                     break;
                 }
 
-                // 5️⃣ Handle Next pagination
+                // 6️⃣ Handle Next pagination
                 try {
                     WebElement nextBtn = driver.findElement(By.xpath(NEXT_PAGINATION));
 
@@ -2532,6 +2746,7 @@ public class Common extends Locators {
 
         logPrint("Pagination validation completed successfully");
     }
+
 
     public void paginationInsideActiveModal() {
 
