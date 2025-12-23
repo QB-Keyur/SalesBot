@@ -1,5 +1,6 @@
 package Pages;
 
+import Config.EnvConfig;
 import Config.ReadProperties;
 import Utils.Common;
 import Utils.Locators;
@@ -16,13 +17,11 @@ import java.nio.file.Paths;
 
 public class KnowledgeBasePage extends Locators {
 
-    ReadProperties readProperties;
     Common common;
 
     public KnowledgeBasePage(WebDriver driver) {
         super(driver);
         this.common = new Common(driver);
-        this.readProperties = new ReadProperties();
     }
 
     public void goToKnowledgeBasePage(){
@@ -344,7 +343,7 @@ public class KnowledgeBasePage extends Locators {
 
     public void validateKBShowsUpInTheProduct(){
         String CreatedKB = validateFileUpload();
-        String url = readProperties.getWebUrl();
+        String url = EnvConfig.getWebUrl();
         common.openNewUrl(url+ "product");
         common.waitUntilElementToBeVisible(CREATE);
         common.click(CREATE);

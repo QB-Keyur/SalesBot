@@ -16,13 +16,11 @@ import java.nio.file.Paths;
 
 public class WhatsAppTemplatePage extends Locators {
 
-    ReadProperties readProperties;
     Common common;
 
     public WhatsAppTemplatePage(WebDriver driver) {
         super(driver);
         this.common = new Common(driver);
-        this.readProperties = new ReadProperties();
     }
 
     public void goToWhatsAppTemplatePage() {

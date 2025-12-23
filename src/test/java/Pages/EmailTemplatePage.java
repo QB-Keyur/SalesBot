@@ -1,5 +1,6 @@
 package Pages;
 
+import Config.EnvConfig;
 import Config.ReadProperties;
 import Utils.Common;
 import Utils.Locators;
@@ -12,13 +13,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class EmailTemplatePage extends Locators {
-    ReadProperties readProperties;
+
     Common common;
 
     public EmailTemplatePage(WebDriver driver) {
         super(driver);
         this.common = new Common(driver);
-        this.readProperties = new ReadProperties();
     }
 
     public void goToEmailTemplatePage(){
@@ -172,7 +172,8 @@ public class EmailTemplatePage extends Locators {
         common.click(ETCCANCEL);
 
         String currentURL = driver.getCurrentUrl();
-        String expectedURL = readProperties.getWebUrl()+"email-template";
+
+        String expectedURL = EnvConfig.getWebUrl()+"email-template";
 
         if (!currentURL.equals(expectedURL)){
             common.logPrint(currentURL+" Current URL Matches "+expectedURL+" Expected URL");
@@ -338,7 +339,7 @@ public class EmailTemplatePage extends Locators {
                 "Email Template is not synced. Current status: " + status
         );
 
-        common.openNewUrl(readProperties.getWebUrl() + "email-campaign");
+        common.openNewUrl(EnvConfig.getWebUrl() + "email-campaign");
         common.waitUntilElementToBeVisible(ETCREATE);
         common.click(ETCREATE);
 
