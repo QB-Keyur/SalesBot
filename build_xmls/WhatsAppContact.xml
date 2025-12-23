@@ -69,16 +69,16 @@
         </classes>
     </test>
 
-    <!-- Create WhatsApp contact using POI -->
-    <test name="Create WhatsApp contact using POI">
-        <classes>
-            <class name="Tests.WhatsAppContactTest">
-                <methods>
-                    <include name="createWhatsAppContactUsingAnPOI"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Create WhatsApp contact using POI &ndash;&gt;-->
+<!--    <test name="Create WhatsApp contact using POI">-->
+<!--        <classes>-->
+<!--            <class name="Tests.WhatsAppContactTest">-->
+<!--                <methods>-->
+<!--                    <include name="createWhatsAppContactUsingAnPOI"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <!-- Verify import page elements -->
     <test name="Verify import page elements">

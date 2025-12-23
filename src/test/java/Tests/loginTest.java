@@ -7,8 +7,6 @@ import org.testng.annotations.Test;
 
 public class loginTest extends BasePage {
 
-
-
     //Login page test cases
     @Test
     public void verifyLoginPageIsLoadsSuccessfully(){

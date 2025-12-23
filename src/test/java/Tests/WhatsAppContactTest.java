@@ -50,7 +50,6 @@ public class WhatsAppContactTest extends BasePage {
         String mobileNumber = common.fakeIndianMobileNumber();
         whatsAppContactPage.createWhatsAppContactCreate(mobileNumber);
         whatsAppContactPage.verifySuccessMessageForWhatsAppContactCreation();
-
         whatsAppContactPage.clickOnTheCreateButton();
         whatsAppContactPage.createWhatsAppContactCreate(mobileNumber);
         whatsAppContactPage.verifyErrorMessageForDuplicateMobileNumber(mobileNumber);
@@ -78,6 +77,7 @@ public class WhatsAppContactTest extends BasePage {
         common.logPrint("Verify view page all the Elements are displayed");
         loginWithAdminUser();
         whatsAppContactPage.redirectsToWhatsAppContactPage();
+        whatsAppContactPage.clickOnTheViewIcon();
         whatsAppContactPage.verifyElementsOnViewPage();
     }
 
@@ -95,6 +95,7 @@ public class WhatsAppContactTest extends BasePage {
         String companyName = whatsAppInfo[4];
         whatsAppContactPage.verifySuccessMessageForWhatsAppContactCreation();
         whatsAppContactPage.searchTheWhatsAppContactUsingMobileNumber(mobileNumber);
+        whatsAppContactPage.clickOnTheViewIcon();
         whatsAppContactPage.verifyViewPageValueAndFieldIsDisabled(name, email, dob, phoneNumber, companyName);
     }
 
@@ -106,6 +107,7 @@ public class WhatsAppContactTest extends BasePage {
         String mobileNumber = common.fakeIndianMobileNumber();
         whatsAppContactPage.createWhatsAppContactCreate(mobileNumber);
         whatsAppContactPage.verifySuccessMessageForWhatsAppContactCreation();
+        whatsAppContactPage.searchTheWhatsAppContactUsingMobileNumber(mobileNumber);
         whatsAppContactPage.verifyDeleteFunctionalityIsWorking();
     }
 
@@ -117,6 +119,7 @@ public class WhatsAppContactTest extends BasePage {
         String mobileNumber = common.fakeIndianMobileNumber();
         whatsAppContactPage.createWhatsAppContactCreate(mobileNumber);
         whatsAppContactPage.verifySuccessMessageForWhatsAppContactCreation();
+        whatsAppContactPage.searchTheWhatsAppContactUsingMobileNumber(mobileNumber);
         whatsAppContactPage.verifyEditFunctionalityIsWorkingProperly();
         whatsAppContactPage.verifyUpdateMessageForWhatsAppContactCreation();
     }
@@ -150,6 +153,8 @@ public class WhatsAppContactTest extends BasePage {
         common.pause(2);
         whatsAppContactPage.searchTheWhatsAppContactUsingMobileNumber(mobileNumber);
         common.pause(1);
+        whatsAppContactPage.clickOnTheButtonMenuListView();
+        whatsAppContactPage.clickOnTheViewButtonTextXpath();
         whatsAppContactPage.verifyViewPageValueAndFieldIsDisabled(name, email, dob, phoneNumber, companyName);
     }
 
