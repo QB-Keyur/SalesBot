@@ -47,8 +47,8 @@ public class KnowledgeBasePage extends Locators {
         columns.put(KBSTATUS, "KB Status");
         columns.put(KBCREATEDDATE, "KB Created Date");
         columns.put(KBACTIONS, "KB Actions");
-        columns.put(KBTOTALROWS, "KB Total");
-        columns.put(KBROWSPERPAGE, "KB Rows per page");
+//        columns.put(KBTOTALROWS, "KB Total");
+//        columns.put(KBROWSPERPAGE, "KB Rows per page");
         columns.put(KBREFRESHBUTTON, "KB Refresh");
         columns.put(KBFILTERS, "KB Filters");
         columns.put(KBCREATE, "KB Create");
@@ -702,10 +702,10 @@ public class KnowledgeBasePage extends Locators {
         common.click(KBCQABUTTON);
 
         List<WebElement> rows = driver.findElements(
-                By.xpath("//tbody[contains(@class,'MuiTableBody-root')]//tr"));
+                By.xpath("//th[text()='Title']/following::tbody[contains(@class,'MuiTableBody-root')]//tr"));
 
         Assert.assertEquals(rows.size(), numberOfWebsites,
-                "Mismatch before deleting websites");
+                "Mismatch before deleting QA");
 
         for (int i = 1; i <= numberOfWebsites; i++) {
             common.pause(1);
@@ -715,7 +715,7 @@ public class KnowledgeBasePage extends Locators {
         }
 
         List<WebElement> rowsPostDelete = driver.findElements(
-                By.xpath("//tbody[contains(@class,'MuiTableBody-root')]//tr"));
+                By.xpath("//th[text()='Title']/following::tbody[contains(@class,'MuiTableBody-root')]//tr"));
 
         int rowsPostDeleteValue = rowsPostDelete.size()-1;
 

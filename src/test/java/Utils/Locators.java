@@ -92,6 +92,7 @@ public class Locators extends BasePage {
     public static String CLOSEBUTTON = "//button[@aria-label='Close alert']";
     public static String SAVEBUTTON = "//button[@type='button']/child::span[contains(text(),'Save')]";
     public static String SUCCESSMESSAGE = "//div[normalize-space(text())='Product created successfully']";
+    public static String UPDATEMESSAGE = "//div[normalize-space(text())='Product updated successfully']";
     public static String SEARCHRESULT = "//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"]";
     public static String EDIT = "//button[@aria-label=\"Edit\"]";
     public static String EDITPRODUCTNAME = "//input[@name='name']";
@@ -426,7 +427,7 @@ public class Locators extends BasePage {
     public static String KBACTIONS = "//span[normalize-space()='Actions']";
     public static String KBTOTALROWS = "//div[contains(text(),'Total')]";
     public static String KBROWSPERPAGE = "//p[contains(text(),'Rows per page:')]";
-    public static String KBREFRESHBUTTON = "//button[@class=\"MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-15wqzvf\"]";
+    public static String KBREFRESHBUTTON = "//button[contains(@class,'css-q8p1uw')]";
     public static String KBFILTERS = "//button[@type='button']/following::span[contains(text(),'Filters')]";
     public static String KBCREATE = "//button[@type='button']/following::span[text()='Create']";
     public static String KBSERACHRESULT = "//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"]";
@@ -476,7 +477,7 @@ public class Locators extends BasePage {
     public static String KBCWEBHEADER = "//h6[text()='Add Links']";
     public static String KBCWEBINPUT = "//input[@placeholder=\"http://www.example.com/\"]";
     public static String KBCWEBADD = "//button[@type='button']/following::span[text()='Add Link']";
-    public static String KBCWEBADDEDDELETE = "(//button[@class=\"MuiButtonBase-root MuiIconButton-root MuiIconButton-colorError MuiIconButton-sizeSmall css-2cca5\"])[1]";
+    public static String KBCWEBADDEDDELETE = "//th[text()='Title']/following::button";
     //KB Q&A
     public static String KBCQAHEADER = "//h6[text()='Add Q&A']";
     public static String KBCQATITLE = "(//span[text()='Title'])[2]";

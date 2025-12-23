@@ -260,6 +260,7 @@ public class AgentConfigurationPage extends Locators {
 
     public void verifyActivateButton(){
         goToAgentConfigurationPage();
+        common.waitUntilElementToBeVisible(REFRESH);
         WebElement btn = driver.findElement(By.xpath("//span[text()='Active']/parent::button"));
 
         boolean isDisabled = !btn.isEnabled();
@@ -279,6 +280,8 @@ public class AgentConfigurationPage extends Locators {
     public void verifyActiveButtonNegative(){
 
         goToAgentConfigurationPage();
+
+        common.waitUntilElementToBeVisible(REFRESH);
 
         WebElement btn = driver.findElement(By.xpath("//span[text()='Active']/parent::button"));
         boolean isDisabled = !btn.isEnabled();
@@ -366,6 +369,7 @@ public class AgentConfigurationPage extends Locators {
 
     public void verifyCreatePageElements(){
         goToAgentConfigurationPage();
+        common.waitUntilElementToBeVisible(CREATE);
         driver.findElement(By.xpath(CREATE)).click();
 
         Map<String, String> columns = new LinkedHashMap<>();
@@ -760,7 +764,7 @@ public class AgentConfigurationPage extends Locators {
         common.click(ACDELETEBUTTON);
         WebElement cancelButton = driver.findElement(By.xpath(ACDELETECANCELBUTTON));
         common.click(ACDELETECANCELBUTTON);
-
+        common.pause2Sec();
         if(!cancelButton.isDisplayed()){
             common.logPrint("Cancel Button works as expected");
         }
@@ -935,8 +939,10 @@ public class AgentConfigurationPage extends Locators {
         Map<String, String> agent = addANewAgentValidData();
         String name = agent.get("name");
         String playgroundURL = url+"playground";
+        common.logPrint("Url: "+playgroundURL);
+        driver.get(playgroundURL);
 
-        common.openNewUrl(playgroundURL);
+
         common.waitUntilElementToBeVisible(ACPLAYGROUNDHEADER);
 
         String currentURL = driver.getCurrentUrl();
