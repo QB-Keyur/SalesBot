@@ -92,4 +92,11 @@ public class EmailCampaignTest extends BasePage {
         loginWithAdminUser();
         emailCampaignPage.verifyCancelButton();
     }
+
+    @Test
+    public void viewEmailCampaign() {
+        common.logPrint("Verifying Email Campaign view");
+        loginWithAdminUser();
+        emailCampaignPage.viewEmailCampaign();
+    }
 }
