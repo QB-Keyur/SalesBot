@@ -3261,6 +3261,66 @@ public class Common extends Locators {
         return findBy(activeContext + locator);
     }
 
+    public int getMandatoryFieldCount() {
+
+        List<WebElement> mandatoryFields = driver.findElements(
+                By.xpath("//span[text()='*']")
+        );
+
+        int count = mandatoryFields.size();
+
+        for (WebElement star : mandatoryFields) {
+            try {
+                highlightElement(star);
+            } catch (Exception e) {
+                logPrint("Unable to highlight mandatory field indicator");
+            }
+        }
+
+        logPrint("Mandatory fields found and highlighted: " + count);
+
+        return count;
+    }
+
+    public void clearElement(String locator) {
+
+        WebElement element = waitUntilElementToBeVisible(locator);
+
+        try {
+            // 1️⃣ Try normal clear
+            element.clear();
+
+            if (element.getAttribute("value") == null || element.getAttribute("value").isEmpty()) {
+                return;
+            }
+        } catch (Exception ignored) {
+            // fallback below
+        }
+
+        try {
+            // 2️⃣ CTRL + A + DELETE
+            element.click();
+            element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+            element.sendKeys(Keys.DELETE);
+
+            if (element.getAttribute("value") == null || element.getAttribute("value").isEmpty()) {
+                return;
+            }
+        } catch (Exception ignored) {
+            // fallback below
+        }
+
+        // 3️⃣ BACKSPACE brute-force (masked inputs)
+        element.click();
+        String currentValue = element.getAttribute("value");
+        if (currentValue != null) {
+            for (int i = 0; i < currentValue.length() + 2; i++) {
+                element.sendKeys(Keys.BACK_SPACE);
+            }
+        }
+    }
+
+
 }
 
 /* ---------------- Usage examples ----------------

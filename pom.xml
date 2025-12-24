@@ -13,8 +13,8 @@
     <!-- ================== PROPERTIES ================== -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
 
         <selenium.version>4.12.0</selenium.version>
         <testng.version>7.9.0</testng.version>
@@ -160,6 +160,17 @@
                         <suiteXmlFile>build_xmls/LeadManagement.xml</suiteXmlFile>
 <!--                        <suiteXmlFile>build_xmls/WhatsAppTemplate.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/WhatsAppCampaign.xml</suiteXmlFile>-->
+<!--                        <suiteXmlFile>build_xmls/WhatsAppContact.xml</suiteXmlFile>-->
+<!--                        <suiteXmlFile>build_xmls/LeadManagement.xml</suiteXmlFile>-->
+<!--                        <suiteXmlFile>build_xmls/WhatsAppTemplate.xml</suiteXmlFile>-->
+<!--                        <suiteXmlFile>build_xmls/WhatsAppCampaign.xml</suiteXmlFile>-->
+
+                        <!-- ____________________________________________ Keyur Test Cases ___________________________________________________________________ -->
+<!--                        <suiteXmlFile>build_xmls/AgentConfiguration.xml</suiteXmlFile>-->
+<!--                        <suiteXmlFile>build_xmls/KnowledgeBase.xml</suiteXmlFile>-->
+                        <suiteXmlFile>build_xmls/EmailCampaign.xml</suiteXmlFile>
+<!--                       <suiteXmlFile>build_xmls/Product.xml</suiteXmlFile>-->
+<!--                        <suiteXmlFile>build_xmls/CompanyManagement.xml</suiteXmlFile>-->
                     </suiteXmlFiles>
 
                     <systemPropertyVariables>
