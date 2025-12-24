@@ -24,6 +24,7 @@ public class LeadManagementPage extends Locators {
 
         common.waitUntilElementToBeVisible(LEADMANAGMENT);
         common.click(LEADMANAGMENT);
+        common.pause(2);
 
         common.waitUntilElementToBeVisible(LEAD);
         common.click(LEAD);
@@ -76,8 +77,10 @@ public class LeadManagementPage extends Locators {
 
         common.logPrint("Steps:: verify the Lead created Successfully message ");
         common.waitUntilElementToBeVisible(LEADCREATEDMSG);
+        common.pause(1);
         String successMSG = common.getText(LEADCREATEDMSG);
         common.logPrint("Steps:: getting message "+ successMSG);
+        common.pause(2);
         return expectedData;
 
     }
