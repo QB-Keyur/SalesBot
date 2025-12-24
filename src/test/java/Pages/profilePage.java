@@ -56,6 +56,8 @@ public class profilePage extends Locators {
         common.assertElementPresent(updateProfileBtn);
         common.logPrint("'Update profile' button is displayed");
 
+        common.logPrint("Test is completed");
+
     }
 
     public void verifyProfilePageLabels() {
