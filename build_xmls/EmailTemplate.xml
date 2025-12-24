@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Email Template Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <!-- Navigate to Email Template page -->
+    <test name="Verify Email Template page navigation">
+        <classes>
+            <class name="Tests.EmailTemplateTest">
+                <methods>
+                    <include name="goToEmailTemplatePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify list page UI elements -->
+    <test name="Verify Email Template list page UI elements">
+        <classes>
+            <class name="Tests.EmailTemplateTest">
+                <methods>
+                    <include name="verifyAllTheUIElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify create page UI elements -->
+    <test name="Verify Email Template create page UI elements">
+        <classes>
+            <class name="Tests.EmailTemplateTest">
+                <methods>
+                    <include name="verifyAllTheCreateUIElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify mandatory field validations -->
+    <test name="Verify mandatory field validations on Email Template create page">
+        <classes>
+            <class name="Tests.EmailTemplateTest">
+                <methods>
+                    <include name="verifyMandatoryFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify cancel button functionality -->
+    <test name="Verify Cancel button functionality on Email Template create page">
+        <classes>
+            <class name="Tests.EmailTemplateTest">
+                <methods>
+                    <include name="verifyCancelButton"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify adding a new Email Template -->
+    <test name="Verify adding a new Email Template">
+        <classes>
+            <class name="Tests.EmailTemplateTest">
+                <methods>
+                    <include name="verifyAddingANewEmailTemplate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify horizontal view -->
+    <test name="Verify Email Template horizontal view">
+        <classes>
+            <class name="Tests.EmailTemplateTest">
+                <methods>
+                    <include name="verifyingHorizontalView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify search functionality -->
+    <test name="Verify search functionality on Email Template page">
+        <classes>
+            <class name="Tests.EmailTemplateTest">
+                <methods>
+                    <include name="verifyingSearch"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify pagination -->
+    <test name="Verify pagination on Email Template page">
+        <classes>
+            <class name="Tests.EmailTemplateTest">
+                <methods>
+                    <include name="verifyPagination"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify adding variables -->
+    <test name="Verify adding variables in Email Template">
+        <classes>
+            <class name="Tests.EmailTemplateTest">
+                <methods>
+                    <include name="verifyAddingVariables"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Email Template reflection in Email Campaign -->
+    <test name="Verify Email Template reflection in Email Campaign module">
+        <classes>
+            <class name="Tests.EmailTemplateTest">
+                <methods>
+                    <include name="verifyEmailTemplateReflectionInEmailCampaign"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify refresh button functionality -->
+    <test name="Verify refresh button updates server sync status">
+        <classes>
+            <class name="Tests.EmailTemplateTest">
+                <methods>
+                    <include name="verifyRefreshButtonUpdatesTheServerSyncStatus"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify view button functionality -->
+    <test name="Verify View button on Email Template page">
+        <classes>
+            <class name="Tests.EmailTemplateTest">
+                <methods>
+                    <include name="verifyViewButton"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

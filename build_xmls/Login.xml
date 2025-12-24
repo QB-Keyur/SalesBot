@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Login module Test Cases" verbose="10" parallel="tests" thread-count="3" allow-return-values="true">
+
+    <!-- Verify that the login page loads successfully.-->
+    <test name="Verify that the login page loads successfully">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifyLoginPageIsLoadsSuccessfully"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify user can log-in with valid credentials.-->
+    <test name="Verify user can log-in with valid credentials">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="VerifyUserCanLoginWthValidCredentials"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify error message for invalid credentials.-->
+    <test name="Verify error message for invalid credentials">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifyErrorMessageForInvalidCredential"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify validation messages for empty fields.-->
+    <test name="Verify validation messages for empty fields">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifyValidationMessageForBlankFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Forgot password link navigation.-->
+    <test name="Verify Forgot password link navigation">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifyRedirectionOfForgotPassword"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify SignUp link navigation.-->
+    <test name="Verify SignUp link navigation">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifyRedirectionOfSignUpPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify page load time.-->
+    <test name="Verify page load time">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifyPageLoadTime"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify forgot password page loads successfully -->
+    <test name="Verify forgot password page loads successfully">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifyForgotPasswordPageIsLoadsSuccessfully"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify all elements are present on forgot password page -->
+    <test name="Verify all elements on forgot password page">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifyAllTheElementPresentOnThePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify validation message for empty email field -->
+    <test name="Verify validation message for empty email field">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifyValidationMessageForEmailFieldOnForgotPassword"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify success message when OTP is sent -->
+    <test name="Verify success message for OTP sent">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifySuccessMessageIsShowingForOTPSent"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify validation message for invalid OTP -->
+    <test name="Verify validation message for invalid OTP">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifyValidationMessageForInvalidOtp"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify success message for password reset link -->
+    <test name="Verify success message for password reset link">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifySuccessMessageForPasswordResetLink"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify success message for password updated successfully -->
+    <test name="Verify success message for password updated">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifySuccessMessageForPasswordUpdatedSuccessfully"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify complete forgot password flow -->
+    <test name="Verify complete forgot password flow">
+        <classes>
+            <class name="Tests.loginTest">
+                <methods>
+                    <include name="verifyForgotPasswordFlowIsWorkingFine"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+</suite>

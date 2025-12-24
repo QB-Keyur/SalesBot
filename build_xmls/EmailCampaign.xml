@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Email Campaign Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <!-- Navigate to Email Campaign page -->
+    <test name="Navigate to Email Campaign page">
+        <classes>
+            <class name="Tests.EmailCampaignTest">
+                <methods>
+                    <include name="goToEmailCampaignPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Email Campaign page UI elements -->
+    <test name="Verify Email Campaign page elements">
+        <classes>
+            <class name="Tests.EmailCampaignTest">
+                <methods>
+                    <include name="verifyEmailCampaignElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Create Email Campaign page elements -->
+    <test name="Verify Create Email Campaign page elements">
+        <classes>
+            <class name="Tests.EmailCampaignTest">
+                <methods>
+                    <include name="verifyEmailCampaignCreatePageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify search functionality -->
+    <test name="Verify search functionality in Email Campaign">
+        <classes>
+            <class name="Tests.EmailCampaignTest">
+                <methods>
+                    <include name="verifySearch"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify horizontal view -->
+    <test name="Verify horizontal view in Email Campaign">
+        <classes>
+            <class name="Tests.EmailCampaignTest">
+                <methods>
+                    <include name="verifyHorizontalView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify pagination -->
+    <test name="Verify pagination in Email Campaign">
+        <classes>
+            <class name="Tests.EmailCampaignTest">
+                <methods>
+                    <include name="verifyPagination"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify running a new Email Campaign -->
+    <test name="Verify running a new Email Campaign">
+        <classes>
+            <class name="Tests.EmailCampaignTest">
+                <methods>
+                    <include name="verifyRunningANewEmailCampaign"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify search inside Create Email Campaign -->
+    <test name="Verify search inside Create Email Campaign">
+        <classes>
+            <class name="Tests.EmailCampaignTest">
+                <methods>
+                    <include name="verifySearchInsideCreate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify pagination inside Create Email Campaign -->
+    <test name="Verify pagination inside Create Email Campaign">
+        <classes>
+            <class name="Tests.EmailCampaignTest">
+                <methods>
+                    <include name="verifyPaginationInsideCreate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify running a blank Email Campaign -->
+    <test name="Verify running a blank Email Campaign">
+        <classes>
+            <class name="Tests.EmailCampaignTest">
+                <methods>
+                    <include name="verifyRunningABlankCampaign"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify pagination inside View Contact modal -->
+    <test name="Verify pagination inside View Contact modal">
+        <classes>
+            <class name="Tests.EmailCampaignTest">
+                <methods>
+                    <include name="verifyPaginationInsideViewContact"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Cancel button -->
+    <test name="Verify Cancel button functionality">
+        <classes>
+            <class name="Tests.EmailCampaignTest">
+                <methods>
+                    <include name="verifyCancelButton"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
