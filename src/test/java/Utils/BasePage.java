@@ -56,6 +56,7 @@ public class BasePage {
     public EmailTemplatePage emailTemplatePage;
     public EmailCampaignPage emailCampaignPage;
     public UserManagementPage userManagementPage;
+    public CompanyManagementPage companyManagementPage;
 
     protected List<String> stringList = new ArrayList<>();
 
@@ -170,6 +171,7 @@ public class BasePage {
         emailTemplatePage = new EmailTemplatePage(getDriver());
         emailCampaignPage = new EmailCampaignPage(getDriver());
         userManagementPage = new UserManagementPage(getDriver());
+        companyManagementPage = new CompanyManagementPage(getDriver());
         steps.set(1);
         Common.printCurrentTime("Starting Time");
         getDriver().get(EnvConfig.getWebUrl());

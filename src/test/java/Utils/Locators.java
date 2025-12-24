@@ -817,4 +817,70 @@ public class Locators extends BasePage {
     public static String Req_Product="//span[text()='Product is required']";
 
 
+    //Company Management
+    public static String COMPANYSIDEBAR= "//span[text()='Company']";
+    public static String COMPMGMTBTN= "//button[text()='Company Management']";
+    public static String CMGMTHEADER= "//h6[text()='Company Management']";
+    public static String CMGMTTOTAL = "//div[@class=\"MuiBox-root css-a7l4db\"]";
+    public static String CMGMTSEARCH= "//input[@placeholder=\"Search...\"]";
+    public static String CMGMTFILTER= "//button[contains(@class,'css-1yfm8su')]";
+    public static String CMGMTREFRESH= "//button[contains(@class,'css-q8p1uw')]";
+    public static String CMGMTCREATEBTN= "//button[contains(@class,'css-2y6xkt')]";
+    public static String CMGMTSR= "//span[text()='#']";
+    public static String CMGMTNAME= "//span[text()='Name']";
+    public static String CMGMTDESIGNATION= "//span[text()='Designation']";
+    public static String CMGMTEMAIL= "//span[text()='Email']";
+    public static String CMGMTPHONE= "//span[text()='Phone Number']";
+    public static String CMGMTCREATEDDATE= "//span[text()='Created Date']";
+    public static String CMGMTACTIONS= "//span[text()='Actions']";
+    public static String CMGMTSHOWTEXT= "//p[text()='Show']";
+    public static String CMGMTROWSINPUT= "//div[contains(@class,'css-trm6af-')]";
+    public static String CMGMTPREVBTN= "//button[@aria-label=\"Go to previous page\"]";
+    public static String CMGMTNEXTBTN= "//button[@aria-label=\"Go to next page\"]";
+    public static String CMGMTEDITBTN= "(//button[@aria-label=\"Edit\"])[1]";
+    public static String CMGMTDELETEBTN= "//button[@aria-label=\"Delete\"]";
+    public static String CMGMTVIEWBTN= "//button[@aria-label=\"View\"]";
+
+    //Company management Create
+    public static String CCHEADER = "//h6[text()='Create Company Management']";
+    public static String CCBACKBUTTON = "//button[contains(@class,'css-1i1o7bi')]";
+    public static String CCANCELBTN = "//span[text()='Cancel']/parent::button";
+    public static String CCSAVEBTN = "//span[text()='Save']/parent::button";
+    public static String CCNAMELABEL = "//span[text()='Name']";
+    public static String CCDESIGNATIONLABEL = "//span[text()='Designation']";
+    public static String CCEMAILLABEL = "//span[text()='Email']";
+    public static String CCPHONELABEL = "//span[text()='Phone Number']";
+    public static String CCSUCCESS = "//div[text()='Company Management created successfully']";
+
+    public static String CCNAMEINPUT = "//input[@name=\"name\"]";
+    public static String CCDESIGNATIONINPUT = "//input[@name=\"designation\"]";
+    public static String CCEMAILINPUT = "//input[@name=\"email\"]";
+    public static String CCPHONEINPUT = "//input[@name=\"phone_number\"]";
+
+    public static String CCNAMEVAL = "//span[text()='Name is required']";
+    public static String CCDESIGNATIONVAL = "//span[text()='Designation is required']";
+    public static String CCEMAILVAL = "//span[text()='Email is required']";
+    public static String CCPHONEVAL = "//div[text()='Phone number is required']";
+
+    public static String CEDITHEADER = "//h6[text()='Update Company Management']";
+    public static String CEDITRESET = "//span[text()='Reset']/parent::button";
+    public static String CEDITMSG = "//div[text()='Company Management updated successfully']";
+    public static String CDELETEMSG2 = "//h6[text()='Delete Company Management']";
+    public static String CDELETEMSG3 = "//p[text()='Are you sure you want to permanently delete this Company Management?']";
+    public static String CDELETEMSGCANCEL = "//span[text()='Cancel']/parent::button";
+    public static String CDELETEMSGDELETE = "//span[text()='Delete']/parent::button";
+
+    public static String CVIEWHEADER = "//p[contains(text(),'View ')]";
+    public static String CVIENAMEINPUT =  "(//div[contains(@class,'css-mid2s2')]/child::input[@type='text'])[1]";
+    public static String CVIEWDESIGINPUT = "(//div[contains(@class,'css-mid2s2')]/child::input[@type='text'])[2]";
+    public static String CVIEWEMAILINPUT = "(//div[contains(@class,'css-mid2s2')]/child::input[@type='text'])[3]";
+    public static String CVIEWPHONEINPUT = "(//div[contains(@class,'css-mid2s2')]/child::input[@type='text'])[4]";
+    public static String CVIEWCANCELBUTTON = "//button[contains(@class,'css-66pmys')]";
+    public static String CCREATEDDATEVAL = "//div[@data-rowindex=\"0\"]/child::div[@data-colindex=\"5\"]";
+
+
+
+
+
+
 }

@@ -45,7 +45,6 @@ public class Common extends Locators {
     private static final Logger log = LoggerFactory.getLogger(Common.class);
 
 
-
     WebDriver driver;
 
     public Common(WebDriver driver) {
@@ -124,17 +123,17 @@ public class Common extends Locators {
         }
     }
 
-    public WebElement waitUntilStringLocator(String locator){
+    public WebElement waitUntilStringLocator(String locator) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         return wait.ignoring(StaleElementReferenceException.class).until(ExpectedConditions.visibilityOfElementLocated(findBy(locator)));
     }
 
-    public WebElement waitUntilStringLocatorAsaElement(WebElement element){
+    public WebElement waitUntilStringLocatorAsaElement(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         return wait.ignoring(StaleElementReferenceException.class).until(ExpectedConditions.visibilityOf(element));
     }
 
-    public Boolean waitUntilInvisible(String locator){
+    public Boolean waitUntilInvisible(String locator) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         return getWait(150).ignoring(StaleElementReferenceException.class).until(ExpectedConditions.invisibilityOf(findElement(locator)));
     }
@@ -147,7 +146,7 @@ public class Common extends Locators {
         return getWait().ignoring(StaleElementReferenceException.class).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
     }
 
-    public String removeZero (String input){
+    public String removeZero(String input) {
         input = input.indexOf(".") < 0 ? input : input.replaceAll("0*$", "").replaceAll("\\.$", "");
         return input;
     }
@@ -202,7 +201,7 @@ public class Common extends Locators {
         }
     }
 
-    public void  switch_windows(Set<String>  windowHandles, String title){
+    public void switch_windows(Set<String> windowHandles, String title) {
         // Iterate through the window handles
         for (String windowHandle : windowHandles) {
             // Switch to the window handle
@@ -220,7 +219,7 @@ public class Common extends Locators {
 
     }
 
-    public void switchToTab(int n){
+    public void switchToTab(int n) {
 
         List<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(n));
@@ -240,6 +239,7 @@ public class Common extends Locators {
         List<String> windows = new ArrayList<>(driver.getWindowHandles()); // "windows" instead of "tabs"
         driver.switchTo().window(windows.get(n));
     }
+
     /**
      * Get past date in MM/dd/yyyy format as per argument.
      *
@@ -307,6 +307,7 @@ public class Common extends Locators {
         pause(2);
         Assert.assertFalse(isElementDisplayed(locator));
     }
+
     /**
      * Assertion to check that given element is being displayed.
      *
@@ -399,6 +400,7 @@ public class Common extends Locators {
 //        String responseBody = response.getBody().asString();
 //        return new JsonParser().parse(responseBody).getAsJsonObject();
 //    }
+
     /**
      * Common method to assert response status code and execution result status
      */
@@ -422,6 +424,7 @@ public class Common extends Locators {
         highlightElement(element);
         actions.moveToElement(element).click().perform();
     }
+
     /**
      * Scroll page to element for given locator.
      *
@@ -569,7 +572,7 @@ public class Common extends Locators {
                             ? element.getAttribute("innerText")
                             : "No readable text/value";
 
-            logPrint("Asserted: " + text +" is displayed.");
+            logPrint("Asserted: " + text + " is displayed.");
 
         } catch (Exception e) {
             logPrint("Assertion FAILED for locator: " + locator + " | Error: " + e.getMessage());
@@ -659,11 +662,11 @@ public class Common extends Locators {
         if (print.startsWith("Step")) {
             int stepcount = BasePage.steps.get();
             String[] msg = print.split("::");
-            Reporter.log("<br>Step " + stepcount + " : " + msg[1].trim(),true);
+            Reporter.log("<br>Step " + stepcount + " : " + msg[1].trim(), true);
 //            System.out.println("Step " + stepcount + " : " + msg[1].trim());
             BasePage.steps.set(stepcount + 1);
         } else {
-            Reporter.log("<br>Message : " + print,true);
+            Reporter.log("<br>Message : " + print, true);
 //            System.out.println("Message : " + print);
 
         }
@@ -696,12 +699,12 @@ public class Common extends Locators {
         actions.moveToElement(webElement).perform();
     }
 
-    public void moveToElementAndClick(WebElement webElement){
+    public void moveToElementAndClick(WebElement webElement) {
         Actions actions = new Actions(driver);
         actions.moveToElement(webElement).click().build().perform();
     }
 
-    public void moveToElementAndClick(String locator){
+    public void moveToElementAndClick(String locator) {
         Actions actions = new Actions(driver);
         WebElement element = waitUntilElementToBeClickable(locator);
         actions.moveToElement(element).click().build().perform();
@@ -725,7 +728,7 @@ public class Common extends Locators {
         }
     }
 
-    public void scrollToElement(String locator)  {
+    public void scrollToElement(String locator) {
         WebElement element = waitUntilStringLocator(locator);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 
@@ -736,6 +739,7 @@ public class Common extends Locators {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView()", element);
     }
+
     /**
      * <p>
      * Creates a random character string whose length is the number of characters
@@ -749,9 +753,10 @@ public class Common extends Locators {
      * @param length the length of random character string to create
      * @return The random character string in lower case
      */
-    public  String generateRandomChars(int length) {
+    public String generateRandomChars(int length) {
         return RandomStringUtils.randomAlphabetic(length).toLowerCase();
     }
+
     /**
      * <p>
      * Creates a random character string whose length is the number of characters
@@ -765,9 +770,10 @@ public class Common extends Locators {
      * @param length the length of random character string to create
      * @return The random character string in lower case
      */
-    public  String generateRandomCharsToUpperCase(int length) {
+    public String generateRandomCharsToUpperCase(int length) {
         return RandomStringUtils.randomAlphabetic(length).toUpperCase();
     }
+
     /**
      * <p>
      * Creates a random number string whose length is the number of characters
@@ -781,16 +787,17 @@ public class Common extends Locators {
      * @param length the length of random number string to create
      * @return The random number string
      */
-    public  String generateRandomNumberString(int length) {
+    public String generateRandomNumberString(int length) {
 
         return RandomStringUtils.randomNumeric(length);
     }
 
-    public  String generateRandomNumberString(int min, int max) {
+    public String generateRandomNumberString(int min, int max) {
         Random random = new Random();
         int randomNumber = random.nextInt((max - min) + 1) + min;
         return String.valueOf(randomNumber);
     }
+
     /**
      * Waits until findElements(By.xpath(xpath)) returns size > 0 or timeout.
      * Returns empty list if timed out.
@@ -851,7 +858,8 @@ public class Common extends Locators {
         // 1️⃣ Click Search button (best-effort)
         try {
             common.click(SEARCH);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         // 2️⃣ Collect grid values
         List<WebElement> elements = waitForElements(baseXPath, 8);
@@ -902,7 +910,6 @@ public class Common extends Locators {
     }
 
 
-
     public String selectDropdownAndGetSelectedText(By dropdownActivator, By optionLocator) {
         // 1. Click the dropdown to open it
         driver.findElement(dropdownActivator).click();
@@ -920,17 +927,16 @@ public class Common extends Locators {
         return selectedText;
     }
 
-    public void validateSearch(String xpathVal, String searchedTerm){
+    public void validateSearch(String xpathVal, String searchedTerm) {
         WebElement element = driver.findElement(By.xpath(xpathVal));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].style.border='4px solid yellow'", element);
         String searched_result = element.getText();
-        if(searchedTerm.equals(searched_result)){
-            logPrint(searchedTerm + " Equals "+ searched_result);
+        if (searchedTerm.equals(searched_result)) {
+            logPrint(searchedTerm + " Equals " + searched_result);
             logPrint("Search works as expected");
-        }
-        else{
-            logPrint(searchedTerm+ " Not Found, Search Doesn't work as expected");
+        } else {
+            logPrint(searchedTerm + " Not Found, Search Doesn't work as expected");
         }
     }
 
@@ -939,6 +945,7 @@ public class Common extends Locators {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].style.border='4px solid yellow'", element);
     }
+
     public void highlightElement(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].style.border='3px solid yellow'", element);
@@ -966,8 +973,10 @@ public class Common extends Locators {
                 highlightElementClick(element);
 
                 System.out.println("Highlighted element " + index + " of " + elements.size());
-                try { logPrint("Highlighted element " + index + " of " + elements.size()); }
-                catch (Exception ignored) {}
+                try {
+                    logPrint("Highlighted element " + index + " of " + elements.size());
+                } catch (Exception ignored) {
+                }
 
                 common.pause(200);
 
@@ -1173,6 +1182,7 @@ public class Common extends Locators {
     /**
      * If given element is a form entry element, this will reset its value first
      * then simulate typing into an element, which may set its value.
+     *
      * @param element    the element where to send keys
      * @param keysToSend the character sequence to send to the element
      */
@@ -1228,6 +1238,7 @@ public class Common extends Locators {
             logPrint("Step :: Clicked on element");
         }
     }
+
     private String getReadableElementName(WebElement element) {
 
         String[] attributes = {
@@ -1275,6 +1286,7 @@ public class Common extends Locators {
      * <p>
      * There are some preconditions for an element to be clicked. the element must
      * be visible, and it must have a height and width greater than 0.
+     *
      * @param element the element to be clicked.
      */
     public void click(WebElement element) {
@@ -1290,6 +1302,7 @@ public class Common extends Locators {
 
     /**
      * Clicks on visible or not visible element through javascript.
+     *
      * @param locator the locator of element to be clicked.
      */
     public void jsClick(String locator) {
@@ -1303,6 +1316,7 @@ public class Common extends Locators {
 
     /**
      * Clicks on visible or not visible element through javascript.
+     *
      * @param element the element to be clicked.
      */
     public void jsClick(WebElement element) {
@@ -1324,6 +1338,7 @@ public class Common extends Locators {
 
     /**
      * Clicks on visible or not visible element through javascript.
+     *
      * @param element the element to be clicked.
      */
     public void jsClickWithoutWait(WebElement element) {
@@ -1363,17 +1378,20 @@ public class Common extends Locators {
 //        highlightElement(element);
         return element.getText().trim();
     }
+
     // Get and return the random integer
     // within Min and Max
     public int getRandomIntergerValue(int Min, int Max) {
 
         return ThreadLocalRandom.current().nextInt(Min, Max);
     }
+
     // Get and return the random double
     // within Min and Max
     public double getRandomDoubleValue(double Min, double Max) {
         return ThreadLocalRandom.current().nextDouble(Min, Max);
     }
+
     /**
      * Get the visible (i.e. not hidden by CSS) text of given element, including
      * sub-elements.
@@ -1388,8 +1406,7 @@ public class Common extends Locators {
         return element.getText();
     }
 
-    public static void printCurrentTime(String time)
-    {
+    public static void printCurrentTime(String time) {
         // Get the current time in IST
         SimpleDateFormat istFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
         istFormat.setTimeZone(TimeZone.getTimeZone("CST"));
@@ -1406,10 +1423,11 @@ public class Common extends Locators {
             System.out.println("Server Time: " + cstTime);
         }
     }
+
     public void upload_File_Using_Robot(String file) throws AWTException {
 
         //String path_win = "C:\\Users\\testc\\OneDrive\\Desktop\\Automation new\\qa-automation\\test_data\\Screenshot_1.png";
-        String path_win = System.getProperty("user.dir")+ file;
+        String path_win = System.getProperty("user.dir") + file;
         StringSelection filepath = new StringSelection(path_win);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(filepath, filepath);
         Robot robot = new Robot();
@@ -1477,6 +1495,7 @@ public class Common extends Locators {
         highlightElement(element);
         return element.getAttribute(attributeName);
     }
+
     /**
      * Get the value of the given attribute of the element. Will return the current
      * value, even if this has been modified after the page has been loaded.
@@ -1508,7 +1527,7 @@ public class Common extends Locators {
      * @param element       the element to get its attribute value
      * @param attributeName The name of the attribute
      * @return The attribute/property's current value or null if the value is not
-     *         set.
+     * set.
      */
     public String getAttribute(WebElement element, String attributeName) {
         waitUntilStringLocatorAsaElement(element);
@@ -1555,7 +1574,7 @@ public class Common extends Locators {
         }
     }
 
-    public void downKeyAndEnter(){
+    public void downKeyAndEnter() {
 
         // Create Actions instance
         Actions actions = new Actions(driver);
@@ -1567,12 +1586,12 @@ public class Common extends Locators {
                 .perform();
     }
 
-    public void selectCheckBox(String checkboxValue){
+    public void selectCheckBox(String checkboxValue) {
         WebElement element = driver.findElement(By.xpath(checkboxValue));
         element.click();
     }
 
-    public void twoDownKeyAndEnter(){
+    public void twoDownKeyAndEnter() {
 
         pause(1);
 
@@ -1584,20 +1603,20 @@ public class Common extends Locators {
                 .perform();
     }
 
-    public void pressEnter(){
+    public void pressEnter() {
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.ENTER).build().perform();
     }
 
-    public void pressSpace(){
+    public void pressSpace() {
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.SPACE).build().perform();
     }
 
-    public void dynamicDownKeyPress(int amount){
+    public void dynamicDownKeyPress(int amount) {
         Actions actions = new Actions(driver);
 
-        for(int i =0; i< amount; i++) {
+        for (int i = 0; i < amount; i++) {
             actions.sendKeys(Keys.DOWN).build().perform();
         }
         actions.sendKeys(Keys.ENTER).perform();
@@ -1607,7 +1626,7 @@ public class Common extends Locators {
         int attempts = 0;
         while (attempts < 3) {
             try {
-                WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 WebElement el = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
                 el.click();
                 logPrint("Step :: Safe Clicking on the " + el.getText());
@@ -1637,24 +1656,30 @@ public class Common extends Locators {
         return category.toString();
     }
 
-    public String fakeName(){
+    public String fakeName() {
         Faker faker = new Faker();
         String Name = faker.name().firstName();
         return Name;
     }
 
-    public String fakeProductName(){
+    public String fakeProductName() {
         String name = faker.commerce().productName();
         return name;
 
     }
 
-    public String fakeSubject(){
+    public String fakeSubject() {
         String subject = faker.book().title();
         return subject;
     }
 
-    public void openNewIncognitoBrowser(){
+    public String fakeCampaignName() {
+        Faker faker = new Faker();
+        String campaignName = faker.company().name();
+        return campaignName;
+    }
+
+    public void openNewIncognitoBrowser() {
         // Initialize ChromeOptions to configure browser settings
         ChromeOptions options = new ChromeOptions();
         // Add the argument for incognito mode
@@ -1663,34 +1688,34 @@ public class Common extends Locators {
         WebDriver driver = new ChromeDriver(options);
 
         //Switch to a new tab
-        for (String tab: driver.getWindowHandles()){
+        for (String tab : driver.getWindowHandles()) {
             driver.switchTo().window(tab);
         }
     }
 
-    public void openNewWindow(){
+    public void openNewWindow() {
 
         ((JavascriptExecutor) driver).executeScript("window.open();");
 
         //Switch to a new tab
-        for (String tab: driver.getWindowHandles()){
+        for (String tab : driver.getWindowHandles()) {
             driver.switchTo().window(tab);
         }
     }
 
-    public void openNewUrl(String linkUrl){
+    public void openNewUrl(String linkUrl) {
         driver.get(linkUrl);
     }
 
-    public void switchToFrameWithId(String idString){
+    public void switchToFrameWithId(String idString) {
         driver.switchTo().frame(idString);
     }
 
-    public void switchToFrameWithName(String name){
+    public void switchToFrameWithName(String name) {
         driver.switchTo().frame(name);
     }
 
-    public void switchToDefaultContent(){
+    public void switchToDefaultContent() {
         driver.switchTo().defaultContent();
     }
 
@@ -1717,7 +1742,7 @@ public class Common extends Locators {
         return incognitoDriver;
     }
 
-    public void hoverOverTheElement(String element){
+    public void hoverOverTheElement(String element) {
 
         Actions actions = new Actions(driver);
 
@@ -1726,21 +1751,21 @@ public class Common extends Locators {
         actions.moveToElement(menuOption).click().perform();
     }
 
-    public void hoverAndClickOnElement(String element){
+    public void hoverAndClickOnElement(String element) {
 
         WebElement element1 = driver.findElement(By.xpath(String.valueOf(element)));
         Actions actions = new Actions(driver);
         actions.moveToElement(element1).pause(Duration.ofSeconds(2)).click().perform();
     }
 
-    public void scrollPageUsingPixel(){
+    public void scrollPageUsingPixel() {
 
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,250)");
 
     }
 
-    public static List<String> readColumnDataFromExcel(String sheetName){
+    public static List<String> readColumnDataFromExcel(String sheetName) {
         List<String> dataList = new ArrayList<>();
         String filePath = "C:\\Main_Folder\\Automation\\Web_Automation\\src\\test\\resources\\DoctorAttributes.xlsx";
 
@@ -1769,7 +1794,7 @@ public class Common extends Locators {
         return dataList;
     }
 
-    public WebElement waitForElementWithStaleCheck(By locator, int maxRetries, int waitSeconds){
+    public WebElement waitForElementWithStaleCheck(By locator, int maxRetries, int waitSeconds) {
 
         int attempts = 0;
 
@@ -1795,9 +1820,10 @@ public class Common extends Locators {
 
     /**
      * Generates a date string based on the type: "past", "future", "current", "next", or "between"
-     * @param type Type of date to generate ("past", "future", "current", "next", "between")
+     *
+     * @param type         Type of date to generate ("past", "future", "current", "next", "between")
      * @param startDateStr Required for "between" - format "MM/dd/yyyy"
-     * @param endDateStr Required for "between" - format "MM/dd/yyyy"
+     * @param endDateStr   Required for "between" - format "MM/dd/yyyy"
      * @return Formatted date as String (e.g., "05/28/2025")
      */
 
@@ -1857,9 +1883,10 @@ public class Common extends Locators {
 
     /**
      * Generates a time string based on the type: "past", "future", "current", or "between"
-     * @param type Type of time to generate ("past", "future", "current", "between")
+     *
+     * @param type         Type of time to generate ("past", "future", "current", "between")
      * @param startTimeStr Start time (e.g., "09:00 AM") for "between"
-     * @param endTimeStr End time (e.g., "05:00 PM") for "between"
+     * @param endTimeStr   End time (e.g., "05:00 PM") for "between"
      * @return Formatted time as String (e.g., "03:45 PM")
      */
 
@@ -1931,25 +1958,25 @@ public class Common extends Locators {
         return faker.name().fullName();  // e.g., "John Doe"
     }
 
-    public String GenerateOneLineText(int count){
+    public String GenerateOneLineText(int count) {
         String Name = faker.lorem().sentence(count);
 
         return Name;
     }
 
-    public String GenerateParagraph(int count){
+    public String GenerateParagraph(int count) {
         String Name = faker.lorem().paragraph(count);
 
         return Name;
     }
 
-    public String GenerateEmail(){
+    public String GenerateEmail() {
         Faker faker = new Faker();
         String email = faker.internet().emailAddress();
         return email;
     }
 
-    public String GeneratePhoneNUm(){
+    public String GeneratePhoneNUm() {
         Faker faker = new Faker();
         String Mobile = faker.phoneNumber().phoneNumber();
         return Mobile;
@@ -1968,7 +1995,7 @@ public class Common extends Locators {
         return String.valueOf(randomYear);
     }
 
-    public String generateCurDate(){
+    public String generateCurDate() {
         LocalDate todays = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -1979,7 +2006,7 @@ public class Common extends Locators {
 
     }
 
-    public void selectRandomValueFromDropdown(String dropdownXpath, int optionsCount){
+    public void selectRandomValueFromDropdown(String dropdownXpath, int optionsCount) {
 
         WebElement element = driver.findElement(By.xpath(dropdownXpath));
 
@@ -1990,11 +2017,11 @@ public class Common extends Locators {
 
         //generate random index between 1 and optionCount -1
         Random random = new Random();
-        int randomIndex = random.nextInt(optionsCount - 1)+1;
+        int randomIndex = random.nextInt(optionsCount - 1) + 1;
 
         Actions actions = new Actions(driver);
 
-        for(int i = 0; i< randomIndex; i++){
+        for (int i = 0; i < randomIndex; i++) {
             actions.sendKeys(Keys.ARROW_DOWN);
         }
 
@@ -2003,7 +2030,7 @@ public class Common extends Locators {
         logPrint("Selected random index from dropdown: " + randomIndex);
     }
 
-    public void pressDownKeysByArgument(int downCount){
+    public void pressDownKeysByArgument(int downCount) {
         pause(1);
 
         Actions actions = new Actions(driver);
@@ -2036,7 +2063,7 @@ public class Common extends Locators {
         }
     }
 
-    public String resetAndCheck(){
+    public String resetAndCheck() {
         List<WebElement> inputFields = driver.findElements(By.tagName("input"));
 
         boolean allFieldsEmpty = true;
@@ -2071,12 +2098,12 @@ public class Common extends Locators {
         logPrint("Date entered manually and confirmed: " + dateValue);
     }
 
-    public static String convertDateFormat(String inputDate){
+    public static String convertDateFormat(String inputDate) {
 
         SimpleDateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy");
         SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        try{
+        try {
             Date date = inputFormat.parse(inputDate);
             return outputFormat.format(date);
 
@@ -2088,16 +2115,16 @@ public class Common extends Locators {
 
     public void textFileReader(String filePath) throws IOException {
 
-        FileReader reader = new FileReader(System.getProperty("user.dir")+filePath);
+        FileReader reader = new FileReader(System.getProperty("user.dir") + filePath);
         BufferedReader bufferedReader = new BufferedReader(reader);
 
         String line;
-        while((line = bufferedReader.readLine()) !=null){
+        while ((line = bufferedReader.readLine()) != null) {
             logPrint(line);
         }
     }
 
-    public void addDate(String sentDateAndMonth, String element){
+    public void addDate(String sentDateAndMonth, String element) {
         logPrint("Step :: Adding the daily tour plan date");
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.TAB).perform();
@@ -2132,7 +2159,6 @@ public class Common extends Locators {
         return "Hi! " + faker.company().catchPhrase();
     }
 
-
     /* ---------------------- PERSONALITY & GOAL ---------------------- */
 
     // Personality
@@ -2149,7 +2175,6 @@ public class Common extends Locators {
         };
         return goals[faker.random().nextInt(goals.length)];
     }
-
 
     /* ---------------------- BUSINESS DETAILS ---------------------- */
 
@@ -2201,17 +2226,17 @@ public class Common extends Locators {
         Map<String, String> data = new LinkedHashMap<>();
 
 
-        data.put("name",               generateAgentName());
-        data.put("companyName",        generateCompanyName());
-        data.put("greeting",           generateGreetingMessage());
-        data.put("personality",        generatePersonality());
-        data.put("goalType",           generateGoalType());
-        data.put("coreUSP",            generateCoreUSP());
-        data.put("coreFeatures",       generateCoreFeatures());
-        data.put("contactInfo",        generateContactInfo());
-        data.put("companyDomain",      generateCompanyDomain());
-        data.put("businessFocus",      generateBusinessFocus());
-        data.put("offerDescription",   generateOfferDescription());
+        data.put("name", generateAgentName());
+        data.put("companyName", generateCompanyName());
+        data.put("greeting", generateGreetingMessage());
+        data.put("personality", generatePersonality());
+        data.put("goalType", generateGoalType());
+        data.put("coreUSP", generateCoreUSP());
+        data.put("coreFeatures", generateCoreFeatures());
+        data.put("contactInfo", generateContactInfo());
+        data.put("companyDomain", generateCompanyDomain());
+        data.put("businessFocus", generateBusinessFocus());
+        data.put("offerDescription", generateOfferDescription());
         data.put("companyDescription", generateCompanyDescription());
 
         waitUntilElementToBeClickable(ACCNAMEINPUT);
@@ -2278,7 +2303,7 @@ public class Common extends Locators {
 
     public void selectCheckbox(String inputXpath) {
 
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         WebElement checkbox = wait.until(
                 ExpectedConditions.presenceOfElementLocated(By.xpath(inputXpath))
@@ -2290,7 +2315,7 @@ public class Common extends Locators {
         }
     }
 
-//    public void validateHorizontalViewCardCount() {
+    //    public void validateHorizontalViewCardCount() {
 //
 //        // 1️⃣ Navigate to page
 //        ;
@@ -2370,135 +2395,136 @@ public class Common extends Locators {
 //                "Card count does not match pagination total!"
 //        );
 //    }
-public void validateHorizontalViewCardCount(String fallbackCountXpath) {
+    public void validateHorizontalViewCardCount(String fallbackCountXpath) {
 
-    pause(2);
+        pause(2);
 
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-    int totalRows = 0;
+        int totalRows = 0;
 
-    // 1️⃣ Try reading from pagination text (PRIMARY)
-    try {
-        WebElement text = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
-                )
-        );
-
-        String paginationText = text.getText(); // e.g. "1–8 of 8"
-        String totalStr = paginationText.replaceAll(".*of\\s*", "").trim();
-        totalRows = Integer.parseInt(totalStr.replaceAll("[^0-9]", ""));
-
-        logPrint("Total rows from pagination text: " + totalRows);
-
-    } catch (Exception e) {
-        logPrint("Pagination text parsing failed. Trying fallback count...");
-    }
-
-    // 2️⃣ Fallback: read direct number using passed XPath
-    if (totalRows <= 0) {
+        // 1️⃣ Try reading from pagination text (PRIMARY)
         try {
-            WebElement fallbackCount = wait.until(
+            WebElement text = wait.until(
                     ExpectedConditions.visibilityOfElementLocated(
-                            By.xpath(fallbackCountXpath)
+                            By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
                     )
             );
 
-            totalRows = Integer.parseInt(
-                    fallbackCount.getText().replaceAll("[^0-9]", "")
-            );
+            String paginationText = text.getText(); // e.g. "1–8 of 8"
+            String totalStr = paginationText.replaceAll(".*of\\s*", "").trim();
+            totalRows = Integer.parseInt(totalStr.replaceAll("[^0-9]", ""));
 
-            logPrint("Total rows from fallback XPath: " + totalRows);
+            logPrint("Total rows from pagination text: " + totalRows);
 
-        } catch (Exception ex) {
-            throw new RuntimeException(
-                    "Unable to determine total row count from both pagination and fallback XPath: "
-                            + fallbackCountXpath
-            );
+        } catch (Exception e) {
+            logPrint("Pagination text parsing failed. Trying fallback count...");
         }
-    }
 
-    // 3️⃣ Switch to horizontal view
-    waitUntilElementToBeVisible(MULTITABHOR);
-    click(MULTITABHOR);
-    pause(2);
+        // 2️⃣ Fallback: read direct number using passed XPath
+        if (totalRows <= 0) {
+            try {
+                WebElement fallbackCount = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath(fallbackCountXpath)
+                        )
+                );
 
-    // 4️⃣ Scroll till end (handle lazy loading)
-    By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
-    scrollTillPageEnd(totalRows, cardLocator);
+                totalRows = Integer.parseInt(
+                        fallbackCount.getText().replaceAll("[^0-9]", "")
+                );
 
-    // 5️⃣ Validate card count
-    try {
-        WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        shortWait.until(
-                ExpectedConditions.numberOfElementsToBe(cardLocator, totalRows)
+                logPrint("Total rows from fallback XPath: " + totalRows);
+
+            } catch (Exception ex) {
+                throw new RuntimeException(
+                        "Unable to determine total row count from both pagination and fallback XPath: "
+                                + fallbackCountXpath
+                );
+            }
+        }
+
+        // 3️⃣ Switch to horizontal view
+        waitUntilElementToBeVisible(MULTITABHOR);
+        click(MULTITABHOR);
+        pause(2);
+
+        // 4️⃣ Scroll till end (handle lazy loading)
+        By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
+        scrollTillPageEnd(totalRows, cardLocator);
+
+        // 5️⃣ Validate card count
+        try {
+            WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            shortWait.until(
+                    ExpectedConditions.numberOfElementsToBe(cardLocator, totalRows)
+            );
+        } catch (Exception ignored) {
+        }
+
+        List<WebElement> cardList = driver.findElements(cardLocator);
+        int actualCount = cardList.size();
+
+        logPrint("Expected number of cards: " + totalRows);
+        logPrint("Actual number of cards: " + actualCount);
+
+        // 6️⃣ Assertion
+        Assert.assertEquals(
+                actualCount,
+                totalRows,
+                "Card count does not match pagination total!"
         );
-    } catch (Exception ignored) {}
-
-    List<WebElement> cardList = driver.findElements(cardLocator);
-    int actualCount = cardList.size();
-
-    logPrint("Expected number of cards: " + totalRows);
-    logPrint("Actual number of cards: " + actualCount);
-
-    // 6️⃣ Assertion
-    Assert.assertEquals(
-            actualCount,
-            totalRows,
-            "Card count does not match pagination total!"
-    );
-}
+    }
 
 
     public void scrollTillPageEnd(int totalRows, By cardLocator) {
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement container = wait.until(
-                    ExpectedConditions.visibilityOfElementLocated(
-                            By.xpath("//div[contains(@class,'infinite-scroll-component')]")
-                    )
-            );
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement container = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//div[contains(@class,'infinite-scroll-component')]")
+                )
+        );
 
-            // ✅ Focus without triggering logging
-            new Actions(driver).moveToElement(container).click().perform();
+        // ✅ Focus without triggering logging
+        new Actions(driver).moveToElement(container).click().perform();
 
-            Actions actions = new Actions(driver);
+        Actions actions = new Actions(driver);
 
-            int previousCount = 0;
-            int sameCountTries = 0;
+        int previousCount = 0;
+        int sameCountTries = 0;
 
-            while (true) {
+        while (true) {
 
-                int actualCount = driver.findElements(cardLocator).size();
-                System.out.println("Cards loaded so far: " + actualCount);
+            int actualCount = driver.findElements(cardLocator).size();
+            System.out.println("Cards loaded so far: " + actualCount);
 
-                // ✅ Stop when expected count reached
-                if (actualCount >= totalRows) {
-                    System.out.println("Expected card count reached. Stop scrolling.");
+            // ✅ Stop when expected count reached
+            if (actualCount >= totalRows) {
+                System.out.println("Expected card count reached. Stop scrolling.");
+                break;
+            }
+
+            // 🛑 Safety stop if nothing new loads
+            if (actualCount == previousCount) {
+                sameCountTries++;
+                if (sameCountTries >= 3) {
+                    System.out.println("No new cards loading. Stop scrolling.");
                     break;
                 }
-
-                // 🛑 Safety stop if nothing new loads
-                if (actualCount == previousCount) {
-                    sameCountTries++;
-                    if (sameCountTries >= 3) {
-                        System.out.println("No new cards loading. Stop scrolling.");
-                        break;
-                    }
-                } else {
-                    sameCountTries = 0;
-                }
-
-                previousCount = actualCount;
-
-                // 🔥 Real user scroll
-                actions.sendKeys(Keys.PAGE_DOWN).perform();
-                pause(1);
+            } else {
+                sameCountTries = 0;
             }
-        }
 
-//    public void pagination() {
+            previousCount = actualCount;
+
+            // 🔥 Real user scroll
+            actions.sendKeys(Keys.PAGE_DOWN).perform();
+            pause(1);
+        }
+    }
+
+    //    public void pagination() {
 //
 //        pause(2);
 //
@@ -2609,7 +2635,6 @@ public void validateHorizontalViewCardCount(String fallbackCountXpath) {
 //
 //        logPrint("Pagination validation completed successfully");
 //    }
-
     public void pagination(String fallbackMaxSrXpath) {
 
         pause(2);
@@ -2709,7 +2734,8 @@ public void validateHorizontalViewCardCount(String fallbackCountXpath) {
                             found = true;
                             break;
                         }
-                    } catch (StaleElementReferenceException ignored) {}
+                    } catch (StaleElementReferenceException ignored) {
+                    }
                 }
 
                 if (found) {
@@ -2746,7 +2772,6 @@ public void validateHorizontalViewCardCount(String fallbackCountXpath) {
 
         logPrint("Pagination validation completed successfully");
     }
-
 
     public void paginationInsideActiveModal() {
 
@@ -2816,7 +2841,8 @@ public void validateHorizontalViewCardCount(String fallbackCountXpath) {
                             found = true;
                             break;
                         }
-                    } catch (StaleElementReferenceException ignored) {}
+                    } catch (StaleElementReferenceException ignored) {
+                    }
                 }
 
                 if (found) {
@@ -2846,17 +2872,6 @@ public void validateHorizontalViewCardCount(String fallbackCountXpath) {
 
         logPrint("Modal pagination validation completed successfully");
     }
-
-
-
-
-
-
-
-
-
-
-
 
     private String safeTrim(String s) {
         return s == null ? "" : s.trim();
@@ -2940,6 +2955,7 @@ public void validateHorizontalViewCardCount(String fallbackCountXpath) {
         BEGINS_WITH,
         ENDS_WITH
     }
+
     private void openFilters() {
         common.refreshPage();
         common.waitUntilElementToBeClickable(FILTERS);
@@ -3033,6 +3049,7 @@ public void validateHorizontalViewCardCount(String fallbackCountXpath) {
         }
 
     }
+
     public boolean isValidationMessageDisplayed(By locator) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         return wait.until(
@@ -3088,10 +3105,10 @@ public void validateHorizontalViewCardCount(String fallbackCountXpath) {
         System.out.println("Selected future date and time within business hours: " + dateTimeString);
     }
 
-    public String fakeWebsite(){
+    public String fakeWebsite() {
         Faker faker = new Faker();
         String fakeSite = faker.internet().domainName();
-        return "https://www."+ fakeSite;
+        return "https://www." + fakeSite;
     }
 
     public void uploadFile(String fileInputLocator, String filePath) {
@@ -3230,6 +3247,7 @@ public void validateHorizontalViewCardCount(String fallbackCountXpath) {
 
         logPrint("Checkbox selected for row index: " + rowIndex);
     }
+
     private String activeContext = "";
 
     public void setActiveContext(String contextXpath) {
@@ -3243,13 +3261,67 @@ public void validateHorizontalViewCardCount(String fallbackCountXpath) {
         return findBy(activeContext + locator);
     }
 
+    public int getMandatoryFieldCount() {
+
+        List<WebElement> mandatoryFields = driver.findElements(
+                By.xpath("//span[text()='*']")
+        );
+
+        int count = mandatoryFields.size();
+
+        for (WebElement star : mandatoryFields) {
+            try {
+                highlightElement(star);
+            } catch (Exception e) {
+                logPrint("Unable to highlight mandatory field indicator");
+            }
+        }
+
+        logPrint("Mandatory fields found and highlighted: " + count);
+
+        return count;
+    }
+
+    public void clearElement(String locator) {
+
+        WebElement element = waitUntilElementToBeVisible(locator);
+
+        try {
+            // 1️⃣ Try normal clear
+            element.clear();
+
+            if (element.getAttribute("value") == null || element.getAttribute("value").isEmpty()) {
+                return;
+            }
+        } catch (Exception ignored) {
+            // fallback below
+        }
+
+        try {
+            // 2️⃣ CTRL + A + DELETE
+            element.click();
+            element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+            element.sendKeys(Keys.DELETE);
+
+            if (element.getAttribute("value") == null || element.getAttribute("value").isEmpty()) {
+                return;
+            }
+        } catch (Exception ignored) {
+            // fallback below
+        }
+
+        // 3️⃣ BACKSPACE brute-force (masked inputs)
+        element.click();
+        String currentValue = element.getAttribute("value");
+        if (currentValue != null) {
+            for (int i = 0; i < currentValue.length() + 2; i++) {
+                element.sendKeys(Keys.BACK_SPACE);
+            }
+        }
+    }
+
 
 }
-
-
-
-
-
 
 /* ---------------- Usage examples ----------------
    // explicit
