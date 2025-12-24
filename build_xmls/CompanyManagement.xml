@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Company Management Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <!-- Navigate to Company Management page -->
+    <test name="Navigate to Company Management Page">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="goToCompanyManagementPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Company Management grid page elements -->
+    <test name="Verify Company Management Page Elements">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyCompanyManagementElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Create page UI elements -->
+    <test name="Verify Company Management Create Page Elements">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyCompanyManagementCreatePageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Edit page UI elements -->
+    <test name="Verify Company Management Edit Page Elements">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyCompanyManagementEditPageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify View page UI elements -->
+    <test name="Verify Company Management View Page Elements">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyCompanyManagementViewElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify mandatory fields -->
+    <test name="Verify Mandatory Fields">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyMandatoryFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify adding blank Company Management -->
+    <test name="Verify Adding Blank Company Management">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyAddingABlankCompanyManagement"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify adding valid Company Management -->
+    <test name="Verify Adding Valid Company Management">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyAddingAValidCompanyManagement"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify viewing Company Management -->
+    <test name="Verify Viewing Company Management">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyViewingCompanyManagement"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify cancel button inside View -->
+    <test name="Verify Cancel Button Inside View">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyCancelButtonInsideView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify editing Company Management -->
+    <test name="Verify Editing Company Management">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyEditingACompanyManagement"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify cancel button inside Edit -->
+    <test name="Verify Cancel Button Inside Edit">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyCancelButtonInsideEdit"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify adding duplicate Company Management -->
+    <test name="Verify Adding Duplicate Company Management">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyAddingADuplicateCompanyManagement"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify reset button in Edit -->
+    <test name="Verify Reset Button in Edit">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyResetButtonInEdit"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify delete button functionality -->
+    <test name="Verify Delete Button Functionality">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyDeleteButtonFunctionality"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify horizontal card view -->
+    <test name="Verify Horizontal Card View">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyHorizontalCardView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify pagination -->
+    <test name="Verify Pagination">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyPagination"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify created date -->
+    <test name="Verify Created Date">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyCurrentDate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

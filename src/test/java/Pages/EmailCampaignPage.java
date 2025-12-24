@@ -399,7 +399,5 @@ public class EmailCampaignPage extends Locators {
 
     }
 
-
-
 }
 

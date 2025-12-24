@@ -287,18 +287,16 @@ public class ProductPage extends Locators {
         String description = productName; // keeping same as before, change if needed
         common.type(PHPRODUCTDESCRIPTION, description);
 
-        // KB
         String kb = common.selectDropdownAndGetSelectedText(
                 By.xpath(PHPRODUCTKB),
                 By.xpath(FILTERDROPDOWNVAL)
         );
 
-        // Save and verify
+        common.waitUntilElementToBeVisible(SAVEBUTTON);
         common.click(SAVEBUTTON);
         common.assertElementPresent(SUCCESSMESSAGE);
         common.click(CLOSEBUTTON);
 
-        // Verify via search (keeps your original validation)
         common.click(PHSEACRH);
         common.type(PHSEACRH, productName);
         common.validateSearch(SEARCHRESULT, productName);
@@ -309,27 +307,24 @@ public class ProductPage extends Locators {
     public void editingAProduct() {
         Product created = verifyAddingANewProductWithValidData();
 
-        // open edit - assuming EDIT locator works for first row result after search
         driver.findElement(By.xpath(EDIT)).click();
 
-        // update to a new product name
+
         String newName = common.fakeProductName();
         common.click(PHPRODUCTNAME);
         common.type(PHPRODUCTNAME, newName);
 
-        // update category
         String newCategory = common.selectDropdownAndGetSelectedText(
                 By.xpath(PHPRODUCTCATEGORY),
                 By.xpath(FILTERDROPDOWNVAL)
         );
 
-        // update description
+
         common.waitUntilElementToBeVisible(PHPRODUCTDESCRIPTION);
         common.click(PHPRODUCTDESCRIPTION);
         String newDescription = newName;
         common.type(PHPRODUCTDESCRIPTION, newDescription);
 
-        // update KB
         String newKb = common.selectDropdownAndGetSelectedText(
                 By.xpath(PHPRODUCTKB),
                 By.xpath(FILTERDROPDOWNVAL)
@@ -337,12 +332,11 @@ public class ProductPage extends Locators {
         common.click(PHPRODUCTKB);
         common.downKeyAndEnter();
 
-        // save and verify
+
         common.click(SAVEBUTTON);
         common.assertElementPresent(UPDATEMESSAGE);
         common.click(CLOSEBUTTON);
 
-        // search using updated name and validate
         common.click(PHSEACRH);
         common.type(PHSEACRH, newName);
         common.validateSearch(SEARCHRESULT, newName);
