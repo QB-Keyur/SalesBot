@@ -697,13 +697,12 @@ public class Locators extends BasePage {
     public static String savePassword = "//span[contains(text(),'Save Password')]/ancestor::button";
 
 
-    //WhatsAppCampaign locators
     public static String SearchContact = "//input[@placeholder='Search contacts...']";
     //public static String = "";
     public static String HomeMenu = "//span[text()='Home']";
     public static String CampaignMenu = "//span[text()='Campaign']";
     public static String whatsappCampaign = "//button[text()='Whatsapp Campaign']";
-
+    public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
     public static String WC_REFRESH = "//button[contains(@class,'MuiButton-root')] ";
     public static String WC_PAGEHEADER ="//h6[normalize-space()='WhatsApp Campaign']";
     public static String WCH_NAME ="//span[normalize-space()='Name']";
@@ -717,6 +716,60 @@ public class Locators extends BasePage {
     public static String CWC_Back = "//div[@class='MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-10 MuiGrid-grid-md-6 css-53mvl9']//button[@type='button']";
     public static String CWC_Cancel = "//span[normalize-space()='Cancel']";
     public static String CWC_View = "//span[text()='View']";
+    public static String CWC_Header = "//h6[normalize-space()='Create WhatsApp Campaign']";
+
+    public static String V_Name = "//span[text()='Name']";
+    public static String VContactG = "//span[text()='Contact Group']";
+    public static String VEmail = "//span[text()='Email']";
+    public static String VPhoneNo = "//span[text()='Phone Number']";
+    public static String VDandB = "//span[text()='Date of Birth']";
+    public static String WCViewHeader = "//h6[normalize-space()='View WhatsApp Campaign']";
+    public static String SearchTex ="//div[@role='gridcell' and @data-field='name']";
+    public static String WC_Search = "//input[@placeholder='Search...']";
+    public static String V_RetryRerun = "//button[.//span[normalize-space()='Retry Failed']]";
+    public static String  RerunSuccessMSG ="//div[normalize-space()='WhatsApp campaign start for rerun successfully!']";
+    public static String V_back = "//h6[normalize-space()='View WhatsApp Campaign']/preceding-sibling::button";
+
+
+    public static String CWC_RunCamBTN = "//span[text()='Run Campaign']";
+    public static String RC_PopupNo="//span[text()='No']";
+    public static String RC_PopupYes="//span[text()='Yes']";
+
+
+
+
+
+    public static String C_Name = "//input[@placeholder='Enter campaign name']";
+    public static String C_WhatsAppTem = "//input[@placeholder='Select template']";
+    public static String C_Category = "//input[@placeholder='Create or Select Category']";
+    public static String C_Product ="//input[@placeholder='Select product']";
+    public static String C_ContactGroup = "//input[@placeholder='Select Contact Groups']";
+    public static String C_SelectContact = "//input[@type='checkbox']/parent::span/parent::div[@tabindex='0']";
+    public static String C_SelectContactcheckbox="(//div[@role='row'])[1]//div[@data-field='select']//span[contains(@class,'MuiCheckbox-root')]";
+    public static String C_Contacts ="//p[text()='Contacts']";
+    public static String Contact_RequiredMessage="//div[text()='Please select at least one contact or contact group.']";
+    public static String Search_ContactonCampaignpage="//input[@placeholder='Search contacts...']";
+    public static String SearchedResult_ContactonCampaignpage="//div[@class='MuiDataGrid-row MuiDataGrid-row--firstVisible MuiDataGrid-row--lastVisible']";
+
+
+
+
+    //    //View WhatsApp Campaign
+
+    public static String  CAMPAIGNVIEW ="//button[@aria-label='View']";
+    public static String WProduct = "//label[.//span[text()='Product']]/following::input[1]";
+    public static String WCategory = "//label[.//span[text()='Category']]/following::input[1]";
+    public static String WTemplate = "//label[.//span[text()='WhatsApp Template']]/following::input[1]";
+    public static String WName ="//label[.//span[text()='Campaign Name']]/following::input[1]";
+    public static String WPhoneNumber="//*[contains(text(),'+91 77749 74990')]";
+
+
+
+    //Field Validations  xpath for whatsappcampagin
+    public static String Req_CampaginName="//span[text()='Name is required']";
+    public static String Req_WhatsappTemp="//span[text()='WhatsApp template is required']";
+    public static String Req_Category="//span[text()='Category is required']";
+    public static String Req_Product="//span[text()='Product is required']";
 
 
 
@@ -763,7 +816,6 @@ public class Locators extends BasePage {
     public static String ECCENABLEAINO= "//div[contains(@class,'css-yf7rws')] | //div[contains(@class,'css-12xpge1')]";
     public static String ECCCONTACTS= "//p[text()='Contacts']";
     public static String ECCSEARCHCONTACTS= "//input[@placeholder=\"Search contacts...\"]";
-    public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
     public static String ECCCHECKBOX= "(//span[@class=\"css-ysvidx\"])[1]";
     public static String ECCSRNO= "//span[text()='#']";
     public static String ECCNAME= "//span[text()='Name']";
