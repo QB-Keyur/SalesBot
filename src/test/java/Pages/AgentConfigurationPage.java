@@ -27,7 +27,7 @@ public class AgentConfigurationPage extends Locators {
         this.common = new Common(driver);
     }
 
-    public void goToAgentConfigurationPage(){
+    public void goToAgentConfigurationPage() {
 
         common.waitUntilElementToBeClickable(AGENTCONFIGURATIONMENU);
         common.click(AGENTCONFIGURATIONMENU);
@@ -258,7 +258,7 @@ public class AgentConfigurationPage extends Locators {
         }
     }
 
-    public void verifyActivateButton(){
+    public void verifyActivateButton() {
         goToAgentConfigurationPage();
         common.waitUntilElementToBeVisible(REFRESH);
         WebElement btn = driver.findElement(By.xpath("//span[text()='Active']/parent::button"));
@@ -269,15 +269,14 @@ public class AgentConfigurationPage extends Locators {
         driver.findElement(By.xpath("(//span[text()='Inactive'])[1]/preceding::input[@type='checkbox'][1]")).click();
 
         common.assertElementPresent(ACACTIVTEBUTTON);
-        if(btn.isEnabled()){
+        if (btn.isEnabled()) {
             common.logPrint("Button was Enabled as Expected ");
-        }
-        else{
+        } else {
             common.logPrint("Button didn't get Enabled as Expected");
         }
     }
 
-    public void verifyActiveButtonNegative(){
+    public void verifyActiveButtonNegative() {
 
         goToAgentConfigurationPage();
 
@@ -291,10 +290,9 @@ public class AgentConfigurationPage extends Locators {
         driver.findElement(By.xpath("(//span[text()='Active'])[2]/preceding::input[@type='checkbox'][1]")).click();
 
         common.assertElementPresent(ACACTIVTEBUTTON);
-        if(!btn.isEnabled()){
+        if (!btn.isEnabled()) {
             common.logPrint("Button was Disabled as Expected ");
-        }
-        else{
+        } else {
             common.logPrint("Button didn't stay Disabled as Expected");
         }
     }
@@ -367,7 +365,7 @@ public class AgentConfigurationPage extends Locators {
         Assert.assertEquals(actualCount, totalRows, "Card count does not match pagination total!");
     }
 
-    public void verifyCreatePageElements(){
+    public void verifyCreatePageElements() {
         goToAgentConfigurationPage();
         common.waitUntilElementToBeVisible(CREATE);
         driver.findElement(By.xpath(CREATE)).click();
@@ -457,7 +455,7 @@ public class AgentConfigurationPage extends Locators {
 
     }
 
-    public void verifyEditPageElements(){
+    public void verifyEditPageElements() {
         goToAgentConfigurationPage();
         common.waitUntilElementToBeVisible(ACEDITBUTTON);
         driver.findElement(By.xpath(ACEDITBUTTON)).click();
@@ -590,20 +588,20 @@ public class AgentConfigurationPage extends Locators {
         driver.findElement(By.xpath(ACCSAVEBUTTON)).click();
 
         Map<String, String> validations = new LinkedHashMap<>();
-        validations.put(ACCVALPERSONA,      "Persona is required");
-        validations.put(ACCVALPROMPT,       "Prompt is required");
-        validations.put(ACCVALNAME,         "Name is required");
-        validations.put(ACCVALCOMAPNYNAME,  "Company Name is required");
-        validations.put(ACCVALREETINGS,     "Greeting Message is required");
-        validations.put(ACCVALPERSONLITY,   "Personality is required");
-        validations.put(ACCVALGOAL,         "Goal type is required");
-        validations.put(ACCVALLANG,         "Language is required");
-        validations.put(ACCVALCOREUSP,      "Core USPs is required");
-        validations.put(ACCVALCOREFEATURE,  "Core Features is required");
-        validations.put(ACCVALCONTACT,      "Contact Info is required");
-        validations.put(ACCVALBUSINES,      "Business focus is required");
-        validations.put(ACCVALOFFER,        "Offer description is required");
-        validations.put(COMPANYDESC,        "Company description is required");
+        validations.put(ACCVALPERSONA, "Persona is required");
+        validations.put(ACCVALPROMPT, "Prompt is required");
+        validations.put(ACCVALNAME, "Name is required");
+        validations.put(ACCVALCOMAPNYNAME, "Company Name is required");
+        validations.put(ACCVALREETINGS, "Greeting Message is required");
+        validations.put(ACCVALPERSONLITY, "Personality is required");
+        validations.put(ACCVALGOAL, "Goal type is required");
+        validations.put(ACCVALLANG, "Language is required");
+        validations.put(ACCVALCOREUSP, "Core USPs is required");
+        validations.put(ACCVALCOREFEATURE, "Core Features is required");
+        validations.put(ACCVALCONTACT, "Contact Info is required");
+        validations.put(ACCVALBUSINES, "Business focus is required");
+        validations.put(ACCVALOFFER, "Offer description is required");
+        validations.put(COMPANYDESC, "Company description is required");
 
         List<String> missing = new ArrayList<>();
 
@@ -616,21 +614,37 @@ public class AgentConfigurationPage extends Locators {
             boolean visible = isElementVisible(By.xpath(xpath), perValidationTimeoutSec);
             if (visible) {
                 String msg = "Validation present: " + friendly + " -> " + xpath;
-                try { common.logPrint(msg); } catch (Exception ignored) { System.out.println(msg); }
+                try {
+                    common.logPrint(msg);
+                } catch (Exception ignored) {
+                    System.out.println(msg);
+                }
             } else {
                 String msg = "Validation MISSING: " + friendly + " -> " + xpath;
-                try { common.logPrint(msg); } catch (Exception ignored) { System.err.println(msg); }
+                try {
+                    common.logPrint(msg);
+                } catch (Exception ignored) {
+                    System.err.println(msg);
+                }
                 missing.add(friendly);
             }
         }
 
         if (!missing.isEmpty()) {
             String summary = "Mandatory field validation FAILED. Missing: " + String.join(", ", missing);
-            try { common.logPrint(summary); } catch (Exception ignored) { System.err.println(summary); }
+            try {
+                common.logPrint(summary);
+            } catch (Exception ignored) {
+                System.err.println(summary);
+            }
             Assert.fail(summary);
         } else {
             String summary = "All mandatory field validations are present.";
-            try { common.logPrint(summary); } catch (Exception ignored) { System.out.println(summary); }
+            try {
+                common.logPrint(summary);
+            } catch (Exception ignored) {
+                System.out.println(summary);
+            }
         }
     }
 
@@ -655,8 +669,8 @@ public class AgentConfigurationPage extends Locators {
         Map<String, String> agent = common.fillAgentForm();
 
 
-        String agentName =  agent.get("name");
-        String companyName =   agent.get("companyName");
+        String agentName = agent.get("name");
+        String companyName = agent.get("companyName");
         String greeting = agent.get("greeting");
         String personality = agent.get("personality");
         String goalType = agent.get("goalType");
@@ -670,7 +684,7 @@ public class AgentConfigurationPage extends Locators {
         common.logPrint(agentName);
 
         common.waitUntilElementToBeClickable(ACCTIMEZONEINPUT).click();
-        common.type(ACCTIMEZONEINPUT,"5:30");
+        common.type(ACCTIMEZONEINPUT, "5:30");
         common.downKeyAndEnter();
 
         String english = "//li[text()='English']";
@@ -691,7 +705,7 @@ public class AgentConfigurationPage extends Locators {
         return agent;
     }
 
-    public void editingAnAgent(){
+    public void editingAnAgent() {
         addANewAgentValidData();
 
         String existingUser = common.getText(ACSEARCHRESULT);
@@ -705,8 +719,8 @@ public class AgentConfigurationPage extends Locators {
 
         common.click(SAVEBUTTON);
 
-        System.out.println("Edited agent From: "+existingUser+" to: " + agent);
-        String agentName =  agent.get("name");
+        System.out.println("Edited agent From: " + existingUser + " to: " + agent);
+        String agentName = agent.get("name");
 
         String searchXpath = "//input[@placeholder=\"Search...\"]";
 
@@ -716,24 +730,23 @@ public class AgentConfigurationPage extends Locators {
         common.validateSearch(ACSEARCHRESULT, agentName);
 
 
-
     }
 
     public void verifyUsingTheResetButton() {
 
         Map<String, String> agent = addANewAgentValidData();
 
-        String agentName          = agent.get("name");
-        String companyName        = agent.get("companyName");
-        String greeting           = agent.get("greeting");
-        String personality        = agent.get("personality");
-        String goalType           = agent.get("goalType");
-        String coreUSP            = agent.get("coreUSP");
-        String coreFeatures       = agent.get("coreFeatures");
-        String contactInfo        = agent.get("contactInfo");
-        String companyDomain      = agent.get("companyDomain");
-        String businessFocus      = agent.get("businessFocus");
-        String offerDescription   = agent.get("offerDescription");
+        String agentName = agent.get("name");
+        String companyName = agent.get("companyName");
+        String greeting = agent.get("greeting");
+        String personality = agent.get("personality");
+        String goalType = agent.get("goalType");
+        String coreUSP = agent.get("coreUSP");
+        String coreFeatures = agent.get("coreFeatures");
+        String contactInfo = agent.get("contactInfo");
+        String companyDomain = agent.get("companyDomain");
+        String businessFocus = agent.get("businessFocus");
+        String offerDescription = agent.get("offerDescription");
         String companyDescription = agent.get("companyDescription");
 
         common.waitUntilElementToBeVisible(ACEDITBUTTON);
@@ -757,18 +770,17 @@ public class AgentConfigurationPage extends Locators {
         assertInputValue(ACCCOMPANYINPUT, companyDescription, "Company Description");
     }
 
-    public void deletingAnAgent(){
+    public void deletingAnAgent() {
         Map<String, String> agent = addANewAgentValidData();
-        String existingAgentName =  agent.get("name");
+        String existingAgentName = agent.get("name");
         common.waitUntilElementToBeVisible(ACDELETEBUTTON);
         common.click(ACDELETEBUTTON);
         WebElement cancelButton = driver.findElement(By.xpath(ACDELETECANCELBUTTON));
         common.click(ACDELETECANCELBUTTON);
         common.pause2Sec();
-        if(!cancelButton.isDisplayed()){
+        if (!cancelButton.isDisplayed()) {
             common.logPrint("Cancel Button works as expected");
-        }
-        else {
+        } else {
             common.logPrint("Cancel button doesn't work");
         }
         common.pause(1);
@@ -784,7 +796,6 @@ public class AgentConfigurationPage extends Locators {
         common.validateSearch(ACSEARCHRESULT, existingAgentName);
 
         common.validateToaster(DeletedSuccessfully);
-
 
 
     }
@@ -816,13 +827,13 @@ public class AgentConfigurationPage extends Locators {
         common.logPrint("Validated field value → " + expectedValue);
     }
 
-    public void activeInactive(){
+    public void activeInactive() {
         Map<String, String> agent = addANewAgentValidData();
         String name = agent.get("name");
         String searchXpath = "//input[@placeholder=\"Search...\"]";
 
         common.waitUntilElementToBeVisible(searchXpath);
-        common.type(searchXpath,name);
+        common.type(searchXpath, name);
 
         common.selectCheckbox(ACINACTIVECB);
 
@@ -842,26 +853,25 @@ public class AgentConfigurationPage extends Locators {
         common.click(ACACTIVATEBUTTON);
 
         common.waitUntilElementToBeVisible(searchXpath);
-        common.type(searchXpath,name);
+        common.type(searchXpath, name);
 
         common.pause(1);
-        WebElement ACACTIVEButton= driver.findElement(By.xpath(ACACTIVE));
-        if(ACACTIVEButton.isDisplayed()){
-            common.logPrint(name+ " : Agent activated successfully ");
-        }
-        else{
-            common.logPrint(name+ " Agent is not active ");
+        WebElement ACACTIVEButton = driver.findElement(By.xpath(ACACTIVE));
+        if (ACACTIVEButton.isDisplayed()) {
+            common.logPrint(name + " : Agent activated successfully ");
+        } else {
+            common.logPrint(name + " Agent is not active ");
         }
     }
 
-    public void horizontalViews(){
+    public void horizontalViews() {
         goToAgentConfigurationPage();
         common.pause(2);
         common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
 
     }
 
-    public void pagination(){
+    public void pagination() {
         goToAgentConfigurationPage();
         common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
@@ -932,14 +942,14 @@ public class AgentConfigurationPage extends Locators {
                 "5. Product ENDS WITH filter failed: expected to end with '" + endsWith + "' but was '" + resultEnds + "'");
     }
 
-    public void createAndViewReflectionInPlayground(){
+    public void createAndViewReflectionInPlayground() {
 
         String url = EnvConfig.getWebUrl();
 
         Map<String, String> agent = addANewAgentValidData();
         String name = agent.get("name");
-        String playgroundURL = url+"playground";
-        common.logPrint("Url: "+playgroundURL);
+        String playgroundURL = url + "playground";
+        common.logPrint("Url: " + playgroundURL);
         driver.get(playgroundURL);
 
 
@@ -948,17 +958,16 @@ public class AgentConfigurationPage extends Locators {
         String currentURL = driver.getCurrentUrl();
         Assert.assertTrue(currentURL.contains("playground"), "Expected to navigate to Playground but landed on: " + currentURL);
         common.highlightElement(ACPLAYGROUNDHEADER);
-        common.type(ACPLAYGROUNDSELECTAGENT,name);
+        common.type(ACPLAYGROUNDSELECTAGENT, name);
         common.downKeyAndEnter();
 
-        String validateCommon = common.getAttribute(ACPLAYGROUNDSELECTAGENT,"value");
+        String validateCommon = common.getAttribute(ACPLAYGROUNDSELECTAGENT, "value");
         common.pause(1);
-        common.logPrint("Selected Agent's name: "+ validateCommon);
+        common.logPrint("Selected Agent's name: " + validateCommon);
 
-        if(validateCommon.equals(name)){
+        if (validateCommon.equals(name)) {
             common.logPrint("Selected Agent Matches the newly created agent");
-        }
-        else{
+        } else {
             common.logPrint("Selected agent is different than the created one");
         }
 
@@ -1079,10 +1088,10 @@ public class AgentConfigurationPage extends Locators {
     private String[] splitWordsSafely(String input) {
         input = safeTrim(input);
         if (input.isEmpty()) {
-            return new String[] { "" };
+            return new String[]{""};
         }
         String[] parts = input.split("\\s+");
-        return parts.length == 0 ? new String[] { input } : parts;
+        return parts.length == 0 ? new String[]{input} : parts;
     }
 
     private String safeTrim(String s) {
