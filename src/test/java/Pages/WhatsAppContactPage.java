@@ -57,7 +57,7 @@ public class WhatsAppContactPage extends Locators {
         common.waitUntilElementToBeVisible(HomeMenu);
         common.click(HomeMenu);
 
-       common.pause(1);
+        common.pause(1);
 
     }
 
@@ -80,9 +80,9 @@ public class WhatsAppContactPage extends Locators {
 
         common.waitUntilElementToBeVisible(Contact);
         common.click(Contact);
-
-        common.waitUntilElementToBeVisible(WhatsAppContact);
-        common.click(WhatsAppContact);
+//
+//        common.waitUntilElementToBeVisible(WhatsAppContact);
+//        common.click(WhatsAppContact);
 
         common.pause(2);
     }
@@ -220,7 +220,7 @@ public class WhatsAppContactPage extends Locators {
 
     public void verifyWhatsAppContactGridHeaders() {
 
-        common.logPrint("Step:: Verify 'WhatsApp contact' heading is displayed");
+        common.logPrint("Step:: Verify 'Contact' heading is displayed");
         common.waitUntilElementToBeVisible(By.xpath(whatsAppContactHed));
         common.assertElementPresent(whatsAppContactHed);
 
@@ -289,8 +289,8 @@ public class WhatsAppContactPage extends Locators {
         common.assertElementPresent(emailSubscriptionHeader);
 
         common.logPrint("Step:: Verify 'Actions' grid header is displayed");
-        common.waitUntilElementToBeVisible(By.xpath(actionHeader));
-        common.assertElementPresent(actionHeader);
+        common.waitUntilElementToBeVisible(By.xpath(actionsHeader));
+        common.assertElementPresent(actionsHeader);
 
         common.logPrint("Step:: Verify Previous button is displayed");
         common.waitUntilElementToBeVisible(By.xpath(GoToPreviousBtn));

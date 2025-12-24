@@ -43,6 +43,18 @@ public class UserManagementPage extends Locators {
         common.click(rolePermission);
     }
 
+    public void clickOnUserInvitationMenu(){
+        common.waitUntilElementToBeVisible(userInvitation);
+        common.click(userInvitation);
+    }
+
+    public void verifySuccessfullyMessageForSentInvitation(){
+
+        common.logPrint("Step:: Verify success message");
+        common.assertElementPresent(invitationSentSuccessfully);
+
+    }
+
     public void verifyMenuAndSubMenuAreDisplayedOnThePage(){
 
         common.logPrint("Step:: Verify user management menu are displayed on the menu list");
@@ -231,8 +243,138 @@ public class UserManagementPage extends Locators {
         common.logPrint("Step:: Verify View button is displayed");
         common.waitUntilElementToBeVisible(By.xpath(viewButton));
         common.assertElementPresent(viewButton);
+    }
+
+    public void clickOnCreateButton(){
+        common.waitUntilElementToBeVisible(By.xpath(createContact));
+        common.click(createContact);
+    }
+
+    public void roleAndPermissionAddedSuccessfully(){
+
+        common.logPrint("Success message is showing properly on the page");
+        common.waitUntilElementToBeVisible(By.xpath(roleAndPermissionAddedSuccessfully));
+        common.click(roleAndPermissionAddedSuccessfully);
+    }
+
+    public void duplicateRoleNameValidation(){
+
+        common.logPrint("Verify validation message is showing for duplicate role");
+        common.waitUntilElementToBeVisible(By.xpath(RoleNameIsAlreadyExist));
+        common.click(RoleNameIsAlreadyExist);
 
     }
+
+    public void createANewRole(String name){
+
+        common.logPrint("Step:: Enter the role name");
+
+        common.waitUntilElementToBeVisible(By.xpath(enterRoleName));
+        common.type(enterRoleName,name);
+
+        common.waitUntilElementToBeVisible(By.xpath(saveButton));
+        common.click(saveButton);
+    }
+
+    public void verifyRoleIsShowingOnTheUserInvitationPage(String roleName){
+
+        common.waitUntilElementToBeVisible(By.xpath(roleDropdown));
+        common.click(roleDropdown);
+
+        String nameXpath = "//*[text()='"+roleName+"']";
+
+        common.assertElementPresent(nameXpath);
+    }
+
+    public void verifyFieldValidationMessageForUserInvitationPage(){
+
+        common.waitUntilElementToBeVisible(saveButton);
+        common.click(saveButton);
+
+        common.logPrint("Step:: Verify error message is displayed for first name");
+        common.assertElementPresent(firstNameError);
+
+        common.logPrint("Step:: Verify error message is displayed for last name");
+        common.assertElementPresent(lastNameError);
+
+        common.logPrint("Step:: Verify error message is displayed for phone number");
+        common.assertElementPresent(phoneError);
+
+        common.logPrint("Step:: Verify error message is displayed for email");
+        common.assertElementPresent(emailError);
+
+        common.logPrint("Step:: Verify error message is displayed for role");
+        common.assertElementPresent(roleError);
+    }
+
+    public void verifyFieldValidationMessageForRoleAndPermissionPage(){
+
+        common.waitUntilElementToBeVisible(saveButton);
+        common.click(saveButton);
+
+        common.logPrint("Step:: Verify error message is displayed for Role name");
+        common.assertElementPresent(RoleNameError);
+    }
+
+    public String[] createUserInvitation(){
+
+        String name = common.fakeName();
+        common.waitUntilElementToBeVisible(firstNameInp);
+        common.type(firstNameInp, name);
+
+        String lastName = common.fakeName();
+        common.waitUntilElementToBeVisible(lastNameInp);
+        common.type(lastNameInp, lastName);
+
+        String mobileNum = common.fakeIndianMobileNumber();
+        common.waitUntilElementToBeVisible(phoneNumInp);
+        common.type(phoneNumInp, mobileNum);
+
+        String email = name+"123@yopmail.com";
+        common.waitUntilElementToBeVisible(emailInp);
+        common.type(emailInp, email);
+
+        common.logPrint("Step:: Select role from the dropdown");
+        common.waitUntilElementToBeVisible(roleDropdown);
+        common.click(roleDropdown);
+        common.downKeyAndEnter();
+
+        common.waitUntilElementToBeVisible(saveButton);
+        common.click(saveButton);
+
+        return new String[] {name, lastName, email, mobileNum};
+    }
+
+    public void verifyInvitationLinkIsShowing(String email){
+
+        driver.get("https://yopmail.com/en/");
+
+        common.waitUntilElementToBeVisible(emailInpYopMail);
+        common.type(emailInpYopMail, email);
+
+        common.waitUntilElementToBeVisible(enterArrowBtn);
+        common.click(enterArrowBtn);
+
+        common.waitUntilElementToBeVisible(refreshButtonYopmail);
+        common.click(refreshButtonYopmail);
+        common.pause(2);
+
+        common.waitUntilElementToBeVisible(refreshButtonYopmail);
+        common.click(refreshButtonYopmail);
+
+        common.waitUntilElementToBeVisible(refreshButtonYopmail);
+        common.click(refreshButtonYopmail);
+        common.pause(2);
+
+        // Already inside iframe at this point
+        common.switchToFrameWithName("ifmail");
+        common.logPrint("Step:: Accept invitation button is showing on the mail");
+        common.isElementPresent((acceptInvitationButton));
+        common.switchToDefaultContent();
+
+        common.logPrint("Invitation is showing on the mail");
+    }
+
 }
 
 

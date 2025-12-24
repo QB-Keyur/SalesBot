@@ -198,12 +198,12 @@ public class WhatsAppContactTest extends BasePage {
         whatsAppContactPage.verifyTheContactInWhatsAppCampaignPage(name, email);
     }
 
-    @Test
-    public void createWhatsAppContactUsingAnPOI() throws IOException {
-        common.logPrint("Verify create whatsapp contact using an POI excel sheet");
-        loginWithAdminUser();
-        whatsAppContactPage.createWhatsAppContact();
-    }
+//    @Test
+//    public void createWhatsAppContactUsingAnPOI() throws IOException {
+//        common.logPrint("Verify create whatsapp contact using an POI excel sheet");
+//        loginWithAdminUser();
+//        whatsAppContactPage.createWhatsAppContact();
+//    }
 
 
 

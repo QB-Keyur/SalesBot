@@ -4,13 +4,59 @@ import Config.ReadProperties;
 import Utils.Common;
 import Utils.Locators;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.ArrayList;
 
 public class loginPage extends Locators {
 
     Common common;
+
+    public void waitForOtpByRefreshingYopmail(
+            By refreshBtn,
+            By otpLocator,
+            int timeoutSeconds) {
+
+        FluentWait<WebDriver> wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(timeoutSeconds))
+                .pollingEvery(Duration.ofSeconds(3))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class);
+
+        wait.until(driver -> {
+
+            // Always come back to main page
+            driver.switchTo().defaultContent();
+
+            common.logPrint("OTP not found, clicking Refresh button");
+            driver.findElement(refreshBtn).click();
+
+            // Switch to mail frame
+            driver.switchTo().frame("ifmail");
+
+            // 🔥 Switch to nested iframe (CRITICAL)
+            try {
+                driver.switchTo().frame(0);
+            } catch (Exception e) {
+                return false;
+            }
+
+            try {
+                WebElement otp = driver.findElement(otpLocator);
+                if (otp.isDisplayed()) {
+                    common.logPrint("OTP found successfully");
+                    return true;
+                }
+            } catch (NoSuchElementException ignored) {
+            }
+
+            return false;
+        });
+    }
+
+
 
     public loginPage(WebDriver driver) {
         super(driver);
@@ -210,7 +256,7 @@ public class loginPage extends Locators {
         common.click(CLOSEBUTTON);
     }
 
-    public String getOtpFromYopmail(String email){
+    public String getOtpFromYopmail(String email) {
 
         driver.get("https://yopmail.com/en/");
 
@@ -222,17 +268,22 @@ public class loginPage extends Locators {
 
         common.waitUntilElementToBeVisible(refreshButtonYopmail);
         common.click(refreshButtonYopmail);
-        common.pause(1);
+        common.pause(2);
+
         common.waitUntilElementToBeVisible(refreshButtonYopmail);
         common.click(refreshButtonYopmail);
 
+        common.waitUntilElementToBeVisible(refreshButtonYopmail);
+        common.click(refreshButtonYopmail);
+        common.pause(2);
+
+        // Already inside iframe at this point
         common.switchToFrameWithName("ifmail");
         common.logPrint("Step:: Get OTP from the mail");
-        common.waitUntilElementToBeVisible(otpGetYopmail);
+        common.waitUntilElementsToBeVisible(By.xpath(otpGetYopmail));
         String otp = common.getText(otpGetYopmail);
 
         common.switchToDefaultContent();
-
         return otp;
     }
 
@@ -255,8 +306,8 @@ public class loginPage extends Locators {
         common.waitUntilElementToBeVisible(otpInp5);
         common.type(otpInp5, digits[4]);
 
-        common.waitUntilElementToBeVisible(otpInp1);
-        common.click(LOGINBTN);
+        common.waitUntilElementToBeVisible(verifyOTPBtn);
+        common.click(verifyOTPBtn);
     }
 
     public void clickOnResetPasswordOnYopMail(){

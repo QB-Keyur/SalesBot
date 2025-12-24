@@ -31,6 +31,51 @@ public class profileTest extends BasePage {
         profilePage.verifyChangePasswordPageLabelsAndFields();
     }
 
+    @Test
+    public void verifyPlanIsShowingProperlyOnProfilePage(){
+        loginPage.clickOnTheSignUpLink();
+        String personalInfo[] = loginPage.addPersonalInformation();
+        String email = personalInfo[2];
+        common.logPrint("email is: "+email);
+        loginPage.addBusinessInformation();
+        common.openNewWindow();
+        common.switchToWindowByIndex(2);
+        common.pause(3);
+        String otp = loginPage.getOtpFromYopmail(email);
+        common.switchToWindowByIndex(1);
+        loginPage.enterOtpInInputField(otp);
+        whatsAppContactPage.verifySuccessMessageForYourAccountIsVerified();
+        loginPage.completePayment();
+        loginPage.verifySuccessMessageForCompleteSignUp();
+        profilePage.clickOnTheCloseIconBtnOnCongratulationPopUp();
+        profilePage.redirectsToProfilePage();
+        profilePage.verifyPlanIsShowingProperlyOnProfilePage();
+    }
+
+    @Test
+    public void verifyProfileDetailsAreShowingProperly(){
+        loginPage.clickOnTheSignUpLink();
+        String personalInfo[] = loginPage.addPersonalInformation();
+        String name = personalInfo[0];
+        String lastName = personalInfo[1];
+        String email = personalInfo[2];
+        String mobileNum = personalInfo[3];
+        common.logPrint("email is: "+email);
+        loginPage.addBusinessInformation();
+        common.openNewWindow();
+        common.switchToWindowByIndex(2);
+        common.pause(3);
+        String otp = loginPage.getOtpFromYopmail(email);
+        common.switchToWindowByIndex(1);
+        loginPage.enterOtpInInputField(otp);
+        whatsAppContactPage.verifySuccessMessageForYourAccountIsVerified();
+        loginPage.completePayment();
+        loginPage.verifySuccessMessageForCompleteSignUp();
+        profilePage.clickOnTheCloseIconBtnOnCongratulationPopUp();
+        profilePage.redirectsToProfilePage();
+        profilePage.verifyProfilePageDetails(name, lastName, email, mobileNum);
+    }
+
 
 
 

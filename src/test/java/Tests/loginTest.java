@@ -148,7 +148,7 @@ public class loginTest extends BasePage {
         loginPage.addBusinessInformation();
         common.openNewWindow();
         common.switchToWindowByIndex(2);
-        common.pause(2);
+        common.pause(3);
         String otp = loginPage.getOtpFromYopmail(email);
         common.switchToWindowByIndex(1);
         loginPage.enterOtpInInputField(otp);

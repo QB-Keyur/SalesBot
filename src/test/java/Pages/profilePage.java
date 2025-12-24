@@ -2,6 +2,7 @@ package Pages;
 
 import Utils.Common;
 import Utils.Locators;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class profilePage extends Locators {
@@ -56,8 +57,6 @@ public class profilePage extends Locators {
         common.assertElementPresent(updateProfileBtn);
         common.logPrint("'Update profile' button is displayed");
 
-        common.logPrint("Test is completed");
-
     }
 
     public void verifyProfilePageLabels() {
@@ -90,6 +89,36 @@ public class profilePage extends Locators {
         common.assertElementPresent(timezoneLabel);
         common.logPrint("'TimeZone' label is displayed");
 
+        // ================== Billing Address ==================
+
+        common.logPrint("Step:: Verify 'Billing Address' header is displayed");
+        common.assertElementPresent(billingAddressHed);
+        common.logPrint("'Billing Address' label is displayed");
+
+        common.logPrint("Step:: Verify 'Address' label is displayed");
+        common.assertElementPresent(addressLabel);
+        common.logPrint("'Address' label is displayed");
+
+        common.logPrint("Step:: Verify 'Area' label is displayed");
+        common.assertElementPresent(areaLabel);
+        common.logPrint("'Area' label is displayed");
+
+        common.logPrint("Step:: Verify 'Country' label is displayed");
+        common.assertElementPresent(countryLabel);
+        common.logPrint("'Country' label is displayed");
+
+        common.logPrint("Step:: Verify 'State' label is displayed");
+        common.assertElementPresent(stateLabel);
+        common.logPrint("'State' label is displayed");
+
+        common.logPrint("Step:: Verify 'City' label is displayed");
+        common.assertElementPresent(cityLabel);
+        common.logPrint("'City' label is displayed");
+
+        common.logPrint("Step:: Verify 'Pincode' label is displayed");
+        common.assertElementPresent(pincodeLabel);
+        common.logPrint("'Pincode' label is displayed");
+
         // ================== BUSINESS INFORMATION ==================
         common.logPrint("Step:: Verify 'Business Information' header is displayed");
         common.assertElementPresent(businessHeader);
@@ -115,9 +144,6 @@ public class profilePage extends Locators {
         common.assertElementPresent(gstNumberLabel);
         common.logPrint("'GST Number' label is displayed");
 
-        common.logPrint("Step:: Verify 'Address' label is displayed");
-        common.assertElementPresent(addressLabel);
-        common.logPrint("'Address' label is displayed");
     }
 
     public void verifyChangePasswordPageLabelsAndFields() {
@@ -157,11 +183,36 @@ public class profilePage extends Locators {
         common.logPrint("'Change Password' button is displayed");
     }
 
+    public void clickOnTheCloseIconBtnOnCongratulationPopUp(){
 
+        common.waitUntilElementToBeVisible(closeIconOnCongratulation);
+        common.click(closeIconOnCongratulation);
 
+    }
 
+    public void verifyPlanIsShowingProperlyOnProfilePage(){
 
+        common.waitUntilElementToBeVisible(plansMenu);
+        common.click(plansMenu);
 
+        common.waitUntilElementToBeVisible(getPlanDetail);
+        String planName = common.getText(getPlanDetail);
+
+        common.assertTwoValuesAreEqual(planName, "Trial");
+
+    }
+
+    public void verifyProfilePageDetails(String name, String lastName, String email, String mobileNum){
+
+        common.logPrint("Step:: Get values from the profile page and compare value");
+        common.pause(2);
+        common.waitUntilElementToBeVisible(firstNameInpProfile);
+        String getName = common.getText(firstNameInpProfile);
+        common.logPrint("The name is: "+getName);
+
+        common.assertTwoValuesAreEqual(getName, name);
+
+    }
 
 
 }
