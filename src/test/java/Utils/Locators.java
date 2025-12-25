@@ -823,9 +823,9 @@ public class Locators extends BasePage {
     public static String CMGMTHEADER= "//h6[text()='Company Management']";
     public static String CMGMTTOTAL = "//div[@class=\"MuiBox-root css-a7l4db\"]";
     public static String CMGMTSEARCH= "//input[@placeholder=\"Search...\"]";
-    public static String CMGMTFILTER= "//button[contains(@class,'css-1yfm8su')]";
-    public static String CMGMTREFRESH= "//button[contains(@class,'css-q8p1uw')]";
-    public static String CMGMTCREATEBTN= "//button[contains(@class,'css-2y6xkt')]";
+    public static String CMGMTFILTER= "//span[text()='Filters']/parent::button";
+    public static String CMGMTREFRESH= "//span[@class=\"MuiButton-loadingWrapper\"]/parent::button";
+    public static String CMGMTCREATEBTN= "//span[text()='Create']/parent::button";
     public static String CMGMTSR= "//span[text()='#']";
     public static String CMGMTNAME= "//span[text()='Name']";
     public static String CMGMTDESIGNATION= "//span[text()='Designation']";
@@ -834,7 +834,7 @@ public class Locators extends BasePage {
     public static String CMGMTCREATEDDATE= "//span[text()='Created Date']";
     public static String CMGMTACTIONS= "//span[text()='Actions']";
     public static String CMGMTSHOWTEXT= "//p[text()='Show']";
-    public static String CMGMTROWSINPUT= "//div[contains(@class,'css-trm6af-')]";
+    public static String CMGMTROWSINPUT= "//div[@aria-haspopup=\"listbox\"]";
     public static String CMGMTPREVBTN= "//button[@aria-label=\"Go to previous page\"]";
     public static String CMGMTNEXTBTN= "//button[@aria-label=\"Go to next page\"]";
     public static String CMGMTEDITBTN= "(//button[@aria-label=\"Edit\"])[1]";
@@ -843,7 +843,7 @@ public class Locators extends BasePage {
 
     //Company management Create
     public static String CCHEADER = "//h6[text()='Create Company Management']";
-    public static String CCBACKBUTTON = "//button[contains(@class,'css-1i1o7bi')]";
+    public static String CCBACKBUTTON = "//h6[text()='Create Company Management']/preceding-sibling::button[@type=\"button\"]";
     public static String CCANCELBTN = "//span[text()='Cancel']/parent::button";
     public static String CCSAVEBTN = "//span[text()='Save']/parent::button";
     public static String CCNAMELABEL = "//span[text()='Name']";
@@ -871,12 +871,46 @@ public class Locators extends BasePage {
     public static String CDELETEMSGDELETE = "//span[text()='Delete']/parent::button";
 
     public static String CVIEWHEADER = "//p[contains(text(),'View ')]";
-    public static String CVIENAMEINPUT =  "(//div[contains(@class,'css-mid2s2')]/child::input[@type='text'])[1]";
-    public static String CVIEWDESIGINPUT = "(//div[contains(@class,'css-mid2s2')]/child::input[@type='text'])[2]";
-    public static String CVIEWEMAILINPUT = "(//div[contains(@class,'css-mid2s2')]/child::input[@type='text'])[3]";
-    public static String CVIEWPHONEINPUT = "(//div[contains(@class,'css-mid2s2')]/child::input[@type='text'])[4]";
-    public static String CVIEWCANCELBUTTON = "//button[contains(@class,'css-66pmys')]";
+    public static String CVIENAMEINPUT =  "(//span[text()='Name']/following::input[@type=\"text\"])[1]";
+    public static String CVIEWDESIGINPUT = "(//span[text()='Name']/following::input[@type='text'])[2]";
+    public static String CVIEWEMAILINPUT = "(//span[text()='Name']/following::input[@type='text'])[3]";
+    public static String CVIEWPHONEINPUT = "(//span[text()='Name']/following::input[@type='text'])[4]";
+    public static String CVIEWCANCELBUTTON = "//h6[text()='Create Company Management']/preceding-sibling::button[@type=\"button\"]";
     public static String CCREATEDDATEVAL = "//div[@data-rowindex=\"0\"]/child::div[@data-colindex=\"5\"]";
+
+    //WhatsApp campaign  locators
+    public static String CWC_Header = "//h6[normalize-space()='Create WhatsApp Campaign']";
+    public static String WCViewHeader = "//h6[normalize-space()='View WhatsApp Campaign']";
+    public static String SearchTex ="//div[@role='gridcell' and @data-field='name']";
+    public static String WC_Search = "//input[@placeholder='Search...']";
+    public static String V_RetryRerun = "//button[.//span[normalize-space()='Retry Failed']]";
+    public static String  RerunSuccessMSG ="//div[normalize-space()='WhatsApp campaign start for rerun successfully!']";
+    public static String V_back = "//h6[normalize-space()='View WhatsApp Campaign']/preceding-sibling::button";
+    public static String C_Name = "//input[@placeholder='Enter campaign name']";
+    public static String C_WhatsAppTem = "//input[@placeholder='Select template']";
+    public static String C_Category = "//input[@placeholder='Create or Select Category']";
+    public static String C_Product ="//input[@placeholder='Select product']";
+    public static String C_ContactGroup = "//input[@placeholder='Select Contact Groups']";
+    public static String C_SelectContact = "//input[@type='checkbox']/parent::span/parent::div[@tabindex='0']";
+    public static String C_SelectContactcheckbox="(//div[@role='row'])[1]//div[@data-field='select']//span[contains(@class,'MuiCheckbox-root')]";
+    public static String C_Contacts ="//p[text()='Contacts']";
+    public static String Contact_RequiredMessage="//div[text()='Please select at least one contact or contact group.']";
+    public static String Search_ContactonCampaignpage="//input[@placeholder='Search contacts...']";
+    public static String SearchedResult_ContactonCampaignpage="//div[@class='MuiDataGrid-row MuiDataGrid-row--firstVisible MuiDataGrid-row--lastVisible']";
+
+    //    //View WhatsApp Campaign
+    public static String  CAMPAIGNVIEW ="//button[@aria-label='View']";
+    public static String WProduct = "//label[.//span[text()='Product']]/following::input[1]";
+    public static String WCategory = "//label[.//span[text()='Category']]/following::input[1]";
+    public static String WTemplate = "//label[.//span[text()='WhatsApp Template']]/following::input[1]";
+    public static String WName ="//label[.//span[text()='Campaign Name']]/following::input[1]";
+    public static String WPhoneNumber="//*[contains(text(),'+91 77749 74990')]";
+
+
+
+
+
+
 
 
 
