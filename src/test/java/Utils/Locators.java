@@ -66,7 +66,8 @@ public class Locators extends BasePage {
 
 
     //Locators for the Product Page
-    public static String PRODUCTMENU = "//span[text() ='Product']";
+
+    public static String PRODUCTMENU = "//span[text() ='Product / Service']";
     public static String SRNO = "//span[text() ='#']";
     public static String PRODUCTNAMES = "//span[text() ='Product Name']";
     public static String CATEGORY = "//span[text() ='Category']";
@@ -615,7 +616,36 @@ public class Locators extends BasePage {
     public static String ETCLPINFO = "//p[contains(text(),'You are receiving this communication from')]";
 //    public static String ETCREATEHEADER = "//p[contains(text(),'To stop receiving future emails, please click')]";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //Onboarding module xpath
+
 
     //OnBoarding
     public static String monthlyBtn = "//span[contains(text(),'Monthly')]/ancestor::button";
