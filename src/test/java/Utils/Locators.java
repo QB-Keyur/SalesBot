@@ -459,7 +459,7 @@ public class Locators extends BasePage {
     public static String KBCWEBSITEBUTTON = "//button[@type='button']/following::span[text()='Website']";
     public static String KBCQABUTTON = "//button[@type='button']/following::span[text()='Q&A']";
     public static String KBCFILESUPLOAD = "//h6[text()='Upload']";
-    public static String KBCFILESUPLOADINPUT = "//div[@class=\"flex flex-col items-center gap-4\"]";
+    public static String KBCFILESUPLOADINPUT = "//div[@class=\"flex flex-col items-center gap-4\"] | //div[@class=\"MuiBox-root css-17qkz0m\"]";
     public static String KBCUPLOADTEXT1 = "//p[text()='Select your file or drag and drop (Max 10 MB)']";
     public static String KBCUPLOADTEXT2 = "//p[text()='Allowed formats: (.docx, .pptx, .pdf, .txt, .jpg, .png, .jpeg, .md)']";
     public static String KBCCANCELBUTTON = "//button[@type='button']/child::span[contains(text(),'Cancel')]";
@@ -484,7 +484,7 @@ public class Locators extends BasePage {
     public static String KBCWEBHEADER = "//h6[text()='Add Links']";
     public static String KBCWEBINPUT = "//input[@placeholder=\"http://www.example.com/\"]";
     public static String KBCWEBADD = "//button[@type='button']/following::span[text()='Add Link']";
-    public static String KBCWEBADDEDDELETE = "//th[text()='Title']/following::button";
+    public static String KBCWEBADDEDDELETE = "//th[text()='Title']/following::button | (//th[text()='Status']/following::td/button)[1]";
     //KB Q&A
     public static String KBCQAHEADER = "//h6[text()='Add Q&A']";
     public static String KBCQATITLE = "(//span[text()='Title'])[2]";
@@ -492,7 +492,7 @@ public class Locators extends BasePage {
     public static String KBCQATITLEQ1 = "//span[text()='Question 1']";
     public static String KBCQATITLEQ1INPUT = "(//input[@placeholder=\"Ex: How do I request a refund?\"])[1]";
     public static String KBCADDBUTTON = "//button[@type='button']/following::span[text()='Add Question']";
-    public static String KBCANSWER = "//p[text()='Answer']";
+    public static String KBCANSWER = "//p[text()='Answer'] | //h6[text()='Answer']";
     public static String KBCANSWERINPUT = "(//div[@class=\"ql-editor ql-blank\"])[2]";
     public static String KBCQAADDBUTTON = "//button[@type='button']//span[text()='Add Q&A']";
     //KB Mandatory Fields
@@ -937,6 +937,47 @@ public class Locators extends BasePage {
     public static String WTemplate = "//label[.//span[text()='WhatsApp Template']]/following::input[1]";
     public static String WName ="//label[.//span[text()='Campaign Name']]/following::input[1]";
     public static String WPhoneNumber="//*[contains(text(),'+91 77749 74990')]";
+
+    // Company Portfolio
+    public static String COMPANYPORTFOLIO = "//button[text()='Company Portfolio']";
+    public static String CPHEADER = "//h6[text()='Company Portfolio']";
+    public static String CPSEARCH= "//input[@placeholder=\"Search...\"]";
+    public static String CPFILTER= "//span[text()='Filters']/parent::button";
+    public static String CPREFRESH= "//span[@class=\"MuiButton-loadingWrapper\"]/parent::button";
+    public static String CPCREATEBTN= "//span[text()='Create']/parent::button";
+    public static String CPSR= "//span[text()='#']";
+    public static String CPDESC= "//span[text()='Description']";
+    public static String CPCREATEDATE= "//span[text()='Created Date']";
+    public static String CPACTION= "//span[text()='Actions']";
+    public static String CPSHOWTEXT= "//p[text()='Show']";
+    public static String CPROWSINPUT= "//div[@aria-haspopup=\"listbox\"]";
+    public static String CPPREVBTN= "//button[@aria-label=\"Go to previous page\"]";
+    public static String CPNEXTBTN= "//button[@aria-label=\"Go to next page\"]";
+    public static String CPVIEWBTN= "//button[@aria-label=\"View\"]";
+    public static String CPEDITBTN= "//button[@aria-label=\"Edit\"]";
+    public static String CPSEARCHRESULT= "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"name\" ]";
+
+    //Company Portfolio Create
+    public static String CPCHEADER = "//h6[text()='Create Company Portfolio']";
+    public static String CPCBACKBUTTON = "//h6[text()='Create Company Portfolio']/preceding-sibling::button[@type=\"button\"]";
+    public static String CPCANCELBTN = "//span[text()='Cancel']/parent::button";
+    public static String CPCSAVEBTN = "//span[text()='Save']/parent::button";
+    public static String CPCNAMELABEL = "//span[text()='Name']";
+    public static String CPCDESC = "//span[text()='Description']";
+    public static String CPCSUCESS = "//div[text()='Company Portfolio created successfully']";
+    public static String CPCEDITMSG = "//div[text()='Company Portfolio updated successfully']";
+
+    public static String CPCNAMEINPUT = "(//span[text()='Name']/following::input[@type=\"text\"])[1]";
+    public static String CPCDESCINPUT = "(//span[text()='Name']/following::input[@type=\"text\"])[2]";
+    public static String CPCDESCINPUTVIEW = "//textarea[1]";
+
+
+    public static String CPCEDITHEADER = "//h6[text()='Update Company Portfolio']";
+
+
+
+
+
 
 
 

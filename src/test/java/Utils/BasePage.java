@@ -57,6 +57,7 @@ public class BasePage {
     public EmailCampaignPage emailCampaignPage;
     public UserManagementPage userManagementPage;
     public CompanyManagementPage companyManagementPage;
+    public CompanyPortfolioPage companyPortfolioPage;
 
     protected List<String> stringList = new ArrayList<>();
 
@@ -172,6 +173,7 @@ public class BasePage {
         emailCampaignPage = new EmailCampaignPage(getDriver());
         userManagementPage = new UserManagementPage(getDriver());
         companyManagementPage = new CompanyManagementPage(getDriver());
+        companyPortfolioPage = new CompanyPortfolioPage(getDriver());
         steps.set(1);
         Common.printCurrentTime("Starting Time");
         getDriver().get(EnvConfig.getWebUrl());
@@ -222,8 +224,8 @@ public class BasePage {
 
         Common.printCurrentTime("Ending Time");
         getDriver().manage().deleteAllCookies();
-        getDriver().quit();
-        driver.remove();
+//        getDriver().quit();
+//        driver.remove();
     }
 
     public void makeScreenshot(WebDriver driver, String screenshotName) {

@@ -391,7 +391,7 @@ public class ProductPage extends Locators {
     public void horizontalView() {
         goToProductPage();
         common.pause(2);
-        common.validateHorizontalViewCardCount("MuiBox-root css-a7l4db");
+        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
 //        common.pause(2);
 //
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
