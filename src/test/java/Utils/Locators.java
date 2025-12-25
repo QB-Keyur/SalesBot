@@ -441,6 +441,8 @@ public class Locators extends BasePage {
     public static String KBVIEW = "//button[@aria-label=\"View\"]";
     public static String KBVIEWINPUTDATE = "(//input[@type='text'])[4]";
     public static String KBVIEWINPUTNAME = "(//input[@type='text'])[2]";
+
+
     //KB Create
     public static String KBCHEADER = "//h6[text()='Create Knowledge Base']";
     public static String KBCBACKBUTTON = "//button[@class=\"MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-mfslm7\"]";
