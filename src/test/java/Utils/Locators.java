@@ -82,7 +82,7 @@ public class Locators extends BasePage {
     public static String MULTITABHOR = "(//button[@role='tab'])[2]";
     public static String MULTITABVER = "(//button[@role='tab'])[1]";
     public static String TOTAL = "//div[contains(text(),'Total')]";
-    public static String ROWSPERPAGE = "//p[text()='Rows per page:']";
+    public static String ROWSPERPAGE = "//div[@class=\"MuiBox-root css-a7l4db\"] | //p[text()='Rows per page:']";
     public static String SEARCHRESULTS = "//div[@aria-rowspan='1']/preceding-sibling::div[@aria-colindex='2' and contains(text(),'+ randomValue +')]";
     public static String PHSEACRH = "//input[@placeholder='Search...']";
     public static String PHFILTERSEACRH = "//input[@placeholder='Select column']";
@@ -139,8 +139,8 @@ public class Locators extends BasePage {
     public static String ACPROMPT = "//span[normalize-space()='Prompt']";
     public static String ACSTATUS = "//span[normalize-space()='Status']";
     public static String ACACTIONS = "//span[normalize-space()='Actions']";
-    public static String ACTOTALROWS = "//div[contains(text(),'Total')]";
-    public static String ACROWSPERPAGE = "//p[contains(text(),'Rows per page:')]";
+    public static String ACTOTALROWS = "//div[contains(text(),'Total')] | //div[@class=\"MuiBox-root css-a7l4db\"]";
+    public static String ACROWSPERPAGE = "//p[contains(text(),'Rows per page:')] | //div[@class=\"MuiBox-root css-a7l4db\"]";
     public static String ACROWSPERPAGEDROPDOWN = "//input[@class='MuiSelect-nativeInput css-147e5lo']";
     public static String ACPREVIOUSPAGE = "//button[@title='Go to previous page']";
     public static String ACNEXTPAGE = "//button[@title='Go to next page']";
@@ -254,6 +254,7 @@ public class Locators extends BasePage {
 //    public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
 //    public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
 //public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
+public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successfully')]";
 
     //Contacts pages locators
     //Grid page

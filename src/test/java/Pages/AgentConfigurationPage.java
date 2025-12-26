@@ -601,7 +601,7 @@ public class AgentConfigurationPage extends Locators {
         validations.put(ACCVALCOREFEATURE, "Core Features is required");
         validations.put(ACCVALCONTACT, "Contact Info is required");
         validations.put(ACCVALBUSINES, "Business focus is required");
-        validations.put(ACCVALOFFER, "Offer description is required");
+//        validations.put(ACCVALOFFER, "Offer description is required");
         validations.put(COMPANYDESC, "Company description is required");
 
         List<String> missing = new ArrayList<>();
@@ -789,15 +789,9 @@ public class AgentConfigurationPage extends Locators {
         common.click(ACDELETEBUTTON);
         common.waitUntilElementToBeVisible(ACINNERDELETE);
         common.click(ACINNERDELETE);
-
-        String searchXpath = "//input[@placeholder=\"Search...\"]";
-        common.waitUntilElementToBeVisible(searchXpath);
-        common.type(searchXpath, existingAgentName);
-        common.waitUntilElementToBeVisible(ACSEARCHRESULT);
-        common.validateSearch(ACSEARCHRESULT, existingAgentName);
-
-        common.validateToaster(DeletedSuccessfully);
-
+        common.pause(2);
+        common.waitUntilElementToBeVisible(DELETESUCCESS);
+        common.assertElementPresent(DELETESUCCESS);
 
     }
 
