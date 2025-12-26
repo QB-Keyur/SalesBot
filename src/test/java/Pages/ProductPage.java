@@ -151,10 +151,9 @@ public class ProductPage extends Locators {
     }
 
     public void validateSorting(int columnIndex, String type, String dateFormat, SortOrder order) {
-        goToProductPage();
 //
-        By header = By.xpath("//div[@aria-colindex=" + columnIndex + "]");
-        By cellLocator = By.xpath("//div[@aria-colindex=" + columnIndex + "]");
+        By header = By.xpath("(//div[@role='columnheader' and @aria-colindex='" + columnIndex + "'])[1]");
+        By cellLocator = By.xpath("//div[@role='row' and not(@aria-rowindex='1')]//div[@aria-colindex='" + columnIndex + "']");
 
         List<WebElement> beforeCells = driver.findElements(cellLocator);
         List<String> beforeTextValues = beforeCells.stream()
@@ -180,9 +179,9 @@ public class ProductPage extends Locators {
                 beforeFirst = firstCell.getText().trim();
             } catch (Exception ignored) {
             }
-
-//            WebElement headerEl = wait.until(ExpectedConditions.elementToBeClickable(header));
-//            headerEl.click();
+            WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+            WebElement headerEl = wait.until(ExpectedConditions.elementToBeClickable(header));
+            headerEl.click();
 
             try {
                 WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));

@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
+import javax.swing.*;
+
 public class CompanyManagementTest extends BasePage {
 
 
@@ -135,6 +137,13 @@ public class CompanyManagementTest extends BasePage {
         common.logPrint("Verifying created date is current date in Company Management");
         loginWithAdminUser();
         companyManagementPage.verifyCreatedDate();
+    }
+
+    @Test
+    public void validateSorting(){
+        loginWithAdminUser();
+        companyManagementPage.goToCompanyManagementPage();
+        productPage.validateSorting(2, "int", null, SortOrder.DESCENDING);
     }
 
 
