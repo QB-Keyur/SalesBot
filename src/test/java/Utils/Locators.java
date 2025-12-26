@@ -81,7 +81,7 @@ public class Locators extends BasePage {
     public static String CREATE = "//button[@type='button']//span[normalize-space(.)='Create']";
     public static String MULTITABHOR = "(//button[@role='tab'])[2]";
     public static String MULTITABVER = "(//button[@role='tab'])[1]";
-    public static String TOTAL = "//div[contains(text(),'Total')]";
+    public static String TOTAL = "//div[contains(text(),'Total')] | //div[@class=\"MuiBox-root css-a7l4db\"]";
     public static String ROWSPERPAGE = "//div[@class=\"MuiBox-root css-a7l4db\"] | //p[text()='Rows per page:']";
     public static String SEARCHRESULTS = "//div[@aria-rowspan='1']/preceding-sibling::div[@aria-colindex='2' and contains(text(),'+ randomValue +')]";
     public static String PHSEACRH = "//input[@placeholder='Search...']";
