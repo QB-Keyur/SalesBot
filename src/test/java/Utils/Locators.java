@@ -953,34 +953,6 @@ public class Locators extends BasePage {
     public static String CVIEWCANCELBUTTON = "//span[text()='Cancel']/parent::button";
     public static String CCREATEDDATEVAL = "//div[@data-rowindex=\"0\"]/child::div[@data-colindex=\"5\"]";
 
-    //WhatsApp campaign  locators
-    public static String CWC_Header = "//h6[normalize-space()='Create WhatsApp Campaign']";
-    public static String WCViewHeader = "//h6[normalize-space()='View WhatsApp Campaign']";
-    public static String SearchTex ="//div[@role='gridcell' and @data-field='name']";
-    public static String WC_Search = "//input[@placeholder='Search...']";
-    public static String V_RetryRerun = "//button[.//span[normalize-space()='Retry Failed']]";
-    public static String  RerunSuccessMSG ="//div[normalize-space()='WhatsApp campaign start for rerun successfully!']";
-    public static String V_back = "//h6[normalize-space()='View WhatsApp Campaign']/preceding-sibling::button";
-    public static String C_Name = "//input[@placeholder='Enter campaign name']";
-    public static String C_WhatsAppTem = "//input[@placeholder='Select template']";
-    public static String C_Category = "//input[@placeholder='Create or Select Category']";
-    public static String C_Product ="//input[@placeholder='Select product']";
-    public static String C_ContactGroup = "//input[@placeholder='Select Contact Groups']";
-    public static String C_SelectContact = "//input[@type='checkbox']/parent::span/parent::div[@tabindex='0']";
-    public static String C_SelectContactcheckbox="(//div[@role='row'])[1]//div[@data-field='select']//span[contains(@class,'MuiCheckbox-root')]";
-    public static String C_Contacts ="//p[text()='Contacts']";
-    public static String Contact_RequiredMessage="//div[text()='Please select at least one contact or contact group.']";
-    public static String Search_ContactonCampaignpage="//input[@placeholder='Search contacts...']";
-    public static String SearchedResult_ContactonCampaignpage="//div[@class='MuiDataGrid-row MuiDataGrid-row--firstVisible MuiDataGrid-row--lastVisible']";
-
-    //    //View WhatsApp Campaign
-    public static String  CAMPAIGNVIEW ="//button[@aria-label='View']";
-    public static String WProduct = "//label[.//span[text()='Product']]/following::input[1]";
-    public static String WCategory = "//label[.//span[text()='Category']]/following::input[1]";
-    public static String WTemplate = "//label[.//span[text()='WhatsApp Template']]/following::input[1]";
-    public static String WName ="//label[.//span[text()='Campaign Name']]/following::input[1]";
-    public static String WPhoneNumber="//*[contains(text(),'+91 77749 74990')]";
-
     // Company Portfolio
     public static String COMPANYPORTFOLIO = "//button[text()='Company Portfolio']";
     public static String CPHEADER = "//h6[text()='Company Portfolio']";
