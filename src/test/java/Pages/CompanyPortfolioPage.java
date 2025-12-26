@@ -7,6 +7,8 @@ import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -293,7 +295,20 @@ public class CompanyPortfolioPage extends Locators {
         common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
 
+    public void verifyCreatedDate(){
+        verifyAddingACompanyPortfolio();
+        String dateFromGrid = common.getText("//div[@data-rowindex=\"0\"]/child::div[@data-colindex=\"3\"]").trim();
 
+        String actualDate = dateFromGrid.split(" ")[0];
+
+        String currentDate = LocalDate.now()
+                .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        common.logPrint("Grid Date: " + actualDate + " | Current Date: " + currentDate);
+
+        Assert.assertEquals(actualDate, currentDate, "Created date mismatch");
+
+    }
 
 
 }

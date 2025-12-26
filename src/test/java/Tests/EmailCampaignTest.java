@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
+import javax.swing.*;
+
 public class EmailCampaignTest extends BasePage {
 
     private static final Logger log = LoggerFactory.getLogger(EmailCampaignTest.class);
@@ -98,5 +100,12 @@ public class EmailCampaignTest extends BasePage {
         common.logPrint("Verifying Email Campaign view");
         loginWithAdminUser();
         emailCampaignPage.viewEmailCampaign();
+    }
+
+    @Test
+    public void validateSorting(){
+        loginWithAdminUser();
+        emailCampaignPage.goToEmailCampaignPage();
+        productPage.validateSorting(2, "int", null, SortOrder.DESCENDING);
     }
 }

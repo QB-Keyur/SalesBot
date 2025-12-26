@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
+import javax.swing.*;
+
 public class WhatsAppTemplateTest extends BasePage {
 
     private static final Logger log = LoggerFactory.getLogger(WhatsAppTemplateTest.class);
@@ -92,6 +94,13 @@ public class WhatsAppTemplateTest extends BasePage {
         common.logPrint("Verifying Meta Status Sync functionality in WhatsApp Template editor");
         loginWithAdminUser();
         whatsAppTemplatePage.verifyRefreshButtonUpdatesTheServerSyncStatus();
+    }
+
+    @Test
+    public void validateSorting(){
+        loginWithAdminUser();
+        whatsAppTemplatePage.goToWhatsAppTemplatePage();
+        productPage.validateSorting(2, "int", null, SortOrder.DESCENDING);
     }
 
 }

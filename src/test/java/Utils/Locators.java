@@ -76,7 +76,7 @@ public class Locators extends BasePage {
     public static String CREATEDDATE = "//span[text() ='Created Date']";
     public static String ACTIONS = "//span[text() ='Actions']";
     public static String SEARCH = "//input[@placeholder='Search...']";
-    public static String REFRESH = "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-15wqzvf'] | //span[contains(@class,'css-1sh91j5')]/parent::button[contains(@class,'css-q8p1uw')]";
+    public static String REFRESH = "//span[text()='Filters']/following::button[1] | //span[contains(@class,'css-1sh91j5')]/parent::button[contains(@class,'css-q8p1uw')]";
     public static String FILTERS = "//button[@type='button']//span[normalize-space(.)='Filters']";
     public static String CREATE = "//button[@type='button']//span[normalize-space(.)='Create']";
     public static String MULTITABHOR = "(//button[@role='tab'])[2]";

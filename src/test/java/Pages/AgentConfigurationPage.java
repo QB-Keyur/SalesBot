@@ -301,68 +301,69 @@ public class AgentConfigurationPage extends Locators {
 
         goToAgentConfigurationPage();
         common.pause(2);
+        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        // Use contains(@class, 'MuiTablePagination-displayedRows') to avoid fragile generated suffix
-        WebElement text = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
-        ));
-
-        String paginationText = text.getText(); // example: "1–8 of 8"
-
-        // Extract the last number robustly. First try simple "of" approach, fallback to regex extracting last number.
-        String totalStr = paginationText.replaceAll(".*of\\s*", "").trim();
-        int totalRows;
-        try {
-            totalRows = Integer.parseInt(totalStr);
-        } catch (NumberFormatException nfe) {
-            // fallback: extract last number via regex
-            java.util.regex.Matcher m = java.util.regex.Pattern.compile("(\\d+)$").matcher(paginationText.trim());
-            if (m.find()) {
-                totalRows = Integer.parseInt(m.group(1));
-            } else {
-                throw new RuntimeException("Failed to parse total rows from pagination text: '" + paginationText + "'");
-            }
-        }
-
-        // Switch to horizontal view and wait for UI to render
-        common.waitUntilElementToBeVisible(MULTITABHOR);
-        common.click(MULTITABHOR);
-        common.pause(2); // small pause to let layout update
-
-        By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
-
-        // Wait up to a short duration for the expected number of cards to appear (helps with async loading)
-        try {
-            WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            shortWait.until(ExpectedConditions.numberOfElementsToBe(cardLocator, totalRows));
-        } catch (Exception ignored) {
-            // ignore - we'll still fetch current number and assert (this avoids hard failure if wait timed out)
-        }
-
-        List<WebElement> cardList = driver.findElements(cardLocator);
-        int actualCount = cardList.size();
-        // common.highlightElements(cardList);
-
-        // ALWAYS print Expected vs Actual
-        String msg1 = "Expected number of cards (pagination): " + totalRows;
-        String msg2 = "Actual number of cards displayed:      " + actualCount;
-        System.out.println("=======================================");
-        System.out.println(msg1);
-        System.out.println(msg2);
-        System.out.println("=======================================");
-
-        // If your Common has a logger helper, log there too
-        try {
-            common.logPrint(msg1);
-            common.logPrint(msg2);
-        } catch (Exception ignored) {
-            // ignore if common.logPrint isn't present / fails
-        }
-
-        // Final assertion
-        Assert.assertEquals(actualCount, totalRows, "Card count does not match pagination total!");
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//
+//        // Use contains(@class, 'MuiTablePagination-displayedRows') to avoid fragile generated suffix
+//        WebElement text = wait.until(ExpectedConditions.visibilityOfElementLocated(
+//                By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
+//        ));
+//
+//        String paginationText = text.getText(); // example: "1–8 of 8"
+//
+//        // Extract the last number robustly. First try simple "of" approach, fallback to regex extracting last number.
+//        String totalStr = paginationText.replaceAll(".*of\\s*", "").trim();
+//        int totalRows;
+//        try {
+//            totalRows = Integer.parseInt(totalStr);
+//        } catch (NumberFormatException nfe) {
+//            // fallback: extract last number via regex
+//            java.util.regex.Matcher m = java.util.regex.Pattern.compile("(\\d+)$").matcher(paginationText.trim());
+//            if (m.find()) {
+//                totalRows = Integer.parseInt(m.group(1));
+//            } else {
+//                throw new RuntimeException("Failed to parse total rows from pagination text: '" + paginationText + "'");
+//            }
+//        }
+//
+//        // Switch to horizontal view and wait for UI to render
+//        common.waitUntilElementToBeVisible(MULTITABHOR);
+//        common.click(MULTITABHOR);
+//        common.pause(2); // small pause to let layout update
+//
+//        By cardLocator = By.xpath("//div[contains(@class,'MuiCard-root')]");
+//
+//        // Wait up to a short duration for the expected number of cards to appear (helps with async loading)
+//        try {
+//            WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//            shortWait.until(ExpectedConditions.numberOfElementsToBe(cardLocator, totalRows));
+//        } catch (Exception ignored) {
+//            // ignore - we'll still fetch current number and assert (this avoids hard failure if wait timed out)
+//        }
+//
+//        List<WebElement> cardList = driver.findElements(cardLocator);
+//        int actualCount = cardList.size();
+//        // common.highlightElements(cardList);
+//
+//        // ALWAYS print Expected vs Actual
+//        String msg1 = "Expected number of cards (pagination): " + totalRows;
+//        String msg2 = "Actual number of cards displayed:      " + actualCount;
+//        System.out.println("=======================================");
+//        System.out.println(msg1);
+//        System.out.println(msg2);
+//        System.out.println("=======================================");
+//
+//        // If your Common has a logger helper, log there too
+//        try {
+//            common.logPrint(msg1);
+//            common.logPrint(msg2);
+//        } catch (Exception ignored) {
+//            // ignore if common.logPrint isn't present / fails
+//        }
+//
+//        // Final assertion
+//        Assert.assertEquals(actualCount, totalRows, "Card count does not match pagination total!");
     }
 
     public void verifyCreatePageElements() {
