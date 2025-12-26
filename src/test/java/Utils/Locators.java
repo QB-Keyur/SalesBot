@@ -974,6 +974,12 @@ public class Locators extends BasePage {
 
     public static String CPCEDITHEADER = "//h6[text()='Update Company Portfolio']";
 
+    public static String CPDELETE1 = "//h6[text()='Delete Company Portfolio']";
+    public static String CPDELETE2 = "//p[text()='Are you sure you want to permanently delete this Company Portfolio?']";
+    public static String CPDELETECANCEL = "//span[text()='Cancel']/parent::button";
+    public static String CPDELETEDELETE = "//span[text()='Delete']/parent::button";
+
+
 
 
 

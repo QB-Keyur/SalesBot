@@ -268,10 +268,10 @@ public class CompanyPortfolioPage extends Locators {
         common.waitUntilElementToBeClickable(CMGMTDELETEBTN);
         common.click(CMGMTDELETEBTN);
 
-        common.assertElementPresent(CDELETEMSG2);
-        common.assertElementPresent(CDELETEMSG3);
-        common.assertElementPresent(CDELETEMSGCANCEL);
-        common.assertElementPresent(CDELETEMSGDELETE);
+        common.assertElementPresent(CPDELETE1);
+        common.assertElementPresent(CPDELETE2);
+        common.assertElementPresent(CPDELETECANCEL);
+        common.assertElementPresent(CPDELETEDELETE);
 
         common.click(CDELETEMSGCANCEL);
 
