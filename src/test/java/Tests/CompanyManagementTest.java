@@ -17,6 +17,13 @@ public class CompanyManagementTest extends BasePage {
     }
 
     @Test
+    public void verifyAddingAValidCompanyManagement(){
+        common.logPrint("Verifying adding a valid Company Management");
+        loginWithAdminUser();
+        companyManagementPage.verifyAddingAValidCompanyManagement();
+    }
+
+    @Test
     public void verifyCompanyManagementElements(){
         common.logPrint("Verifying Company Management page UI elements");
         loginWithAdminUser();
@@ -58,12 +65,7 @@ public class CompanyManagementTest extends BasePage {
         companyManagementPage.verifyAddingABlankCompanyManagement();
     }
 
-    @Test
-    public void verifyAddingAValidCompanyManagement(){
-        common.logPrint("Verifying adding a valid Company Management");
-        loginWithAdminUser();
-        companyManagementPage.verifyAddingAValidCompanyManagement();
-    }
+
 
     @Test
     public void verifyViewingCompanyManagement(){

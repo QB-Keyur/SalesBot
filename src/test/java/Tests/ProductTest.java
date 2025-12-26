@@ -15,6 +15,12 @@ public class ProductTest extends BasePage {
     }
 
     @Test
+    public void verifyAddingANewProductWithValidData() {
+        loginWithAdminUser();
+        productPage.verifyAddingANewProductWithValidData();
+    }
+
+    @Test
     public void verifyColumns() {
         loginWithAdminUser();
         productPage.verifyColumns();
@@ -50,11 +56,7 @@ public class ProductTest extends BasePage {
         productPage.validatePlaceHolders();
     }
 
-    @Test
-    public void verifyAddingANewProductWithValidData() {
-        loginWithAdminUser();
-        productPage.verifyAddingANewProductWithValidData();
-    }
+
 
     @Test
     public void editingAProduct(){
