@@ -166,7 +166,7 @@
 <!--                        <suiteXmlFile>build_xmls/WhatsAppCampaign.xml</suiteXmlFile>-->
 
                         <!-- ____________________________________________ Keyur Test Cases ___________________________________________________________________ -->
-                        <suiteXmlFile>build_xmls/AgentConfiguration.xml</suiteXmlFile>
+<!--                        <suiteXmlFile>build_xmls/AgentConfiguration.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/KnowledgeBase.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/EmailCampaign.xml</suiteXmlFile>-->
                        <suiteXmlFile>build_xmls/Product.xml</suiteXmlFile>
