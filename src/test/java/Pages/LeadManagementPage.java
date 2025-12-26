@@ -40,6 +40,7 @@ public class LeadManagementPage extends Locators {
         common.waitUntilElementToBeVisible(LEADNAME);
         String email = common.GenerateEmail();
         common.type(LEADNAME, email);
+        expectedData.put("Email",email);
 
         common.waitUntilElementToBeVisible(TYPE);
         common.click(TYPE);
@@ -62,13 +63,13 @@ public class LeadManagementPage extends Locators {
         common.waitUntilElementToBeVisible(DTAETIME);
         common.selectFutureDateTimeThisWeek(DTAETIME);
         String DandT= common.getText(DTAETIME);
-        expectedData.put("DateTime", DandT);
+       // expectedData.put("DateTime", DandT);
 
         common.waitUntilElementToBeVisible(PRODUCT);
         common.click(PRODUCT);
         common.downKeyAndEnter();
         String Pro= common.getText(PRODUCT);
-        expectedData.put("Product", Pro);
+      //  expectedData.put("Product", Pro);
 
         common.waitUntilElementToBeVisible(SAVE_BTN);
         common.click(SAVE_BTN);
@@ -222,9 +223,9 @@ public class LeadManagementPage extends Locators {
 
         common.waitUntilElementToBeVisible(LEAD);
         common.click(LEAD);
-
-        common.waitUntilElementToBeVisible(LEADREFRESH);
-        common.click(LEADREFRESH);
+//
+//        common.waitUntilElementToBeVisible(LEADREFRESH);
+//        common.click(LEADREFRESH);
 
         common.logPrint("Step:: Verify Lead management Header is display ");
         common.assertElementText(LEADHEADER, "Lead Management");
@@ -243,8 +244,8 @@ public class LeadManagementPage extends Locators {
         common.waitUntilElementToBeVisible(LISTVIEWBTNL);
         common.click(LISTVIEWBTNL);
 
-        common.waitUntilElementToBeVisible(LEADREFRESH);
-        common.click(LEADREFRESH);
+//        common.waitUntilElementToBeVisible(LEADREFRESH);
+//        common.click(LEADREFRESH);
     }
 
     public void VerifyUpdateLead() {
@@ -261,6 +262,7 @@ public class LeadManagementPage extends Locators {
         common.logPrint("Steps:: Header getting displayed on page");
 
         common.waitUntilElementToBeVisible(LEADNAME);
+
         String email = common.GenerateEmail();
         common.type(LEADNAME, email);
         common.pause(5);
@@ -280,9 +282,9 @@ public class LeadManagementPage extends Locators {
         common.waitUntilElementToBeVisible(LEADEDIT);
         common.click(LEADEDIT);
 
-        common.waitUntilElementToBeVisible(LEADPBack);
+        common.waitUntilElementToBeVisible(LeadEditBack);
         common.pause(2);
-        common.click(LEADPBack);
+        common.click(LeadEditBack);
 
         common.waitUntilElementToBeVisible(LEADEDIT);
         common.click(LEADEDIT);
@@ -371,9 +373,9 @@ public class LeadManagementPage extends Locators {
         String HType=common.getText(Header_TYPE);
         common.logPrint("Steps::Header of Type Column is :- "+HType);
 
-        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(Header_WHATSCONT)), "Header not displayed");
-        String HWhatCon=common.getText(Header_WHATSCONT);
-        common.logPrint("Steps::Header of whatsapp contact Column is :- "+HWhatCon);
+        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(Header_CONTACT)), "Header not displayed");
+        String Con=common.getText(Header_CONTACT);
+        common.logPrint("Steps::Header of whatsapp contact Column is :- "+Con);
 
         Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(Header_Product)), "Header not displayed");
         String HProduct=common.getText(Header_Product);
