@@ -349,6 +349,7 @@ public class ProductPage extends Locators {
         driver.findElement(By.xpath(DELETEPRODUCT)).click();
 
         common.click(DELETECONFIRMPRODUCT);
+        common.waitUntilElementToBeVisible(DELETEPRODUCTASSERT);
         common.assertElementPresent(DELETEPRODUCTASSERT);
     }
 

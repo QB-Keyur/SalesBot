@@ -907,7 +907,7 @@ public class Locators extends BasePage {
     public static String CVIEWDESIGINPUT = "(//span[text()='Name']/following::input[@type='text'])[2]";
     public static String CVIEWEMAILINPUT = "(//span[text()='Name']/following::input[@type='text'])[3]";
     public static String CVIEWPHONEINPUT = "(//span[text()='Name']/following::input[@type='text'])[4]";
-    public static String CVIEWCANCELBUTTON = "//h6[text()='Create Company Management']/preceding-sibling::button[@type=\"button\"]";
+    public static String CVIEWCANCELBUTTON = "//span[text()='Cancel']/parent::button";
     public static String CCREATEDDATEVAL = "//div[@data-rowindex=\"0\"]/child::div[@data-colindex=\"5\"]";
 
     //WhatsApp campaign  locators

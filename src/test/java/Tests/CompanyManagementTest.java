@@ -67,8 +67,6 @@ public class CompanyManagementTest extends BasePage {
         companyManagementPage.verifyAddingABlankCompanyManagement();
     }
 
-
-
     @Test
     public void verifyViewingCompanyManagement(){
         common.logPrint("Verifying viewing Company Management details");
