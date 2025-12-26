@@ -67,8 +67,9 @@ public class LeadManagementTest extends BasePage {
         lead.VerifyHeadesForCreatedLead();
     }
 
-    @Test
-    public void verifyLeadView(){
+    @Test //xpath Updated
+    public void verifyLeadView()
+    {
         loginWithAdminUser();
         lead.verifyViewLead();
     }

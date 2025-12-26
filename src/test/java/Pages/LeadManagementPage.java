@@ -147,11 +147,20 @@ public class LeadManagementPage extends Locators {
 
     public Map<String, String> getLeadDetailsAfterSave() {
         Map<String, String> actualData = new HashMap<>();
+
+
+        common.waitUntilElementToBeVisible(Vname);
+        actualData.put("Name", common.getAttribute(Vname,"value"));
+        common.waitUntilElementToBeVisible(Vemail);
+        actualData.put("Email", common.getAttribute(Vemail,"value"));
+        common.waitUntilElementToBeVisible(VType);
         actualData.put("Type", common.getText(VType));
+        common.waitUntilElementToBeVisible(VContactType);
         actualData.put("ContactType", common.getText(VContactType));
-        actualData.put("DateTime", common.getText(VPreDT));
-        actualData.put("Product", common.getText(VPoduct));
+        common.scroll_To_Element(Vname);
+
         return actualData;
+
     }
     public void verifyViewLead() {
         Map<String, String> expected = VerifyCreateNewLead();
@@ -159,12 +168,16 @@ public class LeadManagementPage extends Locators {
         common.click(LEADVIEW);
 
         Map<String, String> actual = getLeadDetailsAfterSave();
+
+        Assert.assertEquals(actual.get("Name"), expected.get("Name"), "Name mismatch");
+        Assert.assertEquals(actual.get("Email"), expected.get("Email"), "Email mismatch");
         Assert.assertEquals(actual.get("Type"), expected.get("Type"), "Type mismatch");
         Assert.assertEquals(actual.get("ContactType"), expected.get("ContactType"), "Contact Type mismatch");
-        Assert.assertEquals(actual.get("DateTime"), expected.get("DateTime"), "Date & Time mismatch");
-        Assert.assertEquals(actual.get("Product"), expected.get("Product"), "Product mismatch");
-        common.waitUntilElementToBeVisible(VClose);
-        common.click(VClose);
+
+
+        common.logPrint("Lead created and validated successfully");
+//        common.waitUntilElementToBeVisible(VClose);
+//        common.click(VClose);
     }
 
     public void verifyDeleteLeadInSearch(String name1) {

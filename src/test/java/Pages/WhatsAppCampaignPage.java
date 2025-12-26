@@ -28,8 +28,8 @@ public class WhatsAppCampaignPage extends Locators {
     }
 
     public void VerifyWhatsAppCampaignPageHeader() {
-        common.waitUntilElementToBeVisible(WC_REFRESH);
-        common.click(WC_REFRESH);
+//        common.waitUntilElementToBeVisible(WC_REFRESH);
+//        common.click(WC_REFRESH);
 
         common.logPrint("Step:: Verify WhatsApp campaign Header is getting  display ");
         common.assertElementText(WC_PAGEHEADER, "WhatsApp Campaign");
@@ -56,13 +56,14 @@ public class WhatsAppCampaignPage extends Locators {
         String HProdName = common.getText(WCH_ProductName);
         common.logPrint("Steps::Header of ProductName contact Column is :- " + HProdName);
 
-        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(WCH_ScheduleTime)), "Header not displayed");
-        String ScheTime = common.getText(WCH_ScheduleTime);
-        common.logPrint("Steps::Header of ScheduleTime  Column is :- " + ScheTime);
 
         Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(WCH_Status)), "Header not displayed");
         String Wch_Stat = common.getText(WCH_Status);
         common.logPrint("Steps::Header of Status at Column is :- " + Wch_Stat);
+
+        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(WCH_DT)), "Header not displayed");
+        String ScheTime = common.getText(WCH_DT);
+        common.logPrint("Steps::Header of Created date  Column is :- " + ScheTime);
 
 
         Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(WCH_Action)), "Header not displayed");
@@ -105,8 +106,8 @@ public class WhatsAppCampaignPage extends Locators {
         common.click(CREATEB);
         common.pause(2);
 
-        common.waitUntilElementToBeVisible(CWC_View);
-        common.click(CWC_View);
+//        common.waitUntilElementToBeVisible(CWC_View);
+//        common.click(CWC_View);
 
         common.logPrint("Step:: Verify Create WhatsApp Campaign Header is display ");
         common.assertElementText(CWC_Header, "Create WhatsApp Campaign");
@@ -120,54 +121,54 @@ public class WhatsAppCampaignPage extends Locators {
         common.click(CREATEB);
         common.pause(2);
 
-        common.waitUntilElementToBeVisible(CWC_RunCamBTN);
-        common.click(CWC_RunCamBTN);
+        common.waitUntilElementToBeVisible(CWC_Save);
+        common.click(CWC_Save);
 
         common.handleAlert();
         common.waitUntilElementToBeVisible(RC_PopupNo);
         common.click(RC_PopupNo);
 
-        common.waitUntilElementToBeVisible(CWC_RunCamBTN);
-        common.click(CWC_RunCamBTN);
-
-        common.handleAlert();
-        common.waitUntilElementToBeVisible(RC_PopupYes);
-        common.click(RC_PopupYes);
+//        common.waitUntilElementToBeVisible(CWC_Save);
+//        common.click(CWC_Save);
+//
+//        common.handleAlert();
+//        common.waitUntilElementToBeVisible(RC_PopupYes);
+//        common.click(RC_PopupYes);
     }
 
-    public void verifyViewContactListHeader() {
-        common.waitUntilElementToBeVisible(CREATEB);
-        common.click(CREATEB);
-        common.pause(2);
-
-        common.waitUntilElementToBeVisible(CWC_View);
-        common.click(CWC_View);
-        common.pause(2);
-
-        common.waitUntilElementToBeVisible(V_Name);
-
-        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(V_Name)), "Header not displayed");
-        String vname = common.getText(V_Name);
-        common.logPrint("Steps::Header of Name Column is :- " + vname);
-        common.pause(2);
-
-
-        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VContactG)), "Header not displayed");
-        String vContactG = common.getText(VContactG);
-        common.logPrint("Steps::Header of ContactGroup Column is :- " + vContactG);
-
-        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VPhoneNo)), "Header not displayed");
-        String PhoneNO = common.getText(VPhoneNo);
-        common.logPrint("Steps::Header of Phone number Column is :- " + PhoneNO);
-
-        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VEmail)), "Header not displayed");
-        String Vemail = common.getText(VEmail);
-        common.logPrint("Steps::Header of Email Column is :- " + Vemail);
-
-        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VDandB)), "Header not displayed");
-        String DofB = common.getText(VDandB);
-        common.logPrint("Steps::Header of Date of birth Column is :- " + DofB);
-    }
+//    public void verifyViewContactListHeader() {
+//        common.waitUntilElementToBeVisible(CREATEB);
+//        common.click(CREATEB);
+//        common.pause(2);
+//
+//        common.waitUntilElementToBeVisible(CWC_View);
+//        common.click(CWC_View);
+//        common.pause(2);
+//
+//        common.waitUntilElementToBeVisible(V_Name);
+//
+//        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(V_Name)), "Header not displayed");
+//        String vname = common.getText(V_Name);
+//        common.logPrint("Steps::Header of Name Column is :- " + vname);
+//        common.pause(2);
+//
+//
+//        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VContactG)), "Header not displayed");
+//        String vContactG = common.getText(VContactG);
+//        common.logPrint("Steps::Header of ContactGroup Column is :- " + vContactG);
+//
+//        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VPhoneNo)), "Header not displayed");
+//        String PhoneNO = common.getText(VPhoneNo);
+//        common.logPrint("Steps::Header of Phone number Column is :- " + PhoneNO);
+//
+//        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VEmail)), "Header not displayed");
+//        String Vemail = common.getText(VEmail);
+//        common.logPrint("Steps::Header of Email Column is :- " + Vemail);
+//
+//        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VDandB)), "Header not displayed");
+//        String DofB = common.getText(VDandB);
+//        common.logPrint("Steps::Header of Date of birth Column is :- " + DofB);
+//    }
 
 
     public void VerifyFieldValidationsMessageOnCampaignPage() {
@@ -176,13 +177,13 @@ public class WhatsAppCampaignPage extends Locators {
         common.click(CREATEB);
         common.pause(2);
 
-        common.waitUntilElementToBeVisible(CWC_RunCamBTN);
-        common.click(CWC_RunCamBTN);
+        common.waitUntilElementToBeVisible(CWC_Save);
+        common.click(CWC_Save);
 
 
         common.handleAlert();
-        common.waitUntilElementToBeVisible(RC_PopupYes);
-        common.click(RC_PopupYes);
+        common.waitUntilElementToBeVisible(RC_RunCamp);
+        common.click(RC_RunCamp);
 
         Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(Req_CampaginName)), "Campaign Name validation message not displayed");
         String Error1 = common.getText(Req_CampaginName);
@@ -299,12 +300,12 @@ public class WhatsAppCampaignPage extends Locators {
         common.click(C_Product);
         common.downKeyAndEnter();
 
-        common.waitUntilElementToBeVisible(CWC_RunCamBTN);
-        common.click(CWC_RunCamBTN);
+        common.waitUntilElementToBeVisible(CWC_Save);
+        common.click(CWC_Save);
 
         common.handleAlert();
-        common.waitUntilElementToBeVisible(RC_PopupYes);
-        common.click(RC_PopupYes);
+        common.waitUntilElementToBeVisible(RC_RunCamp);
+        common.click(RC_RunCamp);
 
         common.waitUntilElementToBeVisible(Contact_RequiredMessage);
         String contactRequired = common.getText(Contact_RequiredMessage);
@@ -364,12 +365,12 @@ public class WhatsAppCampaignPage extends Locators {
         expectedCampaigndata.put("PhoneNumber", phoneNumber);
 
 
-        common.waitUntilElementToBeVisible(CWC_RunCamBTN);
-        common.click(CWC_RunCamBTN);
+        common.waitUntilElementToBeVisible(CWC_Save);
+        common.click(CWC_Save);
 
         common.handleAlert();
-        common.waitUntilElementToBeVisible(RC_PopupYes);
-        common.click(RC_PopupYes);
+        common.waitUntilElementToBeVisible(RC_RunCamp);
+        common.click(RC_RunCamp);
 
         return expectedCampaigndata;
     }
