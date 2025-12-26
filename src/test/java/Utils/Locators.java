@@ -82,7 +82,7 @@ public class Locators extends BasePage {
     public static String MULTITABHOR = "(//button[@role='tab'])[2]";
     public static String MULTITABVER = "(//button[@role='tab'])[1]";
     public static String TOTAL = "//div[contains(text(),'Total')]";
-    public static String ROWSPERPAGE = "//p[text()='Rows per page:']";
+    public static String ROWSPERPAGE = "//div[@class=\"MuiBox-root css-a7l4db\"] | //p[text()='Rows per page:']";
     public static String SEARCHRESULTS = "//div[@aria-rowspan='1']/preceding-sibling::div[@aria-colindex='2' and contains(text(),'+ randomValue +')]";
     public static String PHSEACRH = "//input[@placeholder='Search...']";
     public static String PHFILTERSEACRH = "//input[@placeholder='Select column']";
@@ -139,8 +139,8 @@ public class Locators extends BasePage {
     public static String ACPROMPT = "//span[normalize-space()='Prompt']";
     public static String ACSTATUS = "//span[normalize-space()='Status']";
     public static String ACACTIONS = "//span[normalize-space()='Actions']";
-    public static String ACTOTALROWS = "//div[contains(text(),'Total')]";
-    public static String ACROWSPERPAGE = "//p[contains(text(),'Rows per page:')]";
+    public static String ACTOTALROWS = "//div[contains(text(),'Total')] | //div[@class=\"MuiBox-root css-a7l4db\"]";
+    public static String ACROWSPERPAGE = "//p[contains(text(),'Rows per page:')] | //div[@class=\"MuiBox-root css-a7l4db\"]";
     public static String ACROWSPERPAGEDROPDOWN = "//input[@class='MuiSelect-nativeInput css-147e5lo']";
     public static String ACPREVIOUSPAGE = "//button[@title='Go to previous page']";
     public static String ACNEXTPAGE = "//button[@title='Go to next page']";
@@ -254,6 +254,7 @@ public class Locators extends BasePage {
 //    public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
 //    public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
 //public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
+public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successfully')]";
 
     //Contacts pages locators
     //Grid page
@@ -950,36 +951,8 @@ public class Locators extends BasePage {
     public static String CVIEWDESIGINPUT = "(//span[text()='Name']/following::input[@type='text'])[2]";
     public static String CVIEWEMAILINPUT = "(//span[text()='Name']/following::input[@type='text'])[3]";
     public static String CVIEWPHONEINPUT = "(//span[text()='Name']/following::input[@type='text'])[4]";
-    public static String CVIEWCANCELBUTTON = "//h6[text()='Create Company Management']/preceding-sibling::button[@type=\"button\"]";
+    public static String CVIEWCANCELBUTTON = "//span[text()='Cancel']/parent::button";
     public static String CCREATEDDATEVAL = "//div[@data-rowindex=\"0\"]/child::div[@data-colindex=\"5\"]";
-
-    //WhatsApp campaign  locators
-    public static String CWC_Header = "//h6[normalize-space()='Create WhatsApp Campaign']";
-    public static String WCViewHeader = "//h6[normalize-space()='View WhatsApp Campaign']";
-    public static String SearchTex ="//div[@role='gridcell' and @data-field='name']";
-    public static String WC_Search = "//input[@placeholder='Search...']";
-    public static String V_RetryRerun = "//button[.//span[normalize-space()='Retry Failed']]";
-    public static String  RerunSuccessMSG ="//div[normalize-space()='WhatsApp campaign start for rerun successfully!']";
-    public static String V_back = "//h6[normalize-space()='View WhatsApp Campaign']/preceding-sibling::button";
-    public static String C_Name = "//input[@placeholder='Enter campaign name']";
-    public static String C_WhatsAppTem = "//input[@placeholder='Select template']";
-    public static String C_Category = "//input[@placeholder='Create or Select Category']";
-    public static String C_Product ="//input[@placeholder='Select product']";
-    public static String C_ContactGroup = "//input[@placeholder='Select Contact Groups']";
-    public static String C_SelectContact = "//input[@type='checkbox']/parent::span/parent::div[@tabindex='0']";
-    public static String C_SelectContactcheckbox="(//div[@role='row'])[1]//div[@data-field='select']//span[contains(@class,'MuiCheckbox-root')]";
-    public static String C_Contacts ="//p[text()='Contacts']";
-    public static String Contact_RequiredMessage="//div[text()='Please select at least one contact or contact group.']";
-    public static String Search_ContactonCampaignpage="//input[@placeholder='Search contacts...']";
-    public static String SearchedResult_ContactonCampaignpage="//div[@class='MuiDataGrid-row MuiDataGrid-row--firstVisible MuiDataGrid-row--lastVisible']";
-
-    //    //View WhatsApp Campaign
-    public static String  CAMPAIGNVIEW ="//button[@aria-label='View']";
-    public static String WProduct = "//label[.//span[text()='Product']]/following::input[1]";
-    public static String WCategory = "//label[.//span[text()='Category']]/following::input[1]";
-    public static String WTemplate = "//label[.//span[text()='WhatsApp Template']]/following::input[1]";
-    public static String WName ="//label[.//span[text()='Campaign Name']]/following::input[1]";
-    public static String WPhoneNumber="//*[contains(text(),'+91 77749 74990')]";
 
     // Company Portfolio
     public static String COMPANYPORTFOLIO = "//button[text()='Company Portfolio']";
