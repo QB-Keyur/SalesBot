@@ -219,11 +219,11 @@ public class BasePage {
 //        for (String logs : stringList) {
 //            Reporter.log(logs,true);
 //        }
-
-        Common.printCurrentTime("Ending Time");
-        getDriver().manage().deleteAllCookies();
-        getDriver().quit();
-        driver.remove();
+//
+//        Common.printCurrentTime("Ending Time");
+//        getDriver().manage().deleteAllCookies();
+//        getDriver().quit();
+//        driver.remove();
     }
 
     public void makeScreenshot(WebDriver driver, String screenshotName) {
