@@ -995,6 +995,135 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String CPDELETECANCEL = "//span[text()='Cancel']/parent::button";
     public static String CPDELETEDELETE = "//span[text()='Delete']/parent::button";
 
+    //Working Hours Page
+    public static final String WH_MENU =
+            "//button[text()='Working Hours']";
+
+    public static final String WH_HEADER =
+            "//h6[text()='Business Working Hours']";
+
+    public static final String WH_SAVE_BUTTON =
+            "//span[text()='Save']/parent::button";
+
+    public static final String SUCCESSMSG = "//div[text()='Business Hours updated successfully']";
+    public static final String NOCHANGESMSG = "//div[text()='No changes detected']";
+    public static final String HOLIDAYTEXT = "//li[text()='Holiday']";
+    public static final String WORKINGTEXT = "//li[text()='Working']";
+
+
+    // Column Headers
+    public static final String WH_COLUMN_WEEKDAY =
+            "//div[text()='Weekday']";
+
+    public static final String WH_COLUMN_TYPE =
+            "//div[text()='Type']";
+
+    public static final String WH_COLUMN_START_TIME =
+            "//div[text()='Start Time']";
+
+    public static final String WH_COLUMN_END_TIME =
+            "//div[text()='End Time']";
+
+
+    // Weekday Labels
+    public static final String WH_MONDAY_LABEL =
+            "//div[text()='Monday']";
+
+    public static final String WH_TUESDAY_LABEL =
+            "//div[text()='TuesDay']";
+
+    public static final String WH_WEDNESDAY_LABEL =
+            "//div[text()='Wednesday']";
+
+    public static final String WH_THURSDAY_LABEL =
+            "//div[text()='Thursday']";
+
+    public static final String WH_FRIDAY_LABEL =
+            "//div[text()='Friday']";
+
+    public static final String WH_SATURDAY_LABEL =
+            "//div[text()='Saturday']";
+
+    public static final String WH_SUNDAY_LABEL =
+            "//div[text()='Sunday']";
+
+
+    // Type Inputs
+    public static final String WH_MONDAY_TYPE_INPUT =
+            "//div[text()='Monday']/following::input[1]";
+
+    public static final String WH_TUESDAY_TYPE_INPUT =
+            "//div[text()='TuesDay']/following::input[1]";
+
+    public static final String WH_WEDNESDAY_TYPE_INPUT =
+            "//div[text()='Wednesday']/following::input[1]";
+
+    public static final String WH_THURSDAY_TYPE_INPUT =
+            "//div[text()='Thursday']/following::input[1]";
+
+    public static final String WH_FRIDAY_TYPE_INPUT =
+            "//div[text()='Friday']/following::input[1]";
+
+    public static final String WH_SATURDAY_TYPE_INPUT =
+            "//div[text()='Saturday']/following::input[1]";
+
+    public static final String WH_SUNDAY_TYPE_INPUT =
+            "//div[text()='Sunday']/following::input[1]";
+
+
+    // Start Time Inputs
+    public static final String WH_MONDAY_START_TIME_INPUT =
+            "//div[text()='Monday']/following::input[2]";
+
+    public static final String WH_TUESDAY_START_TIME_INPUT =
+            "//div[text()='TuesDay']/following::input[2]";
+
+    public static final String WH_WEDNESDAY_START_TIME_INPUT =
+            "//div[text()='Wednesday']/following::input[2]";
+
+    public static final String WH_THURSDAY_START_TIME_INPUT =
+            "//div[text()='Thursday']/following::input[2]";
+
+    public static final String WH_FRIDAY_START_TIME_INPUT =
+            "//div[text()='Friday']/following::input[2]";
+
+    public static final String WH_SATURDAY_START_TIME_INPUT =
+            "//div[text()='Saturday']/following::input[2]";
+
+    public static final String WH_SUNDAY_START_TIME_INPUT =
+            "//div[text()='Sunday']/following::input[2]";
+
+
+    // End Time Inputs
+    public static final String WH_MONDAY_END_TIME_INPUT =
+            "//div[text()='Monday']/following::input[3]";
+
+    public static final String WH_TUESDAY_END_TIME_INPUT =
+            "//div[text()='TuesDay']/following::input[3]";
+
+    public static final String WH_WEDNESDAY_END_TIME_INPUT =
+            "//div[text()='Wednesday']/following::input[3]";
+
+    public static final String WH_THURSDAY_END_TIME_INPUT =
+            "//div[text()='Thursday']/following::input[3]";
+
+    public static final String WH_FRIDAY_END_TIME_INPUT =
+            "//div[text()='Friday']/following::input[3]";
+
+    public static final String WH_SATURDAY_END_TIME_INPUT =
+            "//div[text()='Saturday']/following::input[3]";
+
+    public static final String WH_SUNDAY_END_TIME_INPUT =
+            "//div[text()='Sunday']/following::input[3]";
+
+    public static final String WH_CLEAR_MONDAY= "(//div[text()='Monday']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_TUESDAY= "(//div[text()='TuesDay']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_WEDNESDAY= "(//div[text()='Wednesday']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_THURSDAY= "(//div[text()='Thursday']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_FRIDAY= "(//div[text()='Friday']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_SATURDAY= "(//div[text()='Saturday']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_SUNDAY= "(//div[text()='Sunday']/following::button[@title='Clear'])[1]";
+
 
 
 

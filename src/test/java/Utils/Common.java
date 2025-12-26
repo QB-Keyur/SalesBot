@@ -1751,12 +1751,36 @@ public class Common extends Locators {
         actions.moveToElement(menuOption).click().perform();
     }
 
-    public void hoverAndClickOnElement(String element) {
+    public void hoverAndClickOnElement(String locator) {
 
-        WebElement element1 = driver.findElement(By.xpath(String.valueOf(element)));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(element1).pause(Duration.ofSeconds(2)).click().perform();
+        waitUntilElementToBeVisible(locator);
+        hover(locator);
+        pause(1);
+        click(locator);
+        logPrint("Cleared value using clear icon :: " + locator);}
+
+    public void hover(String locator) {
+        WebElement element = waitUntilElementToBeVisible(locator);
+
+        // 1️⃣ Scroll into view (important for hover)
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+
+        // 2️⃣ Dispatch real mouseover + mousemove events
+        ((JavascriptExecutor) driver).executeScript(
+                "const ev1 = new MouseEvent('mouseover', {bubbles:true});" +
+                        "const ev2 = new MouseEvent('mousemove', {bubbles:true});" +
+                        "arguments[0].dispatchEvent(ev1);" +
+                        "arguments[0].dispatchEvent(ev2);",
+                element
+        );
+
+        // 3️⃣ Selenium Actions as backup
+        new Actions(driver).moveToElement(element).perform();
+
+        logPrint("Hovered (JS + Actions) :: " + locator);
     }
+
 
     public void scrollPageUsingPixel() {
 
