@@ -408,4 +408,8 @@ public class LeadManagementPage extends Locators {
         common.logPrint("Steps::Header of Action Column  is :- "+HAction);
 
     }
+    public void  VerifyViewLeadStage()
+    {
+
+    }
 }

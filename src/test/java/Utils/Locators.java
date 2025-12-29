@@ -1090,6 +1090,27 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static final String WH_CLEAR_SUNDAY= "(//div[text()='Sunday']/following::button[@title='Clear'])[1]";
 
 
+//LeadStage
+    public static final String LeadStageMenu ="//button[text()='Lead Stage']";
+    public static final String LS_header = "//h6[text()='Lead Stage']";
+    public static final String  LS_Create = "//span[text()='Create']";
+    //public static final String  LS_Refresh = " ";
+    public static final String  LSH_Name = "//span[text()='Name']";
+    public static final String LSH_Label = "//span[text()='Label']";
+    public static final String LSH_Order = "//span[text()='Order']";
+    public static final String LSH_Actions = "//span[text()='Actions']";
+    public static final String LS_Save ="//span[text()='Save']";
+    public static final String LS_ErrorOnName = "//span[text()='Name is required']";
+    public static final String LS_ErrorOnLabel = "//span[text()='Label is required']";
+    public static final String LS_ErrorOnOrder = "//span[text()='Order is required']";
+    public static final String LS_Cancel = "//span[text()='Cancel']";
+    public static final String LS_Back = "//h6[text()='Create Lead Stage']/preceding-sibling::button";
+    public static final String LS_Name = "//input[@placeholder='Enter Name']";
+    public static final String LS_Label = "//input[@placeholder='Enter Label']";
+    public static final String LS_Order = "//input[@placeholder='Enter Order']";
+;
+
+
 
 
 }
