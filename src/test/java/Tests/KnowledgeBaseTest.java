@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
+import javax.swing.*;
+
 public class KnowledgeBaseTest extends BasePage {
 
 
@@ -165,6 +167,13 @@ public class KnowledgeBaseTest extends BasePage {
         common.logPrint("Verifying Reset button functionality on Knowledge Base forms");
         loginWithAdminUser();
         knowledgeBasePage.validateResetButton();
+    }
+
+    @Test
+    public void validateSorting(){
+        loginWithAdminUser();
+        knowledgeBasePage.goToKnowledgeBasePage();
+        productPage.validateSorting(2, "int", null, SortOrder.DESCENDING);
     }
 
 }

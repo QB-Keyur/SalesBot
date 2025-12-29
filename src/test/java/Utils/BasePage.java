@@ -58,6 +58,7 @@ public class BasePage {
     public UserManagementPage userManagementPage;
     public CompanyManagementPage companyManagementPage;
     public CompanyPortfolioPage companyPortfolioPage;
+    public WorkingHoursPage workingHoursPage;
 
     protected List<String> stringList = new ArrayList<>();
 
@@ -174,6 +175,7 @@ public class BasePage {
         userManagementPage = new UserManagementPage(getDriver());
         companyManagementPage = new CompanyManagementPage(getDriver());
         companyPortfolioPage = new CompanyPortfolioPage(getDriver());
+        workingHoursPage = new WorkingHoursPage(getDriver());
         steps.set(1);
         Common.printCurrentTime("Starting Time");
         getDriver().get(EnvConfig.getWebUrl());

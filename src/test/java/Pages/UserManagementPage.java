@@ -2,8 +2,21 @@ package Pages;
 
 import Utils.Common;
 import Utils.Locators;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserManagementPage extends Locators {
 
@@ -35,6 +48,12 @@ public class UserManagementPage extends Locators {
         common.click(userSubMenu);
     }
 
+    public void clickOnUserSubmenu(){
+
+        common.waitUntilElementToBeVisible(userSubMenu);
+        common.click(userSubMenu);
+    }
+
     public void redirectsToRoleAndPermissionPage(){
 
         clickOnUserManagementMenu();
@@ -52,6 +71,13 @@ public class UserManagementPage extends Locators {
 
         common.logPrint("Step:: Verify success message");
         common.assertElementPresent(invitationSentSuccessfully);
+
+    }
+
+    public void verifySuccessfullyMessageForUserSuccessfullyCreated(){
+
+        common.logPrint("Step:: Verify success message for account created successfully");
+        common.assertElementPresent(userAccountCreatedSuccessfully);
 
     }
 
@@ -276,6 +302,17 @@ public class UserManagementPage extends Locators {
         common.click(saveButton);
     }
 
+    public void createANewRoleWithSpecificModuleAccess(String name){
+
+        common.logPrint("Step:: Enter the role name");
+
+        common.waitUntilElementToBeVisible(By.xpath(enterRoleName));
+        common.type(enterRoleName,name);
+
+        common.waitUntilElementToBeVisible(By.xpath(saveButton));
+        common.click(saveButton);
+    }
+
     public void verifyRoleIsShowingOnTheUserInvitationPage(String roleName){
 
         common.waitUntilElementToBeVisible(By.xpath(roleDropdown));
@@ -375,6 +412,136 @@ public class UserManagementPage extends Locators {
         common.logPrint("Invitation is showing on the mail");
     }
 
+    public void acceptTheInvitation(){
+
+        common.switchToFrameWithName("ifmail");
+        common.logPrint("Step:: Click on the accept invitation button on mail");
+        common.waitUntilElementToBeClickable(acceptInvitationButton);
+        common.click(acceptInvitationButton);
+        common.switchToDefaultContent();
+
+    }
+
+    public String enterPasswordAndConfirmPassword(){
+
+        String password = "Admin@0303";
+
+        common.waitUntilElementToBeVisible(PASSWORDINP);
+        common.type(PASSWORDINP, password);
+
+        common.waitUntilElementToBeVisible(CONFIRMPASSWORDINP);
+        common.type(CONFIRMPASSWORDINP, password);
+
+        common.waitUntilElementToBeVisible(createPasswordBtn);
+        common.click(createPasswordBtn);
+
+        return password;
+    }
+
+    public void searchInvitationUsingAnEmail(String email){
+
+        common.waitUntilElementToBeVisible(SEARCH);
+        common.type(SEARCH, email);
+    }
+
+    public void verifyInformationAndStatusAsNotAccepted(String email){
+
+        String emailXpath = "//div[@title=\""+email.toLowerCase()+"\"]";
+
+        common.logPrint("Step:: Email is showing properly");
+        common.assertElementPresent(emailXpath);
+
+        common.logPrint("Step:: Status is showing as Not Accepted");
+        common.assertElementPresent(notAcceptedStatusOnGrid);
+
+        common.logPrint("Status is showing as not accepted");
+
+    }
+
+    public void verifyInformationAndStatusAsActiveOnUserGrid(String email){
+
+        String emailXpath = "//div[@title=\""+email.toLowerCase()+"\"]";
+
+        common.logPrint("Step:: Email is showing properly");
+        common.assertElementPresent(emailXpath);
+
+        common.logPrint("Step:: Status is showing as Active");
+        common.assertElementPresent(activeStatus);
+
+        common.logPrint("Status is showing as Active");
+    }
+
+    public void verifyDetailIsRemovedFromUserInvitationPage(){
+
+        common.logPrint("Step:: No data rows validation message is showing");
+        common.assertElementPresent(NoRowsValidation);
+
+        common.logPrint("User is removed from the User invitation after request is accepted and showing on the User module");
+
+    }
+
+    public List<String> readExcelData(String filePath, String sheetName){
+
+        List<String> excelData = new ArrayList<>();
+        try (FileInputStream fis = new FileInputStream(filePath);
+             Workbook workbook = new XSSFWorkbook(fis)) {
+
+            Sheet sheet = workbook.getSheet(sheetName);
+
+            for (Row row : sheet) {
+                Cell cell = row.getCell(0); // first column
+                if (cell != null) {
+                    excelData.add(cell.getStringCellValue().trim());
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Excel read failed: " + e.getMessage());
+        }
+        return excelData;
+    }
+
+    public void verifyAllTheRolesShowingOnTheList() {
+
+        String rolesXpath = "//td[contains(@class,'MuiTableCell-root MuiTableCell-body MuiTableCell-alignLef')]";
+
+        //Wait for elements
+        common.waitUntilElementToBeVisible(rolesXpath);
+
+        //Get UI elements
+        List<WebElement> uiElements = driver.findElements(By.xpath(rolesXpath));
+        Assert.assertEquals(uiElements.size(), 22, "UI element count mismatch");
+
+        //Get UI texts
+        List<String> uiTexts = new ArrayList<>();
+        for (WebElement element : uiElements) {
+            uiTexts.add(element.getText().trim());
+        }
+
+        //Read Excel data
+        String excelPath = System.getProperty("user.dir") + "/TestData/TestData.xlsx";
+        List<String> excelTexts = readExcelData(excelPath, "RolesList");
+        Assert.assertEquals(excelTexts.size(), 22, "Excel rows count mismatch");
+
+        //Compare UI vs Excel
+        for (int i = 0; i < uiTexts.size(); i++) {
+
+            common.logPrint(
+                    "Comparing Row " + (i + 1) +
+                            " | UI: " + uiTexts.get(i) +
+                            " | Excel: " + excelTexts.get(i)
+            );
+
+            Assert.assertEquals(
+                    uiTexts.get(i),
+                    excelTexts.get(i),
+                    "Mismatch at row " + (i + 1)
+            );
+        }
+
+        common.assertElementPresent(totalRows);
+
+        common.logPrint("All 22 roles matched successfully with Excel data!");
+    }
 }
 
 

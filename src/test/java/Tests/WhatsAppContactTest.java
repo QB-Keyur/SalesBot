@@ -65,7 +65,7 @@ public class WhatsAppContactTest extends BasePage {
 
     @Test
     public void verifyTheElementIsPresentInTheImportModule() throws IOException {
-        common.logPrint("Verify create whatsapp contact using an POI excel sheet");
+        common.logPrint("Verify create WhatsApp contact using an POI excel sheet");
         loginWithAdminUser();
         whatsAppContactPage.redirectsToWhatsAppContactPage();
         whatsAppContactPage.redirectsToImportPage();

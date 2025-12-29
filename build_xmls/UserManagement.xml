@@ -7,8 +7,8 @@
        thread-count="3"
        allow-return-values="true">
 
-    <!-- Verify User management menu and sub-menu are displayed -->
-    <test name="Verify User management menu and sub-menu are displayed">
+    <!-- Verify User management menu and sub-menu -->
+    <test name="Verify User Management Menu And Sub Menu">
         <classes>
             <class name="Tests.UserManagementTest">
                 <methods>
@@ -19,7 +19,7 @@
     </test>
 
     <!-- Verify User Invitation page elements -->
-    <test name="Verify User Invitation page elements">
+    <test name="Verify User Invitation Page Elements">
         <classes>
             <class name="Tests.UserManagementTest">
                 <methods>
@@ -30,7 +30,7 @@
     </test>
 
     <!-- Verify User page elements -->
-    <test name="Verify User page elements">
+    <test name="Verify User Page Elements">
         <classes>
             <class name="Tests.UserManagementTest">
                 <methods>
@@ -41,11 +41,88 @@
     </test>
 
     <!-- Verify Role and Permission page elements -->
-    <test name="Verify Role and Permission page elements">
+    <test name="Verify Role And Permission Page Elements">
         <classes>
             <class name="Tests.UserManagementTest">
                 <methods>
                     <include name="verifyRolePermissionPageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Role and Permission creation -->
+    <test name="Verify Role And Permission Is Created Successfully">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifyRoleAndPermissionIsCreatedSuccessfully"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Created Role is showing in User Invitation page -->
+    <test name="Verify Created Role Is Showing In User Invitation Page">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifyCreateRoleIsShowingOnThe"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify validation message on User Invitation page -->
+    <test name="Verify Validation Message For User Invitation Page">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifyFieldValidationMessageForUserInvitationPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify validation message on Role and Permission page -->
+    <test name="Verify Validation Message For Role And Permission Page">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifyFieldValidationMessageForRoleAndPermissionPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify duplicate role name validation -->
+    <test name="Verify Validation Message For Duplicate Role Name">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifyValidationMessageForSameRoleName"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify sent invitation functionality -->
+    <test name="Verify Sent Invitation Functionality">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifySentInvitationFunctionalityIsWorking"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify sent invitation is received in mail -->
+    <test name="Verify Sent Invitation Is Showing In Mail">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifySentInvitationIsShowingInMail"/>
                 </methods>
             </class>
         </classes>

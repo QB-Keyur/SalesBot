@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Company Portfolio Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <!-- Verify Company Portfolio page navigation -->
+    <test name="Verify Company Portfolio page navigation">
+        <classes>
+            <class name="Tests.CompanyPortfolioTest">
+                <methods>
+                    <include name="goToCompanyPortfolioPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Company Portfolio page UI elements -->
+    <test name="Verify Company Portfolio page elements">
+        <classes>
+            <class name="Tests.CompanyPortfolioTest">
+                <methods>
+                    <include name="verifyCompanyPortfolioPageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Company Portfolio create page UI elements -->
+    <test name="Verify Company Portfolio create page elements">
+        <classes>
+            <class name="Tests.CompanyPortfolioTest">
+                <methods>
+                    <include name="verifyCompanyPortfolioCreatePageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify adding a Company Portfolio -->
+    <test name="Verify adding a Company Portfolio">
+        <classes>
+            <class name="Tests.CompanyPortfolioTest">
+                <methods>
+                    <include name="verifyAddingACompanyPortfolio"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify viewing a Company Portfolio -->
+    <test name="Verify viewing a Company Portfolio">
+        <classes>
+            <class name="Tests.CompanyPortfolioTest">
+                <methods>
+                    <include name="verifyViewingACompanyPortfolio"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify editing a Company Portfolio -->
+    <test name="Verify editing a Company Portfolio">
+        <classes>
+            <class name="Tests.CompanyPortfolioTest">
+                <methods>
+                    <include name="verifyEditingACompanyPortfolio"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify horizontal card view -->
+    <test name="Verify Company Portfolio horizontal card view">
+        <classes>
+            <class name="Tests.CompanyPortfolioTest">
+                <methods>
+                    <include name="validateHorizontalCardView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify pagination -->
+    <test name="Verify Company Portfolio pagination">
+        <classes>
+            <class name="Tests.CompanyPortfolioTest">
+                <methods>
+                    <include name="validatePagination"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify deleting a Company Portfolio -->
+    <test name="Verify deleting a Company Portfolio">
+        <classes>
+            <class name="Tests.CompanyPortfolioTest">
+                <methods>
+                    <include name="verifyDeleteACompanyPortfolio"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify created date column -->
+    <test name="Verify Company Portfolio created date">
+        <classes>
+            <class name="Tests.CompanyPortfolioTest">
+                <methods>
+                    <include name="verifyCreatedDate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify sorting functionality -->
+    <test name="Verify Company Portfolio sorting">
+        <classes>
+            <class name="Tests.CompanyPortfolioTest">
+                <methods>
+                    <include name="validateSorting"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

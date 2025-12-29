@@ -326,9 +326,9 @@ public class WhatsAppContactPage extends Locators {
         String companyName = common.fakeCompanyName();
         common.type(companyNameInp, companyName);
 
-        common.waitUntilElementToBeVisible(SubscriptionStatus);
-        common.click(SubscriptionStatus);
-        common.downKeyAndEnter();
+//        common.waitUntilElementToBeVisible(SubscriptionStatus);
+//        common.click(SubscriptionStatus);
+//        common.downKeyAndEnter();
 
         common.waitUntilElementToBeVisible(selectCountryDropdown);
         common.click(selectCountryDropdown);
@@ -442,7 +442,7 @@ public class WhatsAppContactPage extends Locators {
 
     public void verifyAllTheElementsArePresentInTheImportPage(){
 
-        common.logPrint("Step:: Verify 'Bulk Upload Whatsapp Contacts' heading is displayed");
+        common.logPrint("Step:: Verify 'Bulk Upload WhatsApp Contacts' heading is displayed");
         common.waitUntilElementToBeVisible(By.xpath(bulkUploadHeader));
         common.assertElementPresent(bulkUploadHeader);
 
@@ -473,8 +473,8 @@ public class WhatsAppContactPage extends Locators {
     }
 
     public void clickOnTheDeleteBtn(){
-        common.waitUntilElementToBeVisible(deleteButton);
-        common.click(deleteButton);
+        common.waitUntilElementToBeVisible(CONFDELETE);
+        common.click(CONFDELETE);
     }
 
     public void clickOnTheButtonMenuListView(){
@@ -485,7 +485,7 @@ public class WhatsAppContactPage extends Locators {
     }
 
     public void clickOnTheViewButtonTextXpath(){
-        common.logPrint("Step:: Click on the view button");
+
         common.waitUntilElementToBeVisible(viewButtonText);
         common.click(viewButtonText);
 
@@ -686,8 +686,8 @@ public class WhatsAppContactPage extends Locators {
 
     public void verifyDeleteFunctionalityIsWorking(){
 
-//        common.waitUntilElementToBeVisible(buttonMenuListView);
-//        common.click(buttonMenuListView);
+        common.waitUntilElementToBeVisible(buttonMenuListView);
+        common.click(buttonMenuListView);
 
         clickOnTheDeleteBtn();
 

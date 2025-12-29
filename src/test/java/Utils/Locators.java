@@ -17,6 +17,7 @@ public class Locators extends BasePage {
     }
 
     public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
+    public static String userAccountCreatedSuccessfully = "//div[contains(text(), 'User account created successfully.')]";
     public static String roleAndPermissionAddedSuccessfully = "//div[contains(text(), 'Role and permissions added successfully')]";
     public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
     public static String RoleNameIsAlreadyExist = "//div[contains(text(), 'Role name already exists')]";
@@ -34,6 +35,7 @@ public class Locators extends BasePage {
     public static String LOGINSUCCESSMESSAGE = "//div[contains(text(), 'Login successful')]";
     public static String EMAILINP = "//input[@name='email']";
     public static String PASSWORDINP = "//input[@name='password']";
+    public static String CONFIRMPASSWORDINP = "//input[@name='confirmpassword']";
     public static String LOGINBTN = "//button[@type='submit']";
     public static String verifyOTPBtn = "//span[contains(text(),'Verify OTP')]/ancestor::button";
     public static String ERROREMAILBLANK = "//span[contains(text(),'Email is required')]";
@@ -76,13 +78,13 @@ public class Locators extends BasePage {
     public static String CREATEDDATE = "//span[text() ='Created Date']";
     public static String ACTIONS = "//span[text() ='Actions']";
     public static String SEARCH = "//input[@placeholder='Search...']";
-    public static String REFRESH = "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-15wqzvf'] | //span[contains(@class,'css-1sh91j5')]/parent::button[contains(@class,'css-q8p1uw')]";
+    public static String REFRESH = "//span[text()='Filters']/following::button[1] | //span[contains(@class,'css-1sh91j5')]/parent::button[contains(@class,'css-q8p1uw')]";
     public static String FILTERS = "//button[@type='button']//span[normalize-space(.)='Filters']";
     public static String CREATE = "//button[@type='button']//span[normalize-space(.)='Create']";
     public static String MULTITABHOR = "(//button[@role='tab'])[2]";
     public static String MULTITABVER = "(//button[@role='tab'])[1]";
-    public static String TOTAL = "//div[contains(text(),'Total')]";
-    public static String ROWSPERPAGE = "//p[text()='Rows per page:']";
+    public static String TOTAL = "//div[contains(text(),'Total')] | //div[@class=\"MuiBox-root css-a7l4db\"]";
+    public static String ROWSPERPAGE = "//div[@class=\"MuiBox-root css-a7l4db\"] | //p[text()='Rows per page:']";
     public static String SEARCHRESULTS = "//div[@aria-rowspan='1']/preceding-sibling::div[@aria-colindex='2' and contains(text(),'+ randomValue +')]";
     public static String PHSEACRH = "//input[@placeholder='Search...']";
     public static String PHFILTERSEACRH = "//input[@placeholder='Select column']";
@@ -139,8 +141,8 @@ public class Locators extends BasePage {
     public static String ACPROMPT = "//span[normalize-space()='Prompt']";
     public static String ACSTATUS = "//span[normalize-space()='Status']";
     public static String ACACTIONS = "//span[normalize-space()='Actions']";
-    public static String ACTOTALROWS = "//div[contains(text(),'Total')]";
-    public static String ACROWSPERPAGE = "//p[contains(text(),'Rows per page:')]";
+    public static String ACTOTALROWS = "//div[contains(text(),'Total')] | //div[@class=\"MuiBox-root css-a7l4db\"]";
+    public static String ACROWSPERPAGE = "//p[contains(text(),'Rows per page:')] | //div[@class=\"MuiBox-root css-a7l4db\"]";
     public static String ACROWSPERPAGEDROPDOWN = "//input[@class='MuiSelect-nativeInput css-147e5lo']";
     public static String ACPREVIOUSPAGE = "//button[@title='Go to previous page']";
     public static String ACNEXTPAGE = "//button[@title='Go to next page']";
@@ -254,6 +256,7 @@ public class Locators extends BasePage {
 //    public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
 //    public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
 //public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
+public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successfully')]";
 
     //Contacts pages locators
     //Grid page
@@ -314,7 +317,7 @@ public class Locators extends BasePage {
     public static String phoneNumberMsg = "//div[text()='Phone number is required']";
     public static String companyNameMsg = "//span[text()='Company Name is required']";
     //Import page locators
-    public static String bulkUploadHeader= "//h6[text()='Bulk Upload Whatsapp Contacts']";
+    public static String bulkUploadHeader= "//h6[text()='Bulk Upload Contacts']";
     public static String downloadSampleTemplate = "//span[text()='Download sample template']";
     public static String bulkUpload = "//input[@id='excel-upload']/following::p";
     public static String QueueDate = "//span[text()='Queue Data']";
@@ -326,7 +329,7 @@ public class Locators extends BasePage {
     public static String deleteButton = "//button[@aria-label='Delete']";
     public static String editButton = "//button[@aria-label='Edit']";
     public static String viewHeader = "//h5[text()='Whatsapp Contact']";
-    public static String buttonMenuListView = "(//h6)[2]/following::button";
+    public static String buttonMenuListView = "//div[contains(@class,'flex items-center justify-between gap-1')]/child::button";
 
     //View page locators
     //label
@@ -451,7 +454,6 @@ public class Locators extends BasePage {
     public static String KBVIEW = "//button[@aria-label=\"View\"]";
     public static String KBVIEWINPUTDATE = "(//input[@type='text'])[4]";
     public static String KBVIEWINPUTNAME = "(//input[@type='text'])[2]";
-
 
     //KB Create
     public static String KBCHEADER = "//h6[text()='Create Knowledge Base']";
@@ -620,36 +622,7 @@ public class Locators extends BasePage {
     public static String ETCLPINFO = "//p[contains(text(),'You are receiving this communication from')]";
 //    public static String ETCREATEHEADER = "//p[contains(text(),'To stop receiving future emails, please click')]";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //Onboarding module xpath
-
 
     //OnBoarding
     public static String monthlyBtn = "//span[contains(text(),'Monthly')]/ancestor::button";
@@ -674,9 +647,11 @@ public class Locators extends BasePage {
     public static String startFreeTrialBtn = "//span[contains(text(),'Start Trial')]/ancestor::button";
     public static String startFreeTrialBtnLastPage = "//span[contains(text(),'Start Free Plan')]/ancestor::button";
     public static String congratulationMessage = "//h6[contains(text(),'Congratulations!')]";
-
     public static String closeIconOnCongratulation = "//div[contains(@class,'relative flex flex-col items-center justify-center')]//button";
     public static String getPlanDetail = "(//h4[contains(text(),'')])[2]";
+    public static String createPasswordBtn = "//span[text()='Create Password']/parent::button";
+    public static String notAcceptedStatusOnGrid = "//div[text()='Not Accepted']";
+    public static String activeStatus = "//span[text()='Active']";
 
     //Profile page xpath
     public static String profileIcon = "(//div[contains(@class,'flex items-center gap-1 sm')]//button)[3]";
@@ -758,10 +733,6 @@ public class Locators extends BasePage {
     public static String RC_PopupNo="//span[text()='No']";
     public static String RC_RunCamp="//span[text()='Run Campaign']";
 
-
-
-
-
     public static String C_Name = "//input[@placeholder='Enter campaign name']";
     public static String C_WhatsAppTem = "//input[@placeholder='Select template']";
     public static String C_Category = "//input[@placeholder='Create or Select Category']";
@@ -773,9 +744,6 @@ public class Locators extends BasePage {
     public static String Contact_RequiredMessage="//div[text()='Please select at least one contact or contact group.']";
     public static String Search_ContactonCampaignpage="//input[@placeholder='Search contacts...']";
     public static String SearchedResult_ContactonCampaignpage="//div[@class='MuiDataGrid-row MuiDataGrid-row--firstVisible MuiDataGrid-row--lastVisible']";
-
-
-
 
     //    //View WhatsApp Campaign
 
@@ -879,6 +847,7 @@ public class Locators extends BasePage {
     public static String emailError     = "//span[text()='Email is required']";
     public static String roleError      = "//span[text()='Role is required']";
     public static String RoleNameError      = "//span[text()='Role Name is required']";
+    public static String totalRows = "//td[text()='Total Rows: 22']";
 
     //grid page headers
     public static String firstNameHeader = "//div[@role='presentation']//span[text()='First Name']";
@@ -889,8 +858,6 @@ public class Locators extends BasePage {
 
     public static String rolePermissionHeader = "//h6[contains(text(),'Role Permissions')]";
     public static String roleNameHeader = "//span[contains(text(),'Role Name')]";
-
-
 
     //Company Management
     public static String COMPANYSIDEBAR= "//span[text()='Company']";
@@ -950,10 +917,8 @@ public class Locators extends BasePage {
     public static String CVIEWDESIGINPUT = "(//span[text()='Name']/following::input[@type='text'])[2]";
     public static String CVIEWEMAILINPUT = "(//span[text()='Name']/following::input[@type='text'])[3]";
     public static String CVIEWPHONEINPUT = "(//span[text()='Name']/following::input[@type='text'])[4]";
-    public static String CVIEWCANCELBUTTON = "//h6[text()='Create Company Management']/preceding-sibling::button[@type=\"button\"]";
+    public static String CVIEWCANCELBUTTON = "//span[text()='Cancel']/parent::button";
     public static String CCREATEDDATEVAL = "//div[@data-rowindex=\"0\"]/child::div[@data-colindex=\"5\"]";
-
-
 
     // Company Portfolio
     public static String COMPANYPORTFOLIO = "//button[text()='Company Portfolio']";
@@ -988,21 +953,141 @@ public class Locators extends BasePage {
     public static String CPCDESCINPUT = "(//span[text()='Name']/following::input[@type=\"text\"])[2]";
     public static String CPCDESCINPUTVIEW = "//textarea[1]";
 
-
     public static String CPCEDITHEADER = "//h6[text()='Update Company Portfolio']";
 
+    public static String CPDELETE1 = "//h6[text()='Delete Company Portfolio']";
+    public static String CPDELETE2 = "//p[text()='Are you sure you want to permanently delete this Company Portfolio?']";
+    public static String CPDELETECANCEL = "//span[text()='Cancel']/parent::button";
+    public static String CPDELETEDELETE = "//span[text()='Delete']/parent::button";
+
+    //Working Hours Page
+    public static final String WH_MENU =
+            "//button[text()='Working Hours']";
+
+    public static final String WH_HEADER =
+            "//h6[text()='Business Working Hours']";
+
+    public static final String WH_SAVE_BUTTON =
+            "//span[text()='Save']/parent::button";
+
+    public static final String SUCCESSMSG = "//div[text()='Business Hours updated successfully']";
+    public static final String NOCHANGESMSG = "//div[text()='No changes detected']";
+    public static final String HOLIDAYTEXT = "//li[text()='Holiday']";
+    public static final String WORKINGTEXT = "//li[text()='Working']";
 
 
+    // Column Headers
+    public static final String WH_COLUMN_WEEKDAY =
+            "//div[text()='Weekday']";
+
+    public static final String WH_COLUMN_TYPE =
+            "//div[text()='Type']";
+
+    public static final String WH_COLUMN_START_TIME =
+            "//div[text()='Start Time']";
+
+    public static final String WH_COLUMN_END_TIME =
+            "//div[text()='End Time']";
 
 
+    // Weekday Labels
+    public static final String WH_MONDAY_LABEL =
+            "//div[text()='Monday']";
+
+    public static final String WH_TUESDAY_LABEL =
+            "//div[text()='TuesDay']";
+
+    public static final String WH_WEDNESDAY_LABEL =
+            "//div[text()='Wednesday']";
+
+    public static final String WH_THURSDAY_LABEL =
+            "//div[text()='Thursday']";
+
+    public static final String WH_FRIDAY_LABEL =
+            "//div[text()='Friday']";
+
+    public static final String WH_SATURDAY_LABEL =
+            "//div[text()='Saturday']";
+
+    public static final String WH_SUNDAY_LABEL =
+            "//div[text()='Sunday']";
 
 
+    // Type Inputs
+    public static final String WH_MONDAY_TYPE_INPUT =
+            "//div[text()='Monday']/following::input[1]";
+
+    public static final String WH_TUESDAY_TYPE_INPUT =
+            "//div[text()='TuesDay']/following::input[1]";
+
+    public static final String WH_WEDNESDAY_TYPE_INPUT =
+            "//div[text()='Wednesday']/following::input[1]";
+
+    public static final String WH_THURSDAY_TYPE_INPUT =
+            "//div[text()='Thursday']/following::input[1]";
+
+    public static final String WH_FRIDAY_TYPE_INPUT =
+            "//div[text()='Friday']/following::input[1]";
+
+    public static final String WH_SATURDAY_TYPE_INPUT =
+            "//div[text()='Saturday']/following::input[1]";
+
+    public static final String WH_SUNDAY_TYPE_INPUT =
+            "//div[text()='Sunday']/following::input[1]";
 
 
+    // Start Time Inputs
+    public static final String WH_MONDAY_START_TIME_INPUT =
+            "//div[text()='Monday']/following::input[2]";
+
+    public static final String WH_TUESDAY_START_TIME_INPUT =
+            "//div[text()='TuesDay']/following::input[2]";
+
+    public static final String WH_WEDNESDAY_START_TIME_INPUT =
+            "//div[text()='Wednesday']/following::input[2]";
+
+    public static final String WH_THURSDAY_START_TIME_INPUT =
+            "//div[text()='Thursday']/following::input[2]";
+
+    public static final String WH_FRIDAY_START_TIME_INPUT =
+            "//div[text()='Friday']/following::input[2]";
+
+    public static final String WH_SATURDAY_START_TIME_INPUT =
+            "//div[text()='Saturday']/following::input[2]";
+
+    public static final String WH_SUNDAY_START_TIME_INPUT =
+            "//div[text()='Sunday']/following::input[2]";
 
 
+    // End Time Inputs
+    public static final String WH_MONDAY_END_TIME_INPUT =
+            "//div[text()='Monday']/following::input[3]";
 
+    public static final String WH_TUESDAY_END_TIME_INPUT =
+            "//div[text()='TuesDay']/following::input[3]";
 
+    public static final String WH_WEDNESDAY_END_TIME_INPUT =
+            "//div[text()='Wednesday']/following::input[3]";
+
+    public static final String WH_THURSDAY_END_TIME_INPUT =
+            "//div[text()='Thursday']/following::input[3]";
+
+    public static final String WH_FRIDAY_END_TIME_INPUT =
+            "//div[text()='Friday']/following::input[3]";
+
+    public static final String WH_SATURDAY_END_TIME_INPUT =
+            "//div[text()='Saturday']/following::input[3]";
+
+    public static final String WH_SUNDAY_END_TIME_INPUT =
+            "//div[text()='Sunday']/following::input[3]";
+
+    public static final String WH_CLEAR_MONDAY= "(//div[text()='Monday']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_TUESDAY= "(//div[text()='TuesDay']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_WEDNESDAY= "(//div[text()='Wednesday']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_THURSDAY= "(//div[text()='Thursday']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_FRIDAY= "(//div[text()='Friday']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_SATURDAY= "(//div[text()='Saturday']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_SUNDAY= "(//div[text()='Sunday']/following::button[@title='Clear'])[1]";
 
 
 

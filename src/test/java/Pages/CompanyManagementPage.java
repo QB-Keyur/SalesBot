@@ -510,6 +510,7 @@ public class CompanyManagementPage extends Locators {
         common.waitUntilElementToBeVisible(CMGMTDELETEBTN);
         common.click(CMGMTDELETEBTN);
 
+        common.waitUntilElementToBeVisible(CDELETEMSG2);
         common.assertElementPresent(CDELETEMSG2);
         common.assertElementPresent(CDELETEMSG3);
         common.assertElementPresent(CDELETEMSGCANCEL);

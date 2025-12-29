@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Working Hours Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <!-- Navigate to Working Hours page -->
+    <test name="Navigate to Working Hours Page">
+        <classes>
+            <class name="Tests.WorkingHoursTest">
+                <methods>
+                    <include name="goToWorkingHoursPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Working Hours page elements -->
+    <test name="Verify Working Hours Page Elements">
+        <classes>
+            <class name="Tests.WorkingHoursTest">
+                <methods>
+                    <include name="verifyElementsOnWorkingHoursPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Monday to Friday default status -->
+    <test name="Verify Weekday Default Working Status">
+        <classes>
+            <class name="Tests.WorkingHoursTest">
+                <methods>
+                    <include name="verifyMondayToFridayDefault"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify changing working hours timings -->
+    <test name="Verify Changing Working Hours Timings">
+        <classes>
+            <class name="Tests.WorkingHoursTest">
+                <methods>
+                    <include name="verifyChangingTime"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Holiday has no start/end timings -->
+    <test name="Verify Holiday Has No Timings">
+        <classes>
+            <class name="Tests.WorkingHoursTest">
+                <methods>
+                    <include name="verifyHolidayHasNoTimings"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify changing Holiday to Working -->
+    <test name="Verify Changing Holiday To Working">
+        <classes>
+            <class name="Tests.WorkingHoursTest">
+                <methods>
+                    <include name="verifyChangingHolidayToWorking"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
