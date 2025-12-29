@@ -1661,6 +1661,11 @@ public class Common extends Locators {
         String Name = faker.name().firstName();
         return Name;
     }
+    public String fakeLeadLabel() {
+        Faker faker = new Faker();
+        String leadLabel = faker.company().buzzword();
+        return leadLabel;
+    }
 
     public String fakeProductName() {
         String name = faker.commerce().productName();
