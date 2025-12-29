@@ -1105,4 +1105,39 @@ public class AgentConfigurationPage extends Locators {
         Assert.assertEquals(actual, expected, fieldName + " value mismatch");
     }
 
+    public void verifyEditingEffectOnCreatedTime() {
+        goToAgentConfigurationPage();
+        String createdDateXpath = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"]";
+        String createdEditXpath = "//div[@data-rowindex=\"0\"]//button[@aria-label=\"Edit\"]";
+
+        String createdDateValue = common.getAttribute(createdDateXpath, "title");
+
+        common.waitUntilElementToBeVisible(createdEditXpath);
+        common.click(createdEditXpath);
+
+        common.assertElementPresent(ACEDITHEADER);
+
+        Map<String, String> agent = common.fillAgentForm();
+
+        common.click(SAVEBUTTON);
+
+        common.waitUntilElementToBeVisible(ACEDITSUCCESSMESSAGE);
+        common.assertElementPresent(ACEDITSUCCESSMESSAGE);
+
+
+        common.waitUntilElementToBeVisible(createdDateXpath);
+        String editedDateValue = common.getAttribute(createdDateXpath, "title");
+
+        common.logPrint("createdDateValue: " + createdDateValue +
+                " | editedDateValue: " + editedDateValue);
+
+        Assert.assertEquals(
+                editedDateValue,
+                createdDateValue,
+                "Created date and Edited date do not match!"
+        );
+
+
+
+    }
 }

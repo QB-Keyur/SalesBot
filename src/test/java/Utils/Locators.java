@@ -240,6 +240,7 @@ public class Locators extends BasePage {
     public static String ACEDITHEADER = "//h6[text()='Update Agent Configuration']";
     public static String ACPLAYGROUNDHEADER = "//span[text()='Select Agent']";
     public static String ACPLAYGROUNDSELECTAGENT = "//input[@placeholder=\"Select agent\"]";
+    public static String ACEDITSUCCESSMESSAGE = "//div[text()='Agent Configuration Updated Successfully']";
 //    public static String ACSEARCHRESULT = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])[1]";
 //    public static String ACEDITBUTTON = "(//button[@aria-label=\"Edit\"])[1]";
 //    public static String ACDELETEBUTTON = "(//button[@aria-label=\"Delete\"])[1]";
@@ -1088,6 +1089,193 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static final String WH_CLEAR_FRIDAY= "(//div[text()='Friday']/following::button[@title='Clear'])[1]";
     public static final String WH_CLEAR_SATURDAY= "(//div[text()='Saturday']/following::button[@title='Clear'])[1]";
     public static final String WH_CLEAR_SUNDAY= "(//div[text()='Sunday']/following::button[@title='Clear'])[1]";
+
+// Integration -> WhatsApp Integration
+
+    public static final String INTEGRATIONMENU = "//span[text()='Integration']";
+    public static final String INTEGRATIONHEADER = "//h6[text()='Integration']";
+    public static final String WIMENU = "//p[text()='WhatsApp']/parent::div";
+    public static final String WIICON = "//p[text()='WhatsApp']/preceding::*[local-name()='svg'][1]";
+    public static final String WIDISCONNECTED = "//p[text()='WhatsApp']/preceding::span[text()='Disconnected']";
+    public static final String WICONNECTED = "//p[text()='WhatsApp']/preceding::span[text()='Connected']";
+    public static final String WIMESSAGE = "//p[text()='WhatsApp']/following-sibling::p[text()='Send automated WhatsApp messages.']";
+    public static final String WIMESSAGE2 = "//p[text()='WhatsApp']";
+
+    //Inside WhatsApp Integration
+
+    public static final String WIIHEADER = "//h6[text()='WhatsApp Integration']";
+    public static final String WIIICON = "//h6[text()='WhatsApp Integration']/preceding-sibling::*[local-name()='svg']";
+    public static final String WIIHEADERMESSAGE = "//p[text()='Set up your Whatsapp integration for the first time.']";
+    public static final String WIIINTEGRATIONBUTTON = "//button[@id=\"step1-header\"]";
+    public static final String WIISTEPS = "//div[@class=\"MuiAccordionDetails-root css-l9xe8y\"]";
+    public static final String WIIPHONEID = "//span[text()='Phone Id']";
+    public static final String WIIPHONEIDINPUT = "//input[@name=\"phone_id\"]";
+    public static final String WIIPHONEIDTOOLTIP = "//*[name()='svg' and @aria-label='Phone ID is the unique identifier for your WhatsApp Business phone number.']";
+    public static final String WIIWABAID = "//span[text()='Waba Id']";
+    public static final String WIIWABAIDINPUT = "//input[@name=\"waba_id\"]";
+    public static final String WIIWABAIDTOOLTIP = "//*[name()='svg' and @aria-label='WABA ID is your WhatsApp Business Account ID, which links your phone number to your business account.']";
+    public static final String WIITOKEN = "//span[text()='Token']";
+    public static final String WIITOKENINPUT = "//input[@name=\"token\"]";
+    public static final String WIITOKENTOOLTIP = "//*[name()='svg' and @aria-label='Token is your WhatsApp Business API token used for authentication. Keep it secure.']";
+    public static final String WIIAPPID = "//span[text()='App Id']";
+    public static final String WIIAPPIDINPUT = "//input[@name=\"app_id\"]";
+    public static final String WIIAPPIDTOOLTIP = "//*[name()='svg' and @aria-label='App ID is found in your Facebook developer account under your WhatsApp app settings.']";
+    public static final String WIIAPPSECRET = "//span[text()='App Secret']";
+    public static final String WIIAPPSECRETINPUT = "//input[@name=\"app_secret\"]";
+    public static final String WIIAPPSECRETTOOLTIP = "//*[name()='svg' and @aria-label='App Secret is found in your Facebook developer account under your WhatsApp app settings. Keep it confidential.']";
+    public static final String WIICONNECT = "//button[@type=\"submit\"]";
+    // ================= STEP 1 : Create a Meta Developer Account =================
+    public static final String STEP1_ALL_LI =
+            "//h2[normalize-space()='Step 1: Create a Meta Developer Account']/following-sibling::ol/li";
+
+    public static final String STEP1_LI_GO_TO_META =
+            "//h2[normalize-space()='Step 1: Create a Meta Developer Account']/following-sibling::ol/li[starts-with(normalize-space(),'Go to')]";
+
+    public static final String STEP1_LI_LOGIN_FACEBOOK =
+            "//h2[normalize-space()='Step 1: Create a Meta Developer Account']/following-sibling::ol/li[normalize-space()='Log in with your Facebook account.']";
+
+    public static final String STEP1_LI_CREATE_DEV_ACCOUNT =
+            "//h2[normalize-space()='Step 1: Create a Meta Developer Account']/following-sibling::ol/li[contains(normalize-space(),'developer account')]";
+
+
+    // ================= STEP 2 : Create a WhatsApp App =================
+    public static final String STEP2_ALL_LI =
+            "//h2[normalize-space()='Step 2: Create a WhatsApp App']/following-sibling::ol/li";
+
+    public static final String STEP2_LI_GO_TO_DASHBOARD =
+            "//h2[normalize-space()='Step 2: Create a WhatsApp App']/following-sibling::ol/li[contains(normalize-space(),'Meta App Dashboard')]";
+
+    public static final String STEP2_LI_SELECT_BUSINESS =
+            "//h2[normalize-space()='Step 2: Create a WhatsApp App']/following-sibling::ol/li[contains(normalize-space(),'Business')]";
+
+    public static final String STEP2_LI_ENTER_APP_DETAILS =
+            "//h2[normalize-space()='Step 2: Create a WhatsApp App']/following-sibling::ol/li[contains(normalize-space(),'App Name')]";
+
+    public static final String STEP2_LI_CREATE_APP =
+            "//h2[normalize-space()='Step 2: Create a WhatsApp App']/following-sibling::ol/li[normalize-space()='Click Create App.']";
+
+
+    // ================= STEP 3 : Add WhatsApp to Your App =================
+    public static final String STEP3_ALL_LI =
+            "//h2[normalize-space()='Step 3: Add WhatsApp to Your App']/following-sibling::ol/li";
+
+    public static final String STEP3_LI_ADD_PRODUCTS =
+            "//h2[normalize-space()='Step 3: Add WhatsApp to Your App']/following-sibling::ol/li[contains(normalize-space(),'Add Products')]";
+
+    public static final String STEP3_LI_SET_UP_WHATSAPP =
+            "//h2[normalize-space()='Step 3: Add WhatsApp to Your App']/following-sibling::ol/li[contains(normalize-space(),'Set Up')]";
+
+    public static final String STEP3_LI_WABA_CREATED =
+            "//h2[normalize-space()='Step 3: Add WhatsApp to Your App']/following-sibling::ol/li[contains(normalize-space(),'WABA')]";
+
+
+    // ================= STEP 4 : Get Your Credentials =================
+    public static final String STEP4_PHONE_WABA_ALL_LI =
+            "//h3[normalize-space()='1. Phone ID & WABA ID']/following-sibling::ul/li";
+
+    public static final String STEP4_LI_API_SETUP =
+            "//h3[normalize-space()='1. Phone ID & WABA ID']/following-sibling::ul/li[contains(normalize-space(),'API Setup')]";
+
+    public static final String STEP4_LI_VERIFY_OTP =
+            "//h3[normalize-space()='1. Phone ID & WABA ID']/following-sibling::ul/li[contains(normalize-space(),'OTP')]";
+
+    public static final String STEP4_LI_SEND_TEST_MESSAGE =
+            "//h3[normalize-space()='1. Phone ID & WABA ID']/following-sibling::ul/li[contains(normalize-space(),'test message')]";
+
+    public static final String STEP4_LI_COPY_IDS =
+            "//h3[normalize-space()='1. Phone ID & WABA ID']/following-sibling::ul/li[contains(normalize-space(),'Phone Number ID')]";
+
+    public static final String STEP4_APP_ALL_LI =
+            "//h3[normalize-space()='2. App ID & App Secret']/following-sibling::ul/li";
+
+    public static final String STEP4_LI_BASIC_SETTINGS =
+            "//h3[normalize-space()='2. App ID & App Secret']/following-sibling::ul/li[contains(normalize-space(),'Settings')]";
+
+    public static final String STEP4_LI_COPY_APP_IDS =
+            "//h3[normalize-space()='2. App ID & App Secret']/following-sibling::ul/li[contains(normalize-space(),'App ID')]";
+
+
+    // ================= STEP 5 : Complete WhatsApp Setup Flow =================
+    public static final String STEP5_ALL_LI =
+            "//h2[normalize-space()='Step 5: Complete WhatsApp Setup Flow']/following-sibling::ul/li";
+
+    public static final String STEP5_LI_BUSINESS_VERIFICATION =
+            "//h2[normalize-space()='Step 5: Complete WhatsApp Setup Flow']/following-sibling::ul/li[contains(normalize-space(),'Business Verification')]";
+
+    public static final String STEP5_LI_MESSAGE_TEMPLATES =
+            "//h2[normalize-space()='Step 5: Complete WhatsApp Setup Flow']/following-sibling::ul/li[contains(normalize-space(),'Message Templates')]";
+
+    public static final String STEP5_LI_ASSIGN_PHONE =
+            "//h2[normalize-space()='Step 5: Complete WhatsApp Setup Flow']/following-sibling::ul/li[contains(normalize-space(),'Assign Phone Numbers')]";
+
+    public static final String STEP5_LI_WEBHOOK =
+            "//h2[normalize-space()='Step 5: Complete WhatsApp Setup Flow']/following-sibling::ul/li[contains(normalize-space(),'Webhook')]";
+
+    public static final String STEP5_LI_LIVE_MODE =
+            "//h2[normalize-space()='Step 5: Complete WhatsApp Setup Flow']/following-sibling::ul/li[contains(normalize-space(),'Live Mode')]";
+
+
+    // ================= STEP 6 : Token (Access Token) =================
+    public static final String STEP6_ALL_LI =
+            "//h2[normalize-space()='Step 6: Token (Access Token)']/following-sibling::ul/li";
+
+    public static final String STEP6_LI_TEMP_TOKEN =
+            "//h2[normalize-space()='Step 6: Token (Access Token)']/following-sibling::ul/li[contains(normalize-space(),'Temporary Token')]";
+
+    public static final String STEP6_LI_PERM_TOKEN =
+            "//h2[normalize-space()='Step 6: Token (Access Token)']/following-sibling::ul/li[contains(normalize-space(),'Permanent Token')]";
+
+    public static final String STEP6_PERMISSIONS_ALL_LI =
+            "//h2[normalize-space()='Step 6: Token (Access Token)']//li[contains(normalize-space(),'Permanent Token')]/ul/li";
+
+    public static final String STEP6_LI_PERMISSION_MSG =
+            "//li[normalize-space()='whatsapp_business_messaging']";
+
+    public static final String STEP6_LI_PERMISSION_MGMT =
+            "//li[normalize-space()='whatsapp_business_management']";
+
+    public static final String STEP6_LI_PERMISSION_PROFILE =
+            "//li[normalize-space()='public_profile']";
+
+
+    // ================= STEP 7 : Add Credentials to Integration Form =================
+    public static final String STEP7_DESCRIPTION =
+            "//h2[normalize-space()='Step 7: Add Credentials to Integration Form']/following-sibling::p";
+
+    public static final String STEP7_CONNECT_TEXT =
+            "//h2[normalize-space()='Step 7: Add Credentials to Integration Form']/following-sibling::p[contains(normalize-space(),'Connect')]";
+
+    //WhatsApp Integration Mandatory
+
+    public static String PHONEIDVAL = "//span[text()='Phone Id is required']";
+    public static String WABAIDVAL = "//span[text()='Waba Id is required']";
+    public static String TOKENVAL = "//span[text()='Token is required']";
+    public static String APPIDVAL = "//span[text()='App Id is required']";
+    public static String APPSECRETIDVAL = "//span[text()='App Secret is required']";
+
+    //WhatsApp Integration Edit
+    public static String WIEDITBTN = "//span[text()='Edit']/parent::button";
+    public static String CONNECTEDICON = "//h6[text()='WhatsApp Integration']/following::span[text()='Connected']";
+    public static String STATISTICS = "//span[text()='Statistics']";
+    public static String WIREFRESH = "//span[text()='Statistics']//following-sibling::*[local-name()='svg']";
+    public static String WIREFRESHSUCCESS = "//div[text()='success']";
+    public static String WITHROUGHPUT = "//h6[text()='Throughput Level']";
+    public static String WICODEV = "//h6[text()='Code verification status']";
+    public static String WIMSGV = "//h6[text()='Message Limit Tier']";
+    public static String WIACCOUNTV = "//h6[text()='Account Mode']";
+    public static String WIQUALITYV = "//h6[text()='Quality Rating']";
+    public static String WIDISCONNECTBTN = "//span[text()='Disconnect']/parent::button";
+    public static String WICONNECTBTN = "//span[text()='Connect']/parent::button";
+    public static String WIDISCONNECTMSG = "//div[text()='Disconnected successfully']";
+    public static String WIUPDATEDMSG = "//div[text()='WhatsApp Integration Updated']";
+
+    //Conversation Page
+    public static String CONVERSATIONMENU = "//span[text()='Conversations']";
+    public static String WACONVERSATIONMENU = "//button[text()='Whatsapp Conversations']";
+    public static String WACONVERSATIONHEADER = "//div[text()='WhatsApp Conversation']";
+    public static String WACONVERSATIONINFO = "//p[text()='Select a contact to start chatting']";
+    public static String WACONNECTED = "//span[text()='Connected']";
+    public static String WADISCONNECTED = "//p[text()='To use this functionality, please connect your WhatsApp integration first.']";
 
 
 //LeadStage

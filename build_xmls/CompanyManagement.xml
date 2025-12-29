@@ -205,4 +205,15 @@
         </classes>
     </test>
 
+    <!-- verify Editing Effect On Created Time -->
+    <test name="verify Editing Effect On Created Time">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="verifyEditingEffectOnCreatedTime"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 </suite>

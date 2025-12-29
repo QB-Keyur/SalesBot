@@ -96,5 +96,13 @@ public class CompanyPortfolioTest extends BasePage {
         common.logPrint("TEST PASS :: Sorting validated successfully for Company Portfolio grid");
     }
 
+    @Test
+    public void verifyEditingEffectOnCreatedTime(){
+        common.logPrint("TEST START :: verify Editing Effect On Created Time");
+        loginWithAdminUser();
+        companyPortfolioPage.verifyEditingEffectOnCreatedTime();
+
+    }
+
 
 }
