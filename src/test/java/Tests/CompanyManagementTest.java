@@ -144,6 +144,12 @@ public class CompanyManagementTest extends BasePage {
         productPage.validateSorting(2, "int", null, SortOrder.DESCENDING);
     }
 
+    @Test
+    public void verifyEditingEffectOnCreatedTime(){
+        loginWithAdminUser();
+        companyManagementPage.verifyEditingEffectOnCreatedTime();
+    }
+
 
 
 

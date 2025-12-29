@@ -93,4 +93,11 @@ public class ProductTest extends BasePage {
         productPage.pagination();
     }
 
+    @Test
+    public void verifyEditingEffectOnCreatedTime(){
+
+        loginWithAdminUser();
+        productPage.verifyEditingEffectOnCreatedTime();
+    }
+
 }

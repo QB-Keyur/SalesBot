@@ -578,6 +578,42 @@ public class ProductPage extends Locators {
                 "10. Category ENDS WITH filter failed: expected to end with '" + catLastWord + "' but was '" + catEndsWithText + "'");
     }
 
+    public void verifyEditingEffectOnCreatedTime(){
+        goToProductPage();
+        String createdDateXpath = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"]";
+        String createdEditXpath = "//div[@data-rowindex=\"0\"]//button[@aria-label=\"Edit\"]";
+
+        String createdDateValue = common.getAttribute(createdDateXpath,"title");
+
+        common.waitUntilElementToBeVisible(createdEditXpath);
+        common.click(createdEditXpath);
+        String newName = common.fakeProductName();
+        common.click(PHPRODUCTNAME);
+        common.type(PHPRODUCTNAME, newName);
+
+        common.click(SAVEBUTTON);
+        common.assertElementPresent(UPDATEMESSAGE);
+        common.click(CLOSEBUTTON);
+
+        common.waitUntilElementToBeVisible(createdDateXpath);
+        String editedDateValue = common.getAttribute(createdDateXpath,"title");
+
+        common.logPrint("createdDateValue: " + createdDateValue +
+                " | editedDateValue: " + editedDateValue);
+
+        Assert.assertEquals(
+                editedDateValue,
+                createdDateValue,
+                "Created date and Edited date do not match!"
+        );
+
+
+
+
+
+
+    }
+
     /**
      * Click an element by xpath with retries. Uses your common.waitUntilElementToBeClickable(xpath)
      * to locate the element before clicking. Retries on StaleElementReferenceException,

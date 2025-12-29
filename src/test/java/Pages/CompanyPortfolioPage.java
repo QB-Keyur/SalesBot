@@ -310,5 +310,47 @@ public class CompanyPortfolioPage extends Locators {
 
     }
 
+    public void verifyEditingEffectOnCreatedTime(){
+        goToCompanyPortfolioPage();
+
+        String createdDateXpath = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"]";
+        String createdEditXpath = "//div[@data-rowindex=\"0\"]//button[@aria-label=\"Edit\"]";
+
+        String createdDateValue = common.getAttribute(createdDateXpath,"title");
+
+        common.waitUntilElementToBeVisible(createdEditXpath);
+        common.click(createdEditXpath);
+
+        String newName = common.fakeProductName();
+        String newDesc  = common.generateCompanyDescription();
+
+        common.waitUntilElementToBeClickable(CPCNAMEINPUT);
+        common.type(CPCNAMEINPUT,newName);
+
+        common.waitUntilElementToBeClickable(CPCDESCINPUT);
+        common.type(CPCDESCINPUT,newDesc);
+
+        common.click(CCSAVEBTN);
+
+        common.assertElementPresent(CPCEDITMSG);
+        common.waitUntilElementToBeVisible(CPHEADER);
+
+        common.waitUntilElementToBeVisible(createdDateXpath);
+        String editedDateValue = common.getAttribute(createdDateXpath,"title");
+
+        if(editedDateValue.equals(createdDateValue)){
+            common.logPrint("createdDateValue: "+createdDateValue+" editedDateValue: "+editedDateValue);
+        }
+        else{
+            common.logPrint("FAILED:  createdDateValue: "+createdDateValue+" editedDateValue: "+editedDateValue);
+        }
+
+
+
+
+
+
+    }
+
 
 }

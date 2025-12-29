@@ -157,4 +157,15 @@
         </classes>
     </test>
 
+    <!-- Verify Editing Functionality affects the Created Date -->
+    <test name="Verify Editing Functionality affects the Created Date">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="verifyEditingEffectOnCreatedTime"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 </suite>

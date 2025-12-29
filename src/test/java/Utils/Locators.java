@@ -240,6 +240,7 @@ public class Locators extends BasePage {
     public static String ACEDITHEADER = "//h6[text()='Update Agent Configuration']";
     public static String ACPLAYGROUNDHEADER = "//span[text()='Select Agent']";
     public static String ACPLAYGROUNDSELECTAGENT = "//input[@placeholder=\"Select agent\"]";
+    public static String ACEDITSUCCESSMESSAGE = "//div[text()='Agent Configuration Updated Successfully']";
 //    public static String ACSEARCHRESULT = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])[1]";
 //    public static String ACEDITBUTTON = "(//button[@aria-label=\"Edit\"])[1]";
 //    public static String ACDELETEBUTTON = "(//button[@aria-label=\"Delete\"])[1]";

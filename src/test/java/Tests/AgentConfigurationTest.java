@@ -168,5 +168,11 @@ public class AgentConfigurationTest extends BasePage {
         agentConfigurationPage.createAndViewReflectionInPlayground();
     }
 
+    @Test
+    public void verifyEditingEffectOnCreatedTime(){
+        common.logPrint("Verifying editing functionality for an existing agent");
+        loginWithAdminUser();
+        agentConfigurationPage.verifyEditingEffectOnCreatedTime();
+    }
 
 }

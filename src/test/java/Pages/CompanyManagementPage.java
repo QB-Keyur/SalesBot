@@ -552,4 +552,36 @@ public class CompanyManagementPage extends Locators {
 
     }
 
-}
+    public void verifyEditingEffectOnCreatedTime() {
+        goToCompanyManagementPage();
+        String createdDateXpath = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"]";
+        String createdEditXpath = "//div[@data-rowindex=\"0\"]//button[@aria-label=\"Edit\"]";
+
+        String createdDateValue = common.getAttribute(createdDateXpath, "title");
+
+        common.waitUntilElementToBeVisible(createdEditXpath);
+        common.click(createdEditXpath);
+
+
+        common.type(CCNAMEINPUT, "EditName");
+
+        common.click(CCSAVEBTN);
+
+        common.assertElementPresent(CEDITMSG);
+        common.waitUntilElementToBeVisible(CMGMTHEADER);
+
+        common.waitUntilElementToBeVisible(createdDateXpath);
+        String editedDateValue = common.getAttribute(createdDateXpath, "title");
+
+        common.logPrint("createdDateValue: " + createdDateValue +
+                " | editedDateValue: " + editedDateValue);
+
+        Assert.assertEquals(
+                editedDateValue,
+                createdDateValue,
+                "Created date and Edited date do not match!"
+        );
+
+
+    }
+    }
