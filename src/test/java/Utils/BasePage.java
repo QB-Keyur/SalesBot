@@ -59,6 +59,7 @@ public class BasePage {
     public CompanyManagementPage companyManagementPage;
     public CompanyPortfolioPage companyPortfolioPage;
     public WorkingHoursPage workingHoursPage;
+    public WhatsAppIntegrationPage whatsAppIntegrationPage;
 
     protected List<String> stringList = new ArrayList<>();
 
@@ -176,6 +177,7 @@ public class BasePage {
         companyManagementPage = new CompanyManagementPage(getDriver());
         companyPortfolioPage = new CompanyPortfolioPage(getDriver());
         workingHoursPage = new WorkingHoursPage(getDriver());
+        whatsAppIntegrationPage = new WhatsAppIntegrationPage(getDriver());
         steps.set(1);
         Common.printCurrentTime("Starting Time");
         getDriver().get(EnvConfig.getWebUrl());
