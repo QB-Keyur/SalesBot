@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class WhatsAppCampaignTest extends BasePage {
 
-    @Test
+    @Test //Xpath updated
     public void  verifyWhatsAppCampaignPage() {
         loginWithAdminUser();
         WhatsAppCPage.goToWhatsAppCampaignPage();
@@ -13,28 +13,21 @@ public class WhatsAppCampaignTest extends BasePage {
         WhatsAppCPage.VerifyListAndGridView();
     }
 
-    @Test
+    @Test //xpath updated
     public void VerifyWhatsAppContactListHeaders() {
         loginWithAdminUser();
         WhatsAppCPage.goToWhatsAppCampaignPage();
         WhatsAppCPage.VerifyWhatsAppContactHeaders();
     }
-    @Test
-    public void VerifyCreateWhatsAppCampaignView() {
-        loginWithAdminUser();
-        WhatsAppCPage.goToWhatsAppCampaignPage();
-     // WhatsAppCPage.VerifyCreateWhatsAppCampaignPage();
-        WhatsAppCPage.verifyViewContactListHeader();
 
-    }
-    @Test
+    @Test //xpath Updated
     public void VerifyRunCampaignPopup(){
         loginWithAdminUser();
         WhatsAppCPage.goToWhatsAppCampaignPage();
         WhatsAppCPage.VerifyRunCampaignPopup();
 
     }
-    @Test
+    @Test //xpath Updated
     public void verifyFieldvalidation()
     {
         loginWithAdminUser();
@@ -44,7 +37,7 @@ public class WhatsAppCampaignTest extends BasePage {
 
 
     }
-    @Test
+    @Test //xpath Updated
 
     public void VerifyContactHeader()
     {
@@ -53,7 +46,7 @@ public class WhatsAppCampaignTest extends BasePage {
         WhatsAppCPage.VerifyContactListHeaderOnCreateCampaignPage();
 
     }
-    @Test
+    @Test //xpath Updated
 
     public void VerifyCreateWhatsAppCampaign()
     {
@@ -64,7 +57,7 @@ public class WhatsAppCampaignTest extends BasePage {
     }
 
 
-    @Test
+    @Test //xpath updated
     public void VerifyRunCampaignWithSelectingContactTest(){
         loginWithAdminUser();
         WhatsAppCPage.goToWhatsAppCampaignPage();
@@ -72,14 +65,14 @@ public class WhatsAppCampaignTest extends BasePage {
     }
 
 
-    @Test
-    public void validateRunCampaignWithSelectedContact() {
+    @Test // xpath Updated
+    public void validateViewRunCampaignWithSelectedContact() {
         loginWithAdminUser();
         WhatsAppCPage.goToWhatsAppCampaignPage();
         WhatsAppCPage.verifyViewCampaign();
     }
 
-    @Test
+    @Test //xpath Updated
     public void verifyElementsOnnCreateCamapignPage()
     {
         loginWithAdminUser();
@@ -87,20 +80,26 @@ public class WhatsAppCampaignTest extends BasePage {
         WhatsAppCPage.VerifyCreateWhatsAppCampaignPageAllElements();
     }
 
-    @Test
+    @Test //xpath Updated
     public void VerifyViewCampaignPageHeaderName()
     {
         loginWithAdminUser();
         WhatsAppCPage.goToWhatsAppCampaignPage();
         WhatsAppCPage.VerifyViewWhatsAppCampaignHader();
-        WhatsAppCPage.VerifyWhatsAppCampaignSearch();
 
+
+    }
+
+    @Test //xpath Updated
+    public void VerifyViewCampaignSearch()
+    {
+        loginWithAdminUser();
+        WhatsAppCPage.goToWhatsAppCampaignPage();
+        WhatsAppCPage.VerifyWhatsAppCampaignSearch();
     }
     @Test
      public void VerifySearch()
     {
-
-
             loginWithAdminUser();
             WhatsAppCPage.goToWhatsAppCampaignPage();
             WhatsAppCPage.VerifyWhatsAppCampaignSearch();

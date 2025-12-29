@@ -415,7 +415,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String LeadEditBack = "//h6[text()='Update Lead Management']/preceding-sibling::button";
     //Lead view
     public static String Vname ="//span[text()='Name']/ancestor::label/following-sibling::div//input[@type='text']";
-    public static String Vemail = "//span[normalize-space()='Email']/ancestor::label/following-sibling::div//input[@type='text']";
+    public static String Vemail = "//span[text()='Email']/ancestor::label/following-sibling::div//input[@type='text']";
     public static String VType = "//span[normalize-space()='Type']/ancestor::label/following-sibling::div//input[@type='text']\n";
     public static String VContactType = "//span[normalize-space()='Contact Type']/ancestor::label/following-sibling::div//input[@type='text']";
 
@@ -707,11 +707,11 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String WCH_WhatsAppTem = "//span[contains(text(),'Whatsapp Template Name')]";
     public static String WCH_WhatsAppCategorName = "//span[normalize-space()='Template Category Name']";
     public static String WCH_ProductName = "//span[normalize-space()='Product Name']";
-    public static String WCH_ScheduleTime= "//span[normalize-space()='Schedule Time']";
+    public static String WCH_DT= "//span[normalize-space()='Created Date']";
     public static String WCH_Status = "//span[text()='Status']";
     public static String WCH_Action = "//span[text()='Actions']";
     //Create WhatsApp Campaign
-    public static String CWC_Back = "//div[@class='MuiGrid-root MuiGrid-direction-xs-row MuiGrid-grid-xs-12 MuiGrid-grid-sm-10 MuiGrid-grid-md-6 css-53mvl9']//button[@type='button']";
+    public static String CWC_Back = "//h6[text()='Create WhatsApp Campaign']/preceding-sibling::button";
     public static String CWC_Cancel = "//span[normalize-space()='Cancel']";
     public static String CWC_View = "//span[text()='View']";
     public static String CWC_Header = "//h6[normalize-space()='Create WhatsApp Campaign']";
@@ -729,9 +729,9 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String V_back = "//h6[normalize-space()='View WhatsApp Campaign']/preceding-sibling::button";
 
 
-    public static String CWC_RunCamBTN = "//span[text()='Run Campaign']";
+    public static String CWC_Save = "//span[text()='Save']";
     public static String RC_PopupNo="//span[text()='No']";
-    public static String RC_PopupYes="//span[text()='Yes']";
+    public static String RC_RunCamp="//span[text()='Run Campaign']";
 
     public static String C_Name = "//input[@placeholder='Enter campaign name']";
     public static String C_WhatsAppTem = "//input[@placeholder='Select template']";
