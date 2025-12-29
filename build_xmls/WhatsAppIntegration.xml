@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="WhatsApp Integration Module Test Suite"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <!-- Navigation -->
+    <test name="Verify WhatsApp Integration Page Navigation">
+        <classes>
+            <class name="Tests.WhatsAppIntegrationTest">
+                <methods>
+                    <include name="goToWhatsAppIntegrationPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Menu & UI Validation -->
+    <test name="Verify WhatsApp Integration Menu and UI Elements">
+        <classes>
+            <class name="Tests.WhatsAppIntegrationTest">
+                <methods>
+                    <include name="verifyWhatsAppIntegrationMenu"/>
+                    <include name="verifyElementsInsideWhatsAppIntegrationMenu"/>
+                    <include name="verifyElementsInEditScreen"/>
+                    <include name="verifyViewEye"/>
+                    <include name="verifyRefreshButton"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Validation Scenarios -->
+    <test name="Verify WhatsApp Integration Validations">
+        <classes>
+            <class name="Tests.WhatsAppIntegrationTest">
+                <methods>
+                    <include name="verifyMandatoryFieldValidationInWhatsAppIntegration"/>
+                    <include name="verifyIntegrationWithWhiteSpaces"/>
+                    <include name="verifyUsingTheSameNumber"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Integration Flow -->
+    <test name="Verify WhatsApp Integration Flow">
+        <classes>
+            <class name="Tests.WhatsAppIntegrationTest">
+                <methods>
+                    <include name="verifyIntegratingWithValidData"/>
+                    <include name="verifyReconnectingSameAccount"/>
+                    <include name="verifyDisconnecting"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Post Integration Functional Checks -->
+    <test name="Verify Post Integration Functionalities">
+        <classes>
+            <class name="Tests.WhatsAppIntegrationTest">
+                <methods>
+                    <include name="verifyItAllowsHavingAConversationAfterConnectingWhatsApp"/>
+                    <include name="verifyAllowsCreatingAWhatsAppTemplateAfterConnecting"/>
+                    <include name="verifyAfterDisconnectingItDoesntAllowConversationOrTemplate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
