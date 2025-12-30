@@ -2032,7 +2032,8 @@ public class Common extends Locators {
     }
 
     public void tab() {
-
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Keys.TAB).build().perform();
     }
 
     public void selectRandomValueFromDropdown(String dropdownXpath, int optionsCount) {

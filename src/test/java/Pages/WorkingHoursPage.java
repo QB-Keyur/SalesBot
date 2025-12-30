@@ -346,7 +346,7 @@ public class WorkingHoursPage extends Locators {
         common.waitUntilElementToBeVisible(WH_MONDAY_TYPE_INPUT);
 
         String startTime = "10:30 AM";
-        String endTime   = "07:00 PM";
+        String endTime   = "19:00 PM";
 
         // ---------- STEP 1: All day TYPE inputs ----------
         List<String> allDayTypeInputs = Arrays.asList(
