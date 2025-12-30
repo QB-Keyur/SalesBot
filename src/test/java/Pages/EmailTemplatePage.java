@@ -339,7 +339,7 @@ public class EmailTemplatePage extends Locators {
                 "Email Template is not synced. Current status: " + status
         );
 
-        common.openNewUrl(EnvConfig.getWebUrl() + "/email-campaign");
+        common.openNewUrl(EnvConfig.getWebUrl() + "email-campaign");
         common.waitUntilElementToBeVisible(ETCREATE);
         common.click(ETCREATE);
 
