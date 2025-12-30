@@ -51,7 +51,7 @@ public final class EnvConfig {
     public static String getForgotPass() {
         return get("FORGOT_PASS");
     }
-
+//WhatsApp Configuration
     public static String getPhoneId() {
         return get("PHONE_ID");
     }
@@ -59,6 +59,12 @@ public final class EnvConfig {
     public static String getToken() {return get("TOKEN");}
     public static String getAppId() {return get("APP_ID");}
     public static String getAppSecret() {return get("APP_SECRET");}
+//    SMTP Configuration
+    public static String getSMTPProvider() {return get("SMTP_PROVIDER_TYPE");}
+    public static String getSMTPEmail() {return get("SMTP_EMAIL");}
+    public static String getSMTPPassword() {return get("SMTP_PASSWORD");}
+    public static String getSMTPPort() {return get("SMTP_PORT");}
+
 
     public static boolean isCI() {
         return "ci".equalsIgnoreCase(getOptional("ENV", "local"));

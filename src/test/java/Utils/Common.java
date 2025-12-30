@@ -716,17 +716,23 @@ public class Common extends Locators {
      * @param locator the locator of checkbox element to be checked
      */
     public void checkChkBox(String locator) {
-        WebElement element = waitUntilStringLocator(locator);
-        highlightElement(element);
-        boolean isCheckBoxChecked = element.isSelected();
-        if (!isCheckBoxChecked) {
+        WebElement checkbox = waitUntilStringLocator(locator);
+        highlightElement(checkbox);
+
+        if (!checkbox.isSelected()) {
             try {
-                element.click();
+                checkbox.click();
             } catch (Exception e) {
-                jsClickWithoutWait(element);
+                jsClickWithoutWait(checkbox);
             }
+
+            // Re-validate state
+            checkbox = waitUntilStringLocator(locator);
+            Assert.assertTrue(checkbox.isSelected(),
+                    "Checkbox was clicked but is still NOT selected: " + locator);
         }
     }
+
 
     public void scrollToElement(String locator) {
         WebElement element = waitUntilStringLocator(locator);

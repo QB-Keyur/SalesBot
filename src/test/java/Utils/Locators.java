@@ -1298,7 +1298,110 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static final String LS_Order = "//input[@placeholder='Enter Order']";
 
     //Integration -> SMTP Integration
-    public static final String SMTPCONVERSATION = "";
+    public static final String SMTPINTEGRATION = "//p[text()='SMTP']/parent::div";
+    public static final String SMTPICON = "//p[text()='SMTP']/preceding::*[local-name()='svg'][1]";
+    public static final String SMTPDISCONNECTED = "//p[text()='SMTP']/preceding::span[text()='Disconnected']";
+    public static final String SMTPPENDING = "//p[text()='SMTP']/preceding::span[text()='Pending']";
+    public static final String SMTPCONNECTED = "//p[text()='SMTP']/preceding::span[text()='Connected']";
+    public static final String SMTPMESSAGE = "//p[text()='SMTP']/following-sibling::p[text()='Integrate your email service using SMTP.']";
+    public static final String SMTPMESSAGE2 = "//p[text()='SMTP']";
+
+    // Add SMTP Integration
+
+    public static final String SIHEADER = "//h6[text()='SMTP Integration']";
+    public static final String SIICON = "//h6[text()='SMTP Integration']/preceding-sibling::*[local-name()='svg']";
+    public static final String SIHEADERMESSAGE = "//h6[text()='SMTP Integration']/following::p[text()='Set up your SMTP integration for the first time.']";
+    public static final String SENDERNAMEHEADER = "//span[text()='Sender Name']";
+    public static final String PROVIDERTYPEHEADER = "//span[text()='Provider Type']";
+    public static final String EMAILHEADER = "//span[text()='Email']";
+    public static final String PASSWORDHEADER = "//span[text()='Password']";
+    public static final String PORTHEADER = "//span[text()='Port number']";
+    public static final String TERMS = "//p[contains(text(),'By using')]";
+    public static final String TERMSCB = "//span[@class=\"css-ysvidx\"] | //input[@type='checkbox']";
+    public static final String CONNECT = "//button[@type=\"submit\"]";
+
+    public static final String SINAMEINPUT = "//input[@name=\"name\"]";
+    public static final String SIPROVIDERINPUT = "//input[@placeholder=\"Select Provider Type\"]";
+    public static final String SIEMAILINPUT = "//input[@placeholder=\"Enter Email\"]";
+    public static final String SIPASSINPUT = "//input[@placeholder=\"Enter password\"]";
+    public static final String SIPORTINPUT = "//input[@placeholder=\"Select\"]";
+    public static final String SIEDIT = "//span[text()='Edit']/parent::button";
+
+    //SMTP Mandatory
+
+    public static String SENDERNAMEVAL = "//span[text()='Sender Name is required']";
+    public static String PROVIDERVAL = "//span[text()='Provider type is required']";
+    public static String EMAILVAL = "//span[text()='email is required']";
+    public static String PASSWORDVAL = "//span[text()='password is required']";
+    public static String PROVIDERREQVAL = "//span[text()='Provider type is required']";
+    public static String PASSWORDREQVAL = "//span[text()='Enter a valid email address']";
+    public static String INTEGRATIONVALMESSAGE = "//div[contains(text(),'SMTP Integration')]";
+    public static String FAILVALMESSAGE = "//div[contains(text(),'Failed')]";
+
+    public static String DISCONNECTBUTTON = "//span[text()='Disconnect']/parent::button";
+    public static String DISCONNECTMESSAGE = "//div[contains(text(),'Disconnected successfully')]";
+
+
+
+    // ================= STEP 1 =================
+    public static final String STEP1_ENABLE_2FA_TITLE =
+            "//h6[normalize-space()='1. Enable 2-Factor Authentication (if not already enabled)']";
+
+    // ================= STEP 1 DETAILS =================
+    public static final String GOOGLE_ACCOUNT_SETTINGS_TITLE =
+            "//h6[normalize-space()='Go to your Google Account settings']";
+
+    public static final String GOOGLE_ACCOUNT_INFO="//p[contains(text(),'Click Security in the left sidebar')]";
+
+
+    // ================= STEP 2 =================
+    public static final String STEP2_GENERATE_APP_PASSWORD_TITLE =
+            "//h6[normalize-space()='2. Generate App Password']";
+    public static final String PASSINFO = "//p[contains(text(),'Click App passwords ')]";
+
+
+    // ================= STEP 2 DETAILS =================
+    public static final String SECURITY_SECTION_SIGN_IN_TITLE =
+            "//h6[normalize-space()='In the same Security section, scroll down to \"Signing in to Google\"']";
+
+
+    // ================= STEP 3 =================
+    public static final String STEP3_CREATE_APP_PASSWORD_TITLE =
+            "//h6[normalize-space()='3. Create App Password for Mail']";
+
+
+    // ================= STEP 3 DETAILS =================
+    public static final String SELECT_APP_MAIL_TITLE =
+            "//h6[normalize-space()='Under Select app, choose Mail']";
+
+    public static final String MAILINFO = "//p[contains(text(),'Under Select device')]";
+
+
+    // ================= STEP 4 =================
+    public static final String STEP4_COPY_PASSWORD_TITLE =
+            "//h6[normalize-space()='4. Copy the Password']";
+
+
+    // ================= STEP 4 DETAILS =================
+    public static final String GOOGLE_16_CHARACTER_PASSWORD_TITLE =
+            "//h6[contains(normalize-space(),'16-character password')]";
+
+    public static final String GOOGLEPASSINFO="//p[contains(text(),'Copy this password immediately')]";
+
+
+    // ================= CONTAINERS =================
+
+    public static final String STEP1_CONTAINER =
+            "//div[contains(@class,'MuiBox-root')][.//h6[contains(text(),'Enable 2-Factor Authentication')]]";
+
+    public static final String STEP2_CONTAINER =
+            "//div[contains(@class,'MuiBox-root')][.//h6[contains(text(),'Generate App Password')]]";
+
+    public static final String STEP3_CONTAINER =
+            "//div[contains(@class,'MuiBox-root')][.//h6[contains(text(),'Create App Password')]]";
+
+    public static final String STEP4_CONTAINER =
+            "//div[contains(@class,'MuiBox-root')][.//h6[contains(text(),'Copy the Password')]]";
 
 
 
