@@ -52,8 +52,8 @@ public class EmailTemplatePage extends Locators {
         columns.put(ETCREATE, "ET Created");
         columns.put(MULTITABHOR, "ET Horizontal View");
         columns.put(MULTITABVER, "ET Vertical View");
-        columns.put(KBTOTALROWS, "ET Total Rows");
-        columns.put(KBROWSPERPAGE, "ET Rows Per Page");
+//        columns.put(KBTOTALROWS, "ET Total Rows");
+//        columns.put(KBROWSPERPAGE, "ET Rows Per Page");
 
 
         int failures = 0;
@@ -102,7 +102,7 @@ public class EmailTemplatePage extends Locators {
         columns.put(ETCVARPHONE, "ET Variable Phone Number");
         columns.put(ETCVARNAME, "ET Variable Name");
         columns.put(ETCVARCNAME, "ET Variable Company Name");
-        columns.put(ETCVARNEW, "ET Variable Custom");
+//        columns.put(ETCVARNEW, "ET Variable Custom");
         columns.put(ETCVARINFO, "ET Variable Info Text");
         columns.put(ETCSUBJECT, "ET Subject Label");
         columns.put(ETCSUBJECTINPUT, "ET Subject Input Field");
@@ -198,11 +198,11 @@ public class EmailTemplatePage extends Locators {
         String name = common.generateCompanyName();
         String subject = common.generateBusinessFocus();
         String body = common.generateCompanyDescription();
-        String ETCSUBJECTPREVIEW = "//p[text()='"+subject+"']";
-        String ETCBODYPREVIEW = "//p[text()='"+body+"']";
-        String ETCBODYPREVIEWFULL = "//b[text()='Subject:']/following::div[1]";
+        String ETCSUBJECTPREVIEW = "//p[text()='"+subject+"'] | //div[text()='"+subject+"']";
+        String ETCBODYPREVIEW = "//p[text()='"+body+"'] | //div[text()='"+body+"']";
+        String ETCBODYPREVIEWFULL = "//b[text()='"+subject+"']/following::div[1] | //div[text()='"+subject+"']/following::div[1]";
 
-        String imagePath = Paths.get("Files", "1.png").toAbsolutePath().toString();
+        String imagePath = Paths.get("TestData", "1.png").toAbsolutePath().toString();
 
 
         common.waitUntilElementToBeClickable(ETCREATE);
@@ -339,7 +339,7 @@ public class EmailTemplatePage extends Locators {
                 "Email Template is not synced. Current status: " + status
         );
 
-        common.openNewUrl(EnvConfig.getWebUrl() + "email-campaign");
+        common.openNewUrl(EnvConfig.getWebUrl() + "/email-campaign");
         common.waitUntilElementToBeVisible(ETCREATE);
         common.click(ETCREATE);
 

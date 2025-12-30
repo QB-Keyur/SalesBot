@@ -510,7 +510,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String WHATSAPPTEMPLATEMENU = "//button[text()='Whatsapp Template']";
     public static String WTHEADER = "//h6[text()='Whatsapp Template']";
     public static String WTSEARCH = "//input[@placeholder=\"Search...\"]";
-    public static String WTREFRESH = "//button[@class=\"MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-15wqzvf\"]";
+    public static String WTREFRESH = "//span[text()='Filters']/following::button[1] | //span[contains(@class,'css-1sh91j5')]/parent::button[contains(@class,'css-q8p1uw')]";
     public static String WTFILTERS = "//button[@type='button']/following::span[contains(text(),'Filters')]";
     public static String WTCREATE = "//button[@type='button']/following::span[text()='Create']";
     public static String WTNAME = "//span[text()=\"Name\"]";
@@ -584,7 +584,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String ETSERVERSYNCED = "//span[text()=\"Server Synced\"]";
     public static String ETCREATEDDATE = "//span[text()=\"Created Date\"]";
     public static String ETACTIONS = "//span[text()=\"Actions\"]";
-    public static String ETREFRESH = "//button[@class=\"MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-15wqzvf\"]";
+    public static String ETREFRESH = "//span[text()='Filters']/following::button[1] | //span[contains(@class,'css-1sh91j5')]/parent::button[contains(@class,'css-q8p1uw')]";
     public static String ETFILTERS = "//button[@type='button']/following::span[contains(text(),'Filters')]";
     public static String ETCREATE = "//button[@type='button']/following::span[text()='Create']";
     public static String ETVIEW = "(//button[@aria-label=\"View\"])[1]";
@@ -598,7 +598,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String ETCTNAMEINPUT = "//input[@placeholder=\"Enter Template Name\"]";
     public static String ETCCBTEXT = "//p[text()='Can be send from whatsapp']";
     public static String ETCCBINPUT = "//input[@type=\"checkbox\"]";
-    public static String ETCUPLOAD = "//h6[text()='Upload Attachments']";
+    public static String ETCUPLOAD = "//p[contains(text(),'Select your file')]";
     public static String ETCUPLOADINPUT = "//p[contains(text(),'Select your file or drag and drop')]";
     public static String ETCSAVE = "//button[@type='button']/following::span[text()='Save']";
     public static String ETCCANCEL = "//button[@type='button']/following::span[text()='Cancel']";
@@ -619,8 +619,8 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String ETCBODYTOOL = "//div[@role='toolbar']";
     public static String ETCBODYINPUT = "//div[@data-placeholder=\"Start writing your email content...\"]";
     public static String ETCLIVEPREVIEW = "//p[text()='Live Preview']";
-    public static String ETCLPSUB = "//b[text()='Subject:']";
-    public static String ETCLPINFO = "//p[contains(text(),'You are receiving this communication from')]";
+    public static String ETCLPSUB = "//b[text()='Subject:']| //div[text()='Subject']";
+    public static String ETCLPINFO = "//p[contains(text(),'You are receiving this communication from')] | //div[contains(text(),'You are receiving this communication from')]";
 //    public static String ETCREATEHEADER = "//p[contains(text(),'To stop receiving future emails, please click')]";
 
     //Onboarding module xpath
@@ -1278,7 +1278,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String WADISCONNECTED = "//p[text()='To use this functionality, please connect your WhatsApp integration first.']";
 
 
-//LeadStage
+    //LeadStage
     public static final String LeadStageMenu ="//button[text()='Lead Stage']";
     public static final String LS_header = "//h6[text()='Lead Stage']";
     public static final String  LS_Create = "//span[text()='Create']";
@@ -1296,7 +1296,9 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static final String LS_Name = "//input[@placeholder='Enter Name']";
     public static final String LS_Label = "//input[@placeholder='Enter Label']";
     public static final String LS_Order = "//input[@placeholder='Enter Order']";
-;
+
+    //Integration -> SMTP Integration
+    public static final String SMTPCONVERSATION = "";
 
 
 
