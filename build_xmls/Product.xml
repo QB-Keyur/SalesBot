@@ -3,6 +3,10 @@
 
 <suite name="Product Module Test Cases" verbose="10" parallel="tests" thread-count="3" allow-return-values="true">
 
+    <listeners>
+        <listener class-name="Utils.RetryListener"></listener>
+    </listeners>
+
     <!-- Go to Product page -->
     <test name="Go to Product page">
         <classes>

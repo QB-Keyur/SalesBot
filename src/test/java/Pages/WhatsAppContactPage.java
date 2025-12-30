@@ -473,8 +473,8 @@ public class WhatsAppContactPage extends Locators {
     }
 
     public void clickOnTheDeleteBtn(){
-        common.waitUntilElementToBeVisible(CONFDELETE);
-        common.click(CONFDELETE);
+        common.waitUntilElementToBeVisible(deleteButton);
+        common.click(deleteButton);
     }
 
     public void clickOnTheButtonMenuListView(){
@@ -699,6 +699,20 @@ public class WhatsAppContactPage extends Locators {
 
         common.logPrint("Delete functionality is working.");
     }
+
+    public void verifyDeleteFunctionalityIsWorkingOnGridView(){
+
+        clickOnTheDeleteBtn();
+
+        common.logPrint("Step:: Again click on the delete button on pop-up");
+        common.waitUntilElementToBeVisible(deleteButtonPopup);
+        common.click(deleteButtonPopup);
+
+        verifyDeleteSuccessfullyMessageForWhatsAppContactCreation();
+
+        common.logPrint("Delete functionality is working.");
+    }
+
 
     public void verifyEditFunctionalityIsWorkingProperly(){
 

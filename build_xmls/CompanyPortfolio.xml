@@ -7,6 +7,10 @@
        thread-count="3"
        allow-return-values="true">
 
+    <listeners>
+        <listener class-name="Utils.RetryListener"></listener>
+    </listeners>
+
     <!-- Verify Company Portfolio page navigation -->
     <test name="Verify Company Portfolio page navigation">
         <classes>

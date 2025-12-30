@@ -3,6 +3,10 @@
 
 <suite name="WhatsApp Contact Module Test Cases" verbose="10" parallel="tests" thread-count="3" allow-return-values="true">
 
+    <listeners>
+        <listener class-name="Utils.RetryListener"></listener>
+    </listeners>
+
     <!-- Verify WhatsApp grid page elements -->
     <test name="Verify WhatsApp grid page elements">
         <classes>

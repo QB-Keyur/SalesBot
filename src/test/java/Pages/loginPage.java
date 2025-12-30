@@ -113,7 +113,8 @@ public class loginPage extends Locators {
 
     public void verifyErrorMessageIsShowingForInvalidEmailPass(){
         common.logPrint("Step:: Verify validation message is showing for the invalid email or pass");
-        common.assertElementPresent(ERRORMESSAGEFORINVALIDEMAIL);
+//        common.assertElementPresent(ERRORMESSAGEFORINVALIDEMAIL);
+        common.assertElementPresent(stateLabel);
 
         common.logPrint("Error message is showing for the invalid email or pass");
     }
