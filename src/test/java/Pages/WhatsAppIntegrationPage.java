@@ -243,23 +243,46 @@ public class WhatsAppIntegrationPage extends Locators {
         common.waitUntilElementToBeVisible(WIMENU);
         common.click(WIMENU);
 
-        common.waitUntilElementToBeVisible(WIIHEADER);
+        common.pause(5);
 
-        common.waitUntilElementToBeVisible(WIIPHONEIDINPUT);
-        common.type(WIIPHONEIDINPUT,phoneID);
-        common.waitUntilElementToBeVisible(WIIWABAIDINPUT);
-        common.type(WIIWABAIDINPUT,wabaID);
-        common.waitUntilElementToBeVisible(WIITOKENINPUT);
-        common.type(WIITOKENINPUT,token);
-        common.waitUntilElementToBeVisible(WIIAPPIDINPUT);
-        common.type(WIIAPPIDINPUT,appID);
-        common.waitUntilElementToBeVisible(WIIAPPSECRETINPUT);
-        common.type(WIIAPPSECRETINPUT,appSecret);
+        if(common.isElementDisplayed(STATISTICS))
+        {
+            common.waitUntilElementToBeVisible(WIEDITBTN);
+            common.scroll_To_Element(WIEDITBTN);
+            common.click(WIEDITBTN);
 
-        common.waitUntilElementToBeVisible(WIICONNECT);
-        common.click(WIICONNECT);
+            common.waitUntilElementToBeVisible(WICONNECTBTN);
+            common.click(WICONNECTBTN);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+            WebElement successMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(WIUPDATEDMSG)));
+            common.waitUntilElementToBeClickable(successMsg);
 
-        common.waitUntilElementToBeVisible(WICONNECTED);
+            common.refreshPage();
+
+            common.waitUntilElementToBeVisible(WICONNECTED);
+            common.assertElementPresent(WICONNECTED);
+
+        }
+        else {
+
+            common.waitUntilElementToBeVisible(WIIHEADER);
+
+            common.waitUntilElementToBeVisible(WIIPHONEIDINPUT);
+            common.type(WIIPHONEIDINPUT, phoneID);
+            common.waitUntilElementToBeVisible(WIIWABAIDINPUT);
+            common.type(WIIWABAIDINPUT, wabaID);
+            common.waitUntilElementToBeVisible(WIITOKENINPUT);
+            common.type(WIITOKENINPUT, token);
+            common.waitUntilElementToBeVisible(WIIAPPIDINPUT);
+            common.type(WIIAPPIDINPUT, appID);
+            common.waitUntilElementToBeVisible(WIIAPPSECRETINPUT);
+            common.type(WIIAPPSECRETINPUT, appSecret);
+
+            common.waitUntilElementToBeVisible(WIICONNECT);
+            common.click(WIICONNECT);
+
+            common.waitUntilElementToBeVisible(WICONNECTED);
+        }
     }
 
     public void verifyViewEye(){
