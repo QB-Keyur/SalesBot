@@ -61,6 +61,7 @@ public class BasePage {
     public WorkingHoursPage workingHoursPage;
     public LeadStagePage leadStagePage;
     public WhatsAppIntegrationPage whatsAppIntegrationPage;
+    public SMTPIntegrationPage smtpIntegrationPage;
 
     protected List<String> stringList = new ArrayList<>();
 
@@ -180,6 +181,7 @@ public class BasePage {
         workingHoursPage = new WorkingHoursPage(getDriver());
         leadStagePage = new LeadStagePage(getDriver());
         whatsAppIntegrationPage = new WhatsAppIntegrationPage(getDriver());
+        smtpIntegrationPage = new SMTPIntegrationPage(getDriver());
         steps.set(1);
         Common.printCurrentTime("Starting Time");
         getDriver().get(EnvConfig.getWebUrl());
