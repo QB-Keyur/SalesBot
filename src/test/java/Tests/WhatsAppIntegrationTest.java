@@ -1,5 +1,6 @@
 package Tests;
 
+import Config.EnvConfig;
 import Utils.BasePage;
 import org.testng.annotations.Test;
 
@@ -61,11 +62,11 @@ public class WhatsAppIntegrationTest extends BasePage {
         common.logPrint("START :: Verify WhatsApp integration using valid credentials");
 
         loginWithAdminUser();
-        whatsAppIntegrationPage.verifyIntegratingWithValidData(           "838123732714912",
-                "1277026863826538",
-                "EAAUyPQsl7sEBP8MR26mSB19HiRgRXjeVkTW3LAes6wtFeZAmkW0NmDyYqzOZAjmZAkMtvIAOGAi9pBQVg0VBn6YQ6TxiNiI6L6JZC4E7bEzRlSuRH4BXwxLI7R6m4WiR7kgRiCZALus95fxH4kkCJXNpCGFSZBZBbJHLQLY3ZAUJ3NtBzr7JiQHoupC3KMQVcYfsKwZDZD",
-                "1462612644982465",
-                "d48193b283bede22cde7bf9dd10927d8"
+        whatsAppIntegrationPage.verifyIntegratingWithValidData(EnvConfig.getPhoneId(),
+                EnvConfig.getWabaId(),
+                EnvConfig.getToken(),
+                EnvConfig.getAppId(),
+                EnvConfig.getAppSecret()
         );
 
         common.logPrint("SUCCESS :: WhatsApp account integrated successfully with valid data");
@@ -86,11 +87,11 @@ public class WhatsAppIntegrationTest extends BasePage {
         common.logPrint("START :: Verify validation when using an already integrated WhatsApp number");
 
         loginWithAdminUser();
-        whatsAppIntegrationPage.verifyUsingTheSameNumber(           "838123732714912",
-                "1277026863826538",
-                "EAAUyPQsl7sEBP8MR26mSB19HiRgRXjeVkTW3LAes6wtFeZAmkW0NmDyYqzOZAjmZAkMtvIAOGAi9pBQVg0VBn6YQ6TxiNiI6L6JZC4E7bEzRlSuRH4BXwxLI7R6m4WiR7kgRiCZALus95fxH4kkCJXNpCGFSZBZBbJHLQLY3ZAUJ3NtBzr7JiQHoupC3KMQVcYfsKwZDZD",
-                "1462612644982465",
-                "d48193b283bede22cde7bf9dd10927d8"
+        whatsAppIntegrationPage.verifyUsingTheSameNumber(           EnvConfig.getPhoneId(),
+                EnvConfig.getWabaId(),
+                EnvConfig.getToken(),
+                EnvConfig.getAppId(),
+                EnvConfig.getAppSecret()
         );
 
         common.logPrint("SUCCESS :: System correctly restricts duplicate WhatsApp number integration");

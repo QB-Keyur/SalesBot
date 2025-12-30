@@ -48,10 +48,17 @@ public final class EnvConfig {
     public static String getForgotUser() {
         return get("FORGOT_USER");
     }
-
     public static String getForgotPass() {
         return get("FORGOT_PASS");
     }
+
+    public static String getPhoneId() {
+        return get("PHONE_ID");
+    }
+    public static String getWabaId() {return get("WABA_ID");}
+    public static String getToken() {return get("TOKEN");}
+    public static String getAppId() {return get("APP_ID");}
+    public static String getAppSecret() {return get("APP_SECRET");}
 
     public static boolean isCI() {
         return "ci".equalsIgnoreCase(getOptional("ENV", "local"));
