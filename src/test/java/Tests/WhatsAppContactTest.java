@@ -108,12 +108,12 @@ public class WhatsAppContactTest extends BasePage {
         whatsAppContactPage.createWhatsAppContactCreate(mobileNumber);
         whatsAppContactPage.verifySuccessMessageForWhatsAppContactCreation();
         whatsAppContactPage.searchTheWhatsAppContactUsingMobileNumber(mobileNumber);
-        whatsAppContactPage.verifyDeleteFunctionalityIsWorking();
+        whatsAppContactPage.verifyDeleteFunctionalityIsWorkingOnGridView();
     }
 
     @Test
     public void verifyEditFunctionalityOnWhatsAppContact(){
-        common.logPrint("Verify delete functionality is working properly");
+        common.logPrint("Verify Edit functionality is working properly");
         loginWithAdminUser();
         whatsAppContactPage.redirectsToWhatsAppContactCreatePage();
         String mobileNumber = common.fakeIndianMobileNumber();

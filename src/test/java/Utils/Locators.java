@@ -27,7 +27,7 @@ public class Locators extends BasePage {
     public static String passwordHasBeenUpdated = "//div[contains(text(), 'Password has been updated')]";
     public static String invalidOtpValidation = "//div[contains(text(), 'Invalid OTP or OTP is expired! Please Try Again.')]";
     public static String passwordResetLinkSuccess = "//div[contains(text(), 'Password reset link has been sent to your email')]";
-    public static String otpSentSuccessfully = "//div[contains(text(), 'An OTP is sent to p******t@yopmail.com. Please Verify your email.')]";
+    public static String otpSentSuccessfully = "//div[contains(text(), 'An OTP is sent to s***1@yopmail.com. Please Verify your email.')]";
     //public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
 
     //Locators for the validation messages
@@ -43,8 +43,8 @@ public class Locators extends BasePage {
     public static String FORGOTPASSWORD = "//a[contains(text(),'Forgot password?')]";
 
     public static String SIGNUPLINK = "//span[contains(text(),'Sign Up')]";
-    public static String enterPasswordInp = "//input[@placeholder='Enter Password']";
-    public static String confirmPasswordInp = "//input[@placeholder='Confirm Password']";
+    public static String enterPasswordInp = "//input[@name ='password']";
+    public static String confirmPasswordInp = "//input[@name ='confirmPassword']";
 
     //Locators for the Forgot password
     public static String ENTEREMAILINPFORGOT = "//input[@name='email']";
@@ -281,7 +281,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String companyHeader = "//div[@role='presentation']//span[text()='Company ']";
     public static String contactGroupHeader = "//div[@role='presentation']//span[text()='Contact Group']";
     public static String createdDateHeader = "//div[@role='presentation']//span[text()='Created Date']";
-    public static String emailSubscriptionHeader = "//div[@role='presentation']//span[text()='Email Subscription']";
+    public static String emailSubscriptionHeader = "//div[@role='presentation']//span[text()='Whatsapp Subscription']";
     public static String actionsHeader = "//div[@role='presentation']//span[text()='Actions']";
     public static String actionHeader = "//div[@role='presentation']//span[text()='Action']";
 
