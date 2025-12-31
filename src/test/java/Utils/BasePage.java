@@ -121,7 +121,6 @@ public class BasePage {
             if (headless) {
                 options.addArguments("--headless");
             }
-            options.addArguments("start-maximized");
             options.addArguments("--incognito");
             options.addArguments("--disable-dev-shm-usage");    // overcome limited resource problems
             options.addArguments("--no-sandbox");               // Bypass an OS security model
@@ -135,8 +134,6 @@ public class BasePage {
             WebDriverManager.edgedriver().setup();
             EdgeOptions options = new EdgeOptions();
             options.addArguments("-private");
-            options.addArguments("start-maximized");
-
             if (headless) {
                 options.addArguments("--headless");
                 options.addArguments("--disable-gpu");
@@ -237,24 +234,36 @@ public class BasePage {
     }
 
     public void makeScreenshot(WebDriver driver, String screenshotName) {
-
-        WebDriver augmentedDriver = new Augmenter().augment(driver);
-        File screenshot = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.FILE);
-        String nameWithExtention = screenshotName + ".png";
         try {
-            String reportFolder = "target" + File.separator + "test-output" + File.separator + "screenshots";
-            File screenshotFolder = new File(reportFolder);
-            if (!screenshotFolder.getAbsoluteFile().exists()) {
-                screenshotFolder.mkdir();
+            File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+            //surefire-reports
+            String screenshotDir = System.getProperty("user.dir")
+                    + File.separator + "target"
+                    + File.separator + "surefire-reports"
+                    + File.separator + "screenshots";
+
+            File dir = new File(screenshotDir);
+            if (!dir.exists()) {
+                dir.mkdirs();
             }
-            File destFile = new File(screenshotFolder + File.separator + nameWithExtention).getAbsoluteFile();
-            FileUtils.copyFile(screenshot, destFile);
-            Reporter.log("<a href='" + "https://app.testreport.io/qa-java-api/api/v1/user/getImage/SCREENSHOT/"
-                    + destFile.getName() + "'> <img src='"
-                    + "https://app.testreport.io/qa-java-api/api/v1/user/getImage/SCREENSHOT/" + destFile.getName()
-                    + "' height='250' width='500'/> </a>");
-        } catch (IOException e) {
-            System.out.println("Failed to capture screenshot: " + e.getMessage());
+
+            File dest = new File(screenshotDir + File.separator + screenshotName + ".png");
+            FileUtils.copyFile(src, dest);
+
+            //RELATIVE PATH from emailable-report.html
+            String relativePath = "./screenshots/" + screenshotName + ".png";
+
+            Reporter.log("<br><b>Screenshot:</b><br>");
+            Reporter.log(
+                    "<a href=\"" + relativePath + "\" target=\"_blank\">" +
+                            "<img src=\"" + relativePath + "\" height=\"250\" width=\"450\"/>" +
+                            "</a>"
+            );
+
+        } catch (Exception e) {
+            Reporter.log("Screenshot capture failed: " + e.getMessage());
         }
     }
+
 }

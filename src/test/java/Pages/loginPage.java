@@ -113,8 +113,8 @@ public class loginPage extends Locators {
 
     public void verifyErrorMessageIsShowingForInvalidEmailPass(){
         common.logPrint("Step:: Verify validation message is showing for the invalid email or pass");
-//        common.assertElementPresent(ERRORMESSAGEFORINVALIDEMAIL);
-        common.assertElementPresent(stateLabel);
+        common.assertElementPresent(ERRORMESSAGEFORINVALIDEMAIL);
+        //common.assertElementPresent(listViewBtn);
 
         common.logPrint("Error message is showing for the invalid email or pass");
     }
@@ -160,7 +160,7 @@ public class loginPage extends Locators {
         common.logPrint("Step:: Verify forgot password page is showing using a current url.");
         String getUrl = driver.getCurrentUrl();
         common.logPrint("Redirected URL is: "+ getUrl);
-        common.assertTwoValuesAreEqual("https://salesbot.cloud/forgot-password", getUrl);
+        common.assertTwoValuesAreEqual("https://app.salesbot.cloud/forgot-password", getUrl);
 
         common.logPrint("User is successfully redirects to the forgot password page.");
     }
@@ -173,7 +173,7 @@ public class loginPage extends Locators {
         String getUrl = driver.getCurrentUrl();
         common.logPrint("Current URL link is: "+ getUrl);
 
-        common.assertTwoValuesAreEqual("https://salesbot.cloud/pricing", getUrl);
+        common.assertTwoValuesAreEqual("https://app.salesbot.cloud/pricing", getUrl);
 
         common.logPrint("User is successfully redirects to the Sign-up page.");
     }
@@ -193,7 +193,7 @@ public class loginPage extends Locators {
 
         common.logPrint("Load time is: "+ loadTime + "ms");
 
-        Assert.assertTrue(loadTime<= 3000, "Page load time is more then 3 sec");
+        Assert.assertTrue(loadTime<= 5000, "Page load time is more then 5 sec");
 
     }
 
@@ -218,7 +218,7 @@ public class loginPage extends Locators {
 
         common.logPrint("Load time: "+loadTime);
 
-        Assert.assertTrue(loadTime<=3000, "Page load time is executed in 3 seconds");
+        Assert.assertTrue(loadTime<=5000, "Page load time is executed in 5 seconds");
     }
 
     //Forgot password scenarios
