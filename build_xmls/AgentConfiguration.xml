@@ -1,176 +1,264 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="WhatsApp Integration Module Test Cases"
+<suite name="Agent Configuration Module Test Cases"
        verbose="10"
        parallel="tests"
        thread-count="3"
        allow-return-values="true">
 
     <listeners>
-        <listener class-name="Utils.RetryListener"></listener>
+        <listener class-name="Utils.RetryListener"/>
     </listeners>
 
-    <!-- Verify WhatsApp Integration page navigation -->
-    <test name="Verify WhatsApp Integration page navigation">
+    <!-- Verify Agent Configuration page navigation -->
+    <test name="Verify Agent Configuration page navigation">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="goToWhatsAppIntegrationPage"/>
+                    <include name="goToAgentConfigurationPage"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify WhatsApp Integration menu -->
-    <test name="Verify WhatsApp Integration menu">
+    <!-- Verify columns and UI elements -->
+    <test name="Verify Agent Configuration columns and UI elements">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyWhatsAppIntegrationMenu"/>
+                    <include name="verifyColumns"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify elements inside WhatsApp Integration menu -->
-    <test name="Verify elements inside WhatsApp Integration menu">
+    <!-- Verify search functionality -->
+    <test name="Verify Agent Configuration search functionality">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyElementsInsideWhatsAppIntegrationMenu"/>
+                    <include name="verifySearch"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify mandatory field validation -->
-    <test name="Verify mandatory field validation in WhatsApp Integration">
+    <!-- Verify refresh functionality -->
+    <test name="Verify Agent Configuration refresh functionality">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyMandatoryFieldValidationInWhatsAppIntegration"/>
+                    <include name="verifyRefresh"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify integration with whitespace values -->
-    <test name="Verify WhatsApp integration with whitespace values">
+    <!-- Verify sorting functionality -->
+    <test name="Verify Agent Configuration sorting functionality">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyIntegrationWithWhiteSpaces"/>
+                    <include name="validateSorting"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify integration using valid data -->
-    <test name="Verify WhatsApp integration using valid data">
+    <!-- Verify activate button -->
+    <test name="Verify Agent activation using Activate button">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyIntegratingWithValidData"/>
+                    <include name="verifyActivateButton"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify view eye icon functionality -->
-    <test name="Verify view eye icon functionality">
+    <!-- Verify activate button negative scenario -->
+    <test name="Verify Activate button negative scenario">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyViewEye"/>
+                    <include name="verifyActiveButtonNegative"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify using the same WhatsApp number -->
-    <test name="Verify duplicate WhatsApp number usage">
+    <!-- Verify horizontal view -->
+    <test name="Verify Agent Configuration horizontal view">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyUsingTheSameNumber"/>
+                    <include name="horizontalView"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify elements on edit screen -->
-    <test name="Verify WhatsApp Integration edit screen elements">
+    <!-- Verify create page elements -->
+    <test name="Verify Create Agent page elements">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyElementsInEditScreen"/>
+                    <include name="verifyCreatePageElements"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify disconnecting WhatsApp integration -->
-    <test name="Verify disconnecting WhatsApp integration">
+    <!-- Verify edit page elements -->
+    <test name="Verify Edit Agent page elements">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyDisconnecting"/>
+                    <include name="verifyEditPageElements"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify reconnecting the same WhatsApp account -->
-    <test name="Verify reconnecting the same WhatsApp account">
+    <!-- Verify reset button functionality -->
+    <test name="Verify Reset button functionality on Agent form">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyReconnectingSameAccount"/>
+                    <include name="verifyUsingTheResetButton"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify refresh button functionality -->
-    <test name="Verify refresh button functionality">
+    <!-- Verify cancel and back button -->
+    <test name="Verify Cancel and Back button functionality">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyRefreshButton"/>
+                    <include name="verifyCancelAndBackButton"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify conversation allowed after WhatsApp connection -->
-    <test name="Verify conversation after WhatsApp connection">
+    <!-- Verify mandatory field validations -->
+    <test name="Verify mandatory field validation for Agent">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyItAllowsHavingAConversationAfterConnectingWhatsApp"/>
+                    <include name="mandatoryFieldVerification"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify WhatsApp template creation after connection -->
-    <test name="Verify WhatsApp template creation after connection">
+    <!-- Verify adding a new agent -->
+    <test name="Verify adding a new Agent with valid data">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyAllowsCreatingAWhatsAppTemplateAfterConnecting"/>
+                    <include name="addANewAgentValidData"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!-- Verify restrictions after disconnecting WhatsApp -->
-    <test name="Verify restrictions after disconnecting WhatsApp integration">
+    <!-- Verify editing an agent -->
+    <test name="Verify editing an existing Agent">
         <classes>
-            <class name="Tests.WhatsAppIntegrationTest">
+            <class name="Tests.AgentConfigurationTest">
                 <methods>
-                    <include name="verifyAfterDisconnectingItDoesntAllowConversationOrTemplate"/>
+                    <include name="editingAnAgent"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify deleting an agent -->
+    <test name="Verify deleting an Agent">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="deletingAnAgent"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify viewing an agent -->
+    <test name="Verify viewing Agent details">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="viewAnAgent"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify activate and deactivate functionality -->
+    <test name="Verify Agent activate and deactivate functionality">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="activeInactive"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify alternate horizontal views -->
+    <test name="Verify alternate horizontal views">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="horizontalViews"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify pagination -->
+    <test name="Verify Agent Configuration pagination">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="pagination"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify filters -->
+    <test name="Verify Agent Configuration filters">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="filters"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Playground reflection -->
+    <test name="Verify Agent reflection in Playground">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="createAndViewReflectionInPlayground"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify editing effect on created time -->
+    <test name="Verify editing effect on Agent created time">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="verifyEditingEffectOnCreatedTime"/>
                 </methods>
             </class>
         </classes>

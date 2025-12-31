@@ -811,7 +811,7 @@ public class AgentConfigurationPage extends Locators {
 
     public void validateInputValue(String expectedValue) {
 
-        String xpath = "//input[@value='" + expectedValue + "']";
+        String xpath = "//input[@value='" + expectedValue + "'] | //textarea[text()='"+expectedValue+"']";
 
         common.waitUntilElementToBeVisible(xpath);
         Assert.assertTrue(

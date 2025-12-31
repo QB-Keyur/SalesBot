@@ -193,7 +193,7 @@ public class Locators extends BasePage {
     public static String ACCCOREFEATURES1 = "//span[text()='{{core_features}}']";
     public static String ACCCOREFEATURESINPUT = "//input[@name=\"core_features\"]";
     public static String ACCCONTACTINFO = "//span[text()='Contact Info']";
-    public static String ACCCONTACTINFOINPUT = "//input[@name=\"contact_info\"]";
+    public static String ACCCONTACTINFOINPUT = "//input[@name=\"contact_info\"] | //span[text()='Contact Info']/following::textarea[1]";
     public static String ACCCONTACTINFO2 = "//span[text()='{{contact_info}}']";
     public static String ACCCOMPANYDOMAIN = "//span[text()='Company Domain']";
     public static String ACCCOMPANYDOMAININPUT = "//input[@name=\"company_domain\"]";
