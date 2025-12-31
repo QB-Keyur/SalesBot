@@ -195,7 +195,7 @@ public class EmailTemplatePage extends Locators {
 
     public String[] verifyAddingANewEmailTemplate(){
         goToEmailTemplatePage();
-        String name = common.generateCompanyName();
+        String name = common.generateCompanyName().replaceAll("[\\s,]", "");
         String subject = common.generateBusinessFocus();
         String body = common.generateCompanyDescription();
         String ETCSUBJECTPREVIEW = "//p[text()='"+subject+"'] | //div[text()='"+subject+"']";
@@ -262,14 +262,14 @@ public class EmailTemplatePage extends Locators {
     public void verifyAddingVariables(){
 
         goToEmailTemplatePage();
-        String name = common.generateCompanyName();
+        String name = common.generateCompanyName().replaceAll("[\\s,]", "");
         String subject = common.generateBusinessFocus();
         String body = common.generateCompanyDescription();
-        String ETCSUBJECTPREVIEW = "//p[text()='"+subject+"']";
-        String ETCBODYPREVIEW = "//p[text()='"+body+"']";
-        String ETCBODYPREVIEWFULL = "//b[text()='Subject:']/following::div[1]";
+        String ETCSUBJECTPREVIEW = "//p[text()='"+subject+"'] | //div[text()='"+subject+"']";
+        String ETCBODYPREVIEW = "//p[text()='"+body+"'] | //div[text()='\"+body+\"']";
+        String ETCBODYPREVIEWFULL = "//b[text()='"+subject+"']/following::div[1] | //div[contains(text(),'"+subject+"')]/following::p[2]";
 
-        String imagePath = Paths.get("Files", "1.png").toAbsolutePath().toString();
+        String imagePath = Paths.get("TestData", "1.png").toAbsolutePath().toString();
 
 
         common.waitUntilElementToBeClickable(ETCREATE);
@@ -297,19 +297,20 @@ public class EmailTemplatePage extends Locators {
         common.waitUntilElementToBeVisible(ETCVARPHONE);
         common.click(ETCVARPHONE);
         common.waitUntilElementToBeVisible(ETCVARNAME);
-        common.click(ETCVAREMAIL);
+        common.click(ETCVARNAME);
         common.waitUntilElementToBeVisible(ETCVARCNAME);
-        common.click(ETCVAREMAIL);
-        common.waitUntilElementToBeVisible(ETCVARNEW);
-        common.click(ETCVARNEW);
+        common.click(ETCVARCNAME);
+//        common.waitUntilElementToBeVisible(ETCVARNEW);
+//        common.click(ETCVARNEW);
         common.waitUntilElementToBeVisible(ETCVARINFO);
-        common.click(ETCVAREMAIL);
+        common.click(ETCVARINFO);
 
 
 
         String bodyInput = common.getText(ETCBODYINPUT);
         common.logPrint("Body Input : "+bodyInput);
 
+        common.scroll_To_Element(ETCBODYPREVIEWFULL);
         String bodyInputFull = common.getText(ETCBODYPREVIEWFULL);
         common.logPrint("Body Preview : "+bodyInputFull);
 
@@ -318,7 +319,7 @@ public class EmailTemplatePage extends Locators {
         }else{
             common.logPrint("Failed Assertion of Body Preview");
         }
-
+        common.scroll_To_Element(ETCSUBJECTPREVIEW);
         common.assertElementPresent(ETCSUBJECTPREVIEW);
 
     }
