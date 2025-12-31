@@ -473,8 +473,8 @@ public class WhatsAppContactPage extends Locators {
     }
 
     public void clickOnTheDeleteBtn(){
-        common.waitUntilElementToBeVisible(deleteButton);
-        common.click(deleteButton);
+        common.waitUntilElementToBeVisible(CONFDELETE);
+        common.click(CONFDELETE);
     }
 
     public void clickOnTheButtonMenuListView(){

@@ -314,7 +314,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String cityLabel = "//span[text()='City']";
     //Contact page creation page validation message for mandatory fields
     public static String nameFieldMsg = "//span[text()='Name is required']";
-    public static String contactGroupMsg = "//span[text()='Please select a contact group']";
+    public static String contactGroupMsg = "//span[text()='Contact Group is required']";
     public static String phoneNumberMsg = "//div[text()='Phone number is required']";
     public static String companyNameMsg = "//span[text()='Company Name is required']";
     //Import page locators
@@ -330,7 +330,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String deleteButton = "//button[@aria-label='Delete']";
     public static String editButton = "//button[@aria-label='Edit']";
     public static String viewHeader = "//h5[text()='Whatsapp Contact']";
-    public static String buttonMenuListView = "//div[contains(@class,'flex items-center justify-between gap-1')]/child::button";
+    public static String buttonMenuListView = "//div[contains(@class,'shrink-0 MuiBox-root css-0')]/child::button";
 
     //View page locators
     //label
@@ -647,7 +647,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String agreeCheckbox= "//input[@type='checkbox']";
     public static String startFreeTrialBtn = "//span[contains(text(),'Start Trial')]/ancestor::button";
     public static String startFreeTrialBtnLastPage = "//span[contains(text(),'Start Free Plan')]/ancestor::button";
-    public static String congratulationMessage = "//h6[contains(text(),'Congratulations!')]";
+    public static String congratulationMessage = "(//h6[contains(text(),'Congratulations!')])[2]";
     public static String closeIconOnCongratulation = "//div[contains(@class,'relative flex flex-col items-center justify-center')]//button";
     public static String getPlanDetail = "(//h4[contains(text(),'')])[2]";
     public static String createPasswordBtn = "//span[text()='Create Password']/parent::button";

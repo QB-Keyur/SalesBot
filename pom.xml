@@ -149,17 +149,17 @@
                 <version>3.0.0</version>
                 <configuration>
                     <suiteXmlFiles>                  
-                    <!--Gopal-->
+                        <!--Gopal-->
                         <suiteXmlFile>build_xmls/Login.xml</suiteXmlFile>
 <!--                        <suiteXmlFile>build_xmls/WhatsAppContact.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/UserManagement.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/profile.xml</suiteXmlFile>-->
                         <!--Rohini-->
 <!--                        <suiteXmlFile>build_xmls/LeadManagement.xml</suiteXmlFile>-->
-<!--                        <suiteXmlFile>build_xmls/WhatsAppTemplate.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/WhatsAppCampaign.xml</suiteXmlFile>-->
                         <!--Keyur-->
 <!--                        <suiteXmlFile>build_xmls/AgentConfiguration.xml</suiteXmlFile>-->
+<!--                        <suiteXmlFile>build_xmls/WhatsAppTemplate.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/KnowledgeBase.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/EmailCampaign.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/Product.xml</suiteXmlFile>-->
@@ -168,9 +168,8 @@
 <!--                        <suiteXmlFile>build_xmls/WorkingHours.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/WhatsAppIntegration.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/EmailTemplate.xml</suiteXmlFile>-->
-                        <suiteXmlFile>build_xmls/SMTPIntegration.xml</suiteXmlFile>
+<!--                        <suiteXmlFile>build_xmls/SMTPIntegration.xml</suiteXmlFile>-->
                     </suiteXmlFiles>
-
                     <systemPropertyVariables>
                         <allure.results.directory>
                             ${project.build.directory}/allure-results
