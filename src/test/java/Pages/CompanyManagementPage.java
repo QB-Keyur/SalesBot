@@ -29,6 +29,7 @@ public class CompanyManagementPage extends Locators {
         common.waitUntilElementToBeVisible(COMPMGMTBTN);
         common.click(COMPMGMTBTN);
 
+        common.pause(1);
         common.waitUntilElementToBeVisible(CMGMTHEADER);
         common.logPrint(CMGMTHEADER + " was found");
 
