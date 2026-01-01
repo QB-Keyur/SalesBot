@@ -1672,6 +1672,10 @@ public class Common extends Locators {
         String leadLabel = faker.company().buzzword();
         return leadLabel;
     }
+    public String fakeOrderNumber2Digit() {
+        int number = (int)(Math.random() * 90) + 10;
+        return String.valueOf(number);
+    }
 
     public String fakeProductName() {
         String name = faker.commerce().productName();

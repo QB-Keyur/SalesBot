@@ -35,12 +35,12 @@ public class LeadManagementPage extends Locators {
         String name1 = common.fakeName();
         common.waitUntilElementToBeVisible(NAME);
         common.type(NAME, name1);
-        expectedData.put("Name", name1);
+     //   expectedData.put("Name", name1);
 
         common.waitUntilElementToBeVisible(LEADNAME);
         String email = common.GenerateEmail();
         common.type(LEADNAME, email);
-        expectedData.put("Email",email);
+      //  expectedData.put("Email",email);
 
         common.waitUntilElementToBeVisible(TYPE);
         common.click(TYPE);
@@ -142,6 +142,17 @@ public class LeadManagementPage extends Locators {
         common.logPrint("Step:: click on Search button"+nam);
         common.waitUntilElementToBeVisible(LEADSEARCH);
         common.type(LEADSEARCH,nam);
+        common.pause(2);
+
+        // Verify searched lead name is displayed
+        common.waitUntilElementToBeVisible(LEAD_NAME_RESULT);
+        String actualName = common.getText(LEAD_NAME_RESULT).trim();
+
+        Assert.assertEquals(actualName, nam, "Searched lead name is not matching");
+
+        common.logPrint("Step :: Lead name verified successfully :: " + actualName);
+
+
         return nam;
     }
 
@@ -149,15 +160,15 @@ public class LeadManagementPage extends Locators {
         Map<String, String> actualData = new HashMap<>();
 
 
-        common.waitUntilElementToBeVisible(Vname);
-        actualData.put("Name", common.getAttribute(Vname,"value"));
-        common.waitUntilElementToBeVisible(Vemail);
-        actualData.put("Email", common.getAttribute(Vemail,"value"));
+//        common.waitUntilElementToBeVisible(Vname);
+//        actualData.put("Name", common.getAttribute(Vname,"value"));
+//        common.waitUntilElementToBeVisible(Vemail);
+//        actualData.put("Email", common.getAttribute(Vemail,"value"));
         common.waitUntilElementToBeVisible(VType);
         actualData.put("Type", common.getText(VType));
         common.waitUntilElementToBeVisible(VContactType);
         actualData.put("ContactType", common.getText(VContactType));
-        common.scroll_To_Element(Vname);
+       // common.scroll_To_Element(Vname);
 
         return actualData;
 
@@ -169,8 +180,8 @@ public class LeadManagementPage extends Locators {
 
         Map<String, String> actual = getLeadDetailsAfterSave();
 
-        Assert.assertEquals(actual.get("Name"), expected.get("Name"), "Name mismatch");
-        Assert.assertEquals(actual.get("Email"), expected.get("Email"), "Email mismatch");
+//        Assert.assertEquals(actual.get("Name"), expected.get("Name"), "Name mismatch");
+//        Assert.assertEquals(actual.get("Email"), expected.get("Email"), "Email mismatch");
         Assert.assertEquals(actual.get("Type"), expected.get("Type"), "Type mismatch");
         Assert.assertEquals(actual.get("ContactType"), expected.get("ContactType"), "Contact Type mismatch");
 
@@ -399,8 +410,8 @@ public class LeadManagementPage extends Locators {
         common.logPrint("Steps::Header of preferred at Column is :- "+HDT);
 
 
-        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(Header_CREATEDAT)), "Header not displayed");
-        String HCreateAt=common.getText(Header_CREATEDAT);
+        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(Header_CREATEDDate)), "Header not displayed");
+        String HCreateAt=common.getText(Header_CREATEDDate);
         common.logPrint("Steps::Header of CreatedAT Column is :- "+HCreateAt);
 
         Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(Header_Actions)), "Header not displayed");

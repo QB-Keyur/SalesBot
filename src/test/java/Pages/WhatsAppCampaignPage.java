@@ -215,21 +215,31 @@ public class WhatsAppCampaignPage extends Locators {
         String vname = common.getText(V_Name);
         common.logPrint("Steps::Header of Name Column is :- " + vname);
 
-        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VContactG)), "Header not displayed");
-        String vContactG = common.getText(VContactG);
-        common.logPrint("Steps::Header of ContactGroup Column is :- " + vContactG);
+        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VwhatsTem)), "Header not displayed");
+        String vtem = common.getText(VwhatsTem);
+        common.logPrint("Steps::Header of whatsApp templat Column is :- " +vtem);
 
-        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VPhoneNo)), "Header not displayed");
-        String PhoneNO = common.getText(VPhoneNo);
-        common.logPrint("Steps::Header of Phone number Column is :- " + PhoneNO);
 
-        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VEmail)), "Header not displayed");
-        String Vemail = common.getText(VEmail);
-        common.logPrint("Steps::Header of Email Column is :- " + Vemail);
 
-        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VDandB)), "Header not displayed");
-        String DofB = common.getText(VDandB);
-        common.logPrint("Steps::Header of Date of birth Column is :- " + DofB);
+        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VTemcate)), "Header not displayed");
+        String vContactG = common.getText(VTemcate);
+        common.logPrint("Steps::Header of WhatsApp category name  Column is :- " + vContactG);
+
+        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(VproductName)), "Header not displayed");
+        String PhoneNO = common.getText(VproductName);
+        common.logPrint("Steps::Header of Product number Column is :- " + PhoneNO);
+
+        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(Vstatus)), "Header not displayed");
+        String Vemail = common.getText(Vstatus);
+        common.logPrint("Steps::Header of Status Column is :- " + Vemail);
+
+        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(V_Createddate)), "Header not displayed");
+        String DofB = common.getText(V_Createddate);
+        common.logPrint("Steps::Header of Created Date Column is :- " + DofB);
+
+        Assert.assertTrue(common.isValidationMessageDisplayed(By.xpath(Vaction)), "Header not displayed");
+        String acti = common.getText(Vaction);
+        common.logPrint("Steps::Header of Created Date Column is :- " + acti);
 
 
     }

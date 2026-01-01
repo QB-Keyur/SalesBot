@@ -55,6 +55,51 @@ public class LeadStageTest extends BasePage {
         leadStagePage.VerifyCreateLeadStage();
     }
 
+    @Test
+    public void viewLead() {
+        loginWithAdminUser();
+        leadStagePage.VerifyonLeadStagePage();
+        leadStagePage.verifyViewLead();
+
+    }
+    @Test
+
+    public void Searchlead()
+    {
+        loginWithAdminUser();
+        leadStagePage.VerifyonLeadStagePage();
+        String lsname = leadStagePage.VerifyCreateLeadStage().toString();
+        leadStagePage.VerifySearch(lsname);
+
+    }
+    @Test
+    public void VerifyEditandSuccessMSG()
+    {
+        loginWithAdminUser();
+        leadStagePage.VerifyonLeadStagePage();
+        leadStagePage.VerifyEdit();
+    }
+    @Test
+    public void VerifyUpdatePageElements()
+    {
+        loginWithAdminUser();
+        leadStagePage.VerifyonLeadStagePage();
+        leadStagePage.BackAndCancelbuttonsOnUpdatePage();
+
+
+    }
+    @Test
+
+    public void VerifyDeletePopup()
+    {
+        loginWithAdminUser();
+        leadStagePage.VerifyonLeadStagePage();
+        leadStagePage.VerifyDeleteleadStage();
+    }
+
+
+
+
 
 
 

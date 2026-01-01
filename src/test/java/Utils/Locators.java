@@ -411,10 +411,11 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String Header_CONTACT = "//div[@role='columnheader']//span[text()='Contact']";
     public static String Header_Product = "//div[@role='columnheader']//span[text()='Product']";
     public static String Header_PreferredDT = "//div[@role='columnheader']//span[text()='Preferred Date / Time']";
-    public static String Header_CREATEDAT= "//span[text()='Created At']";
+    public static String Header_CREATEDDate= "//span[text()='Created Date']";
     public static String Header_Actions= "//span[text()='Actions']";
     public static String LeadEditBack = "//h6[text()='Update Lead Management']/preceding-sibling::button";
     //Lead view
+    public static String LEAD_NAME_RESULT = "(//div[@role='gridcell' and @data-field='name'])[1]";
     public static String Vname ="//span[text()='Name']/ancestor::label/following-sibling::div//input[@type='text']";
     public static String Vemail = "//span[text()='Email']/ancestor::label/following-sibling::div//input[@type='text']";
     public static String VType = "//span[normalize-space()='Type']/ancestor::label/following-sibling::div//input[@type='text']\n";
@@ -718,10 +719,13 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String CWC_Header = "//h6[normalize-space()='Create WhatsApp Campaign']";
 
     public static String V_Name = "//span[text()='Name']";
-    public static String VContactG = "//span[text()='Contact Group']";
-    public static String VEmail = "//span[text()='Email']";
-    public static String VPhoneNo = "//span[text()='Phone Number']";
-    public static String VDandB = "//span[text()='Date of Birth']";
+    public static String VwhatsTem = "//span[text()='Whatsapp Template Name']";
+    public static String VTemcate = "//span[text()='Template Category Name']";
+    public static String VproductName = "//span[text()='Product Name']";
+    public static String Vstatus = "//span[text()='Status']";
+    public static String V_Createddate = "//span[text()='Created Date']";
+    public static String Vaction = "//span[text()='Actions]";
+
     public static String WCViewHeader = "//h6[normalize-space()='View WhatsApp Campaign']";
     public static String SearchTex ="//div[@role='gridcell' and @data-field='name']";
     public static String WC_Search = "//input[@placeholder='Search...']";
@@ -1278,6 +1282,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String WADISCONNECTED = "//p[text()='To use this functionality, please connect your WhatsApp integration first.']";
 
 
+
     //LeadStage
     public static final String LeadStageMenu ="//button[text()='Lead Stage']";
     public static final String LS_header = "//h6[text()='Lead Stage']";
@@ -1296,6 +1301,21 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static final String LS_Name = "//input[@placeholder='Enter Name']";
     public static final String LS_Label = "//input[@placeholder='Enter Label']";
     public static final String LS_Order = "//input[@placeholder='Enter Order']";
+    public static final String LSV_name = "//span[text()='Name']/ancestor::label/following-sibling::div//input";
+    public static final String LSV_label = "//span[text()='Label']/ancestor::label/following-sibling::div//input";
+    public static final String LSV_OrderNo = "//span[text()='Order']/ancestor::label/following-sibling::div//input";
+    public static final String LS_View ="//button[@aria-label='View']";
+    public static final String LS_Search ="//input[@placeholder='Search...']";
+    public static final String LS_edit ="//button[@aria-label='Edit']";
+    public static final String LS_reset = "//span[text()='Reset']";
+    public static final String LS_UpdateMSG = "//div[text()='Lead Stage updated successfully']";
+    public static final String LSU_Back ="//h6[text()='Update Lead Stage']/preceding-sibling::button";
+    public static final String LSU_header ="//h6[text()='Update Lead Stage']";
+    public static final String LS_Delete ="//button[@aria-label='Delete']";
+    public static final String LS_DeleteCancel = "//span[text()='Cancel']";
+    public static final String  LS_ConfirmDelete = "//span[text()='Delete']";
+
+
 
     //Integration -> SMTP Integration
     public static final String SMTPINTEGRATION = "//p[text()='SMTP']/parent::div";

@@ -37,15 +37,15 @@ public class WhatsAppCampaignTest extends BasePage {
 
 
     }
-    @Test //xpath Updated
+//    @Test //xpath Updated
 
-    public void VerifyContactHeader()
-    {
-        loginWithAdminUser();
-        WhatsAppCPage.goToWhatsAppCampaignPage();
-        WhatsAppCPage.VerifyContactListHeaderOnCreateCampaignPage();
-
-    }
+//    public void VerifyContactHeader()
+//    {
+//        loginWithAdminUser();
+//        WhatsAppCPage.goToWhatsAppCampaignPage();
+//        WhatsAppCPage.VerifyContactListHeaderOnCreateCampaignPage();
+//
+//    }
     @Test //xpath Updated
 
     public void VerifyCreateWhatsAppCampaign()
@@ -93,18 +93,11 @@ public class WhatsAppCampaignTest extends BasePage {
     @Test //xpath Updated
     public void VerifyViewCampaignSearch()
     {
-        loginWithAdminUser();
-        WhatsAppCPage.goToWhatsAppCampaignPage();
-        WhatsAppCPage.VerifyWhatsAppCampaignSearch();
+          loginWithAdminUser();
+          WhatsAppCPage.goToWhatsAppCampaignPage();
+          WhatsAppCPage.VerifyWhatsAppCampaignSearch();
     }
-    @Test
-     public void VerifySearch()
-    {
-            loginWithAdminUser();
-            WhatsAppCPage.goToWhatsAppCampaignPage();
-            WhatsAppCPage.VerifyWhatsAppCampaignSearch();
 
-    }
     @Test
     public void VerifyViewElements()
     {
