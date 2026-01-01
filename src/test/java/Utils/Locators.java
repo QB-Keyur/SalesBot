@@ -152,6 +152,7 @@ public class Locators extends BasePage {
     public static String ACINACTIVEGRIDSTATUSGRID = "(//span[text()='Inactive'])[1]/preceding::input[@type='checkbox'][1]";
     public static String ACACTIVTEBUTTON = "//button[@type='button']/child::span[contains(text(),'Active')]";
     public static String ACCHEADER = "//h6[normalize-space()='Create Agent Configuration']";
+    public static String ACCINFO = "//strong[contains(text(),'The configured time zone')]";
     public static String ACCPERSONA = "//p[normalize-space()='Persona']";
     public static String ACCSELECTPERSONA = "//input[@placeholder=\"Select Persona\"]";
     public static String ACCPROMPT = "//p[text()='Prompt']";
@@ -172,6 +173,8 @@ public class Locators extends BasePage {
     public static String ACCGREETINGINPUT = "//textarea[@name=\"greeting_message\"]";
     public static String ACCTIMEZONE = "//span[text()='Timezone']";
     public static String ACCTIMEZONEINPUT = "//input[@placeholder=\"Select Timezone\"]";
+    public static String ACCFOLLOWRETRY = "//span[contains(text(),'Follow Retry')]";
+    public static String ACCFOLLOWRETRYINPUT = "//input[@placeholder=\"Enter Follow Retry\"]";
     public static String ACCPERSONALITY = "//p[text()='Personality & Goal']";
     public static String ACCPERSONALITY2 = "//span[text()='Personality']";
     public static String ACCPERSONALITYINPUT = "//input[@name='personality']";

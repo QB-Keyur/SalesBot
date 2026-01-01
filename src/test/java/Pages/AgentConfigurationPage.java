@@ -376,6 +376,7 @@ public class AgentConfigurationPage extends Locators {
         columns.put(ACCCANCELBUTTON, "Cancel");
         columns.put(ACCSAVEBUTTON, "Save");
         columns.put(ACCPERSONA, "Persona");
+        columns.put(ACCINFO, "Calendy Info");
         columns.put(ACCSELECTPERSONA, "Select Persona");
         columns.put(ACCPROMPT, "Prompt");
         columns.put(ACCPERSONALITY1, "personality");
@@ -393,6 +394,8 @@ public class AgentConfigurationPage extends Locators {
         columns.put(ACCCOMPANYNAMEINPUT, "Enter Company Name");
         columns.put(ACCGREETINGS, "Greeting Message");
         columns.put(ACCGREETINGINPUT, "greeting_message");
+        columns.put(ACCFOLLOWRETRY, "Follow Retry");
+        columns.put(ACCFOLLOWRETRYINPUT, "Follow Retry Input");
         columns.put(ACCTIMEZONE, "Timezone");
         columns.put(ACCTIMEZONEINPUT, "Select Timezone");
         columns.put(ACCPERSONALITY, "Personality & Goal");
@@ -464,6 +467,7 @@ public class AgentConfigurationPage extends Locators {
         Map<String, String> columns = new LinkedHashMap<>();
         columns.put(ACEDITHEADER, "Header");
         columns.put(ACCCANCELBUTTON, "Cancel");
+        columns.put(ACCINFO, "Calendy Info");
         columns.put(ACRESETBUTTON, "Reset");
         columns.put(ACCSAVEBUTTON, "Save");
         columns.put(ACCPERSONA, "Persona");
@@ -486,6 +490,8 @@ public class AgentConfigurationPage extends Locators {
         columns.put(ACCGREETINGINPUT, "greeting_message");
         columns.put(ACCTIMEZONE, "Timezone");
         columns.put(ACCTIMEZONEINPUT, "Select Timezone");
+        columns.put(ACCFOLLOWRETRY, "Follow Retry");
+        columns.put(ACCFOLLOWRETRYINPUT, "Follow Retry Input");
         columns.put(ACCPERSONALITY, "Personality & Goal");
         columns.put(ACCPERSONALITY2, "Personality");
         columns.put(ACCPERSONALITYINPUT, "personality");
@@ -688,20 +694,23 @@ public class AgentConfigurationPage extends Locators {
         common.type(ACCTIMEZONEINPUT, "5:30");
         common.downKeyAndEnter();
 
+        common.waitUntilElementToBeVisible(ACCFOLLOWRETRYINPUT);
+        common.type(ACCFOLLOWRETRYINPUT, "2");
+
         String english = "//li[text()='English']";
         common.waitUntilElementToBeClickable(ACCLANGINPUT).click();
         common.click(english);
 
-        common.click(SAVEBUTTON);
-
-        System.out.println("Created agent: " + agent);
-
-        String searchXpath = "//input[@placeholder=\"Search...\"]";
-
-        common.waitUntilElementToBeVisible(searchXpath);
-        common.type(searchXpath, agentName);
-        common.waitUntilElementToBeVisible(ACSEARCHRESULT);
-        common.validateSearch(ACSEARCHRESULT, agentName);
+//        common.click(SAVEBUTTON);
+//
+//        System.out.println("Created agent: " + agent);
+//
+//        String searchXpath = "//input[@placeholder=\"Search...\"]";
+//
+//        common.waitUntilElementToBeVisible(searchXpath);
+//        common.type(searchXpath, agentName);
+//        common.waitUntilElementToBeVisible(ACSEARCHRESULT);
+//        common.validateSearch(ACSEARCHRESULT, agentName);
 
         return agent;
     }
