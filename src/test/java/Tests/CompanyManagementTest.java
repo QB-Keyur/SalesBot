@@ -61,7 +61,7 @@ public class CompanyManagementTest extends BasePage {
     }
 
     @Test
-    public void verifyAddingABlankCompanyManagement(){
+    public void verifyAddingABlankCompanyManagement() {
         common.logPrint("Verifying adding Company Management with blank fields");
         loginWithAdminUser();
         companyManagementPage.verifyAddingABlankCompanyManagement();

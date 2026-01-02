@@ -922,7 +922,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String CVIEWEMAILINPUT = "(//span[text()='Name']/following::input[@type='text'])[3]";
     public static String CVIEWPHONEINPUT = "(//span[text()='Name']/following::input[@type='text'])[4]";
     public static String CVIEWCANCELBUTTON = "//span[text()='Cancel']/parent::button";
-    public static String CCREATEDDATEVAL = "//div[@data-rowindex=\"0\"]/child::div[@data-colindex=\"5\"]";
+    public static String CCREATEDDATEVAL = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"]";
 
     // Company Portfolio
     public static String COMPANYPORTFOLIO = "//button[text()='Company Portfolio']";

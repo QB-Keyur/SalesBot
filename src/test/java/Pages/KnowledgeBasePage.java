@@ -411,9 +411,10 @@ public class KnowledgeBasePage extends Locators {
         goToKnowledgeBasePage();
 
         String[] filePaths = {
-                "C:\\Users\\Admin\\Downloads\\1.pdf",
-                "C:\\Users\\Admin\\Downloads\\2.pdf",
-                "C:\\Users\\Admin\\Downloads\\3.pdf"
+                "C:\\Users\\Admin\\Downloads\\5.pdf",
+                "C:\\Users\\Admin\\Downloads\\6.pdf",
+                "C:\\Users\\Admin\\Downloads\\7.pdf",
+                "C:\\Users\\Admin\\Downloads\\8.pdf"
         };
 
         // Create KB

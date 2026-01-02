@@ -297,7 +297,7 @@ public class CompanyPortfolioPage extends Locators {
 
     public void verifyCreatedDate(){
         verifyAddingACompanyPortfolio();
-        String dateFromGrid = common.getText("//div[@data-rowindex=\"0\"]/child::div[@data-colindex=\"3\"]").trim();
+        String dateFromGrid = common.getText("//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"]").trim();
 
         String actualDate = dateFromGrid.split(" ")[0];
 
@@ -341,7 +341,8 @@ public class CompanyPortfolioPage extends Locators {
         if(editedDateValue.equals(createdDateValue)){
             common.logPrint("createdDateValue: "+createdDateValue+" editedDateValue: "+editedDateValue);
         }
-        else{
+        else
+        {
             common.logPrint("FAILED:  createdDateValue: "+createdDateValue+" editedDateValue: "+editedDateValue);
         }
 
