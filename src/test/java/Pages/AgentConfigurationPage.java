@@ -701,16 +701,16 @@ public class AgentConfigurationPage extends Locators {
         common.waitUntilElementToBeClickable(ACCLANGINPUT).click();
         common.click(english);
 
-//        common.click(SAVEBUTTON);
-//
-//        System.out.println("Created agent: " + agent);
-//
-//        String searchXpath = "//input[@placeholder=\"Search...\"]";
-//
-//        common.waitUntilElementToBeVisible(searchXpath);
-//        common.type(searchXpath, agentName);
-//        common.waitUntilElementToBeVisible(ACSEARCHRESULT);
-//        common.validateSearch(ACSEARCHRESULT, agentName);
+        common.click(SAVEBUTTON);
+
+        System.out.println("Created agent: " + agent);
+
+        String searchXpath = "//input[@placeholder=\"Search...\"]";
+
+        common.waitUntilElementToBeVisible(searchXpath);
+        common.type(searchXpath, agentName);
+        common.waitUntilElementToBeVisible(ACSEARCHRESULT);
+        common.validateSearch(ACSEARCHRESULT, agentName);
 
         return agent;
     }
