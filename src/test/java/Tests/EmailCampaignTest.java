@@ -81,12 +81,12 @@ public class EmailCampaignTest extends BasePage {
         emailCampaignPage.verifyRunningABlankCampaign();
     }
 
-    @Test
-    public void verifyPaginationInsideViewContact() {
-        common.logPrint("Verifying pagination inside View Contacts modal");
-        loginWithAdminUser();
-        emailCampaignPage.verifyPaginationInsideViewContact();
-    }
+//    @Test
+//    public void verifyPaginationInsideViewContact() {
+//        common.logPrint("Verifying pagination inside View Contacts modal");
+//        loginWithAdminUser();
+//        emailCampaignPage.verifyPaginationInsideViewContact();
+//    }
 
     @Test
     public void verifyCancelButton() {

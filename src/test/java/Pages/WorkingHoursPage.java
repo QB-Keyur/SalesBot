@@ -430,8 +430,4 @@ public class WorkingHoursPage extends Locators {
         );
     }
 
-
-
-
-
 }

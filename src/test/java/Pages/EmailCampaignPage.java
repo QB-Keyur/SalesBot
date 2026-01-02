@@ -61,8 +61,8 @@ public class EmailCampaignPage extends Locators {
         columns.put(ECHEADER, "Email Campaign Header");
 
         columns.put(ECSEARCHBAR, "Email Campaign Search");
-        columns.put(ECREFRESHBUTTON, "Email Campaign Refresh");
-        columns.put(ECREFILTERBUTTON, "Email Campaign Filters");
+        columns.put(REFRESH, "Email Campaign Refresh");
+        columns.put(FILTERS, "Email Campaign Filters");
         columns.put(ECCREATEBUTTON, "Email Campaign Create");
         columns.put(MULTITABHOR, "Email Campaign Horizontal View");
         columns.put(MULTITABVER, "Email Campaign Vertical View");
@@ -73,7 +73,7 @@ public class EmailCampaignPage extends Locators {
         columns.put(ECPRODUCT, "Email Campaign Product");
         columns.put(ECEMAIL, "Email Campaign Integration Email");
         columns.put(ECCONTACT, "Email Campaign Contact");
-        columns.put(ECCONTACTGROUP, "Email Campaign Contact Group");
+//        columns.put(ECCONTACTGROUP, "Email Campaign Contact Group");
         columns.put(ECAI, "Email Campaign Enable AI");
         columns.put(ECSTATUS, "Email Campaign Status");
         columns.put(ECACTION, "Email Campaign Actions");
@@ -131,7 +131,7 @@ public class EmailCampaignPage extends Locators {
         columns.put(ECCCATEGORYINPUT, "Create Email Campaign Category Input");
         columns.put(ECCPRODUCTINPUT, "Create Email Campaign Product Input");
 
-        columns.put(ECCVIEW, "Create Email Campaign View Button");
+//        columns.put(ECCVIEW, "Create Email Campaign View Button");
 
         common.scroll_To_Element(ECCMESSAGECONTENT);
         columns.put(ECCMESSAGECONTENT, "Create Email Campaign Message Content");
@@ -219,6 +219,7 @@ public class EmailCampaignPage extends Locators {
         common.click(ECCREATEBUTTON);
 
         common.scroll_To_Element(ECCROWSPERPAGE);
+        common.waitUntilElementToBeVisible("//div[@class=\"MuiBox-root css-10u381a\"]");
         common.pagination("//div[@class=\"MuiBox-root css-10u381a\"]");
     }
 

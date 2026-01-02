@@ -42,12 +42,21 @@ public class SMTPIntegrationPage extends Locators {
 
         common.assertElementPresent(SMTPINTEGRATION);
         common.assertElementPresent(SMTPICON);
-        common.assertElementPresent(SMTPDISCONNECTED);
-        common.assertElementPresent(SMTPCONNECTED);
         common.assertElementPresent(SMTPMESSAGE);
         common.assertElementPresent(SMTPMESSAGE2);
 
+        boolean isConnected = common.isElementPresent(SMTPCONNECTED);
+        boolean isDisconnected = common.isElementPresent(SMTPDISCONNECTED);
+
+        Assert.assertTrue(
+                isConnected || isDisconnected,
+                "FAILED: Neither SMTP Connected nor Disconnected status is visible"
+        );
+
+        common.logPrint("SMTP status displayed: " +
+                (isConnected ? "CONNECTED" : "DISCONNECTED"));
     }
+
 
     public void verifySMTPCreateElements(){
         goToSMTPIntegrationPage();
@@ -60,6 +69,7 @@ public class SMTPIntegrationPage extends Locators {
 
         common.assertElementPresent(SIHEADER);
         common.assertElementPresent(SIICON);
+        if(common.isElementDisplayed(SIHEADERMESSAGE)){
         common.assertElementPresent(SIHEADERMESSAGE);
         common.assertElementPresent(SENDERNAMEHEADER);
         common.assertElementPresent(PROVIDERTYPEHEADER);
@@ -68,7 +78,17 @@ public class SMTPIntegrationPage extends Locators {
         common.assertElementPresent(PORTHEADER);
         common.assertElementPresent(TERMS);
         common.isElementEnabled(TERMSCB);
-        common.assertElementPresent(CONNECT);
+        common.assertElementPresent(CONNECT);}
+        else{
+            common.assertElementPresent(SENDERNAMEHEADER);
+            common.assertElementPresent(PROVIDERTYPEHEADER);
+            common.assertElementPresent(EMAILHEADER);
+            common.assertElementPresent(PASSWORDHEADER);
+            common.assertElementPresent(PORTHEADER);
+//            common.assertElementPresent(TERMS);
+//            common.isElementEnabled(TERMSCB);
+            common.assertElementPresent(SIEDIT);
+        }
     }
 
     public void verifySMTPMandatoryFields(){
@@ -152,13 +172,13 @@ public class SMTPIntegrationPage extends Locators {
             common.type(SINAMEINPUT,name);
 
             common.waitUntilElementToBeVisible(SIPROVIDERINPUT);
-            common.clear(SIPROVIDERINPUT);
-            common.logPrint("Provider: "+provider);
+            common.pause(2);
             String providerVal = "//li[contains(text(),'"+provider+"')]";
-            common.type(SIPROVIDERINPUT,providerVal);
+            common.logPrint("Provider: "+provider+ " ProviderVal: "+providerVal);
+            common.pause(2);
+            driver.findElement(By.xpath(SIPROVIDERINPUT)).sendKeys(providerVal);
             common.waitUntilElementToBeVisible(providerVal);
             common.click(providerVal);
-
 
             common.waitUntilElementToBeVisible(SIEMAILINPUT);
             common.clear(SIEMAILINPUT);

@@ -168,6 +168,7 @@
 <!--                        <suiteXmlFile>build_xmls/CompanyPortfolio.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/WorkingHours.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/WhatsAppIntegration.xml</suiteXmlFile>-->
+<!--                        <suiteXmlFile>build_xmls/WhatsAppTemplate.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/EmailTemplate.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/SMTPIntegration.xml</suiteXmlFile>-->
                     </suiteXmlFiles>
