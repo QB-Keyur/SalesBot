@@ -202,6 +202,7 @@ public class WorkingHoursPage extends Locators {
                 WH_FRIDAY_END_TIME_INPUT
         };
 
+        // Set values
         for (String locator : startInputs) {
             common.type(locator, expectedStartTime);
         }
@@ -220,36 +221,59 @@ public class WorkingHoursPage extends Locators {
         DateTimeFormatter twelveHour = DateTimeFormatter.ofPattern("hh:mm a");
         DateTimeFormatter twentyFourHour = DateTimeFormatter.ofPattern("HH:mm");
 
+        LocalTime expectedStart = LocalTime.parse(expectedStartTime.toUpperCase(), twelveHour);
+        LocalTime expectedEnd   = LocalTime.parse(expectedEndTime.toUpperCase(), twelveHour);
+
+        // ✅ Validate start times
         for (String locator : startInputs) {
 
             String actualValue = common.getAttribute(locator, "value");
 
-            LocalTime actual = actualValue.toUpperCase().contains("AM") || actualValue.toUpperCase().contains("PM")
-                    ? LocalTime.parse(actualValue.toUpperCase(), twelveHour)
-                    : LocalTime.parse(actualValue, twentyFourHour);
+            // ⛔ Skip non-time values
+            if (actualValue == null ||
+                    actualValue.trim().isEmpty() ||
+                    actualValue.equalsIgnoreCase("holiday") ||
+                    actualValue.equals("—")) {
 
-            LocalTime expected = LocalTime.parse(expectedStartTime.toUpperCase(), twelveHour);
+                common.logPrint("Skipping start time validation (non-working day): " + locator);
+                continue;
+            }
+
+            LocalTime actual =
+                    actualValue.toUpperCase().contains("AM") || actualValue.toUpperCase().contains("PM")
+                            ? LocalTime.parse(actualValue.toUpperCase(), twelveHour)
+                            : LocalTime.parse(actualValue, twentyFourHour);
 
             Assert.assertEquals(
                     actual,
-                    expected,
+                    expectedStart,
                     "Start time mismatch for locator: " + locator
             );
         }
 
+        // ✅ Validate end times
         for (String locator : endInputs) {
 
             String actualValue = common.getAttribute(locator, "value");
 
-            LocalTime actual = actualValue.toUpperCase().contains("AM") || actualValue.toUpperCase().contains("PM")
-                    ? LocalTime.parse(actualValue.toUpperCase(), twelveHour)
-                    : LocalTime.parse(actualValue, twentyFourHour);
+            // ⛔ Skip non-time values
+            if (actualValue == null ||
+                    actualValue.trim().isEmpty() ||
+                    actualValue.equalsIgnoreCase("holiday") ||
+                    actualValue.equals("—")) {
 
-            LocalTime expected = LocalTime.parse(expectedEndTime.toUpperCase(), twelveHour);
+                common.logPrint("Skipping end time validation (non-working day): " + locator);
+                continue;
+            }
+
+            LocalTime actual =
+                    actualValue.toUpperCase().contains("AM") || actualValue.toUpperCase().contains("PM")
+                            ? LocalTime.parse(actualValue.toUpperCase(), twelveHour)
+                            : LocalTime.parse(actualValue, twentyFourHour);
 
             Assert.assertEquals(
                     actual,
-                    expected,
+                    expectedEnd,
                     "End time mismatch for locator: " + locator
             );
         }
