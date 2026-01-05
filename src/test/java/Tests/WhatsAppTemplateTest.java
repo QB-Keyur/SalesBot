@@ -100,7 +100,7 @@ public class WhatsAppTemplateTest extends BasePage {
     public void validateSorting(){
         loginWithAdminUser();
         whatsAppTemplatePage.goToWhatsAppTemplatePage();
-        productPage.validateSorting(2, "int", null, SortOrder.DESCENDING);
+        productPage.validateSorting(2, "int", null, SortOrder.DESCENDING,"//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
 
 }
