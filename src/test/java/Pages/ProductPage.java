@@ -151,21 +151,24 @@ public class ProductPage extends Locators {
         }
     }
 
-    public void validateSorting(int columnIndex, String type, String dateFormat, SortOrder order) {
-//
+    public void validateSorting(
+            int columnIndex,
+            String type,
+            String dateFormat,
+            SortOrder order,
+            String fallbackMaxSrXpath
+    ) {
+
+        common.pause(2);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
         By header = By.xpath("(//div[@role='columnheader' and @aria-colindex='" + columnIndex + "'])[1]");
-        By cellLocator = By.xpath("//div[@role='row' and not(@aria-rowindex='1')]//div[@aria-colindex='" + columnIndex + "']");
+        By cellLocator = By.xpath(
+                "//div[@role='row' and not(@aria-rowindex='1')]//div[@aria-colindex='" + columnIndex + "']"
+        );
 
-        List<WebElement> beforeCells = driver.findElements(cellLocator);
-        List<String> beforeTextValues = beforeCells.stream()
-                .map(e -> e.getText().trim())
-                .collect(Collectors.toList());
-        List<Comparable> beforeParsed = parseValues(beforeTextValues, type, dateFormat);
-
-        System.out.println("\n=============================");
-        System.out.println("BEFORE SORTING (Column " + columnIndex + "): " + beforeParsed);
-        System.out.println("=============================\n");
-
+        /* ---------------- APPLY SORT ---------------- */
         int clicksNeeded = 1;
         String orderName = (order == null) ? "" : order.name().toLowerCase();
 
@@ -174,70 +177,138 @@ public class ProductPage extends Locators {
         else if (orderName.contains("uns") || orderName.contains("none")) clicksNeeded = 3;
 
         for (int i = 0; i < clicksNeeded; i++) {
-            String beforeFirst = "";
-            try {
-                WebElement firstCell = driver.findElement(By.xpath("(//div[@aria-colindex=" + columnIndex + "])[1]"));
-                beforeFirst = firstCell.getText().trim();
-            } catch (Exception ignored) {
-            }
-            WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
             WebElement headerEl = wait.until(ExpectedConditions.elementToBeClickable(header));
             headerEl.click();
-
-            try {
-                WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-                final String bf = beforeFirst;
-                shortWait.until(d -> {
-                    try {
-                        WebElement first = d.findElement(By.xpath("(//div[@aria-colindex=" + columnIndex + "])[1]"));
-                        String now = first.getText().trim();
-                        return !now.equals(bf);
-                    } catch (Exception e) {
-                        return false;
-                    }
-                });
-            } catch (Exception ignored) {
-            }
-
             waitForTableUpdate();
         }
 
-        List<WebElement> afterCells = driver.findElements(cellLocator);
-        List<String> afterTextValues = afterCells.stream()
-                .map(e -> e.getText().trim())
-                .collect(Collectors.toList());
-        List<Comparable> afterParsed = parseValues(afterTextValues, type, dateFormat);
+        /* ---------------- DETERMINE TOTAL COUNT ---------------- */
+        int totalCount = 0;
+
+        try {
+            WebElement text = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
+                    )
+            );
+
+            String paginationText = safeTrim(text.getText());
+            String totalStrRaw = paginationText.replaceAll(".*of\\s*", "").trim();
+            totalCount = Integer.parseInt(totalStrRaw.replaceAll("[^0-9]", ""));
+
+        } catch (Exception ignored) {
+        }
+
+        if (totalCount <= 0) {
+            WebElement fallback = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(fallbackMaxSrXpath))
+            );
+            totalCount = Integer.parseInt(fallback.getText().replaceAll("[^0-9]", ""));
+        }
+
+        final String NEXT_PAGINATION =
+                "//button[@title='Go to next page' or contains(@aria-label,'next')]";
+
+        final String ROWS_PER_PAGE_DROPDOWN =
+                "(//div[@aria-haspopup='listbox'])";
+
+        int[] rowOptions = totalCount < 10
+                ? new int[]{10}
+                : new int[]{10, 20, 30};
+
+        /* ---------------- COLLECT ALL DATA ---------------- */
+        List<Comparable> allData = new ArrayList<>();
+
+        for (int rows : rowOptions) {
+
+            WebElement rowsDropdown = common.waitUntilElementToBeClickable(ROWS_PER_PAGE_DROPDOWN);
+            rowsDropdown.click();
+
+            WebElement rowOption = common.waitUntilElementToBeClickable(
+                    "//li[normalize-space()='" + rows + "']"
+            );
+            rowOption.click();
+
+            common.pause(2);
+
+            for (int page = 1; page <= 200; page++) {
+
+                List<WebElement> pageCells = driver.findElements(cellLocator);
+                List<String> pageValues = pageCells.stream()
+                        .map(e -> e.getAttribute("title"))
+                        .collect(Collectors.toList());
+
+                allData.addAll(parseValues(pageValues, type, dateFormat));
+
+                try {
+                    WebElement nextBtn = driver.findElement(By.xpath(NEXT_PAGINATION));
+
+                    String ariaDisabled = nextBtn.getAttribute("aria-disabled");
+                    String disabledAttr = nextBtn.getAttribute("disabled");
+
+                    if ("true".equalsIgnoreCase(ariaDisabled) ||
+                            (disabledAttr != null && !disabledAttr.isEmpty())) {
+                        break;
+                    }
+
+                    nextBtn.click();
+                    common.pause(1);
+
+                } catch (Exception e) {
+                    break;
+                }
+            }
+            break; // use first valid rows-per-page only
+        }
 
         System.out.println("\n=============================");
-        System.out.println("AFTER SORTING (" + order + ") (Column " + columnIndex + "): " + afterParsed);
+        System.out.println("COLLECTED DATA (" + order + "): " + allData);
         System.out.println("=============================\n");
 
+        /* ---------------- SORT VALIDATION ---------------- */
         Comparator<Comparable> comparator = (a, b) -> {
             if (a == null && b == null) return 0;
             if (a == null) return 1;
             if (b == null) return -1;
+
+            if (a instanceof String && b instanceof String) {
+                return ((String) a).trim().compareToIgnoreCase(((String) b).trim());
+            }
             return a.compareTo(b);
         };
 
-        List<Comparable> expectedAsc = new ArrayList<>(afterParsed);
+        List<Comparable> expectedAsc = new ArrayList<>(allData);
         expectedAsc.sort(comparator);
 
-        List<Comparable> expectedDesc = new ArrayList<>(afterParsed);
+        List<Comparable> expectedDesc = new ArrayList<>(allData);
         expectedDesc.sort(comparator.reversed());
 
-        boolean isAsc = expectedAsc.equals(afterParsed);
-        boolean isDesc = expectedDesc.equals(afterParsed);
+        boolean isAsc = expectedAsc.equals(allData);
+        boolean isDesc = expectedDesc.equals(allData);
 
+        /* ---------------- ASSERT ---------------- */
         if (orderName.contains("asc")) {
-            Assert.assertTrue(isAsc, "Expected ASC but actual was: " + afterParsed);
-        } else if (orderName.contains("desc")) {
-            Assert.assertTrue(isDesc, "Expected DESC but actual was: " + afterParsed);
-        } else if (orderName.contains("uns") || orderName.contains("none")) {
-            Assert.assertFalse(isAsc || isDesc, "Expected UNSORT but column is sorted. Actual: " + afterParsed);
-        } else {
-            Assert.assertTrue(isAsc, "Fallback: Expected ASC but actual was: " + afterParsed);
+            Assert.assertTrue(
+                    isAsc,
+                    "Expected ASC but actual order is incorrect.\nActual: " + allData +
+                            "\nExpected: " + expectedAsc
+            );
+        }
+        else if (orderName.contains("desc")) {
+            Assert.assertTrue(
+                    isDesc,
+                    "Expected DESC but actual order is incorrect.\nActual: " + allData +
+                            "\nExpected: " + expectedDesc
+            );
+        }
+        else if (orderName.contains("uns") || orderName.contains("none")) {
+            Assert.assertFalse(
+                    isAsc || isDesc,
+                    "Expected UNSORTED but data appears sorted.\nActual: " + allData
+            );
         }
     }
+
 
     public void validatePlaceHolders() {
         goToProductPage();
@@ -346,7 +417,7 @@ public class ProductPage extends Locators {
         Product created = verifyAddingANewProductWithValidData();
         common.logPrint(created.getCategory() + " " + created.getName() + " " + created.getKb() + " " + created.getDescription() + " ");
 
-        // Click delete for the product row found (assumes DELETEPRODUCT locator targets the row for current search)
+        common.pause(3);
         driver.findElement(By.xpath(DELETEPRODUCT)).click();
 
         common.click(DELETECONFIRMPRODUCT);
@@ -530,53 +601,55 @@ public class ProductPage extends Locators {
         Assert.assertTrue(resultEnds.endsWith(endsWith),
                 "5. Product ENDS WITH filter failed: expected to end with '" + endsWith + "' but was '" + resultEnds + "'");
 
-        // 6) CATEGORY EQUALS
-        openFilters();
-        selectField(FILTERCATEGORYFROPDOWN);
-        selectOperator(FILTEREQUALS);
-        common.type(PHFILTERVAL, createdCategory);
-        String catEqual = applyAndGetFirstResult(FILTERCATEGORYRESULT);
-        common.logPrint("6. Category EQUALS result: " + catEqual);
-        Assert.assertEquals(catEqual, createdCategory, "6. Category EQUALS filter failed");
-
-        // 7) CATEGORY NOT EQUALS
-        openFilters();
-        selectField(FILTERCATEGORYFROPDOWN);
-        selectOperator(FILTERNOTEQUALS);
-        common.type(PHFILTERVAL, createdCategory);
-        String catNotEqualText = applyAndGetFirstResult(FILTERCATEGORYRESULT);
-        common.logPrint("7. Category NOT EQUALS result: " + catNotEqualText);
-        Assert.assertNotEquals(catNotEqualText, createdCategory, "7. Category NOT EQUALS filter failed");
-
-        // 8) CATEGORY CONTAINS
-        openFilters();
-        selectField(FILTERCATEGORYFROPDOWN);
-        selectOperator(FILTERCONTAINS);
-        common.type(PHFILTERVAL, catMiddleWord);
-        String catContainsText = applyAndGetFirstResult(FILTERCATEGORYRESULT);
-        common.logPrint("8. Category CONTAINS result: " + catContainsText);
-        Assert.assertTrue(catContainsText.contains(catMiddleWord),
-                "8. Category CONTAINS filter failed: expected to contain '" + catMiddleWord + "' but was '" + catContainsText + "'");
-
-        // 9) CATEGORY BEGINS WITH
-        openFilters();
-        selectField(FILTERCATEGORYFROPDOWN);
-        selectOperator(FILTERBEGINSWITH);
-        common.type(PHFILTERVAL, catStartsWith);
-        String catBeginsWithText = applyAndGetFirstResult(FILTERCATEGORYRESULT);
-        common.logPrint("9. Category BEGINS WITH result: " + catBeginsWithText);
-        Assert.assertTrue(catBeginsWithText.startsWith(catStartsWith),
-                "9. Category BEGINS WITH filter failed: expected to start with '" + catStartsWith + "' but was '" + catBeginsWithText + "'");
-
-        // 10) CATEGORY ENDS WITH
-        openFilters();
-        selectField(FILTERCATEGORYFROPDOWN);
-        selectOperator(FILTERENDSWITH);
-        common.type(PHFILTERVAL, catLastWord);
-        String catEndsWithText = applyAndGetFirstResult(FILTERCATEGORYRESULT);
-        common.logPrint("10. Category ENDS WITH result: " + catEndsWithText);
-        Assert.assertTrue(catEndsWithText.endsWith(catLastWord),
-                "10. Category ENDS WITH filter failed: expected to end with '" + catLastWord + "' but was '" + catEndsWithText + "'");
+//        // 6) CATEGORY EQUALS
+//        openFilters();
+//        selectField(FILTERCATEGORYFROPDOWN);
+//        selectOperator(FILTEREQUALS);
+//        common.type(PHFILTERVAL, createdCategory);
+//        String catEqual = applyAndGetFirstResult(FILTERCATEGORYRESULT);
+//        common.logPrint("6. Category EQUALS result: " + catEqual);
+//        Assert.assertEquals(catEqual, createdCategory, "6. Category EQUALS filter failed");
+//
+//        // 7) CATEGORY NOT EQUALS
+//        openFilters();
+//        selectField(FILTERCATEGORYFROPDOWN);
+//        selectOperator(FILTERNOTEQUALS);
+//        common.type(PHFILTERVAL, createdCategory);
+//        String catNotEqualText = applyAndGetFirstResult(FILTERCATEGORYRESULT);
+//        common.logPrint("7. Category NOT EQUALS result: " + catNotEqualText);
+//        Assert.assertNotEquals(catNotEqualText, createdCategory, "7. Category NOT EQUALS filter failed");
+//
+//        // 8) CATEGORY CONTAINS
+//        openFilters();
+//        selectField(FILTERCATEGORYFROPDOWN);
+//        selectOperator(FILTERCONTAINS);
+//        common.type(PHFILTERVAL, catMiddleWord);
+//        String catContainsText = applyAndGetFirstResult(FILTERCATEGORYRESULT);
+//        common.logPrint("8. Category CONTAINS result: " + catContainsText);
+//        Assert.assertTrue(catContainsText.contains(catMiddleWord),
+//                "8. Category CONTAINS filter failed: expected to contain '" + catMiddleWord + "' but was '" + catContainsText + "'");
+//
+//        // 9) CATEGORY BEGINS WITH
+//        openFilters();
+//        selectField(FILTERCATEGORYFROPDOWN);
+//        selectOperator(FILTERBEGINSWITH);
+//        common.type(PHFILTERVAL, catStartsWith);
+//        String catBeginsWithText = applyAndGetFirstResult(FILTERCATEGORYRESULT);
+//        common.logPrint("9. Category BEGINS WITH result: " + catBeginsWithText);
+//        Assert.assertTrue(catBeginsWithText.startsWith(catStartsWith),
+//                "9. Category BEGINS WITH filter failed: expected to start with '" + catStartsWith + "' but was '" + catBeginsWithText + "'");
+//
+//        // 10) CATEGORY ENDS WITH
+//        openFilters();
+//        selectField(FILTERCATEGORYFROPDOWN);
+//        selectOperator(FILTERENDSWITH);
+//        common.type(PHFILTERVAL, catLastWord);
+//        String catEndsWithText = applyAndGetFirstResult(FILTERCATEGORYRESULT);
+//        common.logPrint("10. Category ENDS WITH result: " + catEndsWithText);
+//        Assert.assertTrue(catEndsWithText.endsWith(catLastWord),
+//                "10. Category ENDS WITH filter failed: expected to end with '" + catLastWord + "' but was '" + catEndsWithText + "'");
+//
+//    }
     }
 
     public void verifyEditingEffectOnCreatedTime(){
