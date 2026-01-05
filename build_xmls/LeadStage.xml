@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Lead Stage Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <listeners>
+        <listener class-name="Utils.RetryListener"></listener>
+    </listeners>
+
+    <!-- Verify Lead Stage column headers -->
+    <test name="Verify Lead Stage column headers">
+        <classes>
+            <class name="Tests.LeadStageTest">
+                <methods>
+                    <include name="verifyLeadStagecolumnHeader"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Lead Stage page header -->
+    <test name="Verify Lead Stage page header">
+        <classes>
+            <class name="Tests.LeadStageTest">
+                <methods>
+                    <include name="verifyLeadStagePageHeader"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify List and Grid view -->
+    <test name="Verify Lead Stage list and grid view">
+        <classes>
+            <class name="Tests.LeadStageTest">
+                <methods>
+                    <include name="ListAndGridView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify field validation -->
+    <test name="Verify Lead Stage field validation">
+        <classes>
+            <class name="Tests.LeadStageTest">
+                <methods>
+                    <include name="Fieldvalidation"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Back and Cancel buttons -->
+    <test name="Verify Lead Stage back and cancel buttons">
+        <classes>
+            <class name="Tests.LeadStageTest">
+                <methods>
+                    <include name="CancelAndBackButton"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Create Lead Stage -->
+    <test name="Verify Create Lead Stage">
+        <classes>
+            <class name="Tests.LeadStageTest">
+                <methods>
+                    <include name="CreateLead"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Search Lead Stage -->
+    <test name="Verify Lead Stage search">
+        <classes>
+            <class name="Tests.LeadStageTest">
+                <methods>
+                    <include name="Searchlead"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Edit and success message -->
+    <test name="Verify Lead Stage edit and success message">
+        <classes>
+            <class name="Tests.LeadStageTest">
+                <methods>
+                    <include name="VerifyEditandSuccessMSG"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Update page elements -->
+    <test name="Verify Lead Stage update page elements">
+        <classes>
+            <class name="Tests.LeadStageTest">
+                <methods>
+                    <include name="VerifyUpdatePageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Delete popup -->
+    <test name="Verify Lead Stage delete popup">
+        <classes>
+            <class name="Tests.LeadStageTest">
+                <methods>
+                    <include name="VerifyDeletePopup"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

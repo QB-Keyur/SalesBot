@@ -193,7 +193,7 @@ public class Locators extends BasePage {
     public static String ACCCOREFEATURES1 = "//span[text()='{{core_features}}']";
     public static String ACCCOREFEATURESINPUT = "//input[@name=\"core_features\"]";
     public static String ACCCONTACTINFO = "//span[text()='Contact Info']";
-    public static String ACCCONTACTINFOINPUT = "//input[@name=\"contact_info\"]";
+    public static String ACCCONTACTINFOINPUT = "//input[@name=\"contact_info\"] | //span[text()='Contact Info']/following::textarea[1]";
     public static String ACCCONTACTINFO2 = "//span[text()='{{contact_info}}']";
     public static String ACCCOMPANYDOMAIN = "//span[text()='Company Domain']";
     public static String ACCCOMPANYDOMAININPUT = "//input[@name=\"company_domain\"]";
@@ -314,7 +314,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String cityLabel = "//span[text()='City']";
     //Contact page creation page validation message for mandatory fields
     public static String nameFieldMsg = "//span[text()='Name is required']";
-    public static String contactGroupMsg = "//span[text()='Please select a contact group']";
+    public static String contactGroupMsg = "//span[text()='Contact Group is required']";
     public static String phoneNumberMsg = "//div[text()='Phone number is required']";
     public static String companyNameMsg = "//span[text()='Company Name is required']";
     //Import page locators
@@ -330,7 +330,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String deleteButton = "//button[@aria-label='Delete']";
     public static String editButton = "//button[@aria-label='Edit']";
     public static String viewHeader = "//h5[text()='Whatsapp Contact']";
-    public static String buttonMenuListView = "//div[contains(@class,'flex items-center justify-between gap-1')]/child::button";
+    public static String buttonMenuListView = "//div[contains(@class,'shrink-0 MuiBox-root css-0')]/child::button";
 
     //View page locators
     //label
@@ -648,7 +648,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String agreeCheckbox= "//input[@type='checkbox']";
     public static String startFreeTrialBtn = "//span[contains(text(),'Start Trial')]/ancestor::button";
     public static String startFreeTrialBtnLastPage = "//span[contains(text(),'Start Free Plan')]/ancestor::button";
-    public static String congratulationMessage = "//h6[contains(text(),'Congratulations!')]";
+    public static String congratulationMessage = "(//h6[contains(text(),'Congratulations!')])[2]";
     public static String closeIconOnCongratulation = "//div[contains(@class,'relative flex flex-col items-center justify-center')]//button";
     public static String getPlanDetail = "(//h4[contains(text(),'')])[2]";
     public static String createPasswordBtn = "//span[text()='Create Password']/parent::button";
@@ -781,7 +781,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String ECCATEGORY = "//span[text()=\"Category\"]";
     public static String ECPRODUCT = "//span[text()=\"Product\"]";
     public static String ECEMAIL = "//span[text()=\"Integration Email\"]";
-    public static String ECCONTACT = "//span[text()=\"Contact\"]";
+    public static String ECCONTACT = "//span[text()=\"Contact\"] | //span[text()=\"Contact\"]/following::span[text()='Contact']";
     public static String ECCONTACTGROUP = "//span[text()=\"Contact Group\"]";
     public static String ECAI = "//span[text()=\"Enable AI\"]";
     public static String ECSTATUS = "//span[text()=\"Status\"]";
@@ -825,12 +825,12 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String ECCSEARCHRESULT= "(//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
     public static String ECCDROPDOWNLIST= "//ul[@class='MuiAutocomplete-listbox css-1sg36vf']";
     public static String ECCBODYVALUE= "//div[@data-placeholder=\"Email template body will appear here\"]/child::p";
-    public static String ECCRUNCAMPAIGN= "//button[@type='button']/following::span[text()='Run Campaign']";
+    public static String ECCRUNCAMPAIGN= "//button[@type='button']/following::span[text()='Run Campaign'] | //span[text()=\"Save\"]/parent::button";
     public static String ECCCANCEL= "//button[@type='button']/following::span[text()='Cancel']";
     public static String ECCPOPUPTEXT1= "//h2[text()='Run Campaign']";
     public static String ECCPOPUPTEXT2= "//p[text()='Are you sure you want to run this email campaign? This action will start sending emails to your selected contacts.']";
     public static String ECCPOPUPNO= "//button[@type='button']/following::span[text()='No']";
-    public static String ECCPOPUPYES= "//button[@type='button']/following::span[text()='Yes']";
+    public static String ECCPOPUPYES= "//button[@type='button']/following::span[text()='Yes'] | //button[@type='button']/following::span[text()='Run Campaign']";
     public static String ECCNAMEVAL= "//span[text()='Name is required']";
     public static String ECCEMAILVAL= "//span[text()='Email template is required']";
     public static String ECCCATEGORYVAL= "//span[text()='Category is required']";
@@ -1331,11 +1331,11 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static final String SIHEADER = "//h6[text()='SMTP Integration']";
     public static final String SIICON = "//h6[text()='SMTP Integration']/preceding-sibling::*[local-name()='svg']";
     public static final String SIHEADERMESSAGE = "//h6[text()='SMTP Integration']/following::p[text()='Set up your SMTP integration for the first time.']";
-    public static final String SENDERNAMEHEADER = "//span[text()='Sender Name']";
-    public static final String PROVIDERTYPEHEADER = "//span[text()='Provider Type']";
-    public static final String EMAILHEADER = "//span[text()='Email']";
-    public static final String PASSWORDHEADER = "//span[text()='Password']";
-    public static final String PORTHEADER = "//span[text()='Port number']";
+    public static final String SENDERNAMEHEADER = "//span[text()='Sender Name']|//span[text()='Integration setup steps']/following::span[3]";
+    public static final String PROVIDERTYPEHEADER = "//span[text()='Provider Type']|//h6[text()='Provider Type']";
+    public static final String EMAILHEADER = "//span[text()='Email']|//h6[text()='Email']";
+    public static final String PASSWORDHEADER = "//span[text()='Password']|//h6[text()='Password']";
+    public static final String PORTHEADER = "//span[text()='Port number']|//h6[text()='Port']";
     public static final String TERMS = "//p[contains(text(),'By using')]";
     public static final String TERMSCB = "//span[@class=\"css-ysvidx\"] | //input[@type='checkbox']";
     public static final String CONNECT = "//button[@type=\"submit\"]";

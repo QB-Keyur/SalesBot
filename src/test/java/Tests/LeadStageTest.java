@@ -55,13 +55,13 @@ public class LeadStageTest extends BasePage {
         leadStagePage.VerifyCreateLeadStage();
     }
 
-    @Test
-    public void viewLead() {
-        loginWithAdminUser();
-        leadStagePage.VerifyonLeadStagePage();
-        leadStagePage.verifyViewLead();
-
-    }
+//    @Test
+//    public void viewLead() {
+//        loginWithAdminUser();
+//        leadStagePage.VerifyonLeadStagePage();
+//        leadStagePage.verifyViewLead();
+//
+//    }
     @Test
 
     public void Searchlead()

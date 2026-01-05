@@ -66,6 +66,7 @@ public class LeadStagePage extends Locators {
 
         common.waitUntilElementToBeVisible(LISTVIEWBTNL);
         common.click(LISTVIEWBTNL);
+        common.pause(4);
     }
     public void VerifyFieldvalidation()
     {
@@ -251,6 +252,11 @@ public class LeadStagePage extends Locators {
         common.handleAlert();
         common.waitUntilElementToBeVisible(LS_DeleteCancel);
         common.click(LS_DeleteCancel);
+        common.pause(2);
+
+        common.waitUntilElementToBeVisible(LS_Delete);
+        common.click(LS_Delete);
+
 
         common.waitUntilElementToBeVisible(LS_ConfirmDelete);
         common.click(LS_ConfirmDelete);

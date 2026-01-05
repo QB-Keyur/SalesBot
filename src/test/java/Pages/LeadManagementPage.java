@@ -419,8 +419,16 @@ public class LeadManagementPage extends Locators {
         common.logPrint("Steps::Header of Action Column  is :- "+HAction);
 
     }
-    public void  VerifyViewLeadStage()
+    public void  verifyRefresh()
     {
+        common.waitUntilElementToBeVisible(LEADMANAGMENT);
+        common.click(LEADMANAGMENT);
 
+        common.waitUntilElementToBeVisible(LEAD);
+        common.click(LEAD);
+
+        common.waitUntilElementToBeVisible(LEADREFRESH);
+       common.click(LEADREFRESH);
+       common.pause(2);
     }
 }

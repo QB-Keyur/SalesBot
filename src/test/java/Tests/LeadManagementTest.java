@@ -73,5 +73,13 @@ public class LeadManagementTest extends BasePage {
         loginWithAdminUser();
         lead.verifyViewLead();
     }
+
+    @Test
+    public void VrifyRefresh()
+    {
+        loginWithAdminUser();
+     lead.verifyRefresh();
+    }
+
 }
 

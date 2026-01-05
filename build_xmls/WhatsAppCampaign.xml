@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="WhatsApp Campaign Module Test Cases" verbose="10" parallel="tests" thread-count="3" allow-return-values="true">
+
+<suite name="WhatsApp Campaign Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
 
     <listeners>
         <listener class-name="Utils.RetryListener"></listener>
     </listeners>
 
-    <!-- Verify WhatsApp contact campaign page-->
-    <test name="Verify WhatsApp contact campaign page elements, button and etc.">
+    <!-- Verify WhatsApp Campaign page navigation -->
+    <test name="Verify WhatsApp Campaign page navigation">
         <classes>
             <class name="Tests.WhatsAppCampaignTest">
                 <methods>
@@ -17,8 +22,8 @@
         </classes>
     </test>
 
-    <!-- Verify WhatsApp contact campaign List of headers-->
-    <test name="Verify WhatsApp contact campaign List of headers">
+    <!-- Verify WhatsApp Campaign contact list headers -->
+    <test name="Verify WhatsApp Campaign contact list headers">
         <classes>
             <class name="Tests.WhatsAppCampaignTest">
                 <methods>
@@ -28,8 +33,30 @@
         </classes>
     </test>
 
-    <!-- Verify WhatsApp campaign create functionality-->
-    <test name="Verify WhatsApp campaign create functionality">
+    <!-- Verify Run Campaign popup -->
+    <test name="Verify WhatsApp Campaign run popup">
+        <classes>
+            <class name="Tests.WhatsAppCampaignTest">
+                <methods>
+                    <include name="VerifyRunCampaignPopup"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify field validation messages -->
+    <test name="Verify WhatsApp Campaign field validation">
+        <classes>
+            <class name="Tests.WhatsAppCampaignTest">
+                <methods>
+                    <include name="verifyFieldvalidation"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Create WhatsApp Campaign -->
+    <test name="Verify Create WhatsApp Campaign">
         <classes>
             <class name="Tests.WhatsAppCampaignTest">
                 <methods>
@@ -39,5 +66,70 @@
         </classes>
     </test>
 
+    <!-- Verify Run Campaign with selecting contact -->
+    <test name="Verify Run Campaign with selected contact">
+        <classes>
+            <class name="Tests.WhatsAppCampaignTest">
+                <methods>
+                    <include name="VerifyRunCampaignWithSelectingContactTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify View Campaign with selected contact -->
+    <test name="Verify View Campaign with selected contact">
+        <classes>
+            <class name="Tests.WhatsAppCampaignTest">
+                <methods>
+                    <include name="validateViewRunCampaignWithSelectedContact"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Create Campaign page elements -->
+    <test name="Verify WhatsApp Campaign create page elements">
+        <classes>
+            <class name="Tests.WhatsAppCampaignTest">
+                <methods>
+                    <include name="verifyElementsOnnCreateCamapignPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify View Campaign page header -->
+    <test name="Verify WhatsApp Campaign view page header">
+        <classes>
+            <class name="Tests.WhatsAppCampaignTest">
+                <methods>
+                    <include name="VerifyViewCampaignPageHeaderName"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify WhatsApp Campaign search -->
+    <test name="Verify WhatsApp Campaign search">
+        <classes>
+            <class name="Tests.WhatsAppCampaignTest">
+                <methods>
+                    <include name="VerifyViewCampaignSearch"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify View Campaign page elements -->
+    <test name="Verify WhatsApp Campaign view page elements">
+        <classes>
+            <class name="Tests.WhatsAppCampaignTest">
+                <methods>
+                    <include name="VerifyViewElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
 </suite>
