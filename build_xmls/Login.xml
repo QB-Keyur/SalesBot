@@ -172,7 +172,7 @@
         </test>
 
     <!-- Verify onboarding flow -->
-    <test name="Verify complete forgot password flow">
+    <test name="Verify OnBoarding flow">
         <classes>
             <class name="Tests.loginTest">
                 <methods>
