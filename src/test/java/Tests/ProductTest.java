@@ -48,7 +48,7 @@ public class ProductTest extends BasePage {
     public void validateSorting() {
         loginWithAdminUser();
         productPage.goToProductPage();
-        productPage.validateSorting(2, "int", null, SortOrder.ASCENDING);
+        productPage.validateSorting(2, "int", null, SortOrder.DESCENDING);
     }
 
     @Test

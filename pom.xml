@@ -163,7 +163,7 @@
 <!--                        <suiteXmlFile>build_xmls/WhatsAppTemplate.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/KnowledgeBase.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/EmailCampaign.xml</suiteXmlFile>-->
-<!--                        <suiteXmlFile>build_xmls/Product.xml</suiteXmlFile>-->
+                        <suiteXmlFile>build_xmls/Product.xml</suiteXmlFile>
 <!--                        <suiteXmlFile>build_xmls/CompanyManagement.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/CompanyPortfolio.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/WorkingHours.xml</suiteXmlFile>-->

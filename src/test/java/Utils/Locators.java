@@ -1000,7 +1000,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
             "//div[text()='Monday']";
 
     public static final String WH_TUESDAY_LABEL =
-            "//div[text()='TuesDay']";
+            "//div[text()='Tuesday']";
 
     public static final String WH_WEDNESDAY_LABEL =
             "//div[text()='Wednesday']";
@@ -1023,7 +1023,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
             "//div[text()='Monday']/following::input[1]";
 
     public static final String WH_TUESDAY_TYPE_INPUT =
-            "//div[text()='TuesDay']/following::input[1]";
+            "//div[text()='Tuesday']/following::input[1]";
 
     public static final String WH_WEDNESDAY_TYPE_INPUT =
             "//div[text()='Wednesday']/following::input[1]";
@@ -1046,7 +1046,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
             "//div[text()='Monday']/following::input[2]";
 
     public static final String WH_TUESDAY_START_TIME_INPUT =
-            "//div[text()='TuesDay']/following::input[2]";
+            "//div[text()='Tuesday']/following::input[2]";
 
     public static final String WH_WEDNESDAY_START_TIME_INPUT =
             "//div[text()='Wednesday']/following::input[2]";
@@ -1069,7 +1069,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
             "//div[text()='Monday']/following::input[3]";
 
     public static final String WH_TUESDAY_END_TIME_INPUT =
-            "//div[text()='TuesDay']/following::input[3]";
+            "//div[text()='Tuesday']/following::input[3]";
 
     public static final String WH_WEDNESDAY_END_TIME_INPUT =
             "//div[text()='Wednesday']/following::input[3]";
@@ -1087,7 +1087,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
             "//div[text()='Sunday']/following::input[3]";
 
     public static final String WH_CLEAR_MONDAY= "(//div[text()='Monday']/following::button[@title='Clear'])[1]";
-    public static final String WH_CLEAR_TUESDAY= "(//div[text()='TuesDay']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_TUESDAY= "(//div[text()='Tuesday']/following::button[@title='Clear'])[1]";
     public static final String WH_CLEAR_WEDNESDAY= "(//div[text()='Wednesday']/following::button[@title='Clear'])[1]";
     public static final String WH_CLEAR_THURSDAY= "(//div[text()='Thursday']/following::button[@title='Clear'])[1]";
     public static final String WH_CLEAR_FRIDAY= "(//div[text()='Friday']/following::button[@title='Clear'])[1]";

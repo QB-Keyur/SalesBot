@@ -209,17 +209,6 @@
         </classes>
     </test>
 
-    <!-- Verify alternate horizontal views -->
-    <test name="Verify alternate horizontal views">
-        <classes>
-            <class name="Tests.AgentConfigurationTest">
-                <methods>
-                    <include name="horizontalViews"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
     <!-- Verify pagination -->
     <test name="Verify Agent Configuration pagination">
         <classes>
@@ -259,6 +248,17 @@
             <class name="Tests.AgentConfigurationTest">
                 <methods>
                     <include name="verifyEditingEffectOnCreatedTime"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify alternate horizontal views -->
+    <test name="Verify alternate horizontal views">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="horizontalViews"/>
                 </methods>
             </class>
         </classes>
