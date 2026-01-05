@@ -152,6 +152,7 @@ public class Locators extends BasePage {
     public static String ACINACTIVEGRIDSTATUSGRID = "(//span[text()='Inactive'])[1]/preceding::input[@type='checkbox'][1]";
     public static String ACACTIVTEBUTTON = "//button[@type='button']/child::span[contains(text(),'Active')]";
     public static String ACCHEADER = "//h6[normalize-space()='Create Agent Configuration']";
+    public static String ACCINFO = "//strong[contains(text(),'The configured time zone')]";
     public static String ACCPERSONA = "//p[normalize-space()='Persona']";
     public static String ACCSELECTPERSONA = "//input[@placeholder=\"Select Persona\"]";
     public static String ACCPROMPT = "//p[text()='Prompt']";
@@ -172,6 +173,8 @@ public class Locators extends BasePage {
     public static String ACCGREETINGINPUT = "//textarea[@name=\"greeting_message\"]";
     public static String ACCTIMEZONE = "//span[text()='Timezone']";
     public static String ACCTIMEZONEINPUT = "//input[@placeholder=\"Select Timezone\"]";
+    public static String ACCFOLLOWRETRY = "//span[contains(text(),'Follow Retry')]";
+    public static String ACCFOLLOWRETRYINPUT = "//input[@placeholder=\"Enter Follow Retry\"]";
     public static String ACCPERSONALITY = "//p[text()='Personality & Goal']";
     public static String ACCPERSONALITY2 = "//span[text()='Personality']";
     public static String ACCPERSONALITYINPUT = "//input[@name='personality']";
@@ -441,7 +444,8 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String KBACTIONS = "//span[normalize-space()='Actions']";
     public static String KBTOTALROWS = "//div[contains(text(),'Total')]";
     public static String KBROWSPERPAGE = "//p[contains(text(),'Rows per page:')]";
-    public static String KBREFRESHBUTTON = "//button[contains(@class,'css-q8p1uw')]";
+
+    public static String KBREFRESHBUTTON = "//button[contains(@class,'css-q8p1uw')]| //span[text()='Filters']/following::button[1]";
     public static String KBFILTERS = "//button[@type='button']/following::span[contains(text(),'Filters')]";
     public static String KBCREATE = "//button[@type='button']/following::span[text()='Create']";
     public static String KBSERACHRESULT = "//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"]";
@@ -923,7 +927,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String CVIEWEMAILINPUT = "(//span[text()='Name']/following::input[@type='text'])[3]";
     public static String CVIEWPHONEINPUT = "(//span[text()='Name']/following::input[@type='text'])[4]";
     public static String CVIEWCANCELBUTTON = "//span[text()='Cancel']/parent::button";
-    public static String CCREATEDDATEVAL = "//div[@data-rowindex=\"0\"]/child::div[@data-colindex=\"5\"]";
+    public static String CCREATEDDATEVAL = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"]";
 
     // Company Portfolio
     public static String COMPANYPORTFOLIO = "//button[text()='Company Portfolio']";

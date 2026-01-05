@@ -3,12 +3,11 @@
 
 <suite name="User Management Module Test Cases"
        verbose="10"
-       parallel="tests"
-       thread-count="3"
+       parallel="false"
        allow-return-values="true">
 
     <listeners>
-        <listener class-name="Utils.RetryListener"></listener>
+        <listener class-name="Utils.RetryListener"/>
     </listeners>
 
     <!-- Verify User management menu and sub-menu -->
@@ -121,12 +120,78 @@
         </classes>
     </test>
 
-    <!-- Verify sent invitation is received in mail -->
+    <!-- Verify sent invitation mail -->
     <test name="Verify Sent Invitation Is Showing In Mail">
         <classes>
             <class name="Tests.UserManagementTest">
                 <methods>
                     <include name="verifySentInvitationIsShowingInMail"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify invitation accept and new user login -->
+    <test name="Verify Login With New User After Invitation Acceptance">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifyLoginWithNewUserAfterInvitationIsAccept"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify invitation status as Not Accepted -->
+    <test name="Verify Invitation Status As Not Accepted">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifySentInvitationShowingInTheUserInvitationAndStatusShowingAsNotAccepted"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify user status as Active after accepting invitation -->
+    <test name="Verify User Status As Active In User Grid">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifyAfterAcceptingTheInvitationItShowingInTheUserGridAsActiveStatus"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify invitation removed after accept and user visible in user grid -->
+    <test name="Verify Invitation Removed After Accept And User Visible In Grid">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifyDetailIsRemoveFromUserInvitationAfterAcceptAndShowingInTheUsersGrid"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify all roles are showing on Role and Permission page -->
+    <test name="Verify All Roles Are Showing On Role And Permission Page">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="verifyAllTheRolesAreShowingOnTheRoleAndPermissionPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Create role with specific module access -->
+    <test name="Create Role Permission With Specific Module Access">
+        <classes>
+            <class name="Tests.UserManagementTest">
+                <methods>
+                    <include name="createRolePermissionWithSpecificModuleAccess"/>
                 </methods>
             </class>
         </classes>

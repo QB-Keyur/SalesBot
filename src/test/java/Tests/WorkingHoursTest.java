@@ -53,7 +53,6 @@ public class WorkingHoursTest extends BasePage {
         common.logPrint("TEST PASS :: Holiday successfully converted to Working with timings");
     }
 
-
 }
 
 
