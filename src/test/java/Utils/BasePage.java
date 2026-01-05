@@ -5,44 +5,38 @@ import Config.ReadProperties;
 import Pages.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.Augmenter;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import java.io.*;
+import java.io.File;
 import java.lang.reflect.Method;
-import java.nio.file.Paths;
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class BasePage {
 
-    // ================= DRIVER =================
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal();
+    /* ================= DRIVER ================= */
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static WebDriver getDriver() {
         return driver.get();
     }
 
-    // ================= COMMON OBJECTS =================
+    /* ================= COMMON ================= */
     public Common common;
-    public static String currentTest; // current running test
-    public static ThreadLocal<Integer> steps = new ThreadLocal<Integer>();
+    public static String currentTest;
+    public static ThreadLocal<Integer> steps = new ThreadLocal<>();
 
-    // ================= PAGE OBJECTS =================
+    /* ================= PAGE OBJECTS ================= */
     public loginPage loginPage;
     public OtherPage otherPage;
     public ProductPage productPage;
@@ -65,20 +59,18 @@ public class BasePage {
 
     protected List<String> stringList = new ArrayList<>();
 
-    // CORE login logic (never call this directly from tests)
+    /* ================= LOGIN ================= */
     public void loginWithAdminUser(String username, String password) {
         common.waitUntilElementToBeVisible("//input[@name='email']");
-        common.type("//input[@name='email']",username);
+        common.type("//input[@name='email']", username);
         common.waitUntilElementToBeVisible("//input[@name='password']");
-        common.type("//input[@name='password']",password);
-        common.waitUntilElementToBeVisible("//button[@type='submit']");
+        common.type("//input[@name='password']", password);
         common.click("//button[@type='submit']");
         common.assertElementPresent("//div[contains(text(), 'Login successful')]");
         common.logPrint("Login successfully.");
-        String CLOSEBUTTON = "//button[@aria-label='Close alert']";
-        common.click(CLOSEBUTTON);
+        common.click("//button[@aria-label='Close alert']");
     }
-    // ================= LOGIN METHODS =================
+
     public void loginWithAdminUser() {
         loginWithAdminUser(
                 EnvConfig.getDirectorUser(),
@@ -86,25 +78,9 @@ public class BasePage {
         );
     }
 
-    public void loginForForgotPassword() {
-        loginWithAdminUser(
-                EnvConfig.getForgotUser(),
-                EnvConfig.getForgotPass()
-        );
-    }
-
-    public String forgotEmail = EnvConfig.getForgotUser();
-
-    /**
-     * Setup Method
-     *
-     */
+    /* ================= SETUP ================= */
     @BeforeMethod(alwaysRun = true)
-    public void setUp(Method method, ITestResult testResult) throws Exception {
-
-        System.out.println(
-                "THREAD ID = " + Thread.currentThread().getId()
-        );
+    public void setUp(Method method, ITestResult testResult) {
 
         Reporter.setCurrentTestResult(testResult);
         currentTest = method.getName();
@@ -112,45 +88,46 @@ public class BasePage {
         String browser = ReadProperties.getBrowser();
         boolean headless = ReadProperties.isHeadless();
 
-        // ----------- CHROME -----------
         if (browser.equalsIgnoreCase("chrome")) {
 
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
 
             if (headless) {
-                options.addArguments("--headless");
+                options.addArguments("--headless=new");
             }
-            options.addArguments("--incognito");
-            options.addArguments("--disable-dev-shm-usage");    // overcome limited resource problems
-            options.addArguments("--no-sandbox");               // Bypass an OS security model
-            options.addArguments("--remote-allow-origins=*");
+
             options.addArguments(
-                    "user-agent=Mozilla/5.0 (Linux; Android 8.0.0; TA-1053 Build/OPR1.170623.026) AppleWebKit/537.36 (HTML, like Gecko) Chrome/73.0.3683.0 Mobile Safari/537.36");
+                    "--incognito",
+                    "--disable-dev-shm-usage",
+                    "--no-sandbox",
+                    "--disable-gpu",
+                    "--disable-extensions",
+                    "--remote-allow-origins=*"
+            );
+
             driver.set(new ChromeDriver(options));
         }
+
         else if (browser.equalsIgnoreCase("edge")) {
 
             WebDriverManager.edgedriver().setup();
             EdgeOptions options = new EdgeOptions();
-            options.addArguments("-private");
+
             if (headless) {
                 options.addArguments("--headless");
                 options.addArguments("--disable-gpu");
                 options.addArguments("--no-sandbox");
-                options.addArguments("--disable-dev-shm-usage");
-                options.addArguments("user-agent=Mozilla/5.0 (Linux; Android 8.0.0; TA-1053 Build/OPR1.170623.026) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.0 Mobile Safari/537.36");
             }
 
-            driver.set(new EdgeDriver(options)); // Pass options to EdgeDriver
-
+            driver.set(new EdgeDriver(options));
         }
-        else if (browser.equals("firefox")) {
+
+        else if (browser.equalsIgnoreCase("firefox")) {
 
             WebDriverManager.firefoxdriver().setup();
             FirefoxOptions options = new FirefoxOptions();
-            options.addArguments("-private");
-            //  options.addPreference("devtools.toolbox.selectedTool","netmonitor");
+
             if (headless) {
                 options.addArguments("--headless");
             }
@@ -159,6 +136,8 @@ public class BasePage {
         }
 
         getDriver().manage().window().maximize();
+
+        /* Initialize helpers */
         common = new Common(getDriver());
         loginPage = new loginPage(getDriver());
         otherPage = new OtherPage(getDriver());
@@ -179,91 +158,77 @@ public class BasePage {
         leadStagePage = new LeadStagePage(getDriver());
         whatsAppIntegrationPage = new WhatsAppIntegrationPage(getDriver());
         smtpIntegrationPage = new SMTPIntegrationPage(getDriver());
+
         steps.set(1);
         Common.printCurrentTime("Starting Time");
+
         getDriver().get(EnvConfig.getWebUrl());
     }
 
-    /**
-     * Check that given element is present or not.
-     *
-     * @param xpath the xpath of element to be checked present or not
-     *
-     * @return True if the element present, false otherwise
-     */
-
-    public boolean existsElement(String xpath) {
-        try {
-            getDriver().findElement(By.xpath(xpath));
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
-    /**
-     * After Method {TearDown}
-     */
+    /* ================= TEARDOWN ================= */
     @AfterMethod(alwaysRun = true)
-//     public void tearDown(ITestResult testResult,String TestCycle, String TestCase) throws Exception {
-    public void tearDown(ITestResult testResult) throws Exception {
+    public void tearDown(ITestResult testResult) {
 
         String testName = testResult.getName();
         Reporter.setCurrentTestResult(testResult);
 
-        if (testResult.getStatus() == 2) {
-            Reporter.log("<font color = 'red'><b><i><u><br>Fail :: " + testResult.getName() + "</u></i></b></font>");
-            makeScreenshot(getDriver(), testName);
-            Reporter.log("Failed page URL: "+getDriver().getCurrentUrl());
+        try {
+            if (testResult.getStatus() == ITestResult.FAILURE) {
+                Reporter.log("<font color='red'><b>FAIL :: " + testName + "</b></font>");
+                makeScreenshot(getDriver(), testName);
+                Reporter.log("URL: " + getDriver().getCurrentUrl());
+            }
+            else if (testResult.getStatus() == ITestResult.SUCCESS) {
+                Reporter.log("<font color='green'><b>PASS :: " + testName + "</b></font>");
+            }
         }
-        // MyScreenRecorder.stopRecording();
-        if (testResult.getStatus() == 1) {
-            Reporter.log("<font color = 'green'><b><i><u><br>Pass :: " + testResult.getName() + "</u></i></b></font>");
-//           MyScreenRecorder.deleteFile(testName+".avi");
-            testResult.getThrowable();
-            // makeScreenshot(driver, testName);
+        catch (Exception ignored) {}
+
+        finally {
+            Common.printCurrentTime("Ending Time");
+
+            try {
+                WebDriver drv = getDriver();
+                if (drv != null) {
+                    drv.quit();   // ONLY quit
+                }
+            }
+            catch (Exception e) {
+                System.out.println("⚠️ Driver quit timeout ignored");
+            }
+            finally {
+                driver.remove(); // 🔥 MUST
+            }
         }
-//        for (String logs : stringList) {
-//            Reporter.log(logs,true);
-//        }
-//
-        Common.printCurrentTime("Ending Time");
-        getDriver().manage().deleteAllCookies();
-        getDriver().quit();
-        driver.remove();
     }
 
+    /* ================= SCREENSHOT ================= */
     public void makeScreenshot(WebDriver driver, String screenshotName) {
         try {
             File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
-            //surefire-reports
             String screenshotDir = System.getProperty("user.dir")
                     + File.separator + "target"
                     + File.separator + "surefire-reports"
                     + File.separator + "screenshots";
 
             File dir = new File(screenshotDir);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
+            if (!dir.exists()) dir.mkdirs();
 
             File dest = new File(screenshotDir + File.separator + screenshotName + ".png");
             FileUtils.copyFile(src, dest);
 
-            //RELATIVE PATH from emailable-report.html
             String relativePath = "./screenshots/" + screenshotName + ".png";
 
             Reporter.log("<br><b>Screenshot:</b><br>");
             Reporter.log(
-                    "<a href=\"" + relativePath + "\" target=\"_blank\">" +
-                            "<img src=\"" + relativePath + "\" height=\"250\" width=\"450\"/>" +
+                    "<a href='" + relativePath + "' target='_blank'>" +
+                            "<img src='" + relativePath + "' height='250' width='450'/>" +
                             "</a>"
             );
-
-        } catch (Exception e) {
-            Reporter.log("Screenshot capture failed: " + e.getMessage());
+        }
+        catch (Exception e) {
+            Reporter.log("Screenshot failed: " + e.getMessage());
         }
     }
-
 }
