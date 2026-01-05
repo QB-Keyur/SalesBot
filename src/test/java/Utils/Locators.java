@@ -443,7 +443,8 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String KBACTIONS = "//span[normalize-space()='Actions']";
     public static String KBTOTALROWS = "//div[contains(text(),'Total')]";
     public static String KBROWSPERPAGE = "//p[contains(text(),'Rows per page:')]";
-    public static String KBREFRESHBUTTON = "//button[contains(@class,'css-q8p1uw')]";
+
+    public static String KBREFRESHBUTTON = "//button[contains(@class,'css-q8p1uw')]| //span[text()='Filters']/following::button[1]";
     public static String KBFILTERS = "//button[@type='button']/following::span[contains(text(),'Filters')]";
     public static String KBCREATE = "//button[@type='button']/following::span[text()='Create']";
     public static String KBSERACHRESULT = "//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"]";
