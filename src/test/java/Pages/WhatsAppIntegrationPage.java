@@ -77,6 +77,12 @@ public class WhatsAppIntegrationPage extends Locators {
         common.click(WIMENU);
 
         common.waitUntilElementToBeVisible(WIIHEADER);
+        common.pause(1);
+
+        common.assertElementIsNotDisplayedWithMessage(
+                STATISTICS,
+                "FAILED: As an account was already used, use a new account for this test"
+        );
 
         common.assertElementPresent(WIIHEADER);
         common.assertElementPresent(WIIICON);
@@ -165,6 +171,13 @@ public class WhatsAppIntegrationPage extends Locators {
 
         common.waitUntilElementToBeVisible(WIIHEADER);
 
+        common.pause(1);
+
+        common.assertElementIsNotDisplayedWithMessage(
+                STATISTICS,
+                "FAILED: As an account was already used, use a new account for this test"
+        );
+
         common.waitUntilElementToBeVisible(WIICONNECT);
         common.scroll_To_Element(WIICONNECT);
         common.click(WIICONNECT);
@@ -207,6 +220,13 @@ public class WhatsAppIntegrationPage extends Locators {
 
         common.waitUntilElementToBeVisible(WIIHEADER);
 
+        common.pause(1);
+
+        common.assertElementIsNotDisplayedWithMessage(
+                STATISTICS,
+                "FAILED: As an account was already used, use a new account for this test"
+        );
+
         common.waitUntilElementToBeVisible(WIIPHONEIDINPUT);
         common.type(WIIPHONEIDINPUT,"    ");
         common.waitUntilElementToBeVisible(WIIWABAIDINPUT);
@@ -232,34 +252,45 @@ public class WhatsAppIntegrationPage extends Locators {
                                                String token,
                                                String appID,
                                                String appSecret) {
+
         goToWhatsAppIntegrationPage();
 
         common.waitUntilElementToBeVisible(INTEGRATIONMENU);
 
-        common.logPrint("Checking if there's already a WhatsApp is connected");
+        common.logPrint("Checking if WhatsApp is already connected");
         common.assertElementIsNotDisplayed(WICONNECTED);
 
-        common.logPrint("No existing WhatsApp connection found, Continuing execution...");
+        common.logPrint("No existing WhatsApp connection found, continuing execution");
+
         common.waitUntilElementToBeVisible(WIMENU);
         common.click(WIMENU);
 
         common.waitUntilElementToBeVisible(WIIHEADER);
 
-        common.waitUntilElementToBeVisible(WIIPHONEIDINPUT);
-        common.type(WIIPHONEIDINPUT,phoneID);
-        common.waitUntilElementToBeVisible(WIIWABAIDINPUT);
-        common.type(WIIWABAIDINPUT,wabaID);
-        common.waitUntilElementToBeVisible(WIITOKENINPUT);
-        common.type(WIITOKENINPUT,token);
-        common.waitUntilElementToBeVisible(WIIAPPIDINPUT);
-        common.type(WIIAPPIDINPUT,appID);
-        common.waitUntilElementToBeVisible(WIIAPPSECRETINPUT);
-        common.type(WIIAPPSECRETINPUT,appSecret);
+        common.pause(1);
+
+        common.assertElementIsNotDisplayedWithMessage(
+                STATISTICS,
+                "FAILED: As an account was already used, use a new account for this test"
+        );
+
+        common.type(WIIPHONEIDINPUT, phoneID);
+        common.type(WIIWABAIDINPUT, wabaID);
+        common.type(WIITOKENINPUT, token);
+        common.type(WIIAPPIDINPUT, appID);
+        common.type(WIIAPPSECRETINPUT, appSecret);
 
         common.waitUntilElementToBeVisible(WIICONNECT);
         common.click(WIICONNECT);
 
+        common.pause(3);
+
+        common.assertElementIsNotDisplayedWithMessage(WIEXISTS, "FAILED: WhatsApp account already connected. Use a different account.");
+
+        common.assertElementIsNotDisplayedWithMessage(WITOKENEXPIREDMSG, "FAILED: WhatsApp token has expired.");
+
         common.waitUntilElementToBeVisible(WICONNECTED);
+        common.logPrint("WhatsApp successfully connected");
     }
 
     public void verifyViewEye(){
@@ -276,16 +307,34 @@ public class WhatsAppIntegrationPage extends Locators {
         common.click(WIMENU);
 
         common.waitUntilElementToBeVisible(WIIHEADER);
+        common.pause(2);
 
-        common.waitUntilElementToBeVisible(WIITOKENINPUT);
-        common.type(WIITOKENINPUT,"123213");
+        if(common.isElementDisplayed(STATISTICS)) {
 
-        common.waitUntilElementToBeVisible(viewButton);
-        common.click(viewButton);
+            common.waitUntilElementToBeVisible(WIEDITBTN);
+            common.scroll_To_Element(WIEDITBTN);
+            common.click(WIEDITBTN);
 
-        common.waitUntilElementToBeVisible(tokenUnhide);
-        common.assertElementPresent(tokenUnhide);
+            common.waitUntilElementToBeVisible(WIITOKENINPUT);
+            common.type(WIITOKENINPUT, "123213");
 
+            common.waitUntilElementToBeVisible(viewButton);
+            common.click(viewButton);
+
+            common.waitUntilElementToBeVisible(tokenUnhide);
+            common.assertElementPresent(tokenUnhide);
+        }
+
+        else{
+            common.waitUntilElementToBeVisible(WIITOKENINPUT);
+            common.type(WIITOKENINPUT, "123213");
+
+            common.waitUntilElementToBeVisible(viewButton);
+            common.click(viewButton);
+
+            common.waitUntilElementToBeVisible(tokenUnhide);
+            common.assertElementPresent(tokenUnhide);
+        }
     }
 
     public void verifyUsingTheSameNumber(String phoneID,
@@ -406,8 +455,15 @@ public class WhatsAppIntegrationPage extends Locators {
 
         common.waitUntilElementToBeVisible(WICONNECTBTN);
         common.click(WICONNECTBTN);
+
+        common.pause(1);
+        common.assertElementIsNotDisplayedWithMessage(WIEXISTS,"FAILED: As an account was already used, use a new account for this test");
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement successMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(WIUPDATEDMSG)));
+
+
+
         common.waitUntilElementToBeClickable(successMsg);
 
         common.refreshPage();

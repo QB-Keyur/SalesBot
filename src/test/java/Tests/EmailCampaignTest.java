@@ -106,6 +106,6 @@ public class EmailCampaignTest extends BasePage {
     public void validateSorting(){
         loginWithAdminUser();
         emailCampaignPage.goToEmailCampaignPage();
-        productPage.validateSorting(2, "int", null, SortOrder.DESCENDING,"//div[@class=\"MuiBox-root css-10u381a\"]");
+        productPage.validateSorting(2, "int", null, SortOrder.DESCENDING,"//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
 }

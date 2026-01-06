@@ -216,6 +216,8 @@ public class EmailTemplatePage extends Locators {
         driver.findElement(By.xpath(ETCUPLOADINPUT)).click();
         common.uploadFile(ETCUPLOADINPUT, imagePath);
 
+        common.pause(2);
+
         common.waitUntilElementToBeClickable(ETCUPLOADEDFILE);
         common.assertElementPresent(ETCUPLOADEDFILE);
 
@@ -282,6 +284,8 @@ public class EmailTemplatePage extends Locators {
 
         driver.findElement(By.xpath(ETCUPLOADINPUT)).click();
         common.uploadFile(ETCUPLOADINPUT, imagePath);
+
+        common.pause(2);
 
         common.waitUntilElementToBeClickable(ETCUPLOADEDFILE);
         common.assertElementPresent(ETCUPLOADEDFILE);

@@ -62,17 +62,6 @@
         </classes>
     </test>
 
-    <!-- Verify SMTP integration using valid data -->
-    <test name="Verify SMTP integration using valid data">
-        <classes>
-            <class name="Tests.SMTPIntegrationTest">
-                <methods>
-                    <include name="verifyIntegratingWithValidData"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
     <!-- Verify SMTP password view (eye icon) -->
     <test name="Verify SMTP password view eye icon">
         <classes>
@@ -101,6 +90,18 @@
             <class name="Tests.SMTPIntegrationTest">
                 <methods>
                     <include name="verifyDoesntAllowCreatingTemplateWhenNotConnected"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <!-- Verify SMTP integration using valid data -->
+    <test name="Verify SMTP integration using valid data">
+        <classes>
+            <class name="Tests.SMTPIntegrationTest">
+                <methods>
+                    <include name="verifyIntegratingWithValidData"/>
                 </methods>
             </class>
         </classes>

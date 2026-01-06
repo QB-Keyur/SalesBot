@@ -57,7 +57,6 @@ public class SMTPIntegrationPage extends Locators {
                 (isConnected ? "CONNECTED" : "DISCONNECTED"));
     }
 
-
     public void verifySMTPCreateElements(){
         goToSMTPIntegrationPage();
 
@@ -262,26 +261,39 @@ public class SMTPIntegrationPage extends Locators {
         String tokenUnhide = "//input[@placeholder=\"Enter password\" and @type=\"text\"]";
         String viewButton = "//input[@placeholder=\"Enter password\"]/following::button[@type=\"button\"]";
 
-
         common.waitUntilElementToBeVisible(INTEGRATIONMENU);
 
         common.waitUntilElementToBeVisible(SMTPINTEGRATION);
         common.click(SMTPINTEGRATION);
 
         common.waitUntilElementToBeVisible(SIHEADER);
+        common.pause(2);
 
-        common.click(SIEDIT);
+        if(common.isElementDisplayed(SIEDIT)){
 
+            common.click(SIEDIT);
 
+            common.waitUntilElementToBeVisible(SIPASSINPUT);
+            common.type(SIPASSINPUT,"123213");
 
-        common.waitUntilElementToBeVisible(SIPASSINPUT);
-        common.type(SIPASSINPUT,"123213");
+            common.waitUntilElementToBeVisible(viewButton);
+            common.click(viewButton);
 
-        common.waitUntilElementToBeVisible(viewButton);
-        common.click(viewButton);
+            common.waitUntilElementToBeVisible(tokenUnhide);
+            common.assertElementPresent(tokenUnhide);
 
-        common.waitUntilElementToBeVisible(tokenUnhide);
-        common.assertElementPresent(tokenUnhide);
+        }
+        else {
+            common.logPrint("Edit button not found");
+            common.waitUntilElementToBeVisible(SIPASSINPUT);
+            common.type(SIPASSINPUT, "123213");
+
+            common.waitUntilElementToBeVisible(viewButton);
+            common.click(viewButton);
+
+            common.waitUntilElementToBeVisible(tokenUnhide);
+            common.assertElementPresent(tokenUnhide);
+        }
 
     }
 
@@ -394,6 +406,19 @@ public class SMTPIntegrationPage extends Locators {
         common.waitUntilElementToBeVisible(SMTPINTEGRATION);
         common.click(SMTPINTEGRATION);
 
+        common.pause(2);
+
+        if(!common.isElementPresent(WIIINTEGRATIONBUTTON)){
+            String provider = "Gmail";
+            common.waitUntilElementToBeVisible(SIPROVIDERINPUT);
+            common.logPrint("Provider: "+provider);
+            common.clear(SIPROVIDERINPUT);
+            common.type(SIPROVIDERINPUT,provider);
+            String providerVal = "//li[contains(text(),'"+provider+"')]";
+            common.waitUntilElementToBeVisible(providerVal);
+            common.click(providerVal);
+        }
+
         common.waitUntilElementToBeVisible(WIIINTEGRATIONBUTTON);
         common.click(WIIINTEGRATIONBUTTON);
 
@@ -421,9 +446,5 @@ public class SMTPIntegrationPage extends Locators {
         common.assertElementPresent(STEP2_CONTAINER);
         common.assertElementPresent(STEP3_CONTAINER);
         common.assertElementPresent(STEP4_CONTAINER);
-
-
     }
-
-
 }

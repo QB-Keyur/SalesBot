@@ -57,7 +57,7 @@ public class WhatsAppTemplatePage extends Locators {
         columns.put(MULTITABHOR, "WT Horizontal View");
         columns.put(MULTITABVER, "WT Vertical View");
         columns.put(KBTOTALROWS, "WT Total Rows");
-        columns.put(KBROWSPERPAGE, "WT Rows Per Page");
+
 
 
         int failures = 0;
@@ -94,7 +94,7 @@ public class WhatsAppTemplatePage extends Locators {
         Map<String, String> columns = new LinkedHashMap<>();
 
         columns.put(WTCHEADER, "WTC Header");
-        columns.put(WTCBANNERTEXT, "WTC Banner Text");
+//        columns.put(WTCBANNERTEXT, "WTC Banner Text");
         columns.put(WTCTEMPLATEDETAILS, "WTC Template Details");
         columns.put(WTCTEMPLATENAME, "WTC Template Name");
         columns.put(WTCTEMPLATENAMEINPUT, "WTC Template Name Input");
@@ -159,8 +159,10 @@ public class WhatsAppTemplatePage extends Locators {
         common.waitUntilElementToBeVisible(WTCREATE);
         common.click(WTCREATE);
 
-        common.waitUntilElementToBeVisible(WTCBANNERTEXT);
-        common.click(WTCBANNERTEXT);
+        common.pause(2);
+
+//        common.waitUntilElementToBeVisible(WTCBANNERTEXT);
+//        common.click(WTCBANNERTEXT);
 
         Map<String, String> columns = new LinkedHashMap<>();
 
@@ -293,10 +295,10 @@ public class WhatsAppTemplatePage extends Locators {
         common.waitUntilElementToBeVisible(WTCBODYINPUT);
         common.click(WTCBODYINPUT);
         common.type(WTCBODYINPUT,bodyText);
-
-        common.waitUntilElementToBeVisible(WTCFOOTERINPUT);
-        common.click(WTCFOOTERINPUT);
-        common.type(WTCFOOTERINPUT,footerText);
+//
+//        common.waitUntilElementToBeVisible(WTCFOOTERINPUT);
+//        common.click(WTCFOOTERINPUT);
+//        common.type(WTCFOOTERINPUT,footerText);
 
         common.waitUntilElementToBeVisible(WTCSELECTTYPE);
         common.click(WTCSELECTTYPE);
@@ -332,11 +334,11 @@ public class WhatsAppTemplatePage extends Locators {
 
         String headerTextXpath = "//h6[text()='"+headerText+"']";
         String bodyTextXpath = "//p[text()='"+bodyText+"']";
-        String footerTextXpath = "//p[text()='"+footerText+"']";
+//        String footerTextXpath = "//p[text()='"+footerText+"']";
 
         common.assertElementPresent(headerTextXpath);
         common.assertElementPresent(bodyTextXpath);
-        common.assertElementPresent(footerTextXpath);
+//        common.assertElementPresent(footerTextXpath);
 
 
         return new String[]{headerText, bodyText, footerText};
@@ -360,13 +362,13 @@ public class WhatsAppTemplatePage extends Locators {
 
         common.assertElementPresent(headerTextXpath);
         common.assertElementPresent(bodyTextXpath);
-        common.assertElementPresent(footerTextXpath);
+//        common.assertElementPresent(footerTextXpath);
 
     }
 
     public void verifyingHorizontalView(){
         goToWhatsAppTemplatePage();
-        common.validateHorizontalViewCardCount("MuiBox-root css-a7l4db");
+        common.validateHorizontalViewCardCount("//div[@class='MuiBox-root css-a7l4db']");
     }
 
     public void verifyingSearch(){

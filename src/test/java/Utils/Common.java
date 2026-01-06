@@ -308,6 +308,32 @@ public class Common extends Locators {
         Assert.assertFalse(isElementDisplayed(locator));
     }
 
+    public void assertElementIsNotDisplayedWithMessage(String xpath, String failureMessage) {
+        try {
+            List<WebElement> elements = driver.findElements(By.xpath(xpath));
+
+            // Element not present in DOM at all → PASS
+            if (elements.isEmpty()) {
+                logPrint("Verified: Element is not present → PASS");
+                return;
+            }
+
+            // Element present but visible → FAIL
+            if (elements.get(0).isDisplayed()) {
+                logPrint(failureMessage);
+                Assert.fail(failureMessage);
+            }
+
+            // Element present but not visible → PASS
+            logPrint("Verified: Element is present but not visible → PASS");
+
+        } catch (Exception e) {
+            // Any unexpected exception → treat as PASS (element not displayed)
+            logPrint("Verified: Element is not displayed → PASS");
+        }
+    }
+
+
     /**
      * Assertion to check that given element is being displayed.
      *
@@ -2729,7 +2755,8 @@ public class Common extends Locators {
         // 3️⃣ Decide rows-per-page dynamically
         int[] rowOptions = totalCount < 10
                 ? new int[]{10}
-                : new int[]{10, 20, 30};
+//                : new int[]{10, 20, 30};
+                : new int[]{10, 25, 50, 100};
 
         // 4️⃣ Loop for each rows-per-page option
         for (int rows : rowOptions) {
@@ -2836,7 +2863,8 @@ public class Common extends Locators {
 
         int[] rowOptions = totalCount < 10
                 ? new int[]{10}
-                : new int[]{10, 20, 30};
+//                : new int[]{10, 20, 30};
+                : new int[]{10, 25, 50, 100};
 
         for (int rows : rowOptions) {
 

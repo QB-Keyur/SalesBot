@@ -441,7 +441,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String KBSTATUS = "//span[normalize-space()='Status']";
     public static String KBCREATEDDATE = "//span[normalize-space()='Created Date']";
     public static String KBACTIONS = "//span[normalize-space()='Actions']";
-    public static String KBTOTALROWS = "//div[contains(text(),'Total')]";
+    public static String KBTOTALROWS = "//div[contains(text(),'Total')]|//div[@class='MuiBox-root css-a7l4db']";
     public static String KBROWSPERPAGE = "//p[contains(text(),'Rows per page:')]";
 
     public static String KBREFRESHBUTTON = "//button[contains(@class,'css-q8p1uw')]| //span[text()='Filters']/following::button[1]";
@@ -553,7 +553,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String WTCBUTTONTEXTINPUT = "//input[@placeholder=\"Enter button text\"]";
     public static String WTCADDBUTTON = "//button[@type='button']/following::span[text()='+ Add Button']";
     public static String WTCTEMPLATEPREVIEW = "//p[text()='See how your template will appear']";
-    public static String WTCMESSAGEICON = "//p[@class=\"MuiTypography-root MuiTypography-body1 css-1ba1cez\"]";
+    public static String WTCMESSAGEICON = "//p[@class=\"MuiTypography-root MuiTypography-body1 css-1ba1cez\"]|//div[@class='text-4xl mb-2']";
     public static String WTCTEMPLATEPREVIEW2 = "//p[text()='Start filling the form to see your template preview']";
     public static String WTCTEMPLATEPREVIEW3 = "//p[contains(normalize-space(),'Live Preview')]";
     public static String WTCNAMEMANDATORY = "//span[text()='Name is required']";
@@ -1104,6 +1104,8 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static final String WICONNECTED = "//p[text()='WhatsApp']/preceding::span[text()='Connected']";
     public static final String WIMESSAGE = "//p[text()='WhatsApp']/following-sibling::p[text()='Send automated WhatsApp messages.']";
     public static final String WIMESSAGE2 = "//p[text()='WhatsApp']";
+    public static final String WIEXISTS = "//span[text()='This phone id is already connected. Please use a different one.']";
+    public static final String WITOKENEXPIREDMSG = "//div[contains(text(),'Authentication failed')]";
 
     //Inside WhatsApp Integration
 

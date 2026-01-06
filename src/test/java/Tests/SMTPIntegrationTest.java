@@ -60,23 +60,6 @@ public class SMTPIntegrationTest extends BasePage {
     }
 
     @Test
-    public void verifyIntegratingWithValidData(){
-        common.logPrint("TEST STARTED : Verify SMTP integration with valid data");
-        loginWithAdminUser();
-        common.logPrint("Logged in as Admin user");
-
-        smtpIntegrationPage.verifyIntegratingWithValidData(
-                "Keyur",
-                EnvConfig.getSMTPProvider(),
-                EnvConfig.getSMTPEmail(),
-                EnvConfig.getSMTPPassword(),
-                EnvConfig.getSMTPPort()
-        );
-
-        common.logPrint("SMTP integration completed successfully with valid data");
-    }
-
-    @Test
     public void verifyViewEye(){
         common.logPrint("TEST STARTED : Verify SMTP password visibility (eye icon)");
         loginWithAdminUser();
@@ -104,6 +87,23 @@ public class SMTPIntegrationTest extends BasePage {
 
         smtpIntegrationPage.verifyDoesntAllowCreatingTemplateWhenNotConnected();
         common.logPrint("Template creation correctly blocked when SMTP is disconnected");
+    }
+
+    @Test
+    public void verifyIntegratingWithValidData(){
+        common.logPrint("TEST STARTED : Verify SMTP integration with valid data");
+        loginWithAdminUser();
+        common.logPrint("Logged in as Admin user");
+
+        smtpIntegrationPage.verifyIntegratingWithValidData(
+                "Keyur",
+                EnvConfig.getSMTPProvider(),
+                EnvConfig.getSMTPEmail(),
+                EnvConfig.getSMTPPassword(),
+                EnvConfig.getSMTPPort()
+        );
+
+        common.logPrint("SMTP integration completed successfully with valid data");
     }
 
     @Test
@@ -145,8 +145,5 @@ public class SMTPIntegrationTest extends BasePage {
         smtpIntegrationPage.verifyIntegrationSteps();
         common.logPrint("All SMTP integration instruction steps verified successfully");
     }
-
-
-
 
 }
