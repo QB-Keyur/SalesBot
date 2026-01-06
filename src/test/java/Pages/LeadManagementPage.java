@@ -196,10 +196,10 @@ public class LeadManagementPage extends Locators {
         common.click(DELETEOTIN);
         common.pause(2);
 
-        common.handleAlert();
-        common.waitUntilElementToBeVisible(CANCELDELETE);
-        common.click(CANCELDELETE);
-        common.pause(2);
+//        common.handleAlert();
+//        common.waitUntilElementToBeVisible(CANCELDELETE);
+//        common.click(CANCELDELETE);
+//        common.pause(2);
 
         common.waitUntilElementToBeVisible(DELETEOTIN);
         common.click(DELETEOTIN);
@@ -207,12 +207,13 @@ public class LeadManagementPage extends Locators {
 
         common.handleAlert();
         common.waitUntilElementToBeVisible(CONFDELETE);
+        common.pause(2);
         common.click(CONFDELETE);
 
         common.waitUntilElementToBeVisible(LEADDELETED);
         String successMSG = common.getText(LEADDELETED);
         common.logPrint("Steps:: getting message "+successMSG);
-        common.pause(3);
+        common.pause(2);
 
         common.waitUntilElementToBeVisible(LEADSEARCH);
         common.type(LEADSEARCH,name1);

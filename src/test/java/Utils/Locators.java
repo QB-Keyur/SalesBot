@@ -384,7 +384,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String SAVE_BTN = "//span[text()='Save']";
     public static String LEADVIEW ="//button[@aria-label='View']";
     public static String DTAETIME = "//input[@placeholder='Enter Preferred Date and Time']\n";
-    public static String DELETEOTIN = "//div[@class='MuiDataGrid-row MuiDataGrid-row--firstVisible']//button[@aria-label='Delete']";
+    public static String DELETEOTIN = "//button[@aria-label='Delete']";
     public static String CANCELDELETE = "//span[normalize-space()='Cancel']";
     public static String LEADPBack = "//h6[text()='Create Lead Management']/preceding-sibling::button";
     public static String CONFDELETE = "//span[normalize-space()='Delete']";
@@ -405,7 +405,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String ErrorOnPrefrredDT ="//span[text()='Preferred Date and Time is required']";
     public static String ErrorOnProduct ="//span[text()='Please select a product']";
     public static String LEADCREATEDMSG = "//*[contains(text(),'Lead Created successfully')]";
-    public static String LEADDELETED = "//div[text()='Deleted Successfully']";
+    public static String LEADDELETED = "//*[contains(text(), 'Lead Deleted successfully')]";
     public static String LEADRESET ="//span[text()='Reset']";
     public static String Header_NAME = "//span[text()='Name']";
     public static String Header_EMAIL = "//span[text()='Email']";
@@ -709,7 +709,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
     public static String WC_REFRESH = "//button[contains(@class,'MuiButton-root')] ";
     public static String WC_PAGEHEADER ="//h6[normalize-space()='WhatsApp Campaign']";
-    public static String WCH_NAME ="//span[normalize-space()='Name']";
+    public static String WCH_NAME ="//span[text()='Name']";
     public static String WCH_WhatsAppTem = "//span[contains(text(),'Whatsapp Template Name')]";
     public static String WCH_WhatsAppCategorName = "//span[normalize-space()='Template Category Name']";
     public static String WCH_ProductName = "//span[normalize-space()='Product Name']";

@@ -157,8 +157,8 @@
 <!--                        <suiteXmlFile>build_xmls/profile.xml</suiteXmlFile>-->
 <!--                        Rohini-->
 <!--                        <suiteXmlFile>build_xmls/LeadManagement.xml</suiteXmlFile>-->
-<!--                        <suiteXmlFile>build_xmls/WhatsAppCampaign.xml</suiteXmlFile>-->
-                        <suiteXmlFile>build_xmls/LeadStage.xml</suiteXmlFile>-->
+                        <suiteXmlFile>build_xmls/WhatsAppCampaign.xml</suiteXmlFile>
+<!--                        <suiteXmlFile>build_xmls/LeadStage.xml</suiteXmlFile>&ndash;&gt;-->
 
                         <!--Keyur-->
 <!--                        <suiteXmlFile>build_xmls/AgentConfiguration.xml</suiteXmlFile>-->

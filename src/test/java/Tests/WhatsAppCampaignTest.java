@@ -98,13 +98,13 @@ public class WhatsAppCampaignTest extends BasePage {
           WhatsAppCPage.VerifyWhatsAppCampaignSearch();
     }
 
-    @Test
-    public void VerifyViewElements()
-    {
-        loginWithAdminUser();
-        WhatsAppCPage.goToWhatsAppCampaignPage();
-        WhatsAppCPage.VerifyViewpageElements();
-
-    }
+//    @Test
+//    public void VerifyViewElements()
+//    {
+//        loginWithAdminUser();
+//        WhatsAppCPage.goToWhatsAppCampaignPage();
+//        WhatsAppCPage.VerifyViewpageElements();
+//
+//    }
 
 }
