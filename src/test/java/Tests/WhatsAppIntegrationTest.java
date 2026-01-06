@@ -118,7 +118,7 @@ public class WhatsAppIntegrationTest extends BasePage {
     }
 
     @Test
-    public void verifyReconnectingSameAccount(){
+    public void verifyReconnectingSameAccount() {
         common.logPrint("START :: Verify reconnecting the same WhatsApp account");
 
         loginWithAdminUser();
@@ -158,7 +158,7 @@ public class WhatsAppIntegrationTest extends BasePage {
     }
 
     @Test
-    public void verifyAfterDisconnectingItDoesntAllowConversationOrTemplate(){
+    public void verifyAfterDisconnectingItDoesntAllowConversationOrTemplate() {
         common.logPrint("START :: Verify restrictions after disconnecting WhatsApp integration");
 
         loginWithAdminUser();
