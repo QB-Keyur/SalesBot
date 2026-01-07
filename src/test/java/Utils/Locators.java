@@ -440,7 +440,7 @@ public class Locators extends BasePage {
     public static String KBSTATUS = "//span[normalize-space()='Status']";
     public static String KBCREATEDDATE = "//span[normalize-space()='Created Date']";
     public static String KBACTIONS = "//span[normalize-space()='Actions']";
-    public static String KBTOTALROWS = "//div[contains(text(),'Total')]";
+    public static String KBTOTALROWS = "//div[contains(text(),'Total')]|//div[@class='MuiBox-root css-a7l4db']";
     public static String KBROWSPERPAGE = "//p[contains(text(),'Rows per page:')]";
 
     public static String KBREFRESHBUTTON = "//button[contains(@class,'css-q8p1uw')]| //span[text()='Filters']/following::button[1]";
@@ -552,7 +552,7 @@ public class Locators extends BasePage {
     public static String WTCBUTTONTEXTINPUT = "//input[@placeholder=\"Enter button text\"]";
     public static String WTCADDBUTTON = "//button[@type='button']/following::span[text()='+ Add Button']";
     public static String WTCTEMPLATEPREVIEW = "//p[text()='See how your template will appear']";
-    public static String WTCMESSAGEICON = "//p[@class=\"MuiTypography-root MuiTypography-body1 css-1ba1cez\"]";
+    public static String WTCMESSAGEICON = "//p[@class=\"MuiTypography-root MuiTypography-body1 css-1ba1cez\"]|//div[@class='text-4xl mb-2']";
     public static String WTCTEMPLATEPREVIEW2 = "//p[text()='Start filling the form to see your template preview']";
     public static String WTCTEMPLATEPREVIEW3 = "//p[contains(normalize-space(),'Live Preview')]";
     public static String WTCNAMEMANDATORY = "//span[text()='Name is required']";
@@ -1010,7 +1010,7 @@ public class Locators extends BasePage {
             "//div[text()='Monday']";
 
     public static final String WH_TUESDAY_LABEL =
-            "//div[text()='TuesDay']";
+            "//div[text()='Tuesday']";
 
     public static final String WH_WEDNESDAY_LABEL =
             "//div[text()='Wednesday']";
@@ -1033,7 +1033,7 @@ public class Locators extends BasePage {
             "//div[text()='Monday']/following::input[1]";
 
     public static final String WH_TUESDAY_TYPE_INPUT =
-            "//div[text()='TuesDay']/following::input[1]";
+            "//div[text()='Tuesday']/following::input[1]";
 
     public static final String WH_WEDNESDAY_TYPE_INPUT =
             "//div[text()='Wednesday']/following::input[1]";
@@ -1056,7 +1056,7 @@ public class Locators extends BasePage {
             "//div[text()='Monday']/following::input[2]";
 
     public static final String WH_TUESDAY_START_TIME_INPUT =
-            "//div[text()='TuesDay']/following::input[2]";
+            "//div[text()='Tuesday']/following::input[2]";
 
     public static final String WH_WEDNESDAY_START_TIME_INPUT =
             "//div[text()='Wednesday']/following::input[2]";
@@ -1079,7 +1079,7 @@ public class Locators extends BasePage {
             "//div[text()='Monday']/following::input[3]";
 
     public static final String WH_TUESDAY_END_TIME_INPUT =
-            "//div[text()='TuesDay']/following::input[3]";
+            "//div[text()='Tuesday']/following::input[3]";
 
     public static final String WH_WEDNESDAY_END_TIME_INPUT =
             "//div[text()='Wednesday']/following::input[3]";
@@ -1097,7 +1097,7 @@ public class Locators extends BasePage {
             "//div[text()='Sunday']/following::input[3]";
 
     public static final String WH_CLEAR_MONDAY= "(//div[text()='Monday']/following::button[@title='Clear'])[1]";
-    public static final String WH_CLEAR_TUESDAY= "(//div[text()='TuesDay']/following::button[@title='Clear'])[1]";
+    public static final String WH_CLEAR_TUESDAY= "(//div[text()='Tuesday']/following::button[@title='Clear'])[1]";
     public static final String WH_CLEAR_WEDNESDAY= "(//div[text()='Wednesday']/following::button[@title='Clear'])[1]";
     public static final String WH_CLEAR_THURSDAY= "(//div[text()='Thursday']/following::button[@title='Clear'])[1]";
     public static final String WH_CLEAR_FRIDAY= "(//div[text()='Friday']/following::button[@title='Clear'])[1]";
@@ -1114,6 +1114,8 @@ public class Locators extends BasePage {
     public static final String WICONNECTED = "//p[text()='WhatsApp']/preceding::span[text()='Connected']";
     public static final String WIMESSAGE = "//p[text()='WhatsApp']/following-sibling::p[text()='Send automated WhatsApp messages.']";
     public static final String WIMESSAGE2 = "//p[text()='WhatsApp']";
+    public static final String WIEXISTS = "//span[text()='This phone id is already connected. Please use a different one.']";
+    public static final String WITOKENEXPIREDMSG = "//div[contains(text(),'Authentication failed')]";
 
     //Inside WhatsApp Integration
 
@@ -1316,7 +1318,7 @@ public class Locators extends BasePage {
     public static final String SMTPICON = "//p[text()='SMTP']/preceding::*[local-name()='svg'][1]";
     public static final String SMTPDISCONNECTED = "//p[text()='SMTP']/preceding::span[text()='Disconnected']";
     public static final String SMTPPENDING = "//p[text()='SMTP']/preceding::span[text()='Pending']";
-    public static final String SMTPCONNECTED = "//p[text()='SMTP']/preceding::span[text()='Connected']";
+    public static final String SMTPCONNECTED = "//p[text()='SMTP']/preceding::span[text()='Connected'][1]";
     public static final String SMTPMESSAGE = "//p[text()='SMTP']/following-sibling::p[text()='Integrate your email service using SMTP.']";
     public static final String SMTPMESSAGE2 = "//p[text()='SMTP']";
 

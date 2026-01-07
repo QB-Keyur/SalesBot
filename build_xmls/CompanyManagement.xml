@@ -220,4 +220,15 @@
         </classes>
     </test>
 
+    <!-- Verify Sorting -->
+    <test name="Verify Sorting in Company Management page">
+        <classes>
+            <class name="Tests.CompanyManagementTest">
+                <methods>
+                    <include name="validateSorting"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 </suite>

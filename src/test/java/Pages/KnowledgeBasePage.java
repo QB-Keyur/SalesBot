@@ -293,6 +293,7 @@ public class KnowledgeBasePage extends Locators {
 
         common.click(KBCSAVEBUTTON);
 
+        waitForKBStatus(FakeName);
         waitForKBStatusAndEdit();
         return FakeName;
 
@@ -307,19 +308,31 @@ public class KnowledgeBasePage extends Locators {
         common.waitUntilElementToBeVisible(KBCWEBSITEBUTTON);
         common.click(KBCWEBSITEBUTTON);
 
+        String FakeName = common.fakeProductName();
+        common.type(KBCNAMEINPUT, FakeName);
+
         String FakeDomain = common.fakeWebsite();
 
         common.waitUntilElementToBeVisible(KBCWEBINPUT);
         common.type(KBCWEBINPUT,FakeDomain);
 
+        common.waitUntilElementToBeVisible(KBCWEBADD);
+        common.click(KBCWEBADD);
+
         common.pause(5);
 
+        common.click(KBCSAVEBUTTON);
+
+        waitForKBStatus(FakeName);
     }
 
     public void validateQA(){
         goToKnowledgeBasePage();
         common.waitUntilElementToBeClickable(KBCREATE);
         common.click(KBCREATE);
+
+        String FakeName = common.fakeProductName();
+        common.type(KBCNAMEINPUT, FakeName);
 
         common.waitUntilElementToBeVisible(KBCQABUTTON);
         common.click(KBCQABUTTON);
@@ -337,6 +350,11 @@ public class KnowledgeBasePage extends Locators {
         common.click(KBCQAADDBUTTON);
 
         common.pause(5);
+
+        common.pause(5);
+
+        common.click(KBCSAVEBUTTON);
+        waitForKBStatus(FakeName);
 
 
     }
@@ -828,6 +846,50 @@ public class KnowledgeBasePage extends Locators {
 
     }
 
+    public void waitForKBStatus(String fakeName) {
 
+        // Search using FakeName
+        String searchResult = "(//div[@aria-colindex='2' and @aria-rowspan='1'])[1]";
 
+        common.waitUntilElementToBeVisible(KBSEARCHBAR);
+        common.click(PHSEACRH);
+        common.type(PHSEACRH, fakeName);
+        common.validateSearch(searchResult, fakeName);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(600));
+
+        By completed = By.xpath(KBCOMPLETED);
+        By inProgress = By.xpath(KBINPROGRESS);
+        By failed = By.xpath(KBFAILED);
+
+        // Wait until any one of the statuses appears
+        wait.until(driver ->
+                isElementPresent(completed) ||
+                        isElementPresent(inProgress) ||
+                        isElementPresent(failed)
+        );
+
+        // ❌ FAILED → quit immediately
+        if (isElementPresent(failed)) {
+            String status = driver.findElement(failed).getText();
+            common.logPrint("KB Status FAILED for: " + fakeName);
+            Assert.fail("KB process failed. Status: " + status);
+        }
+
+        // ⏳ IN PROGRESS → wait until COMPLETED
+        if (isElementPresent(inProgress)) {
+            common.logPrint("KB Status IN PROGRESS for: " + fakeName + " | Waiting for completion...");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(completed));
+        }
+
+        // ✅ COMPLETED
+        WebElement completedEl = driver.findElement(completed);
+        common.logPrint("KB Status COMPLETED for: " + fakeName + " | Status: " + completedEl.getText());
     }
+
+    public boolean isElementPresent(By locator) {
+        return !driver.findElements(locator).isEmpty();
+    }
+
+
+}

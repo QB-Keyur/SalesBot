@@ -92,7 +92,7 @@ public class CompanyPortfolioTest extends BasePage {
         common.logPrint("TEST START :: Validate sorting on Company Portfolio grid (Column index: 2, Order: DESC)");
         loginWithAdminUser();
         companyPortfolioPage.goToCompanyPortfolioPage();
-        productPage.validateSorting(2, "int", null, SortOrder.DESCENDING);
+        productPage.validateSorting(2, "", null, SortOrder.ASCENDING,"//div[@class=\"MuiBox-root css-a7l4db\"]");
         common.logPrint("TEST PASS :: Sorting validated successfully for Company Portfolio grid");
     }
 

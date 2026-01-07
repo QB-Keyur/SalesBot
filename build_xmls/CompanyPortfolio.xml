@@ -77,17 +77,6 @@
         </classes>
     </test>
 
-    <!-- Verify horizontal card view -->
-    <test name="Verify Company Portfolio horizontal card view">
-        <classes>
-            <class name="Tests.CompanyPortfolioTest">
-                <methods>
-                    <include name="validateHorizontalCardView"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
     <!-- Verify pagination -->
     <test name="Verify Company Portfolio pagination">
         <classes>
@@ -127,6 +116,16 @@
             <class name="Tests.CompanyPortfolioTest">
                 <methods>
                     <include name="validateSorting"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!-- Verify horizontal card view -->
+    <test name="Verify Company Portfolio horizontal card view">
+        <classes>
+            <class name="Tests.CompanyPortfolioTest">
+                <methods>
+                    <include name="validateHorizontalCardView"/>
                 </methods>
             </class>
         </classes>

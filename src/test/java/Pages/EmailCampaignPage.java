@@ -243,6 +243,7 @@ public class EmailCampaignPage extends Locators {
 
         common.waitUntilElementToBeVisible(ECCNAMEINPUT);
         common.click(ECCNAMEINPUT);
+        common.type(ECCNAMEINPUT, "Name");
 
         common.waitUntilElementToBeVisible(ECCTEMPLATEINPUT);
         common.click(ECCTEMPLATEINPUT);
