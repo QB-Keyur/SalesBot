@@ -447,4 +447,5 @@ public class SMTPIntegrationPage extends Locators {
         common.assertElementPresent(STEP3_CONTAINER);
         common.assertElementPresent(STEP4_CONTAINER);
     }
+
 }
