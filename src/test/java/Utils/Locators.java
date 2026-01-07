@@ -17,6 +17,7 @@ public class Locators extends BasePage {
     }
 
     public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
+    public static String passwordChangedSuccessfully = "//div[contains(text(), 'Password changed successfully')]";
     public static String userAccountCreatedSuccessfully = "//div[contains(text(), 'User account created successfully.')]";
     public static String roleAndPermissionAddedSuccessfully = "//div[contains(text(), 'Role and permissions added successfully')]";
     public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
@@ -66,9 +67,7 @@ public class Locators extends BasePage {
 
     //Locators for the Onboarding
 
-
     //Locators for the Product Page
-
     public static String PRODUCTMENU = "//span[text() ='Product / Service']";
     public static String SRNO = "//span[text() ='#']";
     public static String PRODUCTNAMES = "//span[text() ='Product Name']";
@@ -244,7 +243,7 @@ public class Locators extends BasePage {
     public static String ACPLAYGROUNDHEADER = "//span[text()='Select Agent']";
     public static String ACPLAYGROUNDSELECTAGENT = "//input[@placeholder=\"Select agent\"]";
     public static String ACEDITSUCCESSMESSAGE = "//div[text()='Agent Configuration Updated Successfully']";
-//    public static String ACSEARCHRESULT = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])[1]";
+    //    public static String ACSEARCHRESULT = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])[1]";
 //    public static String ACEDITBUTTON = "(//button[@aria-label=\"Edit\"])[1]";
 //    public static String ACDELETEBUTTON = "(//button[@aria-label=\"Delete\"])[1]";
 //    public static String ACDELETECANCELBUTTON = "//button[@type=\"button\"]/following::span[text()='Cancel']";
@@ -260,7 +259,7 @@ public class Locators extends BasePage {
 //    public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
 //    public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
 //public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
-public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successfully')]";
+    public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successfully')]";
 
     //Contacts pages locators
     //Grid page
@@ -652,14 +651,14 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String startFreeTrialBtn = "//span[contains(text(),'Start Trial')]/ancestor::button";
     public static String startFreeTrialBtnLastPage = "//span[contains(text(),'Start Free Plan')]/ancestor::button";
     public static String congratulationMessage = "(//h6[contains(text(),'Congratulations!')])[2]";
-    public static String closeIconOnCongratulation = "//div[contains(@class,'relative flex flex-col items-center justify-center')]//button";
+    public static String closeIconOnCongratulation = "(//div[contains(@class,'relative flex flex-col items-center justify-center')]//button)[2]";
     public static String getPlanDetail = "(//h4[contains(text(),'')])[2]";
     public static String createPasswordBtn = "//span[text()='Create Password']/parent::button";
     public static String notAcceptedStatusOnGrid = "//div[text()='Not Accepted']";
     public static String activeStatus = "//span[text()='Active']";
 
     //Profile page xpath
-    public static String profileIcon = "(//div[contains(@class,'flex items-center gap-1 sm')]//button)[3]";
+    public static String profileIcon = "(//div[contains(@class,'flex items-center gap-1 sm')]//button)[2]";
     public static String accountHeader = "//span[contains(text(),'Account')]";
     public static String billingAndPlan = "//span[contains(text(),'Billing & Plans')]";
     public static String profileMenuOnProfile = "//p[contains(text(),'Profile')]";
@@ -685,11 +684,22 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String billingAddressHed = "//h6[text()='Billing Address']";
     public static String areaLabel = "//span[text()='Area']";
     public static String pincodeLabel = "//span[text()='Pincode']";
+    public static String buyCreditsHed = "//h6[text()='Buy Credits']";
+    public static String buyCreditsButton = "//span[text()='Buy Credits']/ancestor::button";
+    public static String pricePerCreditLbl = "//p[text()='Price per Credit']";
+    public static String creditToBuyLbl= "//span[text()='Credits to Buy']";
+    public static String totalAmountLbl = "//p[text()='Total Amount']";
+    public static String payableAmountLbl = "//p[text()='Payable Amount']";
+    public static String cancelButtonPopUp = "//span[text()='Cancel']/ancestor::button";
+    public static String buyButtonCreditPopup= "//span[text()='Buy']/ancestor::button";
+    public static String upgradeButtonPlan = "//span[text()='Upgrade']/ancestor::button";
+    public static String updateProfile = "//span[text()='Update Profile']/ancestor::button";
+    //public static String = "";
 
     //Input field Xpaths
     public static String firstNameInpProfile = "(//div[@class='flex-1 min-w-0']//p)[1]";
     public static String lastNameInpProfile = "//input[@name=\"last_name\"]";
-    public static String emailInpProfile = "//input[@name=\"email\"]";
+    public static String emailInpProfile = "//input[@name=\"email\"] | (//div[@class='flex-1 min-w-0']//p)[2]";
     public static String phoneNumberInpProfile = "//input[@name=\"phone_number\"]";
 
     public static String currentPasswordLbl = "//span[contains(text(),'Current Password')]";
@@ -811,7 +821,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static String ECCENABLEAINO= "//div[contains(@class,'css-yf7rws')] | //div[contains(@class,'css-12xpge1')]";
     public static String ECCCONTACTS= "//p[text()='Contacts']";
     public static String ECCSEARCHCONTACTS= "//input[@placeholder=\"Search contacts...\"]";
-  //  public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
+    //  public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
     public static String ECCCHECKBOX= "(//span[@class=\"css-ysvidx\"])[1]";
     public static String ECCSRNO= "//span[text()='#']";
     public static String ECCNAME= "//span[text()='Name']";

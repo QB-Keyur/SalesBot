@@ -76,7 +76,54 @@ public class profileTest extends BasePage {
         profilePage.verifyProfilePageDetails(name, lastName, email, mobileNum);
     }
 
+    @Test
+    public void verifyChangePasswordFunctionalityInProfile(){
+        loginPage.clickOnTheForgotPasswordBtn();
+        loginPage.successMessageForOTPSent(forgotEmail);
+        common.openNewWindow();
+        String otp = loginPage.getOtpFromYopmail(forgotEmail);
+        common.switchToWindowByIndex(1);
+        loginPage.enterOtpInInputField(otp);
+        whatsAppContactPage.verifySuccessMessageForPasswordResetLink();
+        common.switchToWindowByIndex(2);
+        loginPage.clickOnResetPasswordOnYopMail();
+        common.switchToWindowByIndex(3);
+        String updatedPassword = loginPage.enterNewPassword();
+        whatsAppContactPage.verifySuccessMessageForPasswordUpdated();
+        loginPage.loginWithValidUserNameAndPass(forgotEmail, updatedPassword);
+        profilePage.redirectsToProfilePage();
+        profilePage.clickOnTheChangePasswordMenu();
+        profilePage.enterCurrentAndNewPass(updatedPassword);
+        profilePage.verifySuccessMessageForPasswordUpdate();
+    }
 
+    @Test
+    public void verifyBuyCreditsPopUpIsDisplayed(){
+        common.logPrint("Verify Buy Credits pop-up is displayed when clicking on the Buy credits button");
+        loginWithAdminUser();
+        profilePage.redirectsToProfilePage();
+        profilePage.clickOnThePlansMenu();
+        profilePage.verifyPopUpIsDisplayed();
+    }
+
+    @Test
+    public void verifyWhenClickOnUpgradeButtonIsRedirectsToPricingPage(){
+        common.logPrint("Verify upgrade button redirection");
+        loginWithAdminUser();
+        profilePage.redirectsToProfilePage();
+        profilePage.clickOnThePlansMenu();
+        profilePage.clickOnTheUpgradeButton();
+        profilePage.verifyTheLinkPricingPageIsDisplayed();
+    }
+
+    @Test
+    public void verifySaveAndCancelButtonOnProfileUpdate(){
+        common.logPrint("Verify save and cancel button on the profile update page");
+        loginWithAdminUser();
+        profilePage.redirectsToProfilePage();
+        profilePage.clickOnUpdateProfileButton();
+        profilePage.verifyCancelAndSaveButtonIsDisplayed();
+    }
 
 
 
