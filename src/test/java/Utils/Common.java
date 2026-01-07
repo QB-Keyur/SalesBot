@@ -885,6 +885,62 @@ public class Common extends Locators {
      * Main verifySearch method with safe collection, random pick and search entry.
      */
 
+//    public void searchCommon(String baseXPath) {
+//
+//        // 1️⃣ Click Search button (best-effort)
+//        try {
+//            common.click(SEARCH);
+//        } catch (Exception ignored) {
+//        }
+//
+//        // 2️⃣ Collect grid values
+//        List<WebElement> elements = waitForElements(baseXPath, 8);
+//        System.out.println("XPath: " + baseXPath + " -> matched count: " + elements.size());
+//
+//        List<String> values = collectTextsFromElements(elements);
+//
+//        if (values.isEmpty()) {
+//            throw new AssertionError(
+//                    "No values collected for xpath: " + baseXPath +
+//                            ". Check DOM, iframe/shadow-root, or waits."
+//            );
+//        }
+//
+//        // 3️⃣ Pick random value
+//        String randomValue = values
+//                .get(new Random().nextInt(values.size()))
+//                .trim();
+//
+//        System.out.println("Random Value Selected = " + randomValue);
+//
+//        // 4️⃣ Type into search box
+//        By searchBy = By.xpath("//input[@placeholder='Search...']");
+//        WebElement search = waitForElementVisible(searchBy, 8);
+//
+//        search.clear();
+//        search.sendKeys(randomValue);
+//        pause(2); // allow grid refresh
+//
+//        // 5️⃣ Build SMART rich-text-safe XPath
+//        String[] tokens = randomValue.split("\\s+");
+//        StringBuilder searchResultXPath = new StringBuilder(baseXPath);
+//
+//        for (String token : tokens) {
+//            token = token.replaceAll("[^a-zA-Z0-9]", ""); // remove punctuation
+//            if (token.length() > 3) { // ignore small/noise words
+//                searchResultXPath
+//                        .append("[contains(normalize-space(.), '")
+//                        .append(token)
+//                        .append("')]");
+//            }
+//        }
+//
+//        System.out.println("Final Search Result XPATH = " + searchResultXPath);
+//
+//        // 6️⃣ Assertion (re-locate after grid refresh)
+//        assertElementPresent(searchResultXPath.toString());
+//    }
+
     public void searchCommon(String baseXPath) {
 
         // 1️⃣ Click Search button (best-effort)
@@ -921,25 +977,23 @@ public class Common extends Locators {
         search.sendKeys(randomValue);
         pause(2); // allow grid refresh
 
-        // 5️⃣ Build SMART rich-text-safe XPath
-        String[] tokens = randomValue.split("\\s+");
+        // 5️⃣ Build SMART rich-text-safe XPath (underscore-safe)
         StringBuilder searchResultXPath = new StringBuilder(baseXPath);
 
-        for (String token : tokens) {
-            token = token.replaceAll("[^a-zA-Z0-9]", ""); // remove punctuation
-            if (token.length() > 3) { // ignore small/noise words
-                searchResultXPath
-                        .append("[contains(normalize-space(.), '")
-                        .append(token)
-                        .append("')]");
-            }
-        }
+        String normalizedValue = randomValue.replace("_", "").toLowerCase();
+
+        searchResultXPath
+                .append("[contains(")
+                .append("translate(normalize-space(.), '_', ''), '")
+                .append(normalizedValue)
+                .append("')]");
 
         System.out.println("Final Search Result XPATH = " + searchResultXPath);
 
         // 6️⃣ Assertion (re-locate after grid refresh)
         assertElementPresent(searchResultXPath.toString());
     }
+
 
 
     public String selectDropdownAndGetSelectedText(By dropdownActivator, By optionLocator) {
@@ -1817,7 +1871,6 @@ public class Common extends Locators {
 
         logPrint("Hovered (JS + Actions) :: " + locator);
     }
-
 
     public void scrollPageUsingPixel() {
 
@@ -2702,7 +2755,6 @@ public class Common extends Locators {
         pause(2);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
         int totalCount = 0;
 
         // 1️⃣ PRIMARY: Read pagination text (e.g. "1–8 of 1,234")
@@ -2752,23 +2804,31 @@ public class Common extends Locators {
         final String ROWS_PER_PAGE_DROPDOWN =
                 "//div[@aria-haspopup='listbox']";
 
-        // 3️⃣ Decide rows-per-page dynamically
-        int[] rowOptions = totalCount < 10
+        // 3️⃣ Preferred rows-per-page options (supports both UI variants)
+        int[] preferredOptions = totalCount < 10
                 ? new int[]{10}
-//                : new int[]{10, 20, 30};
-                : new int[]{10, 25, 50, 100};
+                : new int[]{10, 20, 25, 30, 50, 100};
 
-        // 4️⃣ Loop for each rows-per-page option
-        for (int rows : rowOptions) {
+        // 4️⃣ Loop through ONLY available options
+        for (int rows : preferredOptions) {
 
-            logPrint("Validating SR with rows-per-page = " + rows);
+            logPrint("Trying rows-per-page = " + rows);
 
             WebElement rowsDropdown = waitUntilElementToBeClickable(ROWS_PER_PAGE_DROPDOWN);
             highlightElement(rowsDropdown);
             rowsDropdown.click();
 
             String ROW_OPTION = "//li[normalize-space()='" + rows + "']";
-            WebElement rowOption = waitUntilElementToBeClickable(ROW_OPTION);
+            List<WebElement> options = driver.findElements(By.xpath(ROW_OPTION));
+
+            // ⛔ Skip missing options safely
+            if (options.isEmpty()) {
+                logPrint("Rows-per-page option " + rows + " not available. Skipping.");
+                rowsDropdown.click();
+                continue;
+            }
+
+            WebElement rowOption = options.get(0);
             highlightElement(rowOption);
             rowOption.click();
 
