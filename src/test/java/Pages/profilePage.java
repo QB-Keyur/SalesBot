@@ -1,5 +1,6 @@
 package Pages;
 
+import Config.EnvConfig;
 import Utils.Common;
 import Utils.Locators;
 import org.openqa.selenium.By;
@@ -9,6 +10,8 @@ public class profilePage extends Locators {
 
     Common common;
 
+    public String url = EnvConfig.getWebUrl();
+
     public profilePage(WebDriver driver) {
         super(driver);
         this.common = new Common(driver);
@@ -17,6 +20,34 @@ public class profilePage extends Locators {
     public void redirectsToProfilePage(){
         common.waitUntilElementToBeVisible(profileIcon);
         common.click(profileIcon);
+    }
+
+    public void clickOnUpdateProfileButton(){
+        common.waitUntilElementToBeVisible(updateProfile);
+        common.click(updateProfile);
+    }
+
+    public void clickOnTheUpgradeButton(){
+        common.waitUntilElementToBeVisible(upgradeButtonPlan);
+        common.click(upgradeButtonPlan);
+    }
+
+    public void clickOnTheChangePasswordMenu(){
+        common.waitUntilElementToBeVisible(changePassword);
+        common.click(changePassword);
+    }
+
+
+    public void clickOnThePlansMenu(){
+        common.waitUntilElementToBeVisible(plansMenu);
+        common.click(plansMenu);
+    }
+
+    public void verifySuccessMessageForPasswordUpdate(){
+
+        common.logPrint("Steps:: Verify success message is showing password is updated");
+        common.assertElementPresent(passwordChangedSuccessfully);
+
     }
 
     public void verifySettingPageHeaderMenuAndSubmenu(){
@@ -204,15 +235,108 @@ public class profilePage extends Locators {
 
     public void verifyProfilePageDetails(String name, String lastName, String email, String mobileNum){
 
-        common.logPrint("Step:: Get values from the profile page and compare value");
+        common.logPrint("Step:: Get values from the profile page and compare");
+
         common.pause(2);
         common.waitUntilElementToBeVisible(firstNameInpProfile);
         String getName = common.getText(firstNameInpProfile);
-        common.logPrint("The name is: "+getName);
-
+        common.logPrint("First name is: "+getName);
         common.assertTwoValuesAreEqual(getName, name);
 
+//        common.waitUntilElementToBeVisible(lastNameInpProfile);
+//        String getLastName = common.getText(lastNameInpProfile);
+//        common.logPrint("Last name is: "+getLastName);
+//        common.assertTwoValuesAreEqual(getLastName, lastName);
+
+        common.waitUntilElementToBeVisible(emailInpProfile);
+        String getEmail = common.getText(emailInpProfile);
+        common.logPrint("Email is: "+getEmail);
+        common.assertTwoValuesAreEqual(getEmail.toLowerCase(), email.toLowerCase());
+//
+//        common.waitUntilElementToBeVisible(phoneNumberInpProfile);
+//        String getMobileNum = common.getText(phoneNumberInpProfile);
+//        common.logPrint("Mobile number is: "+getMobileNum);
+//        common.assertTwoValuesAreEqual(getMobileNum, mobileNum);
     }
+
+    public void enterCurrentAndNewPass(String currentPass){
+
+        common.waitUntilElementToBeVisible(emailInpProfile);
+        common.type(currentPasswordInp, currentPass);
+
+        String newPass ="A"+ common.generateRandomChars(4)+"@12345";
+
+        common.logPrint("New password is: "+ newPass);
+
+        common.waitUntilElementToBeVisible(newPasswordInp);
+        common.type(newPasswordInp, newPass);
+
+        common.waitUntilElementToBeVisible(confirmPasswordInpProfile);
+        common.type(confirmPasswordInpProfile, newPass);
+
+        common.waitUntilElementToBeVisible(savePassword);
+        common.click(savePassword);
+    }
+
+    public void verifyPopUpIsDisplayed(){
+
+        common.logPrint("Step:: Verify 'Buy Credits' header is displayed");
+        common.assertElementPresent(buyCreditsHed);
+        common.logPrint("'Buy Credits' header is displayed");
+
+        common.logPrint("Step:: Verify 'Buy Credits' button is displayed");
+        common.assertElementPresent(buyCreditsButton);
+        common.logPrint("'Buy Credits' button is displayed");
+
+        common.logPrint("Step:: Verify 'Price per Credit' label is displayed");
+        common.assertElementPresent(pricePerCreditLbl);
+        common.logPrint("'Price per Credit' label is displayed");
+
+        common.logPrint("Step:: Verify 'Credits to Buy' label is displayed");
+        common.assertElementPresent(creditToBuyLbl);
+        common.logPrint("'Credits to Buy' label is displayed");
+
+        common.logPrint("Step:: Verify 'Total Amount' label is displayed");
+        common.assertElementPresent(totalAmountLbl);
+        common.logPrint("'Total Amount' label is displayed");
+
+        common.logPrint("Step:: Verify 'Payable Amount' label is displayed");
+        common.assertElementPresent(payableAmountLbl);
+        common.logPrint("'Payable Amount' label is displayed");
+
+        common.logPrint("Step:: Verify 'Cancel' button is displayed on popup");
+        common.assertElementPresent(cancelButtonPopUp);
+        common.logPrint("'Cancel' button is displayed on popup");
+
+        common.logPrint("Step:: Verify 'Buy' button is displayed on credit popup");
+        common.assertElementPresent(buyButtonCreditPopup);
+        common.logPrint("'Buy' button is displayed on credit popup");
+    }
+
+    public void verifyTheLinkPricingPageIsDisplayed(){
+
+        common.logPrint("Step:: Verify pricing link is showing");
+
+        common.logPrint("Step:: Get current link");
+        String currentLink = driver.getCurrentUrl();
+
+        common.assertTwoValuesAreEqual(currentLink, url+"/setting/pricing");
+
+        common.logPrint("Redirection is working fine");
+    }
+
+    public void verifyCancelAndSaveButtonIsDisplayed(){
+
+        common.logPrint("Step:: Verify 'Cancel' button is displayed");
+        common.assertElementPresent(cancelButtonPopUp);
+        common.logPrint("'Cancel' button is displayed");
+
+        common.logPrint("Step:: Verify 'Save' button is displayed");
+        common.assertElementPresent(saveButton);
+        common.logPrint("'Save' button is displayed");
+    }
+
+
 
 
 }

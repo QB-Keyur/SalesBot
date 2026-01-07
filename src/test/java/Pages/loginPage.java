@@ -419,12 +419,14 @@ public class loginPage extends Locators {
 
         common.waitUntilElementToBeVisible(SelectStateInp);
         common.click(SelectStateInp);
-        common.type(SelectStateInp, "gujarat");
+        common.type(SelectStateInp,"Gujarat");
         common.downKeyAndEnter();
+
+        common.pause(1);
 
         common.waitUntilElementToBeVisible(SelectCityInp);
         common.click(SelectCityInp);
-        common.type(SelectCityInp, "Ahmedabad");
+        common.type(SelectStateInp,"Ahmedabad");
         common.downKeyAndEnter();
 
         String pincode = "362220";
