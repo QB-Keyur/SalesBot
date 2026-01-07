@@ -8,7 +8,7 @@
        allow-return-values="true">
 
     <listeners>
-        <listener class-name="Utils.RetryListener"></listener>
+        <listener class-name="Utils.RetryListener"/>
     </listeners>
 
     <!-- Verify all menu and elements are showing properly on profile page -->
@@ -39,6 +39,28 @@
             <class name="Tests.profileTest">
                 <methods>
                     <include name="verifyAllTheLabelAndInputsOnChangePassword"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify plan is showing properly on profile page -->
+    <test name="Verify plan details on profile page">
+        <classes>
+            <class name="Tests.profileTest">
+                <methods>
+                    <include name="verifyPlanIsShowingProperlyOnProfilePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify profile details are showing properly -->
+    <test name="Verify profile details">
+        <classes>
+            <class name="Tests.profileTest">
+                <methods>
+                    <include name="verifyProfileDetailsAreShowingProperly"/>
                 </methods>
             </class>
         </classes>
