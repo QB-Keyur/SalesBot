@@ -1308,7 +1308,7 @@ public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successful
     public static final String SMTPICON = "//p[text()='SMTP']/preceding::*[local-name()='svg'][1]";
     public static final String SMTPDISCONNECTED = "//p[text()='SMTP']/preceding::span[text()='Disconnected']";
     public static final String SMTPPENDING = "//p[text()='SMTP']/preceding::span[text()='Pending']";
-    public static final String SMTPCONNECTED = "//p[text()='SMTP']/preceding::span[text()='Connected']";
+    public static final String SMTPCONNECTED = "//p[text()='SMTP']/preceding::span[text()='Connected'][1]";
     public static final String SMTPMESSAGE = "//p[text()='SMTP']/following-sibling::p[text()='Integrate your email service using SMTP.']";
     public static final String SMTPMESSAGE2 = "//p[text()='SMTP']";
 
