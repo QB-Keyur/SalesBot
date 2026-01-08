@@ -946,8 +946,7 @@ public class Common extends Locators {
         // 1️⃣ Click Search button (best-effort)
         try {
             common.click(SEARCH);
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
 
         // 2️⃣ Collect grid values
         List<WebElement> elements = waitForElements(baseXPath, 8);
@@ -977,24 +976,26 @@ public class Common extends Locators {
         search.sendKeys(randomValue);
         pause(2); // allow grid refresh
 
-        // 5️⃣ Build SMART rich-text-safe XPath (underscore-safe)
-        StringBuilder searchResultXPath = new StringBuilder(baseXPath);
+        // 5️⃣ Build CASE + UNDERSCORE SAFE XPath
+        String normalizedValue = randomValue
+                .replace("_", "")
+                .toLowerCase();
 
-        String normalizedValue = randomValue.replace("_", "").toLowerCase();
+        String finalXPath =
+                baseXPath +
+                        "[contains(" +
+                        "translate(normalize-space(.), " +
+                        "'ABCDEFGHIJKLMNOPQRSTUVWXYZ_', " +
+                        "'abcdefghijklmnopqrstuvwxyz'" +
+                        "), '" +
+                        normalizedValue +
+                        "')]";
 
-        searchResultXPath
-                .append("[contains(")
-                .append("translate(normalize-space(.), '_', ''), '")
-                .append(normalizedValue)
-                .append("')]");
-
-        System.out.println("Final Search Result XPATH = " + searchResultXPath);
+        System.out.println("Final Search Result XPATH = " + finalXPath);
 
         // 6️⃣ Assertion (re-locate after grid refresh)
-        assertElementPresent(searchResultXPath.toString());
+        assertElementPresent(finalXPath);
     }
-
-
 
     public String selectDropdownAndGetSelectedText(By dropdownActivator, By optionLocator) {
         // 1. Click the dropdown to open it
