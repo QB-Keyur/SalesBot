@@ -239,9 +239,9 @@ public class WhatsAppTemplatePage extends Locators {
         String fakeNameValue = common.fakeName();
 
 
-        String imagePath = Paths.get("Files", "1.png").toAbsolutePath().toString();
-        String videoPath = Paths.get("Files", "1.png").toAbsolutePath().toString();
-        String docPath   = Paths.get("Files", "1.pdf").toAbsolutePath().toString();
+        String imagePath = Paths.get("TestData", "1.png").toAbsolutePath().toString();
+        String videoPath = Paths.get("TestData", "1.png").toAbsolutePath().toString();
+        String docPath   = Paths.get("TestData", "1.pdf").toAbsolutePath().toString();
 
         String headerText = common.fakeCategory();
         String bodyText = common.fakeProductName().toLowerCase();

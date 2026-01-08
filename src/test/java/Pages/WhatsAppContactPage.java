@@ -75,7 +75,6 @@ public class WhatsAppContactPage extends Locators {
 
     }
 
-
     public void redirectsToWhatsAppContactPage() {
 
         common.waitUntilElementToBeVisible(Contact);
@@ -409,7 +408,6 @@ public class WhatsAppContactPage extends Locators {
 
     }
 
-
     public void verifyDeleteSuccessfullyMessageForWhatsAppContactCreation(){
 
         common.logPrint("Step:: Verify Delete message is showing");
@@ -594,7 +592,6 @@ public class WhatsAppContactPage extends Locators {
 
     }
 
-
     public void createWhatsAppContact() throws IOException {
 
         redirectsToWhatsAppContactCreatePage();
@@ -718,7 +715,6 @@ public class WhatsAppContactPage extends Locators {
         common.logPrint("Delete functionality is working.");
     }
 
-
     public void verifyEditFunctionalityIsWorkingProperly(){
 
         clickOnTheEditBtn();
@@ -785,13 +781,6 @@ public class WhatsAppContactPage extends Locators {
 
         common.logPrint("Contact is showing on the whatsapp campaign page");
     }
-
-
-
-
-
-
-
 
 
 }

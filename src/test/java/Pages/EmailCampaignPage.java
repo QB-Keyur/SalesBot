@@ -220,7 +220,7 @@ public class EmailCampaignPage extends Locators {
 
         common.scroll_To_Element(ECCROWSPERPAGE);
         common.waitUntilElementToBeVisible("//div[@class=\"MuiBox-root css-10u381a\"]");
-        common.pagination("//div[@class=\"MuiBox-root css-10u381a\"]");
+        common.paginationForLargePageSizes("//div[@class=\"MuiBox-root css-10u381a\"]");
     }
 
     public void verifyPaginationInsideViewContact() {
