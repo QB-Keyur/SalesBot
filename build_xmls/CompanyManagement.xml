@@ -3,8 +3,8 @@
 
 <suite name="Company Management Module Test Cases"
        verbose="10"
-       parallel="none"
-       thread-count="1"
+       parallel="tests"
+       thread-count="3"
        allow-return-values="true">
 
     <listeners>
