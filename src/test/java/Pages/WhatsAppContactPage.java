@@ -2,9 +2,7 @@ package Pages;
 
 import Utils.Common;
 import Utils.Locators;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -17,6 +15,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class WhatsAppContactPage extends Locators {
 
@@ -782,7 +781,67 @@ public class WhatsAppContactPage extends Locators {
         common.logPrint("Contact is showing on the whatsapp campaign page");
     }
 
+    public Object[][] readExcels(String filePath, String sheetName) throws IOException {
 
+        FileInputStream fis = new FileInputStream(filePath);
+        Workbook workbook = WorkbookFactory.create(fis);
+        Sheet sheet = workbook.getSheet(sheetName);
 
+        int rowCount = sheet.getLastRowNum();          // excluding header
+        int colCount = sheet.getRow(0).getLastCellNum();
+
+        Object[][] data = new Object[rowCount][colCount];
+
+        DataFormatter formatter = new DataFormatter();
+
+        for (int i = 1; i <= rowCount; i++) {          // start from row 1 (skip header)
+            Row row = sheet.getRow(i);
+
+            if (row == null) {
+                continue;
+            }
+
+            for (int j = 0; j < colCount; j++) {
+                Cell cell = row.getCell(j, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+                data[i - 1][j] = formatter.formatCellValue(cell).trim();
+            }
+        }
+
+        workbook.close();
+        fis.close();
+
+        return data;
+    }
+
+    public void updateTheCompanyName() throws IOException {
+
+        redirectsToWhatsAppContactPage();
+
+        String filePath = "C:/Users/Admin/Downloads/MobileAndCompany.xlsx";
+        Object[][] contacts = readExcels(filePath, "Sheet1");
+
+        for (int i = 0; i < contacts.length; i++) {
+
+            String mobileNumber = contacts[i][0].toString().trim();
+            String companyName = contacts[i][1].toString().trim();
+
+            // Skip empty rows
+            if (mobileNumber.isEmpty() || companyName.isEmpty()) {
+                common.logPrint("⚠️ Skipping empty row index: " + i);
+                continue;
+            }
+
+            common.logPrint("🔍 Step:: Search contact using mobile number: " + mobileNumber);
+
+            // 1. Search by mobile number
+            common.clear(searchInp);
+            searchTheWhatsAppContactUsingMobileNumber(mobileNumber);
+            common.pause(1);
+
+            // 2. Click Edit
+            clickOnTheEditBtn();
+
+            // 3. Update company name
+            common.logPrint("✏️ Step:: Update company name");
 
 }

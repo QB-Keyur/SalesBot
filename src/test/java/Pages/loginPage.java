@@ -1,5 +1,6 @@
 package Pages;
 
+import Config.EnvConfig;
 import Config.ReadProperties;
 import Utils.Common;
 import Utils.Locators;
@@ -13,6 +14,10 @@ import java.util.ArrayList;
 public class loginPage extends Locators {
 
     Common common;
+    public loginPage(WebDriver driver) {
+        super(driver);
+        this.common = new Common(driver);
+    }
 
     public void waitForOtpByRefreshingYopmail(
             By refreshBtn,
@@ -54,13 +59,6 @@ public class loginPage extends Locators {
 
             return false;
         });
-    }
-
-
-
-    public loginPage(WebDriver driver) {
-        super(driver);
-        this.common = new Common(driver);
     }
 
     public void clickOnLoginButton(){
@@ -160,7 +158,7 @@ public class loginPage extends Locators {
         common.logPrint("Step:: Verify forgot password page is showing using a current url.");
         String getUrl = driver.getCurrentUrl();
         common.logPrint("Redirected URL is: "+ getUrl);
-        common.assertTwoValuesAreEqual("https://app.salesbot.cloud/forgot-password", getUrl);
+        common.assertTwoValuesAreEqual(EnvConfig.getWebUrl() +"/forgot-password", getUrl);
 
         common.logPrint("User is successfully redirects to the forgot password page.");
     }
@@ -173,7 +171,7 @@ public class loginPage extends Locators {
         String getUrl = driver.getCurrentUrl();
         common.logPrint("Current URL link is: "+ getUrl);
 
-        common.assertTwoValuesAreEqual("https://app.salesbot.cloud/pricing", getUrl);
+        common.assertTwoValuesAreEqual(EnvConfig.getWebUrl() +"/pricing", getUrl);
 
         common.logPrint("User is successfully redirects to the Sign-up page.");
     }
@@ -185,7 +183,7 @@ public class loginPage extends Locators {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
 
-        driver.get("https://salesbot.cloud/login");
+        driver.get(EnvConfig.getWebUrl());
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
 

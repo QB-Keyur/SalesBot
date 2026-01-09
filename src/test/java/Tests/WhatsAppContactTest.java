@@ -18,7 +18,7 @@ public class WhatsAppContactTest extends BasePage {
 
     @Test
     public void verifyWhatsAppCreatePageElement() {
-        common.logPrint("Verify create whatsapp contact using an POI excel sheet");
+        common.logPrint("Verify create WhatsApp contact using an POI excel sheet");
         loginWithAdminUser();
         whatsAppContactPage.redirectsToWhatsAppContactCreatePage();
         whatsAppContactPage.verifyWhatsAppContactPageUI();
@@ -34,7 +34,7 @@ public class WhatsAppContactTest extends BasePage {
 
     @Test
     public void createNewWhatsAppContactWithAllTheDetails() {
-        common.logPrint("Verify the whatsapp creation functionality");
+        common.logPrint("Verify the WhatsApp creation functionality");
         loginWithAdminUser();
         whatsAppContactPage.redirectsToWhatsAppContactCreatePage();
         String mobileNumber = common.fakeIndianMobileNumber();
@@ -198,12 +198,21 @@ public class WhatsAppContactTest extends BasePage {
         whatsAppContactPage.verifyTheContactInWhatsAppCampaignPage(name, email);
     }
 
-//    @Test
-//    public void createWhatsAppContactUsingAnPOI() throws IOException {
-//        common.logPrint("Verify create whatsapp contact using an POI excel sheet");
-//        loginWithAdminUser();
-//        whatsAppContactPage.createWhatsAppContact();
-//    }
+    @Test
+    public void createWhatsAppContactUsingAnPOI() throws IOException {
+        common.logPrint("Verify create whatsapp contact using an POI excel sheet");
+        loginWithAdminUser();
+        whatsAppContactPage.createWhatsAppContact();
+    }
+
+    @Test
+    public void updateCompanyNameInWhatsAppContactUsingPOI() throws IOException {
+        common.logPrint("Add company name in all the contacts");
+        loginWithAdminUser();
+        whatsAppContactPage.updateTheCompanyName();
+    }
+
+
 
 
 
