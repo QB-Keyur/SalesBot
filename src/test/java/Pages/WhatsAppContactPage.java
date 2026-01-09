@@ -74,7 +74,6 @@ public class WhatsAppContactPage extends Locators {
 
     }
 
-
     public void redirectsToWhatsAppContactPage() {
 
         common.waitUntilElementToBeVisible(Contact);
@@ -408,7 +407,6 @@ public class WhatsAppContactPage extends Locators {
 
     }
 
-
     public void verifyDeleteSuccessfullyMessageForWhatsAppContactCreation(){
 
         common.logPrint("Step:: Verify Delete message is showing");
@@ -593,7 +591,6 @@ public class WhatsAppContactPage extends Locators {
 
     }
 
-
     public void createWhatsAppContact() throws IOException {
 
         redirectsToWhatsAppContactCreatePage();
@@ -716,7 +713,6 @@ public class WhatsAppContactPage extends Locators {
 
         common.logPrint("Delete functionality is working.");
     }
-
 
     public void verifyEditFunctionalityIsWorkingProperly(){
 
@@ -847,36 +843,5 @@ public class WhatsAppContactPage extends Locators {
 
             // 3. Update company name
             common.logPrint("✏️ Step:: Update company name");
-
-            WebElement element = common.waitUntilElementToBeVisible(companyNameInp);
-            element.clear();
-            common.pause(1);
-
-            // Proper Case formatting
-            String[] words = companyName.toLowerCase().split(" ");
-            StringBuilder formattedName = new StringBuilder();
-            for (String word : words) {
-                formattedName.append(Character.toUpperCase(word.charAt(0)))
-                        .append(word.substring(1))
-                        .append(" ");
-            }
-
-            common.type(companyNameInp, formattedName.toString().trim());
-
-            // 4. Save
-            common.waitUntilElementToBeVisible(saveButton);
-            common.click(saveButton);
-
-            common.logPrint("✅ Company name updated successfully for: " + mobileNumber);
-
-            // Refresh for next iteration
-            common.refreshPage();
-            common.pause(1);
-        }
-    }
-
-
-
-
 
 }

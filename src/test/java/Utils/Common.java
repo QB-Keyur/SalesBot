@@ -885,13 +885,68 @@ public class Common extends Locators {
      * Main verifySearch method with safe collection, random pick and search entry.
      */
 
+//    public void searchCommon(String baseXPath) {
+//
+//        // 1️⃣ Click Search button (best-effort)
+//        try {
+//            common.click(SEARCH);
+//        } catch (Exception ignored) {
+//        }
+//
+//        // 2️⃣ Collect grid values
+//        List<WebElement> elements = waitForElements(baseXPath, 8);
+//        System.out.println("XPath: " + baseXPath + " -> matched count: " + elements.size());
+//
+//        List<String> values = collectTextsFromElements(elements);
+//
+//        if (values.isEmpty()) {
+//            throw new AssertionError(
+//                    "No values collected for xpath: " + baseXPath +
+//                            ". Check DOM, iframe/shadow-root, or waits."
+//            );
+//        }
+//
+//        // 3️⃣ Pick random value
+//        String randomValue = values
+//                .get(new Random().nextInt(values.size()))
+//                .trim();
+//
+//        System.out.println("Random Value Selected = " + randomValue);
+//
+//        // 4️⃣ Type into search box
+//        By searchBy = By.xpath("//input[@placeholder='Search...']");
+//        WebElement search = waitForElementVisible(searchBy, 8);
+//
+//        search.clear();
+//        search.sendKeys(randomValue);
+//        pause(2); // allow grid refresh
+//
+//        // 5️⃣ Build SMART rich-text-safe XPath
+//        String[] tokens = randomValue.split("\\s+");
+//        StringBuilder searchResultXPath = new StringBuilder(baseXPath);
+//
+//        for (String token : tokens) {
+//            token = token.replaceAll("[^a-zA-Z0-9]", ""); // remove punctuation
+//            if (token.length() > 3) { // ignore small/noise words
+//                searchResultXPath
+//                        .append("[contains(normalize-space(.), '")
+//                        .append(token)
+//                        .append("')]");
+//            }
+//        }
+//
+//        System.out.println("Final Search Result XPATH = " + searchResultXPath);
+//
+//        // 6️⃣ Assertion (re-locate after grid refresh)
+//        assertElementPresent(searchResultXPath.toString());
+//    }
+
     public void searchCommon(String baseXPath) {
 
         // 1️⃣ Click Search button (best-effort)
         try {
             common.click(SEARCH);
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
 
         // 2️⃣ Collect grid values
         List<WebElement> elements = waitForElements(baseXPath, 8);
@@ -921,26 +976,26 @@ public class Common extends Locators {
         search.sendKeys(randomValue);
         pause(2); // allow grid refresh
 
-        // 5️⃣ Build SMART rich-text-safe XPath
-        String[] tokens = randomValue.split("\\s+");
-        StringBuilder searchResultXPath = new StringBuilder(baseXPath);
+        // 5️⃣ Build CASE + UNDERSCORE SAFE XPath
+        String normalizedValue = randomValue
+                .replace("_", "")
+                .toLowerCase();
 
-        for (String token : tokens) {
-            token = token.replaceAll("[^a-zA-Z0-9]", ""); // remove punctuation
-            if (token.length() > 3) { // ignore small/noise words
-                searchResultXPath
-                        .append("[contains(normalize-space(.), '")
-                        .append(token)
-                        .append("')]");
-            }
-        }
+        String finalXPath =
+                baseXPath +
+                        "[contains(" +
+                        "translate(normalize-space(.), " +
+                        "'ABCDEFGHIJKLMNOPQRSTUVWXYZ_', " +
+                        "'abcdefghijklmnopqrstuvwxyz'" +
+                        "), '" +
+                        normalizedValue +
+                        "')]";
 
-        System.out.println("Final Search Result XPATH = " + searchResultXPath);
+        System.out.println("Final Search Result XPATH = " + finalXPath);
 
         // 6️⃣ Assertion (re-locate after grid refresh)
-        assertElementPresent(searchResultXPath.toString());
+        assertElementPresent(finalXPath);
     }
-
 
     public String selectDropdownAndGetSelectedText(By dropdownActivator, By optionLocator) {
         // 1. Click the dropdown to open it
@@ -1817,7 +1872,6 @@ public class Common extends Locators {
 
         logPrint("Hovered (JS + Actions) :: " + locator);
     }
-
 
     public void scrollPageUsingPixel() {
 
@@ -2755,7 +2809,143 @@ public class Common extends Locators {
         // 3️⃣ Decide rows-per-page dynamically
         int[] rowOptions = totalCount < 10
                 ? new int[]{10}
-//                : new int[]{10, 20, 30};
+                : new int[]{10, 20, 30};
+
+        // 4️⃣ Loop for each rows-per-page option
+        for (int rows : rowOptions) {
+
+            logPrint("Validating SR with rows-per-page = " + rows);
+
+            WebElement rowsDropdown = waitUntilElementToBeClickable(ROWS_PER_PAGE_DROPDOWN);
+            highlightElement(rowsDropdown);
+            rowsDropdown.click();
+
+            String ROW_OPTION = "//li[normalize-space()='" + rows + "']";
+            WebElement rowOption = waitUntilElementToBeClickable(ROW_OPTION);
+            highlightElement(rowOption);
+            rowOption.click();
+
+            pause(2);
+
+            boolean found = false;
+
+            // 5️⃣ Pagination traversal
+            for (int page = 1; page <= 200; page++) {
+
+                logPrint("Checking page " + page + " for SR " + totalCount);
+
+                String PAGINATION_SR =
+                        "//div[@data-field='srNo' and normalize-space(text())='" + totalCount + "']";
+
+                List<WebElement> matches = driver.findElements(By.xpath(PAGINATION_SR));
+
+                for (WebElement el : matches) {
+                    try {
+                        if (el.isDisplayed()) {
+                            highlightElement(el);
+                            ((JavascriptExecutor) driver)
+                                    .executeScript(
+                                            "arguments[0].scrollIntoView({block:'center'});", el
+                                    );
+                            found = true;
+                            break;
+                        }
+                    } catch (StaleElementReferenceException ignored) {
+                    }
+                }
+
+                if (found) {
+                    logPrint("Found SR " + totalCount + " with rows-per-page = " + rows);
+                    break;
+                }
+
+                // 6️⃣ Handle Next pagination
+                try {
+                    WebElement nextBtn = driver.findElement(By.xpath(NEXT_PAGINATION));
+
+                    String ariaDisabled = nextBtn.getAttribute("aria-disabled");
+                    String disabledAttr = nextBtn.getAttribute("disabled");
+
+                    if ("true".equalsIgnoreCase(ariaDisabled) ||
+                            (disabledAttr != null && !disabledAttr.isEmpty())) {
+                        break;
+                    }
+
+                    highlightElement(nextBtn);
+                    nextBtn.click();
+                    pause(1);
+
+                } catch (Exception e) {
+                    break;
+                }
+            }
+
+            Assert.assertTrue(
+                    found,
+                    "SR " + totalCount + " not found with rows-per-page = " + rows
+            );
+        }
+
+        logPrint("Pagination validation completed successfully");
+    }
+
+    public void paginationForLargePageSizes(String fallbackMaxSrXpath) {
+        pause(2);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        int totalCount = 0;
+
+        // 1️⃣ PRIMARY: Read pagination text (e.g. "1–8 of 1,234")
+        try {
+            WebElement text = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.xpath("//p[contains(@class,'MuiTablePagination-displayedRows')]")
+                    )
+            );
+
+            String paginationText = safeTrim(text.getText());
+            String totalStrRaw = paginationText.replaceAll(".*of\\s*", "").trim();
+            totalCount = Integer.parseInt(totalStrRaw.replaceAll("[^0-9]", ""));
+
+            logPrint("Target SR from pagination text: " + totalCount);
+
+        } catch (Exception e) {
+            logPrint("Pagination text parsing failed. Trying fallback SR...");
+        }
+
+        // 2️⃣ FALLBACK: Read max SR directly using provided XPath
+        if (totalCount <= 0) {
+            try {
+                WebElement fallbackSr = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath(fallbackMaxSrXpath)
+                        )
+                );
+
+                totalCount = Integer.parseInt(
+                        fallbackSr.getText().replaceAll("[^0-9]", "")
+                );
+
+                logPrint("Target SR from fallback XPath: " + totalCount);
+
+            } catch (Exception ex) {
+                throw new RuntimeException(
+                        "Unable to determine max SR from both pagination and fallback XPath: "
+                                + fallbackMaxSrXpath
+                );
+            }
+        }
+
+        final String NEXT_PAGINATION =
+                "//button[@title='Go to next page' or contains(@aria-label,'next')]";
+
+        final String ROWS_PER_PAGE_DROPDOWN =
+                "//div[@aria-haspopup='listbox']";
+
+        // 3️⃣ Decide rows-per-page dynamically
+        int[] rowOptions = totalCount < 10
+                ? new int[]{10}
                 : new int[]{10, 25, 50, 100};
 
         // 4️⃣ Loop for each rows-per-page option
@@ -2835,6 +3025,35 @@ public class Common extends Locators {
 
         logPrint("Pagination validation completed successfully");
     }
+
+
+
+
+
+    public WebElement waitAndClick(String xpath) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement element = wait.until(
+                ExpectedConditions.presenceOfElementLocated(By.xpath(xpath))
+        );
+
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+            element.click();
+        } catch (Exception e) {
+            // JS fallback (MUI-safe)
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].click();", element);
+        }
+
+        return element;
+    }
+
+
+
 
     public void paginationInsideActiveModal() {
 
