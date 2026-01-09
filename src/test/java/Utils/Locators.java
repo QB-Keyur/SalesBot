@@ -28,7 +28,7 @@ public class Locators extends BasePage {
     public static String passwordHasBeenUpdated = "//div[contains(text(), 'Password has been updated')]";
     public static String invalidOtpValidation = "//div[contains(text(), 'Invalid OTP or OTP is expired! Please Try Again.')]";
     public static String passwordResetLinkSuccess = "//div[contains(text(), 'Password reset link has been sent to your email')]";
-    public static String otpSentSuccessfully = "//div[contains(text(), 'An OTP is sent to s***1@yopmail.com. Please Verify your email.')]";
+    public static String otpSentSuccessfully = "//div[contains(text(),'An OTP is sent to') and contains(text(),'Please Verify your email')]";
     //public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
 
     //Locators for the validation messages

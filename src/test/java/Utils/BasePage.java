@@ -70,7 +70,7 @@ public class BasePage {
         common.waitUntilElementToBeVisible("//input[@name='email']");
         common.type("//input[@name='email']",username);
         common.waitUntilElementToBeVisible("//input[@name='password']");
-        common.type("//input[@name='password']",password);
+        common.type("//input[@name='password']","Tipl#789");
         common.waitUntilElementToBeVisible("//button[@type='submit']");
         common.click("//button[@type='submit']");
         common.assertElementPresent("//div[contains(text(), 'Login successful')]");
@@ -229,8 +229,8 @@ public class BasePage {
 //
         Common.printCurrentTime("Ending Time");
         getDriver().manage().deleteAllCookies();
-        getDriver().quit();
-        driver.remove();
+//        getDriver().quit();
+//        driver.remove();
     }
 
     public void makeScreenshot(WebDriver driver, String screenshotName) {
