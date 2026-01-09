@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.nio.file.Paths;
+import java.util.function.Predicate;
 
 /**
  * Define Common Web driver
@@ -940,13 +941,13 @@ public class Common extends Locators {
 //        // 6️⃣ Assertion (re-locate after grid refresh)
 //        assertElementPresent(searchResultXPath.toString());
 //    }
-
     public void searchCommon(String baseXPath) {
 
         // 1️⃣ Click Search button (best-effort)
         try {
             common.click(SEARCH);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         // 2️⃣ Collect grid values
         List<WebElement> elements = waitForElements(baseXPath, 8);
@@ -1748,6 +1749,7 @@ public class Common extends Locators {
         String Name = faker.name().firstName();
         return Name;
     }
+
     public String fakeLeadLabel() {
         Faker faker = new Faker();
         String leadLabel = faker.company().buzzword();
@@ -1849,7 +1851,8 @@ public class Common extends Locators {
         hover(locator);
         pause(1);
         click(locator);
-        logPrint("Cleared value using clear icon :: " + locator);}
+        logPrint("Cleared value using clear icon :: " + locator);
+    }
 
     public void hover(String locator) {
         WebElement element = waitUntilElementToBeVisible(locator);
@@ -3026,9 +3029,228 @@ public class Common extends Locators {
         logPrint("Pagination validation completed successfully");
     }
 
+    public void filters(String columnVal, String fullName) {
+
+        String[] words = fullName.trim().split("\\s+");
+        String first, middle, last;
+
+        if (words.length >= 3) {
+            first = words[0];
+            middle = words[1];
+            last = words[words.length - 1];
+        } else if (words.length == 2) {
+            first = words[0];
+            middle = words[0].substring(0, Math.min(2, words[0].length()));
+            last = words[1];
+        } else {
+            first = words[0];
+            middle = words[0].substring(0, Math.min(2, words[0].length()));
+            last = words[0].substring(Math.max(0, words[0].length() - 2));
+        }
+        pause(1);
+
+        // 1️⃣ EQUALS
+        applyFilter(columnVal, FILTEREQUALS, fullName);
+        Assert.assertTrue(
+                anyGridCellMatches(text -> text.equals(fullName)),
+                "EQUALS failed for column: " + columnVal
+        );
+
+        // 2️⃣ NOT EQUALS
+        applyFilter(columnVal, FILTERNOTEQUALS, fullName);
+        Assert.assertTrue(
+                anyGridCellMatches(text -> !text.equals(fullName)),
+                "NOT EQUALS failed for column: " + columnVal
+        );
+
+        // 3️⃣ CONTAINS
+        applyFilter(columnVal, FILTERCONTAINS, first);
+        Assert.assertTrue(
+                anyGridCellMatches(text -> text.contains(first)),
+                "CONTAINS failed for column: " + columnVal
+        );
+
+        // 4️⃣ BEGINS WITH
+        applyFilter(columnVal, FILTERBEGINSWITH, first);
+        Assert.assertTrue(
+                anyGridCellMatches(text -> text.startsWith(first)),
+                "BEGINS WITH failed for column: " + columnVal
+        );
+
+        // 5️⃣ ENDS WITH
+        applyFilter(columnVal, FILTERENDSWITH, last);
+        Assert.assertTrue(
+                anyGridCellMatches(text -> text.endsWith(last)),
+                "ENDS WITH failed for column: " + columnVal
+        );
+    }
+
+    private void selectFilterColumn(String columnVal) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        String columnXpath = "//li[normalize-space(text())='" + columnVal + "']";
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(columnXpath))).click();
+    }
+
+    private boolean anyGridCellMatches(Predicate<String> condition) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        List<WebElement> rows = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                        By.xpath("//div[@role='rowgroup']/child::div")
+                )
+        );
+
+        for (WebElement row : rows) {
+            int rowIndex = 1;
+
+            for (int col = 1; col <= 10; col++) {
+
+                String cellXpath =
+                        "//div[@aria-colindex='" + col +
+                                "' and @aria-rowspan='1']";
+
+                try {
+                    WebElement cell = wait.until(
+                            ExpectedConditions.visibilityOfElementLocated(By.xpath(cellXpath))
+                    );
+
+                    String text = cell.getText().trim();
+
+                    if (!text.isEmpty() && condition.test(text)) {
+                        logPrint("Match found → Row " + rowIndex + ", Col " + col + ": " + text);
+                        return true; // 🔥 STOP IMMEDIATELY
+                    }
+
+                } catch (TimeoutException ignored) {
+                }
+            }
+        }
+        return false;
+    }
+
+    private void applyFilter(String columnVal, String operatorXpath, String value) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(FILTERS))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(PHFILTERSEACRH))).click();
+
+        selectFilterColumn(columnVal);
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(PHFILTEROPERATOR))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(operatorXpath))).click();
+
+        WebElement input = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath(PHFILTERVAL))
+        );
+        input.clear();
+        pause(1);
+        input.sendKeys(value);
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(APPLYFILTER))).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//div[@aria-rowspan='1']")
+        ));
+    }
 
 
 
+
+    private boolean anyColumnMatches(Predicate<String> condition) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        for (int col = 1; col <= 10; col++) {
+
+            String xpath = "(//div[@aria-colindex='" + col + "' and @aria-rowspan='1'])[1]";
+
+            try {
+                WebElement element = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))
+                );
+
+                String text = element.getText().trim();
+
+                if (!text.isEmpty() && condition.test(text)) {
+                    logPrint("Match found in column " + col + " → " + text);
+                    return true; // 🔥 STOP ITERATION IMMEDIATELY
+                }
+
+            } catch (TimeoutException ignored) {
+                // Column might not exist — safe to skip
+            }
+        }
+
+        return false; // No match found
+    }
+
+    private List<String> getGridColumnValues() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        List<String> values = new ArrayList<>();
+
+        for (int col = 1; col <= 10; col++) {
+            String xpath = "(//div[@aria-colindex='" + col + "' and @aria-rowspan='1'])[1]";
+            try {
+                WebElement element = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))
+                );
+                String text = element.getText().trim();
+                if (!text.isEmpty()) {
+                    values.add(text);
+                }
+            } catch (TimeoutException ignored) {
+                // Column may not exist — safe to ignore
+            }
+        }
+        return values;
+    }
+
+    private void waitForGridToLoad() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("(//div[@aria-rowspan='1'])[1]")
+        ));
+    }
+
+
+
+
+
+
+
+
+    private void openFiltersWithWait(WebDriverWait wait) {
+        click(FILTERS);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PHFILTERSEACRH)));
+    }
+
+    private void selectFieldWithWait(WebDriverWait wait, By field) {
+        wait.until(ExpectedConditions.elementToBeClickable(field)).click();
+    }
+
+    private void selectOperatorWithWait(WebDriverWait wait, By operator) {
+        wait.until(ExpectedConditions.elementToBeClickable(operator)).click();
+    }
+
+    private String applyAndGetFirstResultWithWait(WebDriverWait wait, By result) {
+       click(APPLYFILTER);
+        WebElement res = wait.until(ExpectedConditions.visibilityOfElementLocated(result));
+        return res.getText().trim();
+    }
+
+    private String[] splitWordsSafely(String input) {
+        input = safeTrim(input);
+        if (input.isEmpty()) {
+            return new String[]{""};
+        }
+        String[] parts = input.split("\\s+");
+        return parts.length == 0 ? new String[]{input} : parts;
+    }
 
     public WebElement waitAndClick(String xpath) {
 
@@ -3051,8 +3273,6 @@ public class Common extends Locators {
 
         return element;
     }
-
-
 
 
     public void paginationInsideActiveModal() {

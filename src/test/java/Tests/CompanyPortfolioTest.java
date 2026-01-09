@@ -104,5 +104,12 @@ public class CompanyPortfolioTest extends BasePage {
 
     }
 
+    @Test
+    public void verifyFilter(){
+        common.logPrint("TEST START :: verify Filter on Company Portfolio");
+        loginWithAdminUser();
+        companyPortfolioPage.verifyFilter();
+    }
+
 
 }

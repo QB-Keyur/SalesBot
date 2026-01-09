@@ -150,6 +150,14 @@ public class CompanyManagementTest extends BasePage {
         companyManagementPage.verifyEditingEffectOnCreatedTime();
     }
 
+    @Test
+    public void filters(){
+
+        loginWithAdminUser();
+        companyManagementPage.verifyFilters();
+
+    }
+
 
 
 

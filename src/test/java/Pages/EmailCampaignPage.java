@@ -401,5 +401,23 @@ public class EmailCampaignPage extends Locators {
 
     }
 
+    public void verifyFilters(){
+
+        goToEmailCampaignPage();
+
+        String emailCampaignName = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"name\"]";
+        String  emailCampaignIntegration = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"integration_email\"]";
+
+        common.waitUntilElementToBeVisible(emailCampaignName);
+        String emailCampaignNameValue = common.getText(emailCampaignName);
+
+        common.waitUntilElementToBeVisible(emailCampaignIntegration);
+        String emailCampaignIntegrationValue = common.getText(emailCampaignIntegration);
+
+        common.filters("Name", emailCampaignNameValue);
+        common.filters("Integration Email", emailCampaignIntegrationValue);
+
+    }
+
 }
 
