@@ -9,6 +9,7 @@ import org.testng.Assert;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -584,6 +585,35 @@ public class CompanyManagementPage extends Locators {
                 "Created date and Edited date do not match!"
         );
 
+
+    }
+
+    public void verifyFilters(){
+       String[] newCM= verifyAddingAValidCompanyManagement();
+       String phoneNumber = newCM[3];
+       phoneNumber = phoneNumber.replaceAll("\\D", "");
+       if (phoneNumber.length() > 10) {
+            phoneNumber = phoneNumber.substring(phoneNumber.length() - 10);
+        }
+        String formattedPhoneNumber =
+                "+91 " + phoneNumber.substring(0, 5) + " " + phoneNumber.substring(5);
+
+        System.out.println(formattedPhoneNumber);
+
+        common.refreshPage();
+
+//       common.filters("Name",newCM[0]);
+//       common.logPrint("Name Filters work as expected");
+//
+//       common.filters("Designation",newCM[1]);
+//       common.logPrint("Designation Filters work as expected");
+//
+//       common.filters("Email",newCM[2]);
+//       common.logPrint("Designation Filters work as expected");
+//
+       common.logPrint("Phone Number: "+newCM[3]);
+       common.filters("Phone Number",formattedPhoneNumber);
+       common.logPrint("Phone Filters work as expected");
 
     }
     }

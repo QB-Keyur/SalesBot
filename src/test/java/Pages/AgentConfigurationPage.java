@@ -1022,18 +1022,12 @@ public class AgentConfigurationPage extends Locators {
         throw new RuntimeException("safeClick: Unable to click element after " + maxAttempts + " attempts: " + xpath);
     }
 
-    /**
-     * Selects the field dropdown safely.
-     */
     private void selectField(String fieldDropdownXpath) {
         // Use safe click rather than direct driver click to handle intermittent stale/intercept issues.
         common.waitUntilElementToBeClickable(fieldDropdownXpath);
         safeClick(fieldDropdownXpath);
     }
 
-    /**
-     * Select operator (Equals/Contains/StartsWith/EndsWith) safely.
-     */
     private void selectOperator(String operatorXpath) {
         // Click operator dropdown (the control that opens the operator list)
         common.waitUntilElementToBeClickable(PHFILTEROPERATOR);
@@ -1047,10 +1041,6 @@ public class AgentConfigurationPage extends Locators {
         safeClick(operatorXpath);
     }
 
-    /**
-     * Click apply and return the first result's text. Handles StaleElementReferenceException
-     * by retrying a couple of times to read text.
-     */
     private String applyAndGetFirstResult(String resultXpath) {
         common.waitUntilElementToBeClickable(APPLYFILTER);
         safeClick(APPLYFILTER);

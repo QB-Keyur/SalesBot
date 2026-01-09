@@ -108,4 +108,12 @@ public class EmailCampaignTest extends BasePage {
         emailCampaignPage.goToEmailCampaignPage();
         productPage.validateSorting(2, "int", null, SortOrder.DESCENDING,"//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
+
+    @Test
+    public void verifyFilters(){
+        common.logPrint("Verifying Email Campaign page Filters");
+        loginWithAdminUser();
+        emailCampaignPage.verifyFilters();
+        common.logPrint("Filters Verified");
+    }
 }

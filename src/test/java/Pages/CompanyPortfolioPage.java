@@ -353,5 +353,14 @@ public class CompanyPortfolioPage extends Locators {
 
     }
 
+    public void verifyFilter(){
+        String[] companyPortfolio = verifyAddingACompanyPortfolio();
+
+        common.filters("Name", companyPortfolio[0]);
+        common.logPrint("Name filters work as expected");
+
+        common.filters("Name", companyPortfolio[1]);
+        common.logPrint("Desc filters work as expected");
+    }
 
 }
