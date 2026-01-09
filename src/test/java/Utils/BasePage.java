@@ -70,7 +70,7 @@ public class BasePage {
         common.waitUntilElementToBeVisible("//input[@name='email']");
         common.type("//input[@name='email']",username);
         common.waitUntilElementToBeVisible("//input[@name='password']");
-        common.type("//input[@name='password']","Tipl#789");
+        common.type("//input[@name='password']",password);
         common.waitUntilElementToBeVisible("//button[@type='submit']");
         common.click("//button[@type='submit']");
         common.assertElementPresent("//div[contains(text(), 'Login successful')]");
