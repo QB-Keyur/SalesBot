@@ -1,7 +1,6 @@
 package Pages;
 
 import Config.EnvConfig;
-import Config.ReadProperties;
 import Utils.Common;
 import Utils.Locators;
 import org.openqa.selenium.By;
@@ -330,7 +329,7 @@ public class EmailTemplatePage extends Locators {
 
     public void verifyEmailTemplateReflectionInEmailCampaign() {
 
-        String newEmailTemplate[] = verifyAddingANewEmailTemplate();
+        String[] newEmailTemplate = verifyAddingANewEmailTemplate();
 
         String templateDD = "//input[@placeholder='Select template']";
         String templateOption = "//li[normalize-space(text())='" + newEmailTemplate[0] + "']";
@@ -354,14 +353,9 @@ public class EmailTemplatePage extends Locators {
         common.waitUntilElementToBeVisible(templateOption);
         common.click(templateOption);
 
-        String selectedTemplate =
-                common.getAttribute(templateDD, "value").trim();
+        String selectedTemplate = common.getAttribute(templateDD, "value").trim();
 
-        Assert.assertEquals(
-                selectedTemplate,
-                newEmailTemplate,
-                "Selected Email Template did not reflect correctly in Email Campaign"
-        );
+        Assert.assertEquals(selectedTemplate, newEmailTemplate, "Selected Email Template did not reflect correctly in Email Campaign");
 
         common.logPrint("Email Campaign Template reflected successfully: " + selectedTemplate);
     }
@@ -436,25 +430,21 @@ public class EmailTemplatePage extends Locators {
         common.logPrint("Email template view works successfully");
     }
 
+    public void verifyFilters(){
 
+        goToEmailTemplatePage();
+        String emailTemplateName = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"name\"]";
+        String  emailTemplateSubject = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"subject\"]";
 
+        common.waitUntilElementToBeVisible(emailTemplateName);
+        String emailCampaignNameValue = common.getText(emailTemplateName);
 
+        common.waitUntilElementToBeVisible(emailTemplateSubject);
+        String emailCampaignIntegrationValue = common.getText(emailTemplateSubject);
 
+        common.filters("Name", emailCampaignNameValue);
+        common.filters("Subject", emailCampaignIntegrationValue);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 }

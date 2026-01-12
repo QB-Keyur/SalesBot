@@ -616,4 +616,5 @@ public class CompanyManagementPage extends Locators {
        common.logPrint("Phone Filters work as expected");
 
     }
+
     }

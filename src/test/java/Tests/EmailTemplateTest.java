@@ -96,4 +96,11 @@ public class EmailTemplateTest extends BasePage {
         emailTemplatePage.verifyViewButton();
     }
 
+    @Test
+    public void verifyFilters(){
+        common.logPrint("START :: Verifying Email Template filters");
+        loginWithAdminUser();
+        emailTemplatePage.verifyFilters();
+    }
+
 }
