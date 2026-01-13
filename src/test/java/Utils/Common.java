@@ -98,10 +98,7 @@ public class Common extends Locators {
                     "Timed out waiting for element to be clickable: " + locator, e);
         }
     }
-
-
     /* ---------- helper methods used above ---------- */
-
     private void safeLog(String message) {
         try {
             // If you have a common logger, use it
@@ -151,7 +148,6 @@ public class Common extends Locators {
         input = input.indexOf(".") < 0 ? input : input.replaceAll("0*$", "").replaceAll("\\.$", "");
         return input;
     }
-
     /**
      * Check alert is present or not and accept it if present.
      *
@@ -167,7 +163,6 @@ public class Common extends Locators {
         }
         return strAltert;
     }
-
     /**
      * Check alert is present or not.
      *
@@ -240,7 +235,6 @@ public class Common extends Locators {
         List<String> windows = new ArrayList<>(driver.getWindowHandles()); // "windows" instead of "tabs"
         driver.switchTo().window(windows.get(n));
     }
-
     /**
      * Get past date in MM/dd/yyyy format as per argument.
      *
@@ -260,7 +254,6 @@ public class Common extends Locators {
         String pastdate = dateFormat.format(cal.getTime());
         return pastdate;
     }
-
     /**
      * Takes screenshot and adds it to TestNG report.
      *
@@ -286,7 +279,6 @@ public class Common extends Locators {
         }
         Reporter.log(getScreenshotLink(nameWithExtention, nameWithExtention)); // add screenshot link to the report
     }
-
     /**
      * Generates link for TestNG report.
      *
@@ -298,7 +290,6 @@ public class Common extends Locators {
         Reporter.log("<Strong><font color=#FF0000>--Failed</font></strong>");
         return "<a href='../target/failsafe-reports/firefox/screenshots/" + screenshot_name + "'>" + link_text + "</a>";
     }
-
     /**
      * Assertion to check that given element is not being displayed.
      *
@@ -333,8 +324,6 @@ public class Common extends Locators {
             logPrint("Verified: Element is not displayed → PASS");
         }
     }
-
-
     /**
      * Assertion to check that given element is being displayed.
      *
@@ -347,7 +336,6 @@ public class Common extends Locators {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("return arguments[0].click();", element);
     }
-
     /**
      * Checks that given element is checked or not.
      *
@@ -358,7 +346,6 @@ public class Common extends Locators {
         WebElement element = waitUntilStringLocator(locator);
         return element.isSelected();
     }
-
     /**
      * Get the value of the given attribute of the element. Will return the current
      * value, even if this has been modified after the page has been loaded.
@@ -372,7 +359,6 @@ public class Common extends Locators {
         WebElement element = waitUntilPresenceOfElementLocated(By.xpath(locator));
         return element.getAttribute("value");
     }
-
     /**
      * Assertion to check that two values are equal.
      *
@@ -383,7 +369,6 @@ public class Common extends Locators {
         pause(1);
         Assert.assertEquals(value1, value2);
     }
-
     /**
      * Assertion to check that two values are not equal.
      *
@@ -394,7 +379,6 @@ public class Common extends Locators {
         pause(2);
         Assert.assertNotEquals(value1, value2);
     }
-
     /**
      * Checks given element is being displayed or not on page.
      *
@@ -418,7 +402,6 @@ public class Common extends Locators {
             return false;
         }
     }
-
     /**
      * Common method to send a POST request and get the response as JsonObject
      */
@@ -427,7 +410,6 @@ public class Common extends Locators {
 //        String responseBody = response.getBody().asString();
 //        return new JsonParser().parse(responseBody).getAsJsonObject();
 //    }
-
     /**
      * Common method to assert response status code and execution result status
      */
@@ -451,7 +433,6 @@ public class Common extends Locators {
         highlightElement(element);
         actions.moveToElement(element).click().perform();
     }
-
     /**
      * Scroll page to element for given locator.
      *
@@ -491,7 +472,6 @@ public class Common extends Locators {
 
 
     }
-
     /**
      *  Common method to log response details
      */
@@ -527,7 +507,6 @@ public class Common extends Locators {
 //            failedCriteriasList.add(criteria.getAsString());
 //        }
 //    }
-
     /**
      * Check that given element is present or not.
      *
@@ -544,7 +523,6 @@ public class Common extends Locators {
             return false;
         }
     }
-
     /**
      * Check that given element is present or not.
      *
@@ -561,7 +539,6 @@ public class Common extends Locators {
         }
 
     }
-
     /**
      * Assertion to check that given element is not present.
      *
@@ -571,7 +548,6 @@ public class Common extends Locators {
         pause(2);
         Assert.assertFalse(isElementPresent(locator));
     }
-
     /**
      * Assertion to check that given element is present.
      *
@@ -606,7 +582,6 @@ public class Common extends Locators {
             Assert.fail("Failed to assert element presence: " + locator, e);
         }
     }
-
     /**
      * Assertion to check that given element is present.
      *
@@ -617,7 +592,6 @@ public class Common extends Locators {
 
         Assert.assertTrue(isElementPresent(locator), message);
     }
-
     /**
      * Causes the currently executing thread to sleep (temporarily cease execution)
      * for the specified number of seconds, subject to the precision and accuracy of
@@ -649,7 +623,6 @@ public class Common extends Locators {
         String fundValue = input.replaceAll("[^0-9.]", "");
         return fundValue;
     }
-
     /**
      * Causes the currently executing thread to sleep (temporarily cease execution)
      * for the specified number of milliseconds, subject to the precision and
@@ -660,7 +633,6 @@ public class Common extends Locators {
 
         driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
     }
-
     /**
      * Returns the number of elements in this list. If this list contains more than
      * {@code Integer.MAX_VALUE} elements, returns {@code Integer.MAX_VALUE}.
@@ -673,7 +645,6 @@ public class Common extends Locators {
         List<WebElement> element = waitUntilElementsToBeVisible(findBy(locator));
         return element.size();
     }
-
     /**
      * <p>
      * Log the passed string to the HTML reports.
@@ -698,7 +669,6 @@ public class Common extends Locators {
 
         }
     }
-
     /**
      * Select the option of given element at random index. This is done by examining
      * the "index" attribute of an element, and not merely by counting.
@@ -716,7 +686,6 @@ public class Common extends Locators {
         handleAlert();
         return 0;
     }
-
     /**
      * Method to move to an element
      */
@@ -736,7 +705,6 @@ public class Common extends Locators {
         WebElement element = waitUntilElementToBeClickable(locator);
         actions.moveToElement(element).click().build().perform();
     }
-
     /**
      * Check the checkbox or toggle element.
      *
@@ -760,7 +728,6 @@ public class Common extends Locators {
         }
     }
 
-
     public void scrollToElement(String locator) {
         WebElement element = waitUntilStringLocator(locator);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
@@ -772,7 +739,6 @@ public class Common extends Locators {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView()", element);
     }
-
     /**
      * <p>
      * Creates a random character string whose length is the number of characters
@@ -789,7 +755,6 @@ public class Common extends Locators {
     public String generateRandomChars(int length) {
         return RandomStringUtils.randomAlphabetic(length).toLowerCase();
     }
-
     /**
      * <p>
      * Creates a random character string whose length is the number of characters
@@ -806,7 +771,6 @@ public class Common extends Locators {
     public String generateRandomCharsToUpperCase(int length) {
         return RandomStringUtils.randomAlphabetic(length).toUpperCase();
     }
-
     /**
      * <p>
      * Creates a random number string whose length is the number of characters
@@ -830,7 +794,6 @@ public class Common extends Locators {
         int randomNumber = random.nextInt((max - min) + 1) + min;
         return String.valueOf(randomNumber);
     }
-
     /**
      * Waits until findElements(By.xpath(xpath)) returns size > 0 or timeout.
      * Returns empty list if timed out.
@@ -861,7 +824,6 @@ public class Common extends Locators {
             return null;
         }
     }
-
     /**
      * Collects trimmed, non-empty texts from the passed elements.
      * Handles StaleElementReferenceException by ignoring stale elements.
@@ -881,11 +843,9 @@ public class Common extends Locators {
         }
         return texts;
     }
-
     /**
      * Main verifySearch method with safe collection, random pick and search entry.
      */
-
 //    public void searchCommon(String baseXPath) {
 //
 //        // 1️⃣ Click Search button (best-effort)
@@ -1075,7 +1035,6 @@ public class Common extends Locators {
         }
     }
 
-
     public static By findBy(String locator) {
         if (locator.startsWith("link=") || locator.startsWith("LINK=")) {
             locator = locator.substring(5); // remove "link=" from locator
@@ -1103,7 +1062,6 @@ public class Common extends Locators {
             return By.id(locator);
         }
     }
-
     /**
      * Find the first {@link WebElement} using the given method. This method is
      * affected by the 'implicit wait' times in force at the time of execution. The
@@ -1174,7 +1132,6 @@ public class Common extends Locators {
             return driver.findElements(By.id(locator));
         }
     }
-
     /**
      * Refresh the current page
      */
@@ -1195,7 +1152,6 @@ public class Common extends Locators {
         wait.until(pageLoadCondition);
 
     }
-
     /**
      * If given element is a form entry element, this will reset its value first
      * then simulate typing into an element, which may set its value.
@@ -1266,7 +1222,6 @@ public class Common extends Locators {
         element.sendKeys(Keys.TAB);
         element.sendKeys(Keys.ENTER);
     }
-
     /**
      * If given element is a form entry element, this will reset its value first
      * then simulate typing into an element, which may set its value.
@@ -1280,7 +1235,6 @@ public class Common extends Locators {
         element.clear();
         element.sendKeys(keysToSend);
     }
-
     /**
      * Click on a given element. If this causes a new page to load, you should discard
      * all references to a given element and any further operations performed on a given
@@ -1366,7 +1320,6 @@ public class Common extends Locators {
             jsClickWithoutWait(element);
         }
     }
-
     /**
      * Click on given element. If this causes a new page to load, you should discard
      * all references to given element and any further operations performed on given
@@ -1387,7 +1340,6 @@ public class Common extends Locators {
             jsClickWithoutWait(element);
         }
     }
-
     /**
      * Clicks on visible or not visible element through javascript.
      *
@@ -1401,7 +1353,6 @@ public class Common extends Locators {
         js.executeScript("return arguments[0].click();", element);
 
     }
-
     /**
      * Clicks on visible or not visible element through javascript.
      *
@@ -1423,7 +1374,6 @@ public class Common extends Locators {
         input = input.replaceAll("[^0-9]", "");
         return input;
     }
-
     /**
      * Clicks on visible or not visible element through javascript.
      *
@@ -1434,7 +1384,6 @@ public class Common extends Locators {
         js.executeScript("return arguments[0].click();", element);
 
     }
-
     /**
      * If given element is a form entry element, this will reset its value.
      *
@@ -1445,7 +1394,6 @@ public class Common extends Locators {
         highlightElementClick(element);
         element.clear();
     }
-
     /**
      * Get the visible (i.e. not hidden by CSS) text of given element, including
      * sub-elements.
@@ -1466,20 +1414,17 @@ public class Common extends Locators {
 //        highlightElement(element);
         return element.getText().trim();
     }
-
     // Get and return the random integer
     // within Min and Max
     public int getRandomIntergerValue(int Min, int Max) {
 
         return ThreadLocalRandom.current().nextInt(Min, Max);
     }
-
     // Get and return the random double
     // within Min and Max
     public double getRandomDoubleValue(double Min, double Max) {
         return ThreadLocalRandom.current().nextDouble(Min, Max);
     }
-
     /**
      * Get the visible (i.e. not hidden by CSS) text of given element, including
      * sub-elements.
@@ -1543,7 +1488,6 @@ public class Common extends Locators {
 
         return thisYear;
     }
-
     /**
      * Get the value of the given attribute of the element. Will return the current
      * value, even if this has been modified after the page has been loaded.
@@ -1583,7 +1527,6 @@ public class Common extends Locators {
         highlightElement(element);
         return element.getAttribute(attributeName);
     }
-
     /**
      * Get the value of the given attribute of the element. Will return the current
      * value, even if this has been modified after the page has been loaded.
@@ -1935,7 +1878,6 @@ public class Common extends Locators {
     Faker faker = new Faker();
 
     SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy"); // Correct format for your system
-
     /**
      * Generates a date string based on the type: "past", "future", "current", "next", or "between"
      *
@@ -1944,7 +1886,6 @@ public class Common extends Locators {
      * @param endDateStr   Required for "between" - format "MM/dd/yyyy"
      * @return Formatted date as String (e.g., "05/28/2025")
      */
-
     public String generateDate(String type, String startDateStr, String endDateStr) {
         Date resultDate = null;
 
@@ -1998,7 +1939,6 @@ public class Common extends Locators {
     }
 
     SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm a"); // Example: 03:45 PM
-
     /**
      * Generates a time string based on the type: "past", "future", "current", or "between"
      *
@@ -2007,7 +1947,6 @@ public class Common extends Locators {
      * @param endTimeStr   End time (e.g., "05:00 PM") for "between"
      * @return Formatted time as String (e.g., "03:45 PM")
      */
-
     public String generateTime(String type, String startTimeStr, String endTimeStr) {
         try {
             Date resultTime;
@@ -2255,37 +2194,28 @@ public class Common extends Locators {
 
         actions.sendKeys(Keys.DOWN).perform();
     }
-
     // add this at top of your common class
-
     /* ---------------- Generic typing helper ---------------- */
     // Put this at the top of your common class
-
     /* ---------------------- AGENT INFO ---------------------- */
-
     // Name
     public String generateAgentName() {
         return faker.name().fullName();
     }
-
     // Company Name
     public String generateCompanyName() {
         return faker.company().name();
     }
-
     // Greeting Message
     public String generateGreetingMessage() {
         return "Hi! " + faker.company().catchPhrase();
     }
-
     /* ---------------------- PERSONALITY & GOAL ---------------------- */
-
     // Personality
     public String generatePersonality() {
         String[] personalities = {"friendly", "professional", "humorous", "empathetic", "casual", "formal"};
         return personalities[faker.random().nextInt(personalities.length)];
     }
-
     // Goal type
     public String generateGoalType() {
         String[] goals = {
@@ -2294,14 +2224,11 @@ public class Common extends Locators {
         };
         return goals[faker.random().nextInt(goals.length)];
     }
-
     /* ---------------------- BUSINESS DETAILS ---------------------- */
-
     // Core USP
     public String generateCoreUSP() {
         return faker.company().bs() + " that drives results";
     }
-
     // Core Features
     public String generateCoreFeatures() {
         return String.join(", ",
@@ -2310,30 +2237,25 @@ public class Common extends Locators {
                 faker.company().profession()
         );
     }
-
     // Contact Info
     public String generateContactInfo() {
         return faker.phoneNumber().cellPhone() + " | " +
                 faker.internet().emailAddress() + " | " +
                 "www." + faker.internet().domainName();
     }
-
     // Company Domain
     public String generateCompanyDomain() {
         return faker.internet().domainName();
     }
-
     // Business focus
     public String generateBusinessFocus() {
         String[] focuses = {"SaaS", "e-commerce", "FinTech", "Healthcare", "Education", "Retail"};
         return focuses[faker.random().nextInt(focuses.length)];
     }
-
     // Offer description
     public String generateOfferDescription() {
         return faker.company().catchPhrase() + " with " + faker.commerce().material();
     }
-
     // Company description
     public String generateCompanyDescription() {
         return faker.company().name() + " is " + faker.company().catchPhrase()
@@ -2514,6 +2436,7 @@ public class Common extends Locators {
 //                "Card count does not match pagination total!"
 //        );
 //    }
+
     public void validateHorizontalViewCardCount(String fallbackCountXpath) {
 
         pause(2);
@@ -2594,7 +2517,6 @@ public class Common extends Locators {
                 "Card count does not match pagination total!"
         );
     }
-
 
     public void scrollTillPageEnd(int totalRows, By cardLocator) {
 
@@ -2754,6 +2676,7 @@ public class Common extends Locators {
 //
 //        logPrint("Pagination validation completed successfully");
 //    }
+
     public void pagination(String fallbackMaxSrXpath) {
 
         pause(2);
@@ -3158,9 +3081,6 @@ public class Common extends Locators {
         ));
     }
 
-
-
-
     private boolean anyColumnMatches(Predicate<String> condition) {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -3217,13 +3137,6 @@ public class Common extends Locators {
         ));
     }
 
-
-
-
-
-
-
-
     private void openFiltersWithWait(WebDriverWait wait) {
         click(FILTERS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PHFILTERSEACRH)));
@@ -3273,7 +3186,6 @@ public class Common extends Locators {
 
         return element;
     }
-
 
     public void paginationInsideActiveModal() {
 
@@ -3822,7 +3734,6 @@ public class Common extends Locators {
             }
         }
     }
-
 
 }
 

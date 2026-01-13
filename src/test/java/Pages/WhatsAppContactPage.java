@@ -844,4 +844,4 @@ public class WhatsAppContactPage extends Locators {
             // 3. Update company name
             common.logPrint("✏️ Step:: Update company name");
 
-}
+}}}
