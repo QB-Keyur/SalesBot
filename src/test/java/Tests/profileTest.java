@@ -125,6 +125,14 @@ public class profileTest extends BasePage {
         profilePage.verifyCancelAndSaveButtonIsDisplayed();
     }
 
-
-
+    @Test
+    public void verifyCalendlyIsConnected(){
+        common.logPrint("Verify that Calendly is connected or not");
+        loginWithAdminUser();
+        profilePage.redirectToIntegratedPage();
+        profilePage.verifyCalendlyIsConnected();
+        profilePage.redirectsToProfilePage();
+        profilePage.verifyTimeZoneInProfile();
+        profilePage.redirectToAgentConfigurationPage();
+    }
 }
