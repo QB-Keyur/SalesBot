@@ -176,4 +176,11 @@ public class KnowledgeBaseTest extends BasePage {
         productPage.validateSorting(2, "", null, SortOrder.DESCENDING,"//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
 
+    @Test
+    public void verifyFilters(){
+        loginWithAdminUser();
+        knowledgeBasePage.verifyFilters();
+
+    }
+
 }
