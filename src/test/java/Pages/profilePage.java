@@ -5,6 +5,8 @@ import Utils.Common;
 import Utils.Locators;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 public class profilePage extends Locators {
 
@@ -336,6 +338,41 @@ public class profilePage extends Locators {
         common.logPrint("'Save' button is displayed");
     }
 
+    public void redirectToIntegratedPage(){
+        common.waitUntilElementToBeVisible(INTEGRATIONMENU);
+        common.click(INTEGRATIONMENU);
+    }
+
+    public void redirectToAgentConfigurationPage(){
+        common.waitUntilElementToBeVisible(AGENTCONFIGURATIONMENU);
+        common.click(AGENTCONFIGURATIONMENU);
+    }
+
+    public void verifyCalendlyIsConnected(){
+
+        if(common.isElementPresent("//p[text()='Calendly']/parent::div//span[text()='Disconnected']")){
+            common.logPrint("Calendly is disconnected test failed");
+            Assert.fail("Calendly is disconnected test failed");
+        } else {
+            common.logPrint("Calendly is connected");
+        }
+    }
+
+    public void verifyTimeZoneInProfile(){
+        common.waitUntilElementToBeVisible(ACCTIMEZONEINPUT);
+        WebElement element = common.findElement(ACCTIMEZONEINPUT);
+        String timeZone = element.getAttribute("value");
+
+        common.logPrint(timeZone);
+    }
+
+    public void verifyTimeZoneInAgentConfiguration(){
+        common.waitUntilElementToBeVisible(ACCTIMEZONEINPUT);
+        WebElement element = common.findElement(ACCTIMEZONEINPUT);
+        String timeZone = element.getAttribute("value");
+
+        common.logPrint(timeZone);
+    }
 
 
 
