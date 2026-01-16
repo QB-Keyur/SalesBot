@@ -602,15 +602,15 @@ public class CompanyManagementPage extends Locators {
 
         common.refreshPage();
 
-//       common.filters("Name",newCM[0]);
-//       common.logPrint("Name Filters work as expected");
-//
-//       common.filters("Designation",newCM[1]);
-//       common.logPrint("Designation Filters work as expected");
-//
-//       common.filters("Email",newCM[2]);
-//       common.logPrint("Designation Filters work as expected");
-//
+       common.filters("Name",newCM[0]);
+       common.logPrint("Name Filters work as expected");
+
+       common.filters("Designation",newCM[1]);
+       common.logPrint("Designation Filters work as expected");
+
+       common.filters("Email",newCM[2]);
+       common.logPrint("Designation Filters work as expected");
+
        common.logPrint("Phone Number: "+newCM[3]);
        common.filters("Phone Number",formattedPhoneNumber);
        common.logPrint("Phone Filters work as expected");

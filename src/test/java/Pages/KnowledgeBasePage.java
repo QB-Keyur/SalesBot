@@ -891,5 +891,24 @@ public class KnowledgeBasePage extends Locators {
         return !driver.findElements(locator).isEmpty();
     }
 
+    public void verifyFilters(){
+        goToKnowledgeBasePage();
+        String first = "//div[@data-rowindex=\"0\"]/child::div[@data-colindex=\"1\"]";
+
+        String fullName = common.getAttribute(first, "title"); // e.g. "John Michael Doe"
+
+        String[] words = fullName.trim().split("\\s+");
+
+        String firstWord  = words.length > 0 ? words[0] : "";
+        String middleWord = words.length > 1 ? words[1] : "";
+        String lastWord   = words.length > 2 ? words[2] : "";
+
+        common.filters("Name", fullName);
+
+
+
+
+    }
+
 
 }
