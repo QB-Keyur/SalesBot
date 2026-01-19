@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +46,7 @@ public class EmailCampaignPage extends Locators {
 
     }
 
-    public void verifyEmailCampaignElements(){
+    public void verifyEmailCampaignElements() {
 
         goToEmailCampaignPage();
 
@@ -109,7 +108,7 @@ public class EmailCampaignPage extends Locators {
 
     }
 
-    public void verifyEmailCampaignCreatePageElements(){
+    public void verifyEmailCampaignCreatePageElements() {
         goToEmailCampaignPage();
 
         common.waitUntilElementToBeVisible(ECCREATEBUTTON);
@@ -195,24 +194,24 @@ public class EmailCampaignPage extends Locators {
 
     }
 
-    public void verifySearch(){
+    public void verifySearch() {
         goToEmailCampaignPage();
         common.searchCommon(ECCSEARCHRESULT);
     }
 
-    public void verifyHorizontalView(){
+    public void verifyHorizontalView() {
 
         goToEmailCampaignPage();
         common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
 
     }
 
-    public void verifyPagination(){
+    public void verifyPagination() {
         goToEmailCampaignPage();
         common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
     }
 
-    public void verifyPaginationInsideCreate(){
+    public void verifyPaginationInsideCreate() {
         goToEmailCampaignPage();
 
         common.waitUntilElementToBeVisible(ECCREATEBUTTON);
@@ -235,7 +234,7 @@ public class EmailCampaignPage extends Locators {
         common.paginationInsideActiveModal();
     }
 
-    public void verifyRunningANewEmailCampaign(){
+    public void verifyRunningANewEmailCampaign() {
         goToEmailCampaignPage();
 
         common.waitUntilElementToBeVisible(ECCREATEBUTTON);
@@ -309,7 +308,7 @@ public class EmailCampaignPage extends Locators {
         common.validateSearch(ECCSEARCHCONTACTSVALUE, rowText);
     }
 
-    public void verifyRunningABlankCampaign(){
+    public void verifyRunningABlankCampaign() {
         goToEmailCampaignPage();
 
         common.waitUntilElementToBeVisible(ECCREATEBUTTON);
@@ -369,7 +368,7 @@ public class EmailCampaignPage extends Locators {
         );
     }
 
-    public void viewEmailCampaign(){
+    public void viewEmailCampaign() {
         goToEmailCampaignPage();
 
         String firstRow = "//div[@data-rowindex=\"0\"]";
@@ -401,7 +400,7 @@ public class EmailCampaignPage extends Locators {
 
     }
 
-    public void verifyFilters(){
+    public void verifyFilters() {
 
         goToEmailCampaignPage();
 
