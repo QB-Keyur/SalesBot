@@ -327,7 +327,7 @@ public class EmailTemplatePage extends Locators {
 
     }
 
-    public void verifyEmailTemplateReflectionInEmailCampaign() {
+    public void verifyEmailTemplateReflectionInEmailCampaign(){
 
         String[] newEmailTemplate = verifyAddingANewEmailTemplate();
 

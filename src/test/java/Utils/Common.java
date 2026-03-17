@@ -43,8 +43,8 @@ import java.util.function.Predicate;
  * @author whimstay
  */
 public class Common extends Locators {
-    private static final Logger log = LoggerFactory.getLogger(Common.class);
 
+    private static final Logger log = LoggerFactory.getLogger(Common.class);
 
     WebDriver driver;
 
@@ -2523,7 +2523,7 @@ public class Common extends Locators {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement container = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//div[contains(@class,'infinite-scroll-component')]")
+                        By.xpath("//div[contains(@class,'infinite-scroll-component')]| //div[@class=\"MuiBox-root css-tvlt1v\"]")
                 )
         );
 
@@ -2761,7 +2761,7 @@ public class Common extends Locators {
                 logPrint("Checking page " + page + " for SR " + totalCount);
 
                 String PAGINATION_SR =
-                        "//div[@data-field='srNo' and normalize-space(text())='" + totalCount + "']";
+                        "//div[@data-field='srNo' and normalize-space(text())='" + totalCount + "'] | //td[contains(text(),'" + totalCount + "')]";
 
                 List<WebElement> matches = driver.findElements(By.xpath(PAGINATION_SR));
 

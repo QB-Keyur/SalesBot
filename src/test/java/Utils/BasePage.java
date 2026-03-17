@@ -75,7 +75,7 @@ public class BasePage {
         common.click("//button[@type='submit']");
         common.assertElementPresent("//div[contains(text(), 'Login successful')]");
         common.logPrint("Login successfully.");
-        String CLOSEBUTTON = "//button[@aria-label='Close alert']";
+        String CLOSEBUTTON = "//button[@aria-label='Close alert'] | //button[@aria-label='Close']";
         common.click(CLOSEBUTTON);
     }
     // ================= LOGIN METHODS =================
@@ -228,9 +228,9 @@ public class BasePage {
 //        }
 //
         Common.printCurrentTime("Ending Time");
-//        getDriver().manage().deleteAllCookies();
-//        getDriver().quit();
-//        driver.remove();
+        getDriver().manage().deleteAllCookies();
+        getDriver().quit();
+        driver.remove();
     }
 
     public void makeScreenshot(WebDriver driver, String screenshotName) {

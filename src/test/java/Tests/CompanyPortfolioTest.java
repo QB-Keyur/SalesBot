@@ -2,7 +2,6 @@ package Tests;
 
 import Utils.BasePage;
 import org.testng.annotations.Test;
-
 import javax.swing.*;
 
 public class CompanyPortfolioTest extends BasePage {
@@ -101,7 +100,6 @@ public class CompanyPortfolioTest extends BasePage {
         common.logPrint("TEST START :: verify Editing Effect On Created Time");
         loginWithAdminUser();
         companyPortfolioPage.verifyEditingEffectOnCreatedTime();
-
     }
 
     @Test
@@ -110,6 +108,4 @@ public class CompanyPortfolioTest extends BasePage {
         loginWithAdminUser();
         companyPortfolioPage.verifyFilter();
     }
-
-
 }
