@@ -68,22 +68,22 @@ public class Locators extends BasePage {
     //Locators for the Onboarding
 
     //Locators for the Product Page
-    public static String PRODUCTMENU = "//span[text() ='Product / Service']";
-    public static String SRNO = "//span[text() ='#']";
-    public static String PRODUCTNAMES = "//span[text() ='Product Name']";
-    public static String CATEGORY = "//span[text() ='Category']";
-    public static String DESCRIPTION = "//span[text() ='Description']";
-    public static String KBARTICLE = "//span[text() ='KB Article']";
-    public static String CREATEDDATE = "//span[text() ='Created Date']";
-    public static String ACTIONS = "//span[text() ='Actions']";
+    public static String PRODUCTMENU = "//*[self::span or self::div][text()='Product / Service']";
+    public static String SRNO = "//*[self::span or self::div][text()='#']";
+    public static String PRODUCTNAMES = "//*[self::span or self::div][text()='Product Name']";
+    public static String CATEGORY = "//*[self::span or self::div][text()='Category']";
+    public static String DESCRIPTION = "//*[self::span or self::div][text()='Description']";
+    public static String KBARTICLE = "//*[self::span or self::div][text()='KB Article']";
+    public static String CREATEDDATE = "//*[self::span or self::div][text()='Created Date']";
+    public static String ACTIONS = "//*[self::span or self::div][text()='Actions']| //*[self::span or self::div][text()='Action']";
     public static String SEARCH = "//input[@placeholder='Search...']";
     public static String REFRESH = "//span[text()='Filters']/following::button[1] | //span[contains(@class,'css-1sh91j5')]/parent::button[contains(@class,'css-q8p1uw')]";
     public static String FILTERS = "//button[@type='button']//span[normalize-space(.)='Filters']";
     public static String CREATE = "//button[@type='button']//span[normalize-space(.)='Create']";
     public static String MULTITABHOR = "(//button[@role='tab'])[2]";
     public static String MULTITABVER = "(//button[@role='tab'])[1]";
-    public static String TOTAL = "//div[contains(text(),'Total')] | //div[@class=\"MuiBox-root css-a7l4db\"]";
-    public static String ROWSPERPAGE = "//div[@class=\"MuiBox-root css-a7l4db\"] | //p[text()='Rows per page:']";
+    public static String TOTAL = "//div[contains(text(),'Total')] | //div[@class=\"MuiBox-root css-a7l4db\"] | //h6[text()='Product']/following-sibling::div";
+    public static String ROWSPERPAGE = "//div[@class=\"MuiBox-root css-a7l4db\"] | //p[text()='Rows per page:'] | //h6[text()='Product']/following-sibling::div";
     public static String SEARCHRESULTS = "//div[@aria-rowspan='1']/preceding-sibling::div[@aria-colindex='2' and contains(text(),'+ randomValue +')]";
     public static String PHSEACRH = "//input[@placeholder='Search...']";
     public static String PHFILTERSEACRH = "//input[@placeholder='Select column']";
@@ -92,21 +92,48 @@ public class Locators extends BasePage {
     public static String PHFILTEROPERATOR = "//input[@placeholder='Select operator']";
     public static String CLOSEFILTER = "//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-xz9haa']";
     public static String PHPRODUCTNAME = "//input[@placeholder='Enter Product Name']";
-    public static String PHPRODUCTCATEGORY = "//input[@placeholder='Create or Select Category']";
+    public static String PHPRODUCTCATEGORY = "//input[@placeholder='Create or Select Category']|//span[text()='Category']/following::input[1]";
     public static String PHPRODUCTCATEGORYNEW = "//li[starts-with(normalize-space(), 'Create')]";
-    public static String PHPRODUCTDESCRIPTION = "//input[@placeholder='Enter Description']";
-    public static String PHPRODUCTKB = "//input[@placeholder='Select KB Article']";
-    public static String CLOSEBUTTON = "//button[@aria-label='Close alert']";
+    public static String PHPRODUCTDESCRIPTION = "//input[@placeholder='Enter Description'] | //textarea[@placeholder='Enter Description']";
+    public static String PHPRODUCTKB = "//input[@placeholder='Select KB Article'] | //input[@placeholder='Enter KB Article'] | //span[text()='KB Article']/following::input[1]";
+    public static String PHSELECTUNIT = "//input[@placeholder='Select Unit']";
+    public static String PHPRICELIST = "//span[normalize-space()='Create Price List']/parent::button";
+    public static String PHENTERPRICELISTNAME = "//input[@placeholder='Enter Price List Name']";
+    public static String PHSELECTCOUNTRY = "//input[@placeholder='Select country']";
+    public static String PHSELECTSTATE = "//input[@placeholder='Select state']";
+    public static String PHSELECTCITY = "//input[@placeholder='Select city']";
+    public static String PHENTERAMOUNT = "//input[@placeholder='Enter Amount']";
+    public static String PHENTERDISCOUNT = "//input[@placeholder='Enter Discount']";
+    public static String PHENTERDISCOUNTSTRATEGY = "//input[@placeholder='Enter Discount Strategy']";
+    public static String PHSELECTCURRENCY = "//input[@placeholder='Select currency']";
+    public static String PHENTEREFFECTIVEFROM = "//input[@placeholder='Enter Effective From']";
+    public static String PHENTEREFFECTIVETO = "//input[@placeholder='Enter Effective To']";
+    public static String PHPLANLIST = "//span[normalize-space()='Create Plan List']/parent::button";
+    public static String PHENTERPLANLISTNAME = "//input[@placeholder='Enter Plan List Name']";
+    public static String PHENTERDESCRIPTION = "//textarea[@placeholder='Enter Description']";
+    public static String PHSELECTBILLINGCYCLE = "//input[@placeholder='Select Billing Cycle']";
+    public static String PHENTERREDIRECTURL = "//input[@placeholder='Enter Redirect URL']";
+    public static String PHENTERFEATURES = "//textarea[@placeholder='Enter Features']";
+
+    public static String PHBASEPRICE = "//input[@name='base_price']";
+    public static String PHTAX = "//input[@name='tax']";
+    public static String PHDISCOUNT = "//input[@name='discount']";
+    public static String PHTOTALPRICE = "//input[@name='total_price']";
+
+    public static String PHPRICECANCEL = "(//span[normalize-space()='Cancel']/parent::button)[2]";
+    public static String PHPRICESAVE = "(//span[normalize-space()='Save']/parent::button)[2]";
+
+    public static String CLOSEBUTTON = "//button[@aria-label='Close alert'] | //button[@aria-label='Close']";
     public static String SAVEBUTTON = "//button[@type='button']/child::span[contains(text(),'Save')]";
     public static String SUCCESSMESSAGE = "//div[normalize-space(text())='Product created successfully']";
     public static String UPDATEMESSAGE = "//div[normalize-space(text())='Product updated successfully']";
-    public static String SEARCHRESULT = "//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"]";
-    public static String EDIT = "//button[@aria-label=\"Edit\"]";
+    public static String SEARCHRESULT = "//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"]| //tr[1]/td[2]";
+    public static String EDIT = "//button[@aria-label=\"Edit\"]|(//span[@aria-label=\"Edit\"]/child::button)[1]";
     public static String EDITPRODUCTNAME = "//input[@name='name']";
-    public static String DELETEPRODUCT = "(//button[@aria-label=\"Delete\"])[1]";
-    public static String DELETECONFIRMPRODUCT = "//button[@type='button']/child::span[contains(text(),'Delete')]";
-    public static String DELETEPRODUCTASSERT = "//div[contains(text(),\"Deleted Successfully\")]";
-    public static String VIEWBUTTON = "//button[@aria-label=\"View\"]";
+    public static String DELETEPRODUCT = "(//button[@aria-label=\"Delete\"])[1]|(//span[@aria-label=\"Delete\"]/child::button)[1]";
+    public static String DELETECONFIRMPRODUCT = "//button[@type='button']/child::span[contains(text(),'Delete')]|//span[contains(text(),'Delete')]/ancestor::button";
+    public static String DELETEPRODUCTASSERT = "//div[contains(normalize-space(),'Deleted Successfully')] | //div[contains(@class,'MuiAlert-message') and contains(normalize-space(),'Delete')]";
+    public static String VIEWBUTTON = "//button[@aria-label=\"View\"] | (//span[@aria-label=\"View\"]/child::button)[1]";
     public static String VIEWNAME = "//span[contains(text(),'Name')]/following::input[@value='IT Company']";
     public static String VIEWCATEGORY = "//span[contains(text(),'Category')]/following::input[@value='IT Company']";
     public static String VIEWDESC = "//span[contains(text(),'Description')]/following::input[@value='IT Company']";
@@ -121,7 +148,7 @@ public class Locators extends BasePage {
     public static String FILTERBEGINSWITH = "//li[contains(text(),'Begins With')]";
     public static String FILTERENDSWITH = "//li[contains(text(),'Ends With')]";
     public static String APPLYFILTER = "//button[@type='button']/child::span[contains(text(),'Apply Filter')]";
-    public static String FILTERNAMERESULT = "//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"]";
+    public static String FILTERNAMERESULT = "//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"]| //tbody/tr[1]/td[2]";
     public static String FILTERCATEGORYRESULT = "//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"]";
     public static String CLEARFILTER = "(//button[@title='Clear'])[1]";
     public static String PAGINATIONSR = "//div[@data-field=\"srNo\" and contains(text(),'32')]";
@@ -1357,8 +1384,6 @@ public class Locators extends BasePage {
     public static String DISCONNECTBUTTON = "//span[text()='Disconnect']/parent::button";
     public static String DISCONNECTMESSAGE = "//div[contains(text(),'Disconnected successfully')]";
 
-
-
     // ================= STEP 1 =================
     public static final String STEP1_ENABLE_2FA_TITLE =
             "//h6[normalize-space()='1. Enable 2-Factor Authentication (if not already enabled)']";
@@ -1418,8 +1443,5 @@ public class Locators extends BasePage {
 
     public static final String STEP4_CONTAINER =
             "//div[contains(@class,'MuiBox-root')][.//h6[contains(text(),'Copy the Password')]]";
-
-
-
 
 }

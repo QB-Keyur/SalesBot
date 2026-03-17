@@ -75,7 +75,7 @@ public class BasePage {
         common.click("//button[@type='submit']");
         common.assertElementPresent("//div[contains(text(), 'Login successful')]");
         common.logPrint("Login successfully.");
-        String CLOSEBUTTON = "//button[@aria-label='Close alert']";
+        String CLOSEBUTTON = "//button[@aria-label='Close alert'] | //button[@aria-label='Close']";
         common.click(CLOSEBUTTON);
     }
     // ================= LOGIN METHODS =================
