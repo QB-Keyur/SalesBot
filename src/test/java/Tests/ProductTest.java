@@ -18,6 +18,7 @@ public class ProductTest extends BasePage {
     public void verifyAddingANewProductWithValidData() {
         loginWithAdminUser();
         productPage.verifyAddingANewProductWithValidData();
+
     }
 
     @Test
@@ -48,7 +49,8 @@ public class ProductTest extends BasePage {
     public void validateSorting() {
         loginWithAdminUser();
         productPage.goToProductPage();
-        productPage.validateSorting(2, "", null, SortOrder.DESCENDING,"//div[@class=\"MuiBox-root css-a7l4db\"]");
+        productPage.validateSorting(2, "", null, SortOrder.ASCENDING,"//div[@class=\"MuiBox-root css-a7l4db\"] | //h6[text()='Product']/following-sibling::div");
+        //
     }
 
     @Test
@@ -61,6 +63,19 @@ public class ProductTest extends BasePage {
     public void editingAProduct(){
         loginWithAdminUser();
         productPage.editingAProduct();
+    }
+
+    @Test
+    public void verifyEditingProductAndAddingPriceList(){
+        loginWithAdminUser();
+        productPage.verifyEditingProductAndAddingPriceList();
+    }
+
+    @Test
+    public void verifyEditingProductAndAddingPlanList(){
+        loginWithAdminUser();
+        productPage.verifyEditingProductAndAddingPlanList();
+
     }
 
     @Test

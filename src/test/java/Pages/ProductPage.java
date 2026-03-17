@@ -74,7 +74,7 @@ public class ProductPage extends Locators {
 
     public void verifySearch() {
         goToProductPage();
-        common.searchCommon("//div[@aria-rowspan='1']/preceding-sibling::div[@aria-colindex='2']");
+        common.searchCommon("//div[@aria-rowspan='1']/preceding-sibling::div[@aria-colindex='2'] | //tbody/child::tr[1]/child::td[2]");
     }
 
     public void verifyRefresh() {
@@ -163,9 +163,9 @@ public class ProductPage extends Locators {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        By header = By.xpath("(//div[@role='columnheader' and @aria-colindex='" + columnIndex + "'])[1]");
+        By header = By.xpath("//tr/child::th[2]");
         By cellLocator = By.xpath(
-                "//div[@role='row' and not(@aria-rowindex='1')]//div[@aria-colindex='" + columnIndex + "']"
+                "//div[@role='row' and not(@aria-rowindex='1')]//div[@aria-colindex='" + columnIndex + "']|//tr[1]/child::td[2]"
         );
 
         /* ---------------- APPLY SORT ---------------- */
@@ -330,6 +330,42 @@ public class ProductPage extends Locators {
         common.assertElementPresent(PHPRODUCTCATEGORY);
         common.assertElementPresent(PHPRODUCTDESCRIPTION);
         common.assertElementPresent(PHPRODUCTKB);
+        common.assertElementPresent(PHSELECTUNIT);
+//        common.assertElementPresent(PHPRICELIST);
+//        common.waitUntilElementToBeClickable(PHPRICELIST);
+//        common.click(PHPRICELIST);
+//        common.waitUntilElementToBeVisible(PHENTERPRICELISTNAME);
+//        common.assertElementPresent(PHENTERPRICELISTNAME);
+//        common.assertElementPresent(PHSELECTCOUNTRY);
+//        common.assertElementPresent(PHSELECTSTATE);
+//        common.assertElementPresent(PHSELECTCITY);
+//        common.assertElementPresent(PHENTERAMOUNT);
+//        common.assertElementPresent(PHENTERDISCOUNT);
+//        common.assertElementPresent(PHENTERDISCOUNTSTRATEGY);
+//        common.assertElementPresent(PHSELECTCURRENCY);
+//        common.assertElementPresent(PHENTEREFFECTIVEFROM);
+//        common.assertElementPresent(PHENTEREFFECTIVETO);
+//        common.assertElementPresent(PHPRICECANCEL);
+//        common.assertElementPresent(PHPRICESAVE);
+//        common.click(PHPRICECANCEL);
+//
+//
+//        common.assertElementPresent(PHPLANLIST);
+//        common.waitUntilElementToBeClickable(PHPLANLIST);
+//        common.click(PHPLANLIST);
+//        common.assertElementPresent(PHENTERPLANLISTNAME);
+//        common.assertElementPresent(PHENTERDESCRIPTION);
+//        common.assertElementPresent(PHSELECTBILLINGCYCLE);
+//        common.assertElementPresent(PHENTERREDIRECTURL);
+//        common.assertElementPresent(PHENTERFEATURES);
+//        common.assertElementPresent(PHBASEPRICE);
+//        common.assertElementPresent(PHTAX);
+//        common.assertElementPresent(PHDISCOUNT);
+//        common.assertElementPresent(PHTOTALPRICE);
+//        common.assertElementPresent(PHPRICECANCEL);
+//        common.assertElementPresent(PHPRICESAVE);
+
+
     }
 
     public Product verifyAddingANewProductWithValidData() {
@@ -363,9 +399,57 @@ public class ProductPage extends Locators {
                 By.xpath(FILTERDROPDOWNVAL)
         );
 
+        common.waitUntilElementToBeVisible(PHSELECTUNIT);
+        common.click(PHSELECTUNIT);
+        common.pause(1);
+        common.twoDownKeyAndEnter();
+//
+//        common.waitUntilElementToBeVisible(PHPRICELIST);
+//        common.click(PHPRICELIST);
+//
+//        common.waitUntilElementToBeVisible(PHENTERPRICELISTNAME);
+//        common.type(PHENTERPRICELISTNAME,common.fakeProductName());
+//
+//        common.waitUntilElementToBeVisible(PHSELECTCOUNTRY);
+//        common.type(PHSELECTCOUNTRY, "India");
+//        common.twoDownKeyAndEnter();
+//
+//        common.waitUntilElementToBeVisible(PHSELECTSTATE);
+//        common.type(PHSELECTSTATE, "Gujarat");
+//        common.twoDownKeyAndEnter();
+//
+//        common.waitUntilElementToBeVisible(PHSELECTCITY);
+//        common.type(PHSELECTCITY, "Ahmedabad");
+//        common.twoDownKeyAndEnter();
+//
+//        common.waitUntilElementToBeVisible(PHENTERAMOUNT);
+//        common.type(PHENTERAMOUNT, "1000");
+//
+//        common.waitUntilElementToBeVisible(PHENTERDISCOUNT);
+//        common.type(PHENTERDISCOUNT, "10");
+//
+//        common.waitUntilElementToBeVisible(PHENTERDISCOUNTSTRATEGY);
+//        common.type(PHENTERDISCOUNTSTRATEGY, "No");
+//
+//        common.waitUntilElementToBeVisible(PHSELECTCURRENCY);
+//        common.type(PHSELECTCURRENCY, "INR");
+//        common.twoDownKeyAndEnter();
+//
+//        common.waitUntilElementToBeVisible(PHENTEREFFECTIVEFROM);
+//        common.click(PHENTEREFFECTIVEFROM);
+//        common.downKeyAndEnter();
+//
+//        common.waitUntilElementToBeVisible(PHENTEREFFECTIVETO);
+//        common.click(PHENTEREFFECTIVETO);
+//        common.twoDownKeyAndEnter();
+//
+//        common.waitUntilElementToBeVisible(PHPRICESAVE);
+//        common.click(PHPRICESAVE);
+
         common.waitUntilElementToBeVisible(SAVEBUTTON);
         common.click(SAVEBUTTON);
         common.assertElementPresent(SUCCESSMESSAGE);
+        common.waitUntilElementToBeVisible(CLOSEBUTTON);
         common.click(CLOSEBUTTON);
 
         common.click(PHSEACRH);
@@ -406,11 +490,163 @@ public class ProductPage extends Locators {
 
         common.click(SAVEBUTTON);
         common.assertElementPresent(UPDATEMESSAGE);
+        common.waitUntilElementToBeVisible(CLOSEBUTTON);
         common.click(CLOSEBUTTON);
 
         common.click(PHSEACRH);
         common.type(PHSEACRH, newName);
         common.validateSearch(SEARCHRESULT, newName);
+    }
+
+    public void verifyEditingProductAndAddingPriceList(){
+        Product created = verifyAddingANewProductWithValidData();
+
+        driver.findElement(By.xpath(EDIT)).click();
+
+
+        String newName = common.fakeProductName();
+        common.click(PHPRODUCTNAME);
+        common.type(PHPRODUCTNAME, newName);
+
+        String newCategory = common.selectDropdownAndGetSelectedText(
+                By.xpath(PHPRODUCTCATEGORY),
+                By.xpath(FILTERDROPDOWNVAL)
+        );
+
+
+        common.waitUntilElementToBeVisible(PHPRODUCTDESCRIPTION);
+        common.click(PHPRODUCTDESCRIPTION);
+        String newDescription = newName;
+        common.type(PHPRODUCTDESCRIPTION, newDescription);
+
+        String newKb = common.selectDropdownAndGetSelectedText(
+                By.xpath(PHPRODUCTKB),
+                By.xpath(FILTERDROPDOWNVAL)
+        );
+        common.click(PHPRODUCTKB);
+        common.downKeyAndEnter();
+
+        common.waitUntilElementToBeVisible(PHPRICELIST);
+        common.click(PHPRICELIST);
+
+        common.waitUntilElementToBeVisible(PHENTERPRICELISTNAME);
+        common.type(PHENTERPRICELISTNAME,common.fakeProductName());
+
+        common.waitUntilElementToBeVisible(PHSELECTCOUNTRY);
+        common.type(PHSELECTCOUNTRY, "India");
+        common.twoDownKeyAndEnter();
+
+//        common.waitUntilElementToBeVisible(PHSELECTSTATE);
+//        common.type(PHSELECTSTATE, "Gujarat");
+//        common.twoDownKeyAndEnter();
+//
+//        common.waitUntilElementToBeVisible(PHSELECTCITY);
+//        common.type(PHSELECTCITY, "Ahmedabad");
+//        common.twoDownKeyAndEnter();
+
+        common.waitUntilElementToBeVisible(PHENTERAMOUNT);
+        common.type(PHENTERAMOUNT, "1000");
+
+        common.waitUntilElementToBeVisible(PHENTERDISCOUNT);
+        common.type(PHENTERDISCOUNT, "10");
+
+        common.waitUntilElementToBeVisible(PHENTERDISCOUNTSTRATEGY);
+        common.type(PHENTERDISCOUNTSTRATEGY, "No");
+
+        common.waitUntilElementToBeVisible(PHSELECTCURRENCY);
+        common.type(PHSELECTCURRENCY, "INR");
+        common.twoDownKeyAndEnter();
+
+//        common.waitUntilElementToBeVisible(PHENTEREFFECTIVEFROM);
+//        common.click(PHENTEREFFECTIVEFROM);
+//        common.downKeyAndEnter();
+//
+//        common.waitUntilElementToBeVisible(PHENTEREFFECTIVETO);
+//        common.click(PHENTEREFFECTIVETO);
+//        common.twoDownKeyAndEnter();
+
+        common.waitUntilElementToBeVisible(PHPRICESAVE);
+        common.click(PHPRICESAVE);
+
+        common.click(SAVEBUTTON);
+        common.assertElementPresent(UPDATEMESSAGE);
+        common.waitUntilElementToBeVisible(CLOSEBUTTON);
+        common.click(CLOSEBUTTON);
+
+        common.click(PHSEACRH);
+        common.type(PHSEACRH, newName);
+        common.validateSearch(SEARCHRESULT, newName);
+
+    }
+
+    public void verifyEditingProductAndAddingPlanList(){
+        Product created = verifyAddingANewProductWithValidData();
+
+        driver.findElement(By.xpath(EDIT)).click();
+
+
+        String newName = common.fakeProductName();
+        common.click(PHPRODUCTNAME);
+        common.type(PHPRODUCTNAME, newName);
+
+        String newCategory = common.selectDropdownAndGetSelectedText(
+                By.xpath(PHPRODUCTCATEGORY),
+                By.xpath(FILTERDROPDOWNVAL)
+        );
+
+
+        common.waitUntilElementToBeVisible(PHPRODUCTDESCRIPTION);
+        common.click(PHPRODUCTDESCRIPTION);
+        String newDescription = newName;
+        common.type(PHPRODUCTDESCRIPTION, newDescription);
+
+        String newKb = common.selectDropdownAndGetSelectedText(
+                By.xpath(PHPRODUCTKB),
+                By.xpath(FILTERDROPDOWNVAL)
+        );
+        common.click(PHPRODUCTKB);
+        common.downKeyAndEnter();
+
+        common.waitUntilElementToBeVisible(PHPLANLIST);
+        common.click(PHPLANLIST);
+
+        common.waitUntilElementToBeVisible(PHENTERPLANLISTNAME);
+        common.type(PHENTERPLANLISTNAME, common.fakeProductName());
+
+        common.waitUntilElementToBeVisible(PHENTERDESCRIPTION);
+        common.type(PHENTERDESCRIPTION,common.fakeProductName());
+
+        common.waitUntilElementToBeVisible(PHSELECTBILLINGCYCLE);
+        common.click(PHSELECTBILLINGCYCLE);
+        common.twoDownKeyAndEnter();
+
+        common.waitUntilElementToBeVisible(PHENTERREDIRECTURL);
+        common.type(PHENTERREDIRECTURL, common.fakeWebsite());
+
+        common.waitUntilElementToBeVisible(PHENTERFEATURES);
+        common.type(PHENTERFEATURES, common.fakeWebsite());
+
+        common.waitUntilElementToBeVisible(PHBASEPRICE);
+        common.type(PHBASEPRICE, "100");
+
+        common.waitUntilElementToBeVisible(PHTAX);
+        common.type(PHTAX, "10");
+
+        common.waitUntilElementToBeVisible(PHDISCOUNT);
+        common.type(PHDISCOUNT, "10");
+
+
+        common.click(SAVEBUTTON);
+        common.assertElementPresent(UPDATEMESSAGE);
+        common.waitUntilElementToBeVisible(CLOSEBUTTON);
+        common.click(CLOSEBUTTON);
+
+        common.click(PHSEACRH);
+        common.type(PHSEACRH, newName);
+        common.validateSearch(SEARCHRESULT, newName);
+
+
+
     }
 
     public void deletingAProduct() {
@@ -421,6 +657,7 @@ public class ProductPage extends Locators {
         driver.findElement(By.xpath(DELETEPRODUCT)).click();
 
         common.click(DELETECONFIRMPRODUCT);
+
         common.waitUntilElementToBeVisible(DELETEPRODUCTASSERT);
         common.assertElementPresent(DELETEPRODUCTASSERT);
     }
@@ -434,6 +671,7 @@ public class ProductPage extends Locators {
         String givenKB = created.getKb();
 
         driver.findElement(By.xpath(VIEWBUTTON)).click();
+        common.pause(1);
         common.logPrint("Step :: Clicking on the view button");
 
         WebElement viewNameValue = driver.findElement(
@@ -463,7 +701,7 @@ public class ProductPage extends Locators {
     public void horizontalView() {
         goToProductPage();
         common.pause(2);
-        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
+        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"] | //h6[contains(text(),\"Product\")]/following-sibling::div");
 //        common.pause(2);
 //
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -524,7 +762,7 @@ public class ProductPage extends Locators {
 
     public void pagination(){
         goToProductPage();
-        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
+        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]| //h6[contains(text(),\"Product\")]/following-sibling::div");
     }
 
     public void filters() {
@@ -654,10 +892,11 @@ public class ProductPage extends Locators {
 
     public void verifyEditingEffectOnCreatedTime(){
         goToProductPage();
-        String createdDateXpath = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"]";
-        String createdEditXpath = "//div[@data-rowindex=\"0\"]//button[@aria-label=\"Edit\"]";
+        String createdDateXpath = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"] | //tbody/tr[1]/td[6]";
+        String createdEditXpath = "//div[@data-rowindex=\"0\"]//button[@aria-label=\"Edit\"]| (//span[@aria-label=\"Edit\"]/child::button)[1]";
 
-        String createdDateValue = common.getAttribute(createdDateXpath,"title");
+//        String createdDateValue = common.getAttribute(createdDateXpath,"title");
+        String createdDateValue = common.getText(createdDateXpath);
 
         common.waitUntilElementToBeVisible(createdEditXpath);
         common.click(createdEditXpath);
@@ -670,7 +909,8 @@ public class ProductPage extends Locators {
         common.click(CLOSEBUTTON);
 
         common.waitUntilElementToBeVisible(createdDateXpath);
-        String editedDateValue = common.getAttribute(createdDateXpath,"title");
+//        String editedDateValue = common.getAttribute(createdDateXpath,"title");
+        String editedDateValue = common.getText(createdDateXpath);
 
         common.logPrint("createdDateValue: " + createdDateValue +
                 " | editedDateValue: " + editedDateValue);

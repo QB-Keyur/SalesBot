@@ -106,6 +106,28 @@
         </classes>
     </test>
 
+    <!-- Verify edit product functionality -->
+    <test name="Verify edit product and add a price list functionality">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="verifyEditingProductAndAddingPriceList"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify edit product functionality -->
+    <test name="Verify edit product and add a plan list functionality">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="verifyEditingProductAndAddingPlanList"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <!-- Verify delete product functionality -->
     <test name="Verify delete product functionality">
         <classes>
@@ -123,17 +145,6 @@
             <class name="Tests.ProductTest">
                 <methods>
                     <include name="viewProduct"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <!-- Verify horizontal view functionality -->
-    <test name="Verify horizontal view functionality">
-        <classes>
-            <class name="Tests.ProductTest">
-                <methods>
-                    <include name="horizontalView"/>
                 </methods>
             </class>
         </classes>
@@ -171,5 +182,17 @@
             </class>
         </classes>
     </test>
+
+    <!-- Verify horizontal view functionality -->
+    <test name="Verify horizontal view functionality">
+        <classes>
+            <class name="Tests.ProductTest">
+                <methods>
+                    <include name="horizontalView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 
 </suite>
