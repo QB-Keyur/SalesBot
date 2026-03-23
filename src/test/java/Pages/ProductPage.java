@@ -235,7 +235,19 @@ public class ProductPage extends Locators {
 
                 List<WebElement> pageCells = driver.findElements(cellLocator);
                 List<String> pageValues = pageCells.stream()
-                        .map(e -> e.getAttribute("title"))
+                        .map(e -> {
+                            String value = e.getAttribute("title");
+
+                            if (value == null || value.trim().isEmpty()) {
+                                value = e.getText();
+                            }
+
+                            if (value == null || value.trim().isEmpty()) {
+                                value = e.getAttribute("innerText");
+                            }
+
+                            return value != null ? value.trim() : null;
+                        })
                         .collect(Collectors.toList());
 
                 allData.addAll(parseValues(pageValues, type, dateFormat));

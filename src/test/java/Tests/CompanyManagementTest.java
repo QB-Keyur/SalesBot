@@ -141,7 +141,7 @@ public class CompanyManagementTest extends BasePage {
     public void validateSorting(){
         loginWithAdminUser();
         companyManagementPage.goToCompanyManagementPage();
-        productPage.validateSorting(2, "", null, SortOrder.DESCENDING,"//div[@class='MuiBox-root css-a7l4db']");
+        productPage.validateSorting(2, "", null, SortOrder.DESCENDING,"//div[@class='MuiBox-root css-a7l4db'] | //h6[text()='Company Management']/following-sibling::div");
     }
 
     @Test

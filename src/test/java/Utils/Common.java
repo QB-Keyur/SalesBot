@@ -1442,7 +1442,7 @@ public class Common extends Locators {
     public static void printCurrentTime(String time) {
         // Get the current time in IST
         SimpleDateFormat istFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
-        istFormat.setTimeZone(TimeZone.getTimeZone("CST"));
+        istFormat.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
         String cstTime = istFormat.format(new Date());
         System.out.println("<br>Script " + time + ":" + cstTime);
         Reporter.log("<br>Script " + time + ":" + cstTime);
@@ -3023,7 +3023,7 @@ public class Common extends Locators {
 
         List<WebElement> rows = wait.until(
                 ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                        By.xpath("//div[@role='rowgroup']/child::div")
+                        By.xpath("//div[@role='rowgroup']/child::div | //tbody/tr/td[2]")
                 )
         );
 
@@ -3034,7 +3034,7 @@ public class Common extends Locators {
 
                 String cellXpath =
                         "//div[@aria-colindex='" + col +
-                                "' and @aria-rowspan='1']";
+                                "' and @aria-rowspan='1'] | //tbody/tr/td[2]";
 
                 try {
                     WebElement cell = wait.until(
@@ -3077,7 +3077,7 @@ public class Common extends Locators {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(APPLYFILTER))).click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[@aria-rowspan='1']")
+                By.xpath("//div[@aria-rowspan='1']|//tbody/tr[1]")
         ));
     }
 

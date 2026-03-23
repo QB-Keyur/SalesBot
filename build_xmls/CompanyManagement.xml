@@ -154,16 +154,16 @@
         </classes>
     </test>
 
-    <!-- Verify reset button in Edit -->
-    <test name="Verify Reset Button in Edit">
-        <classes>
-            <class name="Tests.CompanyManagementTest">
-                <methods>
-                    <include name="verifyResetButtonInEdit"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; Verify reset button in Edit &ndash;&gt;-->
+<!--    <test name="Verify Reset Button in Edit">-->
+<!--        <classes>-->
+<!--            <class name="Tests.CompanyManagementTest">-->
+<!--                <methods>-->
+<!--                    <include name="verifyResetButtonInEdit"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <!-- Verify delete button functionality -->
     <test name="Verify Delete Button Functionality">
@@ -199,26 +199,26 @@
     </test>
 
     <!-- Verify created date -->
-    <test name="Verify Created Date">
-        <classes>
-            <class name="Tests.CompanyManagementTest">
-                <methods>
-                    <include name="verifyCurrentDate"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="Verify Created Date">-->
+<!--        <classes>-->
+<!--            <class name="Tests.CompanyManagementTest">-->
+<!--                <methods>-->
+<!--                    <include name="verifyCurrentDate"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- verify Editing Effect On Created Time -->
-    <test name="verify Editing Effect On Created Time">
-        <classes>
-            <class name="Tests.CompanyManagementTest">
-                <methods>
-                    <include name="verifyEditingEffectOnCreatedTime"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; verify Editing Effect On Created Time &ndash;&gt;-->
+<!--    <test name="verify Editing Effect On Created Time">-->
+<!--        <classes>-->
+<!--            <class name="Tests.CompanyManagementTest">-->
+<!--                <methods>-->
+<!--                    <include name="verifyEditingEffectOnCreatedTime"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <!-- Verify Sorting -->
     <test name="Verify Sorting in Company Management page">

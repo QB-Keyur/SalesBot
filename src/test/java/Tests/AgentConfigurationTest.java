@@ -46,7 +46,7 @@ public class AgentConfigurationTest extends BasePage {
         common.logPrint("Verifying sorting functionality on the Agent Configuration page");
         loginWithAdminUser();
         agentConfigurationPage.goToAgentConfigurationPage();
-        productPage.validateSorting(3, "", null, SortOrder.DESCENDING,"//div[@class=\"MuiBox-root css-a7l4db\"]");
+        productPage.validateSorting(3, "", null, SortOrder.DESCENDING,"//div[@class=\"MuiBox-root css-a7l4db\"] | //h6[normalize-space()='Agent Configuration']/following::div[1]");
     }
 
     @Test
