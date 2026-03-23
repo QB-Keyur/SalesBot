@@ -50,7 +50,7 @@ public class ProductTest extends BasePage {
         loginWithAdminUser();
         productPage.goToProductPage();
         productPage.validateSorting(2, "", null, SortOrder.ASCENDING,"//div[@class=\"MuiBox-root css-a7l4db\"] | //h6[text()='Product']/following-sibling::div");
-        //
+
     }
 
     @Test

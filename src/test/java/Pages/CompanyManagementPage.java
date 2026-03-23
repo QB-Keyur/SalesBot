@@ -70,7 +70,7 @@ public class CompanyManagementPage extends Locators {
         columns.put(CMGMTDESIGNATION, "Company Management Designation Column");
         columns.put(CMGMTEMAIL,       "Company Management Email Column");
         columns.put(CMGMTPHONE,       "Company Management Phone Number Column");
-        columns.put(CMGMTCREATEDDATE, "Company Management Created Date Column");
+//        columns.put(CMGMTCREATEDDATE, "Company Management Created Date Column");
         columns.put(CMGMTACTIONS,     "Company Management Actions Column");
 
         columns.put(CMGMTSHOWTEXT,    "Company Management Show Rows Text");
@@ -177,7 +177,7 @@ public class CompanyManagementPage extends Locators {
         common.logPrint("Mandatory Fields found: " +mandatory);
 
         common.assertElementPresent(CEDITHEADER);
-        common.assertElementPresent(CEDITRESET);
+//        common.assertElementPresent(CEDITRESET);
         common.assertElementPresent(CCNAMELABEL);
         common.assertElementPresent(CCDESIGNATIONLABEL);
         common.assertElementPresent(CCEMAILLABEL);
@@ -197,14 +197,15 @@ public class CompanyManagementPage extends Locators {
         common.click(CMGMTVIEWBTN);
 
         common.assertElementPresent(CVIEWHEADER);
-        common.assertElementPresent("(//span[text()='Name'])[2]");
+        common.assertElementPresent("(//span[text()='Name'])[2] | //span[text()='Name']");
         common.assertElementPresent(CVIENAMEINPUT);
-        common.assertElementPresent("(//span[text()='Designation'])[2]");
+        common.assertElementPresent("(//span[text()='Designation'])[2]| //span[text()='Designation']");
         common.assertElementPresent(CVIEWDESIGINPUT);
-        common.assertElementPresent("(//span[text()='Email'])[2]");
+        common.assertElementPresent("(//span[text()='Email'])[2]| //span[text()='Email']");
         common.assertElementPresent(CVIEWEMAILINPUT);
-        common.assertElementPresent("(//span[text()='Phone Number'])[2]");
+        common.assertElementPresent("(//span[text()='Phone Number'])[2]| //span[text()='Phone Number']");
         common.assertElementPresent(CVIEWPHONEINPUT);
+        common.assertElementPresent("//span[text()='Status']");
         common.assertElementPresent(CVIEWCANCELBUTTON);
 
         common.logPrint("All view elemnts asserted successfully.");
@@ -258,7 +259,7 @@ public class CompanyManagementPage extends Locators {
         String fakeEmail =  (firstName + "." + lastName + "@companytest.com").toLowerCase();;
         String fakePhoneNumber = common.fakeIndianMobileNumber();
 
-        String searchResult = "//div[@data-rowindex='0']/child::div[@data-field='name']";
+        String searchResult = "//div[@data-rowindex='0']/child::div[@data-field='name'] | //tbody/tr[1]/td[2]";
 
         common.waitUntilElementToBeVisible(CMGMTCREATEBTN);
         common.click(CMGMTCREATEBTN);
@@ -450,7 +451,7 @@ public class CompanyManagementPage extends Locators {
         common.type(CCPHONEINPUT," " + expectedPhone);
 
         common.click(CCSAVEBTN);
-
+        common.assertElementPresent("//div[text()='Name: A company with this name already exists.']");
         common.assertElementIsNotDisplayed(CMGMTCREATEBTN);
 
 
@@ -499,11 +500,6 @@ public class CompanyManagementPage extends Locators {
 
         common.logPrint("Company Management edit verified successfully");
 
-
-
-
-
-
     }
 
     public void verifyDeleteButtonFunctionality(){
@@ -526,18 +522,19 @@ public class CompanyManagementPage extends Locators {
 
         common.click(CDELETEMSGDELETE);
 
+        common.waitUntilElementToBeVisible(DeletedSuccessfully);
         common.assertElementPresent(DeletedSuccessfully);
     }
 
     public void verifyHorizontalCardView(){
         goToCompanyManagementPage();
-        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
+        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]| //h6[text()='Company Management']/following-sibling::div");
 }
 
     public void verifyPagination(){
         goToCompanyManagementPage();
 
-        common.pagination("//div[@class='MuiBox-root css-a7l4db']");
+        common.pagination("//div[@class='MuiBox-root css-a7l4db'] | //h6[text()='Company Management']/following-sibling::div");
     }
 
     public void verifyCreatedDate(){

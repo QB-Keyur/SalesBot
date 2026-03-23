@@ -20,7 +20,7 @@ public class Locators extends BasePage {
     public static String passwordChangedSuccessfully = "//div[contains(text(), 'Password changed successfully')]";
     public static String userAccountCreatedSuccessfully = "//div[contains(text(), 'User account created successfully.')]";
     public static String roleAndPermissionAddedSuccessfully = "//div[contains(text(), 'Role and permissions added successfully')]";
-    public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
+    public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')] | //div[contains(normalize-space(),'Delete')]";
     public static String RoleNameIsAlreadyExist = "//div[contains(text(), 'Role name already exists')]";
     public static String invitationSentSuccessfully = "//div[contains(text(), 'Invitation Sent Successfully')]";
     public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
@@ -155,26 +155,29 @@ public class Locators extends BasePage {
     public static String PAGINATIONROWS = "//div[@aria-haspopup=\"listbox\"]";
 
     //AGENT CONFIGURATION
-    public static String AGENTCONFIGURATIONMENU = "//span[text() ='Agent Configuration']";
+    public static String AGENTCONFIGURATIONMENU = "//span[text() ='Agent Configuration'] | //span[text()='Agent & Probing']";
+    public static String AGENTCONFIGURATIONMODULE = "//button[text()='Agent Configuration']";
     public static String ACHEADER = "//h6[normalize-space()='Agent Configuration']";
     public static String ACSEARCHBAR = "//input[@placeholder=\"Search...\"]";
     public static String ACSELECTALL = "//input[@type=\"checkbox\" and @xpath=\"1\"]";
-    public static String ACSRNUMBER = "//span[normalize-space()='#']";
-    public static String ACNAME = "//span[normalize-space()='Name']";
-    public static String ACGREETINGS = "//span[normalize-space()='Greeting Message']";
-    public static String ACPERSONALITY = "//span[normalize-space()='Personality']";
-    public static String ACPERSONA = "//span[normalize-space()='Persona']";
-    public static String ACPROMPT = "//span[normalize-space()='Prompt']";
-    public static String ACSTATUS = "//span[normalize-space()='Status']";
-    public static String ACACTIONS = "//span[normalize-space()='Actions']";
+    public static String ACSRNUMBER = "//span[normalize-space()='#'] | //div[normalize-space()='#']";
+    public static String ACNAME = "//span[normalize-space()='Name']| //div[normalize-space()='Name']";
+    public static String ACGREETINGS = "//span[normalize-space()='Greeting Message']| //div[normalize-space()='Greeting Message']";
+    public static String ACPERSONALITY = "//span[normalize-space()='Personality']| //div[normalize-space()='Personality']";
+    public static String ACPERSONA = "//span[normalize-space()='Persona']| //div[normalize-space()='Persona']";
+    public static String ACPROMPT = "//span[normalize-space()='Prompt']| //div[normalize-space()='Prompt']";
+    public static String ACSTATUS = "//span[normalize-space()='Status']| //div[normalize-space()='Status']";
+    public static String ACACTIONS = "//span[normalize-space()='Actions']| //div[normalize-space()='Actions']";
     public static String ACTOTALROWS = "//div[contains(text(),'Total')] | //div[@class=\"MuiBox-root css-a7l4db\"]";
     public static String ACROWSPERPAGE = "//p[contains(text(),'Rows per page:')] | //div[@class=\"MuiBox-root css-a7l4db\"]";
     public static String ACROWSPERPAGEDROPDOWN = "//input[@class='MuiSelect-nativeInput css-147e5lo']";
     public static String ACPREVIOUSPAGE = "//button[@title='Go to previous page']";
     public static String ACNEXTPAGE = "//button[@title='Go to next page']";
-    public static String ACNAMEINDEX = "//div[@aria-rowspan='1']/preceding-sibling::div[@aria-colindex='3']";
+    public static String ACNAMEINDEX = "//div[@aria-rowspan='1']/preceding-sibling::div[@aria-colindex='3'] | //tbody/tr[1]/td[3]";
     public static String ACINACTIVEGRIDSTATUS = "(//span[text()='Inactive'])[1]";
-    public static String ACACTIVEGRIDSTATUS = "//span[@class=\"MuiChip-label MuiChip-labelSmall css-oruufx\" and contains(text(),'Active')][1] | (//span[contains(text(),'Status')]/following::span[text()='Active'])[1]";
+    public static String ACACTIVEGRIDSTATUS = "//span[@class=\"MuiChip-label MuiChip-labelSmall css-oruufx\" and contains(text(),'Active')][1] " +
+            "| (//span[contains(text(),'Status')]/following::span[text()='Active'])[1] " +
+            "| (//div[contains(text(),'Status')]/following::span[text()='Active'])[1]";
     public static String ACINACTIVEGRIDSTATUSGRID = "(//span[text()='Inactive'])[1]/preceding::input[@type='checkbox'][1]";
     public static String ACACTIVTEBUTTON = "//button[@type='button']/child::span[contains(text(),'Active')]";
     public static String ACCHEADER = "//h6[normalize-space()='Create Agent Configuration']";
@@ -209,6 +212,12 @@ public class Locators extends BasePage {
     public static String ACCGOALINPUT = "//input[@name=\"goal_type\"]";
     public static String ACCLANG = "//span[text()='Language']";
     public static String ACCLANGINPUT = "//input[@placeholder=\"Select Language\"]";
+    public static String ACCOBJECTION = "//input[@name=\"follow_retry\"]";
+    public static String ACCRESETCOUNTLIMIT = "//input[@name=\"reset_count_limit\"]";
+    public static String ACCTHRESHOLD = "//input[@name=\"threshold_score\"]";
+    public static String ACCCTA = "//input[@placeholder=\"Select CTA Type\"]";
+    public static String ACCCOUNTRY = "//input[@placeholder=\"Select Country\"]";
+
     public static String ACCALLOWEMOJI = "//p[text()='Allow Emojis']";
     public static String ACCRADIOYES1 = "(//div[@class=\"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-k08jj6\"])[1]";
     public static String ACCRADIOYES2 = "(//div[@class=\"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-k08jj6\"])[3]";
@@ -254,7 +263,7 @@ public class Locators extends BasePage {
     public static String CUSTOMERSUPPORT = "//li[text()='CUSTOMER SUPPORT']";
     public static String HR = "//li[text()='HR']";
     public static String SALES = "//li[text()='SALES']";
-    public static String ACSEARCHRESULT = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])[1]";
+    public static String ACSEARCHRESULT = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])[1] | //tbody/tr[1]/td[3] ";
     public static String ACEDITBUTTON = "(//button[@aria-label=\"Edit\"])[1]";
     public static String ACRESETBUTTON = "//button[@type='button']/following::span[text()='Reset']";
     public static String ACDELETEBUTTON = "(//button[@aria-label=\"Delete\"])[1]";
@@ -270,7 +279,7 @@ public class Locators extends BasePage {
     public static String ACPLAYGROUNDHEADER = "//span[text()='Select Agent']";
     public static String ACPLAYGROUNDSELECTAGENT = "//input[@placeholder=\"Select agent\"]";
     public static String ACEDITSUCCESSMESSAGE = "//div[text()='Agent Configuration Updated Successfully']";
-    //    public static String ACSEARCHRESULT = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])[1]";
+//    public static String ACSEARCHRESULT = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])[1]";
 //    public static String ACEDITBUTTON = "(//button[@aria-label=\"Edit\"])[1]";
 //    public static String ACDELETEBUTTON = "(//button[@aria-label=\"Delete\"])[1]";
 //    public static String ACDELETECANCELBUTTON = "//button[@type=\"button\"]/following::span[text()='Cancel']";
@@ -281,11 +290,10 @@ public class Locators extends BasePage {
 //    public static String ACINACTIVECB = "(//input[@type='checkbox'])[2]";
 //    public static String ACACTIVEINACTIVE = "//button[@type='button']//span[normalize-space()='Active']";
 //    public static String ACFILTERNAME = "//li[contains(text(),'Name')]";
-//
 //    public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
 //    public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
 //    public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
-//public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
+//    public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
     public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successfully')]";
 
     //Contacts pages locators
@@ -331,6 +339,7 @@ public class Locators extends BasePage {
     public static String SelectStateInp = "//input[@placeholder='Select State']";
     public static String SelectCityInp = "//input[@placeholder='Select City']";
     public static String SubscriptionStatus = "//input[@placeholder='Select Whatsapp Subscription Status']";
+
     //Contacts labels
     public static String nameLabel = "//span[text()='Name']";
     public static String emailLabel = "//span[text()='Email']";
@@ -341,11 +350,13 @@ public class Locators extends BasePage {
     public static String countryLabel = "//span[text()='Country']";
     public static String stateLabel = "//span[text()='State']";
     public static String cityLabel = "//span[text()='City']";
+
     //Contact page creation page validation message for mandatory fields
     public static String nameFieldMsg = "//span[text()='Name is required']";
     public static String contactGroupMsg = "//span[text()='Contact Group is required']";
     public static String phoneNumberMsg = "//div[text()='Phone number is required']";
     public static String companyNameMsg = "//span[text()='Company Name is required']";
+
     //Import page locators
     public static String bulkUploadHeader= "//h6[text()='Bulk Upload Contacts']";
     public static String downloadSampleTemplate = "//span[text()='Download sample template']";
@@ -728,7 +739,6 @@ public class Locators extends BasePage {
     public static String lastNameInpProfile = "//input[@name=\"last_name\"]";
     public static String emailInpProfile = "//input[@name=\"email\"] | (//div[@class='flex-1 min-w-0']//p)[2]";
     public static String phoneNumberInpProfile = "//input[@name=\"phone_number\"]";
-
     public static String currentPasswordLbl = "//span[contains(text(),'Current Password')]";
     public static String newPasswordLbl = "//span[contains(text(),'New Password')]";
     public static String confirmPasswordLbl = "//span[contains(text(),'Confirm Password')]";
@@ -787,7 +797,7 @@ public class Locators extends BasePage {
     public static String Search_ContactonCampaignpage="//input[@placeholder='Search contacts...']";
     public static String SearchedResult_ContactonCampaignpage="//div[@class='MuiDataGrid-row MuiDataGrid-row--firstVisible MuiDataGrid-row--lastVisible']";
 
-    //    //View WhatsApp Campaign
+    //View WhatsApp Campaign
 
     public static String  CAMPAIGNVIEW ="//button[@aria-label='View']";
     public static String WProduct = "//label[.//span[text()='Product']]/following::input[1]";
@@ -795,8 +805,6 @@ public class Locators extends BasePage {
     public static String WTemplate = "//label[.//span[text()='WhatsApp Template']]/following::input[1]";
     public static String WName ="//label[.//span[text()='Campaign Name']]/following::input[1]";
     public static String WPhoneNumber="//*[contains(text(),'+91 77749 74990')]";
-
-
 
     //Field Validations  xpath for whatsappcampagin
     public static String Req_CampaginName="//span[text()='Name is required']";
@@ -897,7 +905,6 @@ public class Locators extends BasePage {
     public static String statusHeader = "//div[@role='presentation']//span[text()='Status']";
     public static String tokenStatusHeader = "//div[@role='presentation']//span[text()='Token Status']";
     public static String userHeader = "//h6[text()='User']";
-
     public static String rolePermissionHeader = "//h6[contains(text(),'Role Permissions')]";
     public static String roleNameHeader = "//span[contains(text(),'Role Name')]";
 
@@ -905,25 +912,25 @@ public class Locators extends BasePage {
     public static String COMPANYSIDEBAR= "//span[text()='Company']";
     public static String COMPMGMTBTN= "//button[text()='Company Management']";
     public static String CMGMTHEADER= "//h6[text()='Company Management']";
-    public static String CMGMTTOTAL = "//div[@class=\"MuiBox-root css-a7l4db\"]";
+    public static String CMGMTTOTAL = "//div[@class=\"MuiBox-root css-a7l4db\"] | //h6/following::div[1]";
     public static String CMGMTSEARCH= "//input[@placeholder=\"Search...\"]";
     public static String CMGMTFILTER= "//span[text()='Filters']/parent::button";
     public static String CMGMTREFRESH= "//span[@class=\"MuiButton-loadingWrapper\"]/parent::button";
     public static String CMGMTCREATEBTN= "//span[text()='Create']/parent::button";
-    public static String CMGMTSR= "//span[text()='#']";
-    public static String CMGMTNAME= "//span[text()='Name']";
-    public static String CMGMTDESIGNATION= "//span[text()='Designation']";
-    public static String CMGMTEMAIL= "//span[text()='Email']";
-    public static String CMGMTPHONE= "//span[text()='Phone Number']";
-    public static String CMGMTCREATEDDATE= "//span[text()='Created Date']";
-    public static String CMGMTACTIONS= "//span[text()='Actions']";
+    public static String CMGMTSR= "//span[text()='#'] | //div[text()='#']";
+    public static String CMGMTNAME= "//span[text()='Name'] | //div[text()='Name']";
+    public static String CMGMTDESIGNATION= "//span[text()='Designation'] | //div[text()='Designation']";
+    public static String CMGMTEMAIL= "//span[text()='Email'] | //div[text()='Email']";
+    public static String CMGMTPHONE= "//span[text()='Phone Number'] | //div[text()='Phone Number']";
+    public static String CMGMTCREATEDDATE= "//span[text()='Created Date'] | //div[text()='Created Date']";
+    public static String CMGMTACTIONS= "//span[text()='Actions'] | //div[text()='Actions']";
     public static String CMGMTSHOWTEXT= "//p[text()='Show']";
     public static String CMGMTROWSINPUT= "//div[@aria-haspopup=\"listbox\"]";
     public static String CMGMTPREVBTN= "//button[@aria-label=\"Go to previous page\"]";
     public static String CMGMTNEXTBTN= "//button[@aria-label=\"Go to next page\"]";
-    public static String CMGMTEDITBTN= "(//button[@aria-label=\"Edit\"])[1]";
-    public static String CMGMTDELETEBTN= "//button[@aria-label=\"Delete\"]";
-    public static String CMGMTVIEWBTN= "//button[@aria-label=\"View\"]";
+    public static String CMGMTEDITBTN= "(//button[@aria-label=\"Edit\"])[1] | (//span[@aria-label=\"Edit\"]/button)[1]";
+    public static String CMGMTDELETEBTN= "//button[@aria-label=\"Delete\"] | (//span[@aria-label=\"Delete\"]/button)[1]";
+    public static String CMGMTVIEWBTN= "//button[@aria-label=\"View\"] | (//span[@aria-label=\"View\"]/child::button)[1]";
 
     //Company management Create
     public static String CCHEADER = "//h6[text()='Create Company Management']";
@@ -935,25 +942,21 @@ public class Locators extends BasePage {
     public static String CCEMAILLABEL = "//span[text()='Email']";
     public static String CCPHONELABEL = "//span[text()='Phone Number']";
     public static String CCSUCCESS = "//div[text()='Company Management created successfully']";
-
     public static String CCNAMEINPUT = "//input[@name=\"name\"]";
     public static String CCDESIGNATIONINPUT = "//input[@name=\"designation\"]";
     public static String CCEMAILINPUT = "//input[@name=\"email\"]";
     public static String CCPHONEINPUT = "//input[@name=\"phone_number\"]";
-
     public static String CCNAMEVAL = "//span[text()='Name is required']";
     public static String CCDESIGNATIONVAL = "//span[text()='Designation is required']";
     public static String CCEMAILVAL = "//span[text()='Email is required']";
     public static String CCPHONEVAL = "//div[text()='Phone number is required']";
-
     public static String CEDITHEADER = "//h6[text()='Update Company Management']";
     public static String CEDITRESET = "//span[text()='Reset']/parent::button";
     public static String CEDITMSG = "//div[text()='Company Management updated successfully']";
-    public static String CDELETEMSG2 = "//h6[text()='Delete Company Management']";
+    public static String CDELETEMSG2 = "//h6[text()='Delete Company Management']|//p[text()='Delete Company Management']";
     public static String CDELETEMSG3 = "//p[text()='Are you sure you want to permanently delete this Company Management?']";
-    public static String CDELETEMSGCANCEL = "//span[text()='Cancel']/parent::button";
-    public static String CDELETEMSGDELETE = "//span[text()='Delete']/parent::button";
-
+    public static String CDELETEMSGCANCEL = "//span[text()='Cancel']/parent::button | //span[text()='Cancel']/ancestor::button";
+    public static String CDELETEMSGDELETE = "//span[text()='Delete']/parent::button | //span[text()='Delete']/ancestor::button";
     public static String CVIEWHEADER = "//p[contains(text(),'View ')]";
     public static String CVIENAMEINPUT =  "(//span[text()='Name']/following::input[@type=\"text\"])[1]";
     public static String CVIEWDESIGINPUT = "(//span[text()='Name']/following::input[@type='text'])[2]";

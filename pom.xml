@@ -18,7 +18,7 @@
 
         <selenium.version>4.12.0</selenium.version>
         <testng.version>7.9.0</testng.version>
-        <webdrivermanager.version>5.8.0</webdrivermanager.version>
+        <webdrivermanager.version>6.3.3</webdrivermanager.version>
 <!--        if you are getting issue in chromedriver version and Chrome version delete the folder on this path C:\Users\Admin\.cache-->
 
         <allure.version>2.25.0</allure.version>
@@ -75,6 +75,12 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.13</version>
         </dependency>
 
         <!-- Excel (Apache POI) -->
@@ -148,31 +154,32 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.2.5</version>
                 <configuration>
                     <suiteXmlFiles>
 
-                            <!--Gopal-->
+<!--                        Gopal-->
 <!--                        <suiteXmlFile>build_xmls/SmokeSuite.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/Login.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/WhatsAppContact.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/UserManagement.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/profile.xml</suiteXmlFile>-->
 
-<!--                          Rohini-->
+<!--                        Rohini-->
 <!--                        <suiteXmlFile>build_xmls/LeadManagement.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/WhatsAppCampaign.xml</suiteXmlFile>-->
-                        <!--Keyur-->
+
+<!--                        Keyur-->
 <!--                        <suiteXmlFile>build_xmls/AgentConfiguration.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/KnowledgeBase.xml</suiteXmlFile>-->
-                        <suiteXmlFile>build_xmls/Product.xml</suiteXmlFile>
-<!--                        <suiteXmlFile>build_xmls/CompanyManagement.xml</suiteXmlFile>-->
+<!--                        <suiteXmlFile>build_xmls/Product.xml</suiteXmlFile>-->
+                        <suiteXmlFile>build_xmls/CompanyManagement.xml</suiteXmlFile>
 <!--                        <suiteXmlFile>build_xmls/CompanyPortfolio.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/WorkingHours.xml</suiteXmlFile>-->
 
 <!--                        <suiteXmlFile>build_xmls/WhatsAppIntegration.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/SMTPIntegration.xml</suiteXmlFile>-->
-<!--al                        <suiteXmlFile>build_xmls/WhatsAppTemplate.xml</suiteXmlFile>-->
+<!--                        <suiteXmlFile>build_xmls/WhatsAppTemplate.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/EmailTemplate.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/EmailCampaign.xml</suiteXmlFile>-->
 
@@ -189,14 +196,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.2.5</version>
             </plugin>
 
             <!-- Allure Report -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>2.12.0</version>
+                <version>2.13.0</version>
             </plugin>
 
         </plugins>

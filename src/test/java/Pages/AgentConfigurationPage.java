@@ -31,11 +31,15 @@ public class AgentConfigurationPage extends Locators {
         common.waitUntilElementToBeClickable(AGENTCONFIGURATIONMENU);
         common.click(AGENTCONFIGURATIONMENU);
 
+        common.waitUntilElementToBeClickable(AGENTCONFIGURATIONMODULE);
+        common.click(AGENTCONFIGURATIONMODULE);
+
         common.logPrint("Navigated to Agent Configuration Page and fully loaded.");
 
     }
 
-    public void verifyColumnsAndElemensts() {
+    public void verifyColumnsAndElemensts()
+    {
         goToAgentConfigurationPage();
 
         // LinkedHashMap preserves order so logs are easier to read
@@ -52,7 +56,7 @@ public class AgentConfigurationPage extends Locators {
         columns.put(ACNAME, "Name");
         columns.put(ACGREETINGS, "Greetings");
         columns.put(ACPERSONALITY, "Personality");
-        columns.put(ACPERSONA, "Persona");
+//        columns.put(ACPERSONA, "Persona");
         columns.put(ACPROMPT, "Prompt");
         columns.put(ACSTATUS, "Status");
         columns.put(ACACTIONS, "Actions");
@@ -64,25 +68,30 @@ public class AgentConfigurationPage extends Locators {
 
         int failures = 0;
 
-        for (Map.Entry<String, String> entry : columns.entrySet()) {
+        for (Map.Entry<String, String> entry : columns.entrySet())
+        {
             String locator = entry.getKey();
             String friendlyName = entry.getValue();
-            try {
-
+            try
+            {
                 common.assertElementPresent(locator);
                 common.logPrint("Step :: Verified presence of: " + friendlyName);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 failures++;
                 String msg = "Missing element -> " + friendlyName + " (" + locator + ")";
                 common.logPrint(msg);
-
                 common.logPrint("DEBUG :: " + e.toString());
             }
         }
 
-        if (failures == 0) {
+        if (failures == 0)
+        {
             common.logPrint("Step :: All columns verified successfully.");
-        } else {
+        }
+        else
+        {
             common.logPrint("Step :: Column verification completed with " + failures + " missing element(s).");
         }
     }
@@ -300,7 +309,7 @@ public class AgentConfigurationPage extends Locators {
 
         goToAgentConfigurationPage();
         common.pause(2);
-        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
+        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"] | //h6[text()='Agent Configuration']/following::div[1]");
 
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 //
@@ -669,8 +678,8 @@ public class AgentConfigurationPage extends Locators {
         common.waitUntilElementToBeClickable(CREATE);
         driver.findElement(By.xpath(CREATE)).click();
 
-        common.click(ACCSELECTPERSONA);
-        common.click(SALES);
+//        common.click(ACCSELECTPERSONA);
+//        common.click(SALES);
 
         Map<String, String> agent = common.fillAgentForm();
 
@@ -691,14 +700,32 @@ public class AgentConfigurationPage extends Locators {
 
         common.waitUntilElementToBeClickable(ACCTIMEZONEINPUT).click();
         common.type(ACCTIMEZONEINPUT, "5:30");
+        common.pause(1);
         common.downKeyAndEnter();
 
-        common.waitUntilElementToBeVisible(ACCFOLLOWRETRYINPUT);
-        common.type(ACCFOLLOWRETRYINPUT, "2");
+//        common.waitUntilElementToBeVisible(ACCFOLLOWRETRYINPUT);
+//        common.type(ACCFOLLOWRETRYINPUT, "2");
 
         String english = "//li[text()='English']";
         common.waitUntilElementToBeClickable(ACCLANGINPUT).click();
         common.click(english);
+
+        common.waitUntilElementToBeVisible(ACCOBJECTION).click();
+        common.type(ACCOBJECTION, "2");
+
+        common.waitUntilElementToBeVisible(ACCRESETCOUNTLIMIT).click();
+        common.type(ACCRESETCOUNTLIMIT, "2");
+
+        common.waitUntilElementToBeClickable(ACCTHRESHOLD).click();
+        common.type(ACCTHRESHOLD,"75");
+
+        common.waitUntilElementToBeClickable(ACCCTA).click();
+        common.twoDownKeyAndEnter();
+
+        common.waitUntilElementToBeClickable(ACCCOUNTRY).click();
+        common.type(ACCCOUNTRY,"India");
+        common.pause(1);
+        common.downKeyAndEnter();
 
         common.click(SAVEBUTTON);
 
@@ -710,6 +737,8 @@ public class AgentConfigurationPage extends Locators {
         common.type(searchXpath, agentName);
         common.waitUntilElementToBeVisible(ACSEARCHRESULT);
         common.validateSearch(ACSEARCHRESULT, agentName);
+
+
 
         return agent;
     }
