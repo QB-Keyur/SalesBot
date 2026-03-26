@@ -191,6 +191,8 @@ public class CompanyPortfolioPage extends Locators {
         common.waitUntilElementToBeVisible(CPVIEWBTN);
         common.click(CPVIEWBTN);
 
+        common.logPrint(givenDesc);
+
 
         common.waitUntilElementToBeVisible(CVIEWHEADER);
         common.pause(1);
