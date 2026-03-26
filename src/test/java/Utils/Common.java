@@ -2258,8 +2258,7 @@ public class Common extends Locators {
     }
     // Company description
     public String generateCompanyDescription() {
-        return faker.company().name() + " is " + faker.company().catchPhrase()
-                + ". " + faker.lorem().sentence(10);
+        return faker.lorem().sentence(5);
     }
 
     public Map<String, String> fillAgentForm() {
@@ -2439,9 +2438,7 @@ public class Common extends Locators {
 
     public void validateHorizontalViewCardCount(String fallbackCountXpath) {
 
-        pause(2);
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         int totalRows = 0;
 
@@ -2523,7 +2520,7 @@ public class Common extends Locators {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement container = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//div[contains(@class,'infinite-scroll-component')]| //div[@class=\"MuiBox-root css-tvlt1v\"]")
+                        By.xpath("//div[contains(@class,'infinite-scroll-component')] | //span[text()='Create']/following::div[4]")
                 )
         );
 

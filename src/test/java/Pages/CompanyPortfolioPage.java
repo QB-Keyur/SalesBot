@@ -188,14 +188,21 @@ public class CompanyPortfolioPage extends Locators {
         String givenName = addedPortfolio[0];
         String givenDesc = addedPortfolio[1];
 
+        common.logPrint("Given Desc: " +givenDesc);
+        common.logPrint("Given Name: " +givenName);
+
         common.waitUntilElementToBeVisible(CPVIEWBTN);
         common.click(CPVIEWBTN);
 
+        common.logPrint(givenDesc);
 
         common.waitUntilElementToBeVisible(CVIEWHEADER);
         common.pause(1);
         String actualName        = common.getAttribute(CPCNAMEINPUT, "value");
-        String actualDesc = common.getText(CPCDESCINPUTVIEW);
+        String actualDesc = common.getAttribute(CPCDESCINPUT,"value");
+
+        common.logPrint("Actual Name "+actualName);
+        common.logPrint("Actual Desc "+actualDesc);
 
         Assert.assertEquals(givenName, actualName,
                 "Mismatch in Company Portfolio Name");

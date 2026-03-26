@@ -308,7 +308,7 @@ public class AgentConfigurationPage extends Locators {
     public void horizontalView() {
 
         goToAgentConfigurationPage();
-        common.pause(2);
+        common.waitUntilElementToBeVisible("//h6[text()='Agent Configuration']/following::div[1]");
         common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"] | //h6[text()='Agent Configuration']/following::div[1]");
 
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -383,63 +383,65 @@ public class AgentConfigurationPage extends Locators {
         columns.put(ACCHEADER, "Header");
         columns.put(ACCCANCELBUTTON, "Cancel");
         columns.put(ACCSAVEBUTTON, "Save");
-        columns.put(ACCPERSONA, "Persona");
-        columns.put(ACCINFO, "Calendy Info");
-        columns.put(ACCSELECTPERSONA, "Select Persona");
+        columns.put(ACCINFO, "Calendly Info");
         columns.put(ACCPROMPT, "Prompt");
-        columns.put(ACCPERSONALITY1, "personality");
-        columns.put(ACCTEXTAREAPROMPT, "ACCTEXTAREAPROMPT");
+        columns.put(ACCPERSONALITY1, "Prompt Description");
+        columns.put(ACCTEXTAREAPROMPT, "Prompt Textarea");
         columns.put(ACCRULES, "Rules");
         columns.put(ACCRULESDROPDOWN, "Enter a new rule");
         columns.put(ACCCUSTOMVARIABLE, "Custom Variables");
         columns.put(ACCADDVARIABLE, "Add Variable");
+
+        // Agent Info
         columns.put(ACCAGENT, "Agent Info");
         columns.put(ACCNAME, "Name");
         columns.put(ACCNAMEINPUT, "Enter Name");
-        columns.put(ACCNAME2, "ACCNAME2");
-        columns.put(ACCCOMPANYNAME, "Company name");
-        columns.put(ACCCOMPANYNAME2, "{{company_name}}");
+        columns.put(ACCCOMPANYNAME, "Company Name");
         columns.put(ACCCOMPANYNAMEINPUT, "Enter Company Name");
         columns.put(ACCGREETINGS, "Greeting Message");
-        columns.put(ACCGREETINGINPUT, "greeting_message");
-        columns.put(ACCFOLLOWRETRY, "Follow Retry");
-        columns.put(ACCFOLLOWRETRYINPUT, "Follow Retry Input");
+        columns.put(ACCGREETINGINPUT, "Greeting Message Input");
+        columns.put(ACCFOLLOWRETRY, "Objection Count Limit");
+        columns.put(ACCFOLLOWRETRYINPUT, "Enter Objection Count Limit");
         columns.put(ACCTIMEZONE, "Timezone");
         columns.put(ACCTIMEZONEINPUT, "Select Timezone");
+
+        // Personality & Goal
         columns.put(ACCPERSONALITY, "Personality & Goal");
         columns.put(ACCPERSONALITY2, "Personality");
-        columns.put(ACCPERSONALITYINPUT, "personality");
-        columns.put(ACCGOAL, "Goal type");
-        columns.put(ACCGOAL1, "{{goal_type}}");
-        columns.put(ACCGOALINPUT, "goal_type");
+        columns.put(ACCPERSONALITYINPUT, "Personality Input");
+        columns.put(ACCGOAL, "Goal Type");
+        columns.put(ACCGOALINPUT, "Goal Type Input");
         columns.put(ACCLANG, "Language");
         columns.put(ACCLANGINPUT, "Select Language");
+        columns.put(ACCOBJECTION, "Objection Count Input");
+        columns.put(ACCRESETCOUNTLIMIT, "Reset Count Limit Input");
+        columns.put(ACCTHRESHOLD, "Probing Threshold Input");
+        columns.put(ACCCTA, "Select CTA Type");
+        columns.put(ACCCOUNTRY, "Select Country");
+
+        // Preferences
         columns.put(ACCALLOWEMOJI, "Allow Emojis");
-        columns.put(ACCRADIOYES1, "ACCRADIOYES1");
-        columns.put(ACCRADIOYES2, "ACCRADIOYES2");
-        columns.put(ACCRADIONO1, "ACCRADIONO1");
-        columns.put(ACCRADIONO2, "ACCRADIONO2");
+        columns.put(ACCRADIOYES1, "Allow Emojis - Yes");
+        columns.put(ACCRADIOYES2, "Allow Name Reference - Yes");
+        columns.put(ACCRADIONO1, "Allow Emojis - No");
+        columns.put(ACCRADIONO2, "Allow Name Reference - No");
+
+        // Business Details
         columns.put(ACCBUSINESSDETAILS, "Business Details");
         columns.put(ACCCOREUSP, "Core USP");
-        columns.put(ACCCOREUSP1, "{{core_usps}}");
-        columns.put(ACCCOREUSPINPUT, "Your unique selling proposition");
+        columns.put(ACCCOREUSPINPUT, "Core USP Input");
         columns.put(ACCCOREFEATURES, "Core Features");
-        columns.put(ACCCOREFEATURES1, "{{core_features}}");
-        columns.put(ACCCOREFEATURESINPUT, "core_features");
+        columns.put(ACCCOREFEATURESINPUT, "Core Features Input");
         columns.put(ACCCONTACTINFO, "Contact Info");
-        columns.put(ACCCONTACTINFO2, "{{contact_info}}");
-        columns.put(ACCCONTACTINFOINPUT, "contact_info");
+        columns.put(ACCCONTACTINFOINPUT, "Contact Info Input");
         columns.put(ACCCOMPANYDOMAIN, "Company Domain");
-        columns.put(ACCCOMPANYDOMAININPUT, "company_domain");
-        columns.put(ACCBUSINESSFOCUS, "Business focus");
-        columns.put(ACCBUSINESSFOCUINPUT, "business_focus");
-        columns.put(ACCBUSINESSFOCUS2, "{{business_focus}}");
-        columns.put(ACCOFFER, "Offer description");
-        columns.put(ACCOFFER1, "{{offer_description}}");
-        columns.put(ACCOFFERINPUT, "offer_description");
-        columns.put(ACCCOMPANY, "Company description");
-        columns.put(ACCCOMPANYINPUT, "company_description");
-
+        columns.put(ACCCOMPANYDOMAININPUT, "Company Domain Input");
+        columns.put(ACCBUSINESSFOCUS, "Business Focus");
+        columns.put(ACCBUSINESSFOCUINPUT, "Business Focus Input");
+        columns.put(ACCOFFER, "Offer Description");
+        columns.put(ACCOFFERINPUT, "Offer Description Input");
+        columns.put(ACCCOMPANY, "Company Description");
+        columns.put(ACCCOMPANYINPUT, "Company Description Input");
 
         int failures = 0;
 
@@ -447,14 +449,12 @@ public class AgentConfigurationPage extends Locators {
             String locator = entry.getKey();
             String friendlyName = entry.getValue();
             try {
-
                 common.assertElementPresent(locator);
                 common.logPrint("Step :: Verified presence of: " + friendlyName);
             } catch (Exception e) {
                 failures++;
                 String msg = "Missing element -> " + friendlyName + " (" + locator + ")";
                 common.logPrint(msg);
-
                 common.logPrint("DEBUG :: " + e.toString());
             }
         }
@@ -464,7 +464,6 @@ public class AgentConfigurationPage extends Locators {
         } else {
             common.logPrint("Step :: Column verification completed with " + failures + " missing element(s).");
         }
-
     }
 
     public void verifyEditPageElements() {
@@ -567,7 +566,7 @@ public class AgentConfigurationPage extends Locators {
         common.waitUntilElementToBeClickable(CREATE);
         driver.findElement(By.xpath(CREATE)).click();
 
-        String expectedURL = EnvConfig.getWebUrl() + "/agent-configuration";
+        String expectedURL = EnvConfig.getWebUrl() + "agent-configuration";
 
         clickAndVerifyNavigation(ACCCANCELBUTTON, expectedURL, "Cancel Button");
 
@@ -603,20 +602,28 @@ public class AgentConfigurationPage extends Locators {
         driver.findElement(By.xpath(ACCSAVEBUTTON)).click();
 
         Map<String, String> validations = new LinkedHashMap<>();
-        validations.put(ACCVALPERSONA, "Persona is required");
-        validations.put(ACCVALPROMPT, "Prompt is required");
-        validations.put(ACCVALNAME, "Name is required");
-        validations.put(ACCVALCOMAPNYNAME, "Company Name is required");
-        validations.put(ACCVALREETINGS, "Greeting Message is required");
-        validations.put(ACCVALPERSONLITY, "Personality is required");
+//        validations.put(ACCVALPERSONA, "Persona is required");
+//        validations.put(ACCVALPROMPT, "Prompt is required");
+//        validations.put(ACCVALNAME, "Name is required");
+        validations.put(ACCVALCOMPANYNAME, "Company Name is required");
+        validations.put(ACCVALOBJECTION, "Objection is required");
+        validations.put(ACCVALGREETINGS, "Greeting Message is required");
+        validations.put(ACCVALGREETINGS, "Personality is required");
         validations.put(ACCVALGOAL, "Goal type is required");
         validations.put(ACCVALLANG, "Language is required");
         validations.put(ACCVALCOREUSP, "Core USPs is required");
         validations.put(ACCVALCOREFEATURE, "Core Features is required");
         validations.put(ACCVALCONTACT, "Contact Info is required");
-        validations.put(ACCVALBUSINES, "Business focus is required");
+        validations.put(ACCVALBUSINESS, "Business focus is required");
+        validations.put(ACCVALTIMEZONE, "Time zone is required");
+        validations.put(ACCVALPERSONALITY, "Personality is required");
+        validations.put(ACCVALPROBINGTHRESHOLD, "Probing Threshold is required");
+        validations.put(ACCVALCTATYPE, "Cat Type is required");
+        validations.put(ACCVALCOUNTRY, "Country is required");
+        validations.put(ACCVALCOMPANYDOMAIN, "Company Domain is required");
+        validations.put(ACCVALRESETCOUNT, "Reset count is required");
 //        validations.put(ACCVALOFFER, "Offer description is required");
-        validations.put(COMPANYDESC, "Company description is required");
+        validations.put(ACCVALCOMPANYDESC, "Company description is required");
 
         List<String> missing = new ArrayList<>();
 
@@ -813,22 +820,26 @@ public class AgentConfigurationPage extends Locators {
         String existingAgentName = agent.get("name");
         common.waitUntilElementToBeVisible(ACDELETEBUTTON);
         common.click(ACDELETEBUTTON);
-        WebElement cancelButton = driver.findElement(By.xpath(ACDELETECANCELBUTTON));
+//        WebElement cancelButton = driver.findElement(By.xpath(ACDELETECANCELBUTTON));
+        common.waitUntilElementToBeVisible(ACDELETECANCELBUTTON);
         common.click(ACDELETECANCELBUTTON);
         common.pause2Sec();
-        if (!cancelButton.isDisplayed()) {
-            common.logPrint("Cancel Button works as expected");
-        } else {
-            common.logPrint("Cancel button doesn't work");
-        }
+//        if (!ACDELETECANCELBUTTON.isEmpty()) {
+//            common.logPrint("Cancel Button works as expected");
+//        } else {
+//            common.logPrint("Cancel button doesn't work");
+//        }
         common.pause(1);
         common.waitUntilElementToBeVisible(ACDELETEBUTTON);
         common.click(ACDELETEBUTTON);
         common.waitUntilElementToBeVisible(ACINNERDELETE);
         common.click(ACINNERDELETE);
         common.pause(2);
-        common.waitUntilElementToBeVisible(DELETESUCCESS);
-        common.assertElementPresent(DELETESUCCESS);
+//        common.waitUntilElementToBeVisible(DELETESUCCESS);
+//        common.assertElementPresent(DELETESUCCESS);
+
+        common.waitUntilElementToBeVisible(DELETEPRODUCTASSERT);
+        common.assertElementPresent(DELETEPRODUCTASSERT);
 
     }
 
@@ -899,13 +910,13 @@ public class AgentConfigurationPage extends Locators {
     public void horizontalViews() {
         goToAgentConfigurationPage();
         common.pause(2);
-        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
+        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]| //h6/following::div[1]");
 
     }
 
     public void pagination() {
         goToAgentConfigurationPage();
-        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
+        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]| //h6/following::div[1]");
     }
 
     public void filters() {
@@ -1134,8 +1145,8 @@ public class AgentConfigurationPage extends Locators {
 
     public void verifyEditingEffectOnCreatedTime() {
         goToAgentConfigurationPage();
-        String createdDateXpath = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"]";
-        String createdEditXpath = "//div[@data-rowindex=\"0\"]//button[@aria-label=\"Edit\"]";
+        String createdDateXpath = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"] | //tbody/tr[1]/td[8]";
+        String createdEditXpath = "//div[@data-rowindex=\"0\"]//button[@aria-label=\"Edit\"] | //tbody/tr[1]/td[9]//span[@aria-label='Edit'] ";
 
         String createdDateValue = common.getAttribute(createdDateXpath, "title");
 

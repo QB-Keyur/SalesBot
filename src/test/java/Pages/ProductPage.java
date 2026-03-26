@@ -158,14 +158,13 @@ public class ProductPage extends Locators {
             SortOrder order,
             String fallbackMaxSrXpath
     ) {
-
         common.pause(2);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         By header = By.xpath("//tr/child::th[2]");
         By cellLocator = By.xpath(
-                "//div[@role='row' and not(@aria-rowindex='1')]//div[@aria-colindex='" + columnIndex + "']|//tr[1]/child::td[2]"
+                "//div[@role='row' and not(@aria-rowindex='1')]//div[@aria-colindex='" + columnIndex + "'] | //tr[1]/child::td[2]"
         );
 
         /* ---------------- APPLY SORT ---------------- */

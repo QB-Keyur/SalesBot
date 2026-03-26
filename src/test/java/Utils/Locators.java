@@ -168,8 +168,8 @@ public class Locators extends BasePage {
     public static String ACPROMPT = "//span[normalize-space()='Prompt']| //div[normalize-space()='Prompt']";
     public static String ACSTATUS = "//span[normalize-space()='Status']| //div[normalize-space()='Status']";
     public static String ACACTIONS = "//span[normalize-space()='Actions']| //div[normalize-space()='Actions']";
-    public static String ACTOTALROWS = "//div[contains(text(),'Total')] | //div[@class=\"MuiBox-root css-a7l4db\"]";
-    public static String ACROWSPERPAGE = "//p[contains(text(),'Rows per page:')] | //div[@class=\"MuiBox-root css-a7l4db\"]";
+    public static String ACTOTALROWS = "//div[contains(text(),'Total')] | //div[@class=\"MuiBox-root css-a7l4db\"] | //h6/following::div[1]";
+    public static String ACROWSPERPAGE = "//p[contains(text(),'Rows per page:')] | //div[@class=\"MuiBox-root css-a7l4db\"] |  //h6/following::div[1]";
     public static String ACROWSPERPAGEDROPDOWN = "//input[@class='MuiSelect-nativeInput css-147e5lo']";
     public static String ACPREVIOUSPAGE = "//button[@title='Go to previous page']";
     public static String ACNEXTPAGE = "//button[@title='Go to next page']";
@@ -184,33 +184,39 @@ public class Locators extends BasePage {
     public static String ACCINFO = "//strong[contains(text(),'The configured time zone')]";
     public static String ACCPERSONA = "//p[normalize-space()='Persona']";
     public static String ACCSELECTPERSONA = "//input[@placeholder=\"Select Persona\"]";
-    public static String ACCPROMPT = "//p[text()='Prompt']";
+    public static String ACCPROMPT = "//p[normalize-space()='Prompt']";
     public static String ACCPERSONALITY1 = "//p[contains(text(),'personality')]";
     public static String ACCTEXTAREAPROMPT = "//textarea[@placeholder='Enter your agent prompt here... Use {{variable_name}} to insert dynamic values']";
-    public static String ACCRULES = "//p[text()='Rules']";
+    public static String ACCRULES = "//p[normalize-space()='Rules']";
     public static String ACCRULESDROPDOWN = "//input[@placeholder=\"Enter a new rule...\"]";
-    public static String ACCCUSTOMVARIABLE = "//p[text()='Custom Variables']";
-    public static String ACCADDVARIABLE = "//button[@type='button' and .//span[text()='Add Variable']]";
-    public static String ACCAGENT = "//p[text()='Agent Info']";
-    public static String ACCNAME = "//span[text()='Name']";
+    public static String ACCCUSTOMVARIABLE = "//p[normalize-space()='Custom Variables']";
+    public static String ACCADDVARIABLE = "//button[@type='button' and .//span[normalize-space()='Add Variable']]";
+    public static String ACCAGENT = "//p[normalize-space()='Agent Info']";
+    public static String ACCNAME = "//span[normalize-space()='Name']|//span[text()='Name']";
     public static String ACCNAMEINPUT = "//input[@placeholder=\"Enter Name\"]";
     public static String ACCNAME2 = "//span[text() ='{{name}}']";
-    public static String ACCCOMPANYNAME = "//span[text() ='Company name']";
+    public static String ACCCOMPANYNAME = "//span[normalize-space()='Company Name']|//span[text()='Company Name']";
     public static String ACCCOMPANYNAME2 = "//span[text() ='{{company_name}}']";
     public static String ACCCOMPANYNAMEINPUT = "//input[@placeholder=\"Enter Company Name\"]";
-    public static String ACCGREETINGS = "//span[text() ='Greeting Message']";
+    public static String ACCGREETINGS = "//span[normalize-space()='Greeting Message']|//span[text()='Greeting Message']";
     public static String ACCGREETINGINPUT = "//textarea[@name=\"greeting_message\"]";
-    public static String ACCTIMEZONE = "//span[text()='Timezone']";
+    public static String ACCTIMEZONE = "//span[normalize-space()='Timezone']|//span[text()='Timezone']";
     public static String ACCTIMEZONEINPUT = "//input[@placeholder=\"Select Timezone\"]";
-    public static String ACCFOLLOWRETRY = "//span[contains(text(),'Follow Retry')]";
-    public static String ACCFOLLOWRETRYINPUT = "//input[@placeholder=\"Enter Follow Retry\"]";
-    public static String ACCPERSONALITY = "//p[text()='Personality & Goal']";
-    public static String ACCPERSONALITY2 = "//span[text()='Personality']";
+
+    // UPDATED: label renamed from "Follow Retry" to "Objection Count Limit"
+    public static String ACCFOLLOWRETRY = "//span[normalize-space()='Objection Count Limit']|//span[text()='Objection Count Limit']";
+    public static String ACCFOLLOWRETRYINPUT = "//input[@placeholder=\"Enter Objection Count Limit\"]";
+
+    public static String ACCPERSONALITY = "//p[normalize-space()='Personality & Goal']|//p[text()='Personality & Goal']";
+    public static String ACCPERSONALITY2 = "//span[normalize-space()='Personality']|//span[text()='Personality']";
     public static String ACCPERSONALITYINPUT = "//input[@name='personality']";
-    public static String ACCGOAL = "//span[text()='Goal type']";
+
+    // UPDATED: casing fix "Goal type" -> "Goal Type"
+    public static String ACCGOAL = "//span[normalize-space()='Goal Type']|//span[text()='Goal Type']";
     public static String ACCGOAL1 = "//span[text()='{{goal_type}}']";
     public static String ACCGOALINPUT = "//input[@name=\"goal_type\"]";
-    public static String ACCLANG = "//span[text()='Language']";
+
+    public static String ACCLANG = "//span[normalize-space()='Language']|//span[text()='Language']";
     public static String ACCLANGINPUT = "//input[@placeholder=\"Select Language\"]";
     public static String ACCOBJECTION = "//input[@name=\"follow_retry\"]";
     public static String ACCRESETCOUNTLIMIT = "//input[@name=\"reset_count_limit\"]";
@@ -218,55 +224,69 @@ public class Locators extends BasePage {
     public static String ACCCTA = "//input[@placeholder=\"Select CTA Type\"]";
     public static String ACCCOUNTRY = "//input[@placeholder=\"Select Country\"]";
 
-    public static String ACCALLOWEMOJI = "//p[text()='Allow Emojis']";
-    public static String ACCRADIOYES1 = "(//div[@class=\"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-k08jj6\"])[1]";
-    public static String ACCRADIOYES2 = "(//div[@class=\"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-k08jj6\"])[3]";
-    public static String ACCRADIONO1 = "(//div[@class=\"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-k08jj6\"])[2]";
-    public static String ACCRADIONO2 = "(//div[@class=\"MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-k08jj6\"])[4]";
-    public static String ACCBUSINESSDETAILS = "//p[text()='Business Details']";
-    public static String ACCCOREUSP = "//span[text()='Core USP']";
+    public static String ACCALLOWEMOJI = "//p[normalize-space()='Allow Emojis']|//p[text()='Allow Emojis']";
+    public static String ACCRADIOYES1 = "//p[normalize-space()='Allow Emojis']/following::label[.//p[normalize-space()='Yes']][1]";
+    public static String ACCRADIONO1 = "//p[normalize-space()='Allow Emojis']/following::label[.//p[normalize-space()='No']][1]";
+    public static String ACCRADIOYES2 = "//p[normalize-space()='Allow Name Reference']/following::label[.//p[normalize-space()='Yes']][1]";
+    public static String ACCRADIONO2 = "//p[normalize-space()='Allow Name Reference']/following::label[.//p[normalize-space()='No']][1]";
+    public static String ACCBUSINESSDETAILS = "//p[normalize-space()='Business Details']|//p[text()='Business Details']";
+    public static String ACCCOREUSP = "//span[normalize-space()='Core USP']|//span[text()='Core USP']";
     public static String ACCCOREUSP1 = "//span[text()='{{core_usps}}']";
     public static String ACCCOREUSPINPUT = "//input[@placeholder=\"Your unique selling proposition\"]";
-    public static String ACCCOREFEATURES = "//span[text()='Core Features']";
+    public static String ACCCOREFEATURES = "//span[normalize-space()='Core Features']|//span[text()='Core Features']";
     public static String ACCCOREFEATURES1 = "//span[text()='{{core_features}}']";
     public static String ACCCOREFEATURESINPUT = "//input[@name=\"core_features\"]";
-    public static String ACCCONTACTINFO = "//span[text()='Contact Info']";
+    public static String ACCCONTACTINFO = "//span[normalize-space()='Contact Info']|//span[text()='Contact Info']";
     public static String ACCCONTACTINFOINPUT = "//input[@name=\"contact_info\"] | //span[text()='Contact Info']/following::textarea[1]";
     public static String ACCCONTACTINFO2 = "//span[text()='{{contact_info}}']";
-    public static String ACCCOMPANYDOMAIN = "//span[text()='Company Domain']";
+    public static String ACCCOMPANYDOMAIN = "//span[normalize-space()='Company Domain']|//span[text()='Company Domain']";
     public static String ACCCOMPANYDOMAININPUT = "//input[@name=\"company_domain\"]";
-    public static String ACCBUSINESSFOCUS = "//span[text()='Business focus']";
+
+    // UPDATED: casing fix "Business focus" -> "Business Focus"
+    public static String ACCBUSINESSFOCUS = "//span[normalize-space()='Business Focus']|//span[text()='Business Focus']";
     public static String ACCBUSINESSFOCUS2 = "//span[text()='{{business_focus}}']";
     public static String ACCBUSINESSFOCUINPUT = "//input[@name='business_focus']";
-    public static String ACCOFFER = "//span[text()='Offer description']";
+
+    // UPDATED: casing fix "Offer description" -> "Offer Description"
+    public static String ACCOFFER = "//span[normalize-space()='Offer Description']|//span[text()='Offer Description']";
     public static String ACCOFFER1 = "//span[text()='{{offer_description}}']";
     public static String ACCOFFERINPUT = "//textarea[@name='offer_description']";
-    public static String ACCCOMPANY = "//span[text()='Company description']";
+
+    // UPDATED: casing fix "Company description" -> "Company Description"
+    public static String ACCCOMPANY = "//span[normalize-space()='Company Description']|//span[text()='Company Description']";
     public static String ACCCOMPANYINPUT = "//textarea[@name=\"company_description\"]";
+
     public static String ACCCANCELBUTTON = "//button[@type='button' and .//span[normalize-space()='Cancel']]";
     public static String ACCSAVEBUTTON = "//button[@type='button' and .//span[normalize-space()='Save']]";
     public static String ACCBACKBUTTON = "//button[@type='button']/following::h6[text()='Create Agent Configuration']";
-    public static String ACCVALPERSONA = "//span[text()='Persona is required']";
-    public static String ACCVALPROMPT = "//p[text()='Prompt is required']";
-    public static String ACCVALNAME = "//span[text()='Name is required']";
-    public static String ACCVALCOMAPNYNAME = "//span[text()='Company Name is required']";
-    public static String ACCVALREETINGS = "//span[text()='Greeting Message is required']";
-    public static String ACCVALPERSONLITY = "//span[text()='Personality is required']";
-    public static String ACCVALGOAL = "//span[text()='Goal type is required']";
-    public static String ACCVALLANG = "//span[text()='Language is required']";
-    public static String ACCVALCOREUSP = "//span[text()='Core USPs is required']";
-    public static String ACCVALCOREFEATURE = "//span[text()='Core Features is required']";
-    public static String ACCVALCONTACT = "//span[text()='Contact Info is required']";
-    public static String ACCVALBUSINES = "//span[text()='Business focus is required']";
-    public static String ACCVALOFFER = "//span[text()='Offer description is required']";
-    public static String COMPANYDESC = "//span[text()='Company description is required']";
+
+    // Validation messages
+    public static String ACCVALNAME = "//span[normalize-space()='Name is required']";
+    public static String ACCVALCOMPANYNAME = "//span[normalize-space()='Company name is required']";
+    public static String ACCVALOBJECTION = "//span[normalize-space()='Objection Count Limit is required']";
+    public static String ACCVALTIMEZONE = "//p[normalize-space()='Time zone is required']";
+    public static String ACCVALGREETINGS = "//span[normalize-space()='Greeting message is required']";
+    public static String ACCVALPERSONALITY = "//span[normalize-space()='Personality is required']";
+    public static String ACCVALGOAL = "//span[normalize-space()='Goal Type is required']";
+    public static String ACCVALLANG = "//p[normalize-space()='Language is required']";
+    public static String ACCVALPROBINGTHRESHOLD = "//span[normalize-space()='Profile Threshold is required']";
+    public static String ACCVALCTATYPE = "//p[normalize-space()='CTA Type is required']";
+    public static String ACCVALRESETCOUNT = "//span[normalize-space()='Reset Count Limit is required']";
+    public static String ACCVALCOREUSP = "//span[normalize-space()='Core USPs is required']";
+    public static String ACCVALCOREFEATURE = "//span[normalize-space()='Core features is required']";
+    public static String ACCVALCOUNTRY = "//p[normalize-space()='Country is required']";
+    public static String ACCVALCONTACT = "//span[normalize-space()='Contact info is required']";
+    public static String ACCVALCOMPANYDOMAIN = "//span[normalize-space()='Company domain is required']";
+    public static String ACCVALBUSINESS = "//span[normalize-space()='Business focus is required']";
+    public static String ACCVALCOMPANYDESC = "//span[normalize-space()='Company description is required']";
+
     public static String CUSTOMERSUPPORT = "//li[text()='CUSTOMER SUPPORT']";
     public static String HR = "//li[text()='HR']";
     public static String SALES = "//li[text()='SALES']";
     public static String ACSEARCHRESULT = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])[1] | //tbody/tr[1]/td[3] ";
-    public static String ACEDITBUTTON = "(//button[@aria-label=\"Edit\"])[1]";
+    public static String ACEDITBUTTON = "(//button[@aria-label=\"Edit\"])[1]|(//button[@type=\"button\"]/parent::span[@aria-label=\"Edit\"])[1]";
     public static String ACRESETBUTTON = "//button[@type='button']/following::span[text()='Reset']";
-    public static String ACDELETEBUTTON = "(//button[@aria-label=\"Delete\"])[1]";
+    public static String ACDELETEBUTTON = "(//button[@aria-label=\"Delete\"])[1]|(//button[@type=\"button\"]/parent::span[@aria-label=\"Delete\"])[1]";
     public static String ACDELETECANCELBUTTON = "//button[@type=\"button\"]/following::span[text()='Cancel']";
     public static String ACACTIVATEBUTTON = "//button[@type=\"button\"]/following::span[text()='Activate']";
     public static String ACINNERDELETE = "//button[@type=\"button\"]/following::span[text()='Delete']";
@@ -277,25 +297,9 @@ public class Locators extends BasePage {
     public static String ACFILTERNAME = "//li[contains(text(),'Name')]";
     public static String ACEDITHEADER = "//h6[text()='Update Agent Configuration']";
     public static String ACPLAYGROUNDHEADER = "//span[text()='Select Agent']";
-    public static String ACPLAYGROUNDSELECTAGENT = "//input[@placeholder=\"Select agent\"]";
-    public static String ACEDITSUCCESSMESSAGE = "//div[text()='Agent Configuration Updated Successfully']";
-//    public static String ACSEARCHRESULT = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])[1]";
-//    public static String ACEDITBUTTON = "(//button[@aria-label=\"Edit\"])[1]";
-//    public static String ACDELETEBUTTON = "(//button[@aria-label=\"Delete\"])[1]";
-//    public static String ACDELETECANCELBUTTON = "//button[@type=\"button\"]/following::span[text()='Cancel']";
-//    public static String ACACTIVATEBUTTON = "//button[@type=\"button\"]/following::span[text()='Activate']";
-//    public static String ACINNERDELETE = "//button[@type=\"button\"]/following::span[text()='Delete']";
-//    public static String ACINACTIVE = "//span[text()='Inactive']";
-//    public static String ACACTIVE = "//span[text()='Active']";
-//    public static String ACINACTIVECB = "(//input[@type='checkbox'])[2]";
-//    public static String ACACTIVEINACTIVE = "//button[@type='button']//span[normalize-space()='Active']";
-//    public static String ACFILTERNAME = "//li[contains(text(),'Name')]";
-//    public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
-//    public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')]";
-//    public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
-//    public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
+    public static String ACPLAYGROUNDSELECTAGENT = "//input[@placeholder=\"Select agent\"] | //input[@placeholder=\"Select Agent\"]";
+    public static String ACEDITSUCCESSMESSAGE = "//div[text()='Agent Configuration Updated Successfully'] | //div[text()='Agent configuration updated successfully']";
     public static String DELETESUCCESS = "//div[contains(text(), 'Deleted Successfully')]";
-
     //Contacts pages locators
     //Grid page
     public static String whatsAppContactHed= "//h6[text()='Contact']";
@@ -972,17 +976,17 @@ public class Locators extends BasePage {
     public static String CPFILTER= "//span[text()='Filters']/parent::button";
     public static String CPREFRESH= "//span[@class=\"MuiButton-loadingWrapper\"]/parent::button";
     public static String CPCREATEBTN= "//span[text()='Create']/parent::button";
-    public static String CPSR= "//span[text()='#']";
-    public static String CPDESC= "//span[text()='Description']";
-    public static String CPCREATEDATE= "//span[text()='Created Date']";
-    public static String CPACTION= "//span[text()='Actions']";
+    public static String CPSR= "//span[text()='#']|//div[text()='#']";
+    public static String CPDESC= "//span[text()='Description']|//div[text()='Description']";
+    public static String CPCREATEDATE= "//span[text()='Created Date']|//div[text()='Created Date']";
+    public static String CPACTION= "//span[text()='Actions']|//div[text()='Actions']";
     public static String CPSHOWTEXT= "//p[text()='Show']";
     public static String CPROWSINPUT= "//div[@aria-haspopup=\"listbox\"]";
     public static String CPPREVBTN= "//button[@aria-label=\"Go to previous page\"]";
     public static String CPNEXTBTN= "//button[@aria-label=\"Go to next page\"]";
-    public static String CPVIEWBTN= "//button[@aria-label=\"View\"]";
-    public static String CPEDITBTN= "//button[@aria-label=\"Edit\"]";
-    public static String CPSEARCHRESULT= "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"name\" ]";
+    public static String CPVIEWBTN= "//button[@aria-label=\"View\"]|//button[@type=\"button\"]/parent::span[@aria-label=\"View\"]";
+    public static String CPEDITBTN= "//button[@aria-label=\"Edit\"]|//button[@type=\"button\"]/parent::span[@aria-label=\"Edit\"]";
+    public static String CPSEARCHRESULT= "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"name\" ]|//tbody/tr[1]/td[2]";
 
     //Company Portfolio Create
     public static String CPCHEADER = "//h6[text()='Create Company Portfolio']";
@@ -996,7 +1000,8 @@ public class Locators extends BasePage {
 
     public static String CPCNAMEINPUT = "(//span[text()='Name']/following::input[@type=\"text\"])[1]";
     public static String CPCDESCINPUT = "(//span[text()='Name']/following::input[@type=\"text\"])[2]";
-    public static String CPCDESCINPUTVIEW = "//textarea[1]";
+//    public static String CPCDESCINPUTVIEW = "//textarea[1]|(//input[@type=\"text\"]/preceding::label)[2]| //textarea[1]|(//input[@type=\"text\"])[3]";
+    public static String CPCDESCINPUTVIEW = "//span[text()='Description']/following::input[1]| //input/preceding::span[text()='Description']";
 
     public static String CPCEDITHEADER = "//h6[text()='Update Company Portfolio']";
 
