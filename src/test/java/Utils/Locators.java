@@ -1000,7 +1000,8 @@ public class Locators extends BasePage {
 
     public static String CPCNAMEINPUT = "(//span[text()='Name']/following::input[@type=\"text\"])[1]";
     public static String CPCDESCINPUT = "(//span[text()='Name']/following::input[@type=\"text\"])[2]";
-    public static String CPCDESCINPUTVIEW = "//textarea[1]|(//input[@type=\"text\"]/preceding::label)[2]| //textarea[1]|(//input[@type=\"text\"])[3]";
+//    public static String CPCDESCINPUTVIEW = "//textarea[1]|(//input[@type=\"text\"]/preceding::label)[2]| //textarea[1]|(//input[@type=\"text\"])[3]";
+    public static String CPCDESCINPUTVIEW = "//span[text()='Description']/following::input[1]| //input/preceding::span[text()='Description']";
 
     public static String CPCEDITHEADER = "//h6[text()='Update Company Portfolio']";
 

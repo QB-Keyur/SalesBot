@@ -2258,8 +2258,7 @@ public class Common extends Locators {
     }
     // Company description
     public String generateCompanyDescription() {
-        return faker.company().name() + " is " + faker.company().catchPhrase()
-                + ". " + faker.lorem().sentence(10);
+        return faker.lorem().sentence(5);
     }
 
     public Map<String, String> fillAgentForm() {
