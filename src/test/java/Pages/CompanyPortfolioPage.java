@@ -294,17 +294,17 @@ public class CompanyPortfolioPage extends Locators {
 
     public void validateHorizontalCardView(){
         goToCompanyPortfolioPage();
-        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
+        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]|//h6[text()='Company Portfolio']/following::div[1]");
     }
 
     public void validatePagination(){
         goToCompanyPortfolioPage();
-        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
+        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]|//h6[text()='Company Portfolio']/following::div[1]");
     }
 
     public void verifyCreatedDate(){
         verifyAddingACompanyPortfolio();
-        String dateFromGrid = common.getText("//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"]").trim();
+        String dateFromGrid = common.getText("//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"]|//tbody/tr[1]/td[5]").trim();
 
         String actualDate = dateFromGrid.split(" ")[0];
 
@@ -320,8 +320,8 @@ public class CompanyPortfolioPage extends Locators {
     public void verifyEditingEffectOnCreatedTime(){
         goToCompanyPortfolioPage();
 
-        String createdDateXpath = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"]";
-        String createdEditXpath = "//div[@data-rowindex=\"0\"]//button[@aria-label=\"Edit\"]";
+        String createdDateXpath = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"]|//tbody/tr[1]/td[5]";
+        String createdEditXpath = "//div[@data-rowindex=\"0\"]//button[@aria-label=\"Edit\"]|(//button/preceding::span[@aria-label='Edit'])[1]";
 
         String createdDateValue = common.getAttribute(createdDateXpath,"title");
 
