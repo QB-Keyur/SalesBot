@@ -463,8 +463,10 @@ public class ProductPage extends Locators {
         common.waitUntilElementToBeVisible(CLOSEBUTTON);
         common.click(CLOSEBUTTON);
 
+        common.waitUntilElementToBeClickable(PHSEACRH);
         common.click(PHSEACRH);
         common.type(PHSEACRH, productName);
+        common.waitUntilElementToBeVisible(SEARCHRESULT);
         common.validateSearch(SEARCHRESULT, productName);
 
         return new Product(productName, category, description, kb);
@@ -472,14 +474,18 @@ public class ProductPage extends Locators {
 
     public void editingAProduct() {
         Product created = verifyAddingANewProductWithValidData();
+        String priceListName = "INR";
 
-        driver.findElement(By.xpath(EDIT)).click();
-
+        common.waitUntilElementToBeVisible(EDIT);
+        common.click(EDIT);
 
         String newName = common.fakeProductName();
         common.click(PHPRODUCTNAME);
+        common.clear(PHPRODUCTNAME);
+        common.pause(1);
         common.type(PHPRODUCTNAME, newName);
 
+        common.clear(PHPRODUCTCATEGORY);
         String newCategory = common.selectDropdownAndGetSelectedText(
                 By.xpath(PHPRODUCTCATEGORY),
                 By.xpath(FILTERDROPDOWNVAL)
@@ -488,6 +494,7 @@ public class ProductPage extends Locators {
 
         common.waitUntilElementToBeVisible(PHPRODUCTDESCRIPTION);
         common.click(PHPRODUCTDESCRIPTION);
+        common.clear(PHPRODUCTDESCRIPTION);
         String newDescription = newName;
         common.type(PHPRODUCTDESCRIPTION, newDescription);
 
@@ -498,6 +505,56 @@ public class ProductPage extends Locators {
         common.click(PHPRODUCTKB);
         common.downKeyAndEnter();
 
+        common.waitUntilElementToBeVisible(PHPRICELIST);
+        common.click(PHPRICELIST);
+
+        common.waitUntilElementToBeVisible(PHENTERPRICELISTNAME);
+        common.type(PHENTERPRICELISTNAME, priceListName);
+
+        common.waitUntilElementToBeClickable(PHSELECTCOUNTRY);
+        common.click(PHSELECTCOUNTRY);
+        common.type(PHSELECTCOUNTRY, "INDIA");
+        common.pause(1);
+        common.twoDownKeyAndEnter();
+
+        common.waitUntilElementToBeClickable(PHSELECTCURRENCY);
+        common.click(PHSELECTCURRENCY);
+        common.type(PHSELECTCURRENCY, priceListName);
+        common.pause(1);
+        common.twoDownKeyAndEnter();
+
+        common.waitUntilElementToBeClickable(PHENTERAMOUNT);
+        common.type(PHENTERAMOUNT,"100");
+
+//        common.waitUntilElementToBeClickable(PHENTERDISCOUNT);
+//        common.type(PHENTERDISCOUNT, "0");
+//
+//        common.waitUntilElementToBeClickable(PHENTERDISCOUNTSTRATEGY);
+//        common.type(PHENTERDISCOUNTSTRATEGY,"10% Off on new accounts");
+
+        common.waitUntilElementToBeClickable(PHPLANLIST);
+        common.click(PHPLANLIST);
+
+        common.waitUntilElementToBeClickable(PHENTERPLANLISTNAME);
+        common.type(PHENTERPLANLISTNAME,priceListName);
+
+        common.waitUntilElementToBeClickable(PHENTERDESCRIPTION);
+        common.type(PHENTERDESCRIPTION,common.fakeProductName());
+
+        common.waitUntilElementToBeClickable(PHENTERREDIRECTURL);
+        common.type(PHENTERREDIRECTURL,common.fakeWebsite());
+
+        common.waitUntilElementToBeClickable(PHENTERFEATURES);
+        common.type(PHENTERFEATURES,common.fakeWebsite());
+
+        common.waitUntilElementToBeClickable(PHBASEPRICE);
+        common.type(PHBASEPRICE,"100");
+
+        common.waitUntilElementToBeClickable(PHTAX);
+        common.type(PHTAX,"1");
+
+        common.waitUntilElementToBeClickable(PHDISCOUNT);
+        common.type(PHDISCOUNT,"1");
 
         common.click(SAVEBUTTON);
         common.assertElementPresent(UPDATEMESSAGE);
