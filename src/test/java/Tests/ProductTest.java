@@ -18,7 +18,6 @@ public class ProductTest extends BasePage {
     public void verifyAddingANewProductWithValidData() {
         loginWithAdminUser();
         productPage.verifyAddingANewProductWithValidData();
-
     }
 
     @Test

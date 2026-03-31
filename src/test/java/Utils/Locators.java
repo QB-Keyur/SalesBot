@@ -1452,4 +1452,64 @@ public class Locators extends BasePage {
     public static final String STEP4_CONTAINER =
             "//div[contains(@class,'MuiBox-root')][.//h6[contains(text(),'Copy the Password')]]";
 
+
+    //Customer Locators
+
+    public static final String CONTACT_MENU = "//span[text()='Contact']/ancestor::button";
+    public static final String CUSTOMER_MENU = "//button[normalize-space()='Customer']";
+    public static final String CUSTOMER_HEADER = "//h6[normalize-space()='Customer']";
+    public static final String CUSTOMER_TOTAL_COUNT = "//h6/following::div[1]";
+    public static final String CUSTOMER_SEARCH_BAR = "//input[@placeholder='Search' or contains(@placeholder,'Search')]";
+    public static final String CUSTOMER_FILTER_BUTTON = "//button[.//text()[contains(.,'Filter')]]";
+    public static final String CUSTOMER_REFRESH_BUTTON = "//span[text()='Filters']/following::button[1]";
+    public static final String CUSTOMER_CREATE_BUTTON = "//button[.//text()[contains(.,'Create')]]";
+    public static final String COLUMN_HASH = "//th[normalize-space()='#']";
+    public static final String COLUMN_CUSTOMER_NAME = "//th[normalize-space()='Customer Name']";
+    public static final String COLUMN_INDUSTRY = "//th[normalize-space()='Industry']";
+    public static final String COLUMN_COMPANY_SIZE = "//th[normalize-space()='Company Size']";
+    public static final String COLUMN_STATUS = "//th[normalize-space()='Status']";
+    public static final String COLUMN_CREATED_DATE = "//th[normalize-space()='Created Date']";
+    public static final String COLUMN_ACTIONS = "//th[normalize-space()='Actions']";
+    public static final String PAGINATION_SHOW_DROPDOWN = "//p[normalize-space()='Show']";
+    public static final String PAGINATION_NEXT = "//button[@aria-label='Go to next page']";
+    public static final String PAGINATION_PREVIOUS = "//button[@aria-label='Go to previous page']";
+
+    //Customer Create page locators
+
+    public static final String CC_HEADER = "//h6[text()='Create Customer']";
+    public static final String CC_CANCEL = "//span[text()='Cancel']/parent::button";
+    public static final String CC_SAVE = "//span[text()='Save']/parent::button";
+    public static final String CC_BASIC_DETAILS = "//h2[text()='Basic Details']";
+    public static final String CC_NAME = "//input[@name=\"name\"]";
+    public static final String CC_SELECT_INDUSTRY = "//input[@placeholder=\"Select Industry\"]";
+    public static final String CC_COMPANY_SIZE = "//input[@name=\"company_size\"]";
+    public static final String CC_DESC = "//input[@name=\"description\"]";
+
+
+    public static final String CC_BILLING_NAME = "//input[@name=\"billing_name\"]";
+    public static final String CC_BILLING_ADDRESS_LINE_1 = "//input[@name=\"billing_address_line_1\"]";
+    public static final String CC_BILLING_ADDRESS_LINE_2 = "//input[@name=\"billing_address_line_2\"]";
+    public static final String CC_SELECT_COUNTRY = "//input[@placeholder=\"Select Country\"]";
+    public static final String CC_SELECT_STATE = "//input[@placeholder=\"Select State\"]";
+    public static final String CC_SELECT_CITY = "//input[@placeholder=\"Select City\"]";
+    public static final String CC_SELECT_CODE = "//input[@placeholder=\"Select code\"]";
+    public static final String CC_BILLING_PHONE = "//input[@name=\"billing_phone_number\"]";
+    public static final String CC_BILLING_EMAIL = "//input[@name=\"billing_email\"]";
+    public static final String CC_SHIPPING = "//span[text()='Shipping Address']/parent::button";
+
+
+
+    public static final String INPUT_SHIPPING_NAME        = "//input[@name='shipping_name']";
+    public static final String INPUT_SHIPPING_ADDR_LINE1  = "//input[@name='shipping_address_line_1']";
+    public static final String INPUT_SHIPPING_ADDR_LINE2  = "//input[@name='shipping_address_line_2']";
+    public static final String INPUT_SHIPPING_PHONE       = "//input[@name='shipping_phone_number']";
+    public static final String INPUT_SHIPPING_EMAIL       = "//input[@name='shipping_email']";
+
+    public static final String CC_CONTACT_HEADER = "//h2[text()='Contacts']";
+    public static final String CC_CONTACT_NAME = "//div[text()='Contact Name']";
+    public static final String CC_CONTACT_SOURCE = "//div[text()='Contact Source']|(//div[text()='Contact Source'])[2]";
+    public static final String CC_CONTACT_ACTION = "//div[text()='Action']";
+    public static final String CC_SELECT_CONTACT_BUTTON = "//span[text()='Select Contacts']/parent::button";
+
+    public static String CUSTOMER_CREATE_TOASTER = "//div[contains(normalize-space(), 'Customer Created Successfully')] | //div[text()='Customer created successfully']";
 }

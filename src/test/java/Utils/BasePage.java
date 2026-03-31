@@ -62,6 +62,7 @@ public class BasePage {
     public LeadStagePage leadStagePage;
     public WhatsAppIntegrationPage whatsAppIntegrationPage;
     public SMTPIntegrationPage smtpIntegrationPage;
+    public CustomerPage customerPage;
 
     protected List<String> stringList = new ArrayList<>();
 
@@ -179,6 +180,7 @@ public class BasePage {
         leadStagePage = new LeadStagePage(getDriver());
         whatsAppIntegrationPage = new WhatsAppIntegrationPage(getDriver());
         smtpIntegrationPage = new SMTPIntegrationPage(getDriver());
+        customerPage = new CustomerPage(getDriver());
         steps.set(1);
         Common.printCurrentTime("Starting Time");
         getDriver().get(EnvConfig.getWebUrl());
