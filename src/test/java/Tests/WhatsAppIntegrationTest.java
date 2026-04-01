@@ -87,7 +87,8 @@ public class WhatsAppIntegrationTest extends BasePage {
         common.logPrint("START :: Verify validation when using an already integrated WhatsApp number");
 
         loginWithAdminUser();
-        whatsAppIntegrationPage.verifyUsingTheSameNumber(           EnvConfig.getPhoneId(),
+        whatsAppIntegrationPage.verifyUsingTheSameNumber(
+                EnvConfig.getPhoneId(),
                 EnvConfig.getWabaId(),
                 EnvConfig.getToken(),
                 EnvConfig.getAppId(),

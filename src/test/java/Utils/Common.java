@@ -713,6 +713,7 @@ public class Common extends Locators {
     public void checkChkBox(String locator) {
         WebElement checkbox = waitUntilStringLocator(locator);
         highlightElement(checkbox);
+        pause(1);
 
         if (!checkbox.isSelected()) {
             try {
