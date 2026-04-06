@@ -3,6 +3,7 @@ package Tests;
 import Utils.BasePage;
 import org.testng.annotations.Test;
 import javax.swing.*;
+import Tests.WhatsAppContactTest;
 
 public class CustomerTest extends BasePage {
 
@@ -84,8 +85,5 @@ public class CustomerTest extends BasePage {
         productPage.validateSorting(2, "", null, SortOrder.ASCENDING,"//div[@class=\"MuiBox-root css-a7l4db\"]|//h6[text()='Customer']/following::div[1]");
         common.logPrint("TEST PASS :: Sorting validated successfully for Company Portfolio grid");
     }
-
-
-
 
 }

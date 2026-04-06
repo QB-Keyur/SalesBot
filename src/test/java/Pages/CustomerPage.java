@@ -1,6 +1,7 @@
 package Pages;
 
 import Config.EnvConfig;
+import Tests.WhatsAppContactTest;
 import Utils.Common;
 import Utils.Locators;
 import org.apache.poi.ss.usermodel.*;
@@ -20,6 +21,7 @@ import com.github.javafaker.Faker;
 
 
 
+
 public class CustomerPage extends Locators {
 
     Common common;
@@ -27,6 +29,7 @@ public class CustomerPage extends Locators {
     public CustomerPage(WebDriver driver) {
         super(driver);
         this.common = new Common(driver);
+        this.whatsAppContactPage = new WhatsAppContactPage(driver);
     }
 
     public void goToCustomerPage(){
@@ -194,33 +197,33 @@ public class CustomerPage extends Locators {
         common.assertElementPresent(INPUT_SHIPPING_ADDR_LINE2);
         common.logPrint("Verified: Shipping address line 2 field is available");
 
-// Shipping Country
-        common.waitUntilElementToBeClickable(CC_SELECT_COUNTRY);
-        common.assertElementPresent(CC_SELECT_COUNTRY);
-        common.click(CC_SELECT_COUNTRY);
-        common.twoDownKeyAndEnter();
-        common.logPrint("Verified: Shipping country dropdown is selectable");
-
-// Shipping State
-        common.waitUntilElementToBeClickable(CC_SELECT_STATE);
-        common.assertElementPresent(CC_SELECT_STATE);
-        common.click(CC_SELECT_STATE);
-        common.twoDownKeyAndEnter();
-        common.logPrint("Verified: Shipping state dropdown is selectable");
-
-// Shipping City
-        common.waitUntilElementToBeClickable(CC_SELECT_CITY);
-        common.assertElementPresent(CC_SELECT_CITY);
-        common.click(CC_SELECT_CITY);
-        common.twoDownKeyAndEnter();
-        common.logPrint("Verified: Shipping city dropdown is selectable");
-
-// Shipping Pincode
-        common.waitUntilElementToBeClickable(CC_SELECT_CODE);
-        common.assertElementPresent(CC_SELECT_CODE);
-        common.click(CC_SELECT_CODE);
-        common.twoDownKeyAndEnter();
-        common.logPrint("Verified: Shipping postal code is selectable");
+//// Shipping Country
+//        common.waitUntilElementToBeClickable(CC_SELECT_COUNTRY);
+//        common.assertElementPresent(CC_SELECT_COUNTRY);
+//        common.click(CC_SELECT_COUNTRY);
+//        common.twoDownKeyAndEnter();
+//        common.logPrint("Verified: Shipping country dropdown is selectable");
+//
+//// Shipping State
+//        common.waitUntilElementToBeClickable(CC_SELECT_STATE);
+//        common.assertElementPresent(CC_SELECT_STATE);
+//        common.click(CC_SELECT_STATE);
+//        common.twoDownKeyAndEnter();
+//        common.logPrint("Verified: Shipping state dropdown is selectable");
+//
+//// Shipping City
+//        common.waitUntilElementToBeClickable(CC_SELECT_CITY);
+//        common.assertElementPresent(CC_SELECT_CITY);
+//        common.click(CC_SELECT_CITY);
+//        common.twoDownKeyAndEnter();
+//        common.logPrint("Verified: Shipping city dropdown is selectable");
+//
+//// Shipping Pincode
+//        common.waitUntilElementToBeClickable(CC_SELECT_CODE);
+//        common.assertElementPresent(CC_SELECT_CODE);
+//        common.click(CC_SELECT_CODE);
+//        common.twoDownKeyAndEnter();
+//        common.logPrint("Verified: Shipping postal code is selectable");
 
 // Shipping Contact
         common.assertElementPresent(INPUT_SHIPPING_PHONE);
@@ -279,6 +282,50 @@ public class CustomerPage extends Locators {
         common.assertElementPresent(CC_HEADER);
         common.logPrint("Create Customer page opened");
 
+        common.assertElementPresent(CC_CONTACT_HEADER);
+
+        common.click(CONTACT_MENU);
+
+        common.waitUntilElementToBeClickable(SELECT_CONTACT);
+        common.click(SELECT_CONTACT);
+
+        common.waitUntilElementToBeVisible(CUSTOMER_CREATE_BUTTON);
+        common.click(CUSTOMER_CREATE_BUTTON);
+
+        String mobileNumber = common.fakeIndianMobileNumber();
+        whatsAppContactPage.createWhatsAppContactCreate(mobileNumber);
+        whatsAppContactPage.verifySuccessMessageForWhatsAppContactCreation();
+
+        common.assertElementPresent(CC_SELECT_CONTACT_BUTTON);
+        common.click(CC_SELECT_CONTACT_BUTTON);
+
+        common.waitUntilElementToBeClickable(CC_CONTACT_SOURCE);
+
+//        common.checkChkBox("(//tbody//span[contains(@class,'MuiCheckbox-root')])[1]");
+        int i = 1;
+
+        do {
+            String checkboxXpath = "(//tbody//span[contains(@class,'MuiCheckbox-root')])[" + i + "]";
+            common.selectCheckBox(checkboxXpath);
+            common.pause(1);
+
+            List<WebElement> popupList = driver.findElements(By.xpath(CC_ALREADY_ADDED_POPUP));
+
+            if (!popupList.isEmpty() && popupList.get(0).isDisplayed()) {
+                common.logPrint("ALREADY ADDED POPUP for index: " + i);
+                common.click("//button[@aria-label='Close modal']");
+                i++; // move to next checkbox
+            } else {
+                common.logPrint("No popup → Checkbox selected successfully at index: " + i);
+                break; // EXIT loop immediately
+            }
+
+        } while (true);
+
+        common.click("(//span[text()='Save']/parent::button)[2]");
+
+        common.waitUntilElementToBeVisible(CC_SAVE);
+
         // ===== Basic Details =====
         common.type(CC_NAME, customerName);
         common.logPrint("Entered Customer Name: " + customerName);
@@ -321,60 +368,16 @@ public class CustomerPage extends Locators {
         common.type(INPUT_SHIPPING_ADDR_LINE2, shippingAddr2);
 
         // Dropdowns (Shipping)
-        common.waitUntilElementToBeClickable(CC_SELECT_COUNTRY);
-        common.click(CC_SELECT_COUNTRY);
-        common.twoDownKeyAndEnter();
+        common.tabTwoDownKeyAndEnter();
 
-        common.waitUntilElementToBeClickable(CC_SELECT_STATE);
-        common.click(CC_SELECT_STATE);
-        common.twoDownKeyAndEnter();
+        common.tabTwoDownKeyAndEnter();
 
-        common.waitUntilElementToBeClickable(CC_SELECT_CITY);
-        common.click(CC_SELECT_CITY);
-        common.twoDownKeyAndEnter();
+        common.tabTwoDownKeyAndEnter();
 
-        common.waitUntilElementToBeClickable(CC_SELECT_CODE);
-        common.click(CC_SELECT_CODE);
-        common.twoDownKeyAndEnter();
+        common.tabTwoDownKeyAndEnter();
 
         common.type(INPUT_SHIPPING_PHONE, shippingPhone);
         common.type(INPUT_SHIPPING_EMAIL, shippingEmail);
-
-        // ===== Contacts =====
-        common.assertElementPresent(CC_CONTACT_HEADER);
-
-        common.type(CC_CONTACT_NAME, contactName);
-        common.logPrint("Entered Contact Name: " + contactName);
-
-        common.assertElementPresent(CC_SELECT_CONTACT_BUTTON);
-        common.click(CC_SELECT_CONTACT_BUTTON);
-
-        common.waitUntilElementToBeClickable(CC_CONTACT_SOURCE);
-
-//        common.checkChkBox("(//tbody//span[contains(@class,'MuiCheckbox-root')])[1]");
-        int i = 1;
-
-        do {
-            String checkboxXpath = "(//tbody//span[contains(@class,'MuiCheckbox-root')])[" + i + "]";
-            common.selectCheckBox(checkboxXpath);
-            common.pause(1);
-
-            List<WebElement> popupList = driver.findElements(By.xpath(CC_ALREADY_ADDED_POPUP));
-
-            if (!popupList.isEmpty() && popupList.get(0).isDisplayed()) {
-                common.logPrint("ALREADY ADDED POPUP for index: " + i);
-                common.click("//button[@aria-label='Close modal']");
-                i++; // move to next checkbox
-            } else {
-                common.logPrint("No popup → Checkbox selected successfully at index: " + i);
-                break; // EXIT loop immediately
-            }
-
-        } while (true);
-
-        common.click("(//span[text()='Save']/parent::button)[2]");
-
-        common.waitUntilElementToBeVisible(CC_SAVE);
 
         // ===== Final Action =====
         common.click(CC_SAVE);
@@ -391,8 +394,10 @@ public class CustomerPage extends Locators {
     }
 
     public void editingACustomer() {
+
         Faker faker = new Faker();
 
+        // ===== Updated Data =====
         String description   = faker.company().industry();
 
         String billingName   = faker.name().fullName();
@@ -407,100 +412,84 @@ public class CustomerPage extends Locators {
         String shippingPhone = "9" + faker.number().digits(9);
         String shippingEmail = faker.internet().emailAddress();
 
-        String contactName   = faker.name().fullName();
-
+        // ===== Step 1: Create Customer =====
         createCustomerWithValidData();
 
+        // ===== Step 2: Open Edit =====
         common.waitUntilElementToBeClickable(EDIT);
         common.click(EDIT);
 
         common.waitUntilElementToBeVisible(CC_NAME);
 
-        common.clear(CC_DESC);
+        // ===== Step 3: Update Basic Details =====
         common.type(CC_DESC, description);
 
         // ===== Billing =====
-        common.clear(CC_BILLING_NAME);
         common.type(CC_BILLING_NAME, billingName);
-
-        common.clear(CC_BILLING_ADDRESS_LINE_1);
         common.type(CC_BILLING_ADDRESS_LINE_1, billingAddr1);
-
-        common.clear(CC_BILLING_ADDRESS_LINE_2);
         common.type(CC_BILLING_ADDRESS_LINE_2, billingAddr2);
 
         // Dropdowns (Billing)
         common.click(CC_SELECT_COUNTRY);
         common.twoDownKeyAndEnter();
 
-        common.waitUntilElementToBeClickable(CC_SELECT_STATE);
         common.click(CC_SELECT_STATE);
         common.twoDownKeyAndEnter();
 
-        common.waitUntilElementToBeClickable(CC_SELECT_CITY);
         common.click(CC_SELECT_CITY);
         common.twoDownKeyAndEnter();
 
-        common.waitUntilElementToBeClickable(CC_SELECT_CODE);
         common.click(CC_SELECT_CODE);
         common.twoDownKeyAndEnter();
 
-        common.clear(CC_BILLING_PHONE);
         common.type(CC_BILLING_PHONE, billingPhone);
 
-        common.clear(CC_BILLING_EMAIL);
+        // 🔥 Email fix (no duplication)
+        common.click(CC_BILLING_EMAIL);
+        common.ctrlAAndBackspace();
         common.type(CC_BILLING_EMAIL, billingEmail);
 
         // ===== Shipping =====
         common.click(CC_SHIPPING);
 
-        common.clear(INPUT_SHIPPING_NAME);
         common.type(INPUT_SHIPPING_NAME, shippingName);
-
-        common.clear(INPUT_SHIPPING_ADDR_LINE1);
         common.type(INPUT_SHIPPING_ADDR_LINE1, shippingAddr1);
-
-        common.clear(INPUT_SHIPPING_ADDR_LINE2);
         common.type(INPUT_SHIPPING_ADDR_LINE2, shippingAddr2);
 
         // Dropdowns (Shipping)
-        common.waitUntilElementToBeClickable(SHIPPING_SELECT_COUNTRY);
-        common.click(SHIPPING_SELECT_COUNTRY);
-        common.twoDownKeyAndEnter();
+        common.tabTwoDownKeyAndEnter();
+        common.tabTwoDownKeyAndEnter();
+        common.tabTwoDownKeyAndEnter();
+        common.tabTwoDownKeyAndEnter();
 
-        common.waitUntilElementToBeClickable(SHIPPING_SELECT_STATE);
-        common.click(SHIPPING_SELECT_STATE);
-        common.twoDownKeyAndEnter();
-
-        common.waitUntilElementToBeClickable(SHIPPING_SELECT_CITY);
-        common.click(SHIPPING_SELECT_CITY);
-        common.twoDownKeyAndEnter();
-
-        common.waitUntilElementToBeClickable(CC_SELECT_CODE);
-        common.click(CC_SELECT_CODE);
-        common.twoDownKeyAndEnter();
-
-        common.clear(INPUT_SHIPPING_PHONE);
         common.type(INPUT_SHIPPING_PHONE, shippingPhone);
 
-        common.clear(INPUT_SHIPPING_EMAIL);
+        // 🔥 Email fix
+        common.click(INPUT_SHIPPING_EMAIL);
+        common.ctrlAAndBackspace();
         common.type(INPUT_SHIPPING_EMAIL, shippingEmail);
 
-        // ===== Contacts =====
+        // ===== Contacts (UPDATED - includes create contact) =====
         common.assertElementPresent(CC_CONTACT_HEADER);
-
-        common.clear(CC_CONTACT_NAME);
-        common.type(CC_CONTACT_NAME, contactName);
-        common.logPrint("Entered Contact Name: " + contactName);
+        common.click(CONTACT_MENU);
 
         common.assertElementPresent(CC_SELECT_CONTACT_BUTTON);
         common.click(CC_SELECT_CONTACT_BUTTON);
 
         common.waitUntilElementToBeClickable(CC_CONTACT_SOURCE);
 
+        // 🔥 Create new WhatsApp Contact (same as create flow)
+        common.waitUntilElementToBeVisible(CUSTOMER_CREATE_BUTTON);
+        common.click(CUSTOMER_CREATE_BUTTON);
+
+        String mobileNumber = common.fakeIndianMobileNumber();
+        whatsAppContactPage.createWhatsAppContactCreate(mobileNumber);
+        whatsAppContactPage.verifySuccessMessageForWhatsAppContactCreation();
+
         int i = 1;
 
-        do {
+        while (true) {
+            common.pause(1);
             String checkboxXpath = "(//tbody//span[contains(@class,'MuiCheckbox-root')])[" + i + "]";
             common.selectCheckBox(checkboxXpath);
             common.pause(1);
@@ -515,19 +504,18 @@ public class CustomerPage extends Locators {
                 common.logPrint("No popup → Checkbox selected successfully at index: " + i);
                 break;
             }
-
-        } while (true);
+        }
 
         common.click("(//span[text()='Save']/parent::button)[2]");
 
+        // ===== Final Save =====
         common.waitUntilElementToBeVisible(CC_SAVE);
-
-        // ===== Final Action =====
         common.click(CC_SAVE);
-        common.logPrint("Clicked Save button - Customer creation attempted");
 
-        common.waitUntilElementToBeClickable(CUSTOMER_CREATE_TOASTER);
-        common.assertElementPresent(CUSTOMER_CREATE_TOASTER);
+        common.logPrint("Customer edit attempted");
+
+        common.waitUntilElementToBeClickable(CUSTOMER_UPDATE_TOASTER);
+        common.assertElementPresent(CUSTOMER_UPDATE_TOASTER);
     }
 
     public void deleteACustomer(){

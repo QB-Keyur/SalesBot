@@ -78,6 +78,9 @@ public class WhatsAppContactPage extends Locators {
 
         common.waitUntilElementToBeVisible(Contact);
         common.click(Contact);
+
+        common.waitUntilElementToBeVisible(ContactButton);
+        common.click(ContactButton);
 //
 //        common.waitUntilElementToBeVisible(WhatsAppContact);
 //        common.click(WhatsAppContact);
@@ -309,13 +312,13 @@ public class WhatsAppContactPage extends Locators {
         String email = name+"123@yopmail.com";
         common.type(EmailInp, email.toLowerCase());
 
-        String dob = common.fakeDOB_MMDDYYYY();
+        String dob = common.fakeDOB_DDMMYYYY();
         common.waitUntilElementToBeVisible(dateOfBirthInp);
-        common.type(dateOfBirthInp, dob);
+        common.type(dateOfBirthInp, "2002-04-05");
 
         common.waitUntilElementToBeVisible(contactGroup);
         common.click(contactGroup);
-        common.downKeyAndEnter();
+        common.twoDownKeyAndEnter();
 
         common.waitUntilElementToBeVisible(phoneNumberInp);
         common.type(phoneNumberInp, phoneNumber);
@@ -330,17 +333,17 @@ public class WhatsAppContactPage extends Locators {
 
         common.waitUntilElementToBeVisible(selectCountryDropdown);
         common.click(selectCountryDropdown);
-        common.downKeyAndEnter();
+        common.twoDownKeyAndEnter();
 
         common.waitUntilElementToBeVisible(SelectStateInp);
         common.click(SelectStateInp);
         common.type(SelectStateInp, "gujarat");
-        common.downKeyAndEnter();
+        common.twoDownKeyAndEnter();
 
         common.waitUntilElementToBeVisible(SelectCityInp);
         common.click(SelectCityInp);
         common.type(SelectCityInp, "Ahmedabad");
-        common.downKeyAndEnter();
+        common.twoDownKeyAndEnter();
 
         common.waitUntilElementToBeVisible(saveButton);
         common.click(saveButton);

@@ -16,7 +16,7 @@ public class Locators extends BasePage {
         this.driver = driver;
     }
 
-    public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]";
+    public static String createdSuccessfully = "//div[contains(text(), 'Created successfully')]|//div[contains(text(), 'Contact created successfully')]";
     public static String passwordChangedSuccessfully = "//div[contains(text(), 'Password changed successfully')]";
     public static String userAccountCreatedSuccessfully = "//div[contains(text(), 'User account created successfully.')]";
     public static String roleAndPermissionAddedSuccessfully = "//div[contains(text(), 'Role and permissions added successfully')]";
@@ -332,11 +332,12 @@ public class Locators extends BasePage {
 
     //Inputs Fields
     public static String Contact= "//span[contains(text(),'Contact')]";
+    public static String ContactButton= "//button[contains(text(),'Contact')]";
     public static String WhatsAppContact= "//button[contains(text(),'Whatsapp Contact')]";
     public static String nameInp = "//input[@name='name']";
     public static String EmailInp= "//input[@name='email']";
-    public static String dateOfBirthInp = "//input[@placeholder='Enter Date Of Birth']";
-    public static String contactGroup = "//input[@placeholder='Create or Select Contact Group']";
+    public static String dateOfBirthInp = "//input[@placeholder='Select Date Of Birth']";
+    public static String contactGroup = "//input[@placeholder='Select or Create Contact Group']";
     public static String phoneNumberInp = "//input[@placeholder='Enter phone number']";
     public static String companyNameInp = "//input[@name='company_name']";
     public static String selectCountryDropdown = "//input[@placeholder='Select Country']";
@@ -1462,6 +1463,7 @@ public class Locators extends BasePage {
     public static final String CUSTOMER_SEARCH_BAR = "//input[@placeholder='Search' or contains(@placeholder,'Search')]";
     public static final String CUSTOMER_FILTER_BUTTON = "//button[.//text()[contains(.,'Filter')]]";
     public static final String CUSTOMER_REFRESH_BUTTON = "//span[text()='Filters']/following::button[1]";
+    public static final String SELECT_CONTACT = "//button[.//text()[contains(.,'Select Contacts')]]";
     public static final String CUSTOMER_CREATE_BUTTON = "//button[.//text()[contains(.,'Create')]]";
     public static final String COLUMN_HASH = "//th[normalize-space()='#']";
     public static final String COLUMN_CUSTOMER_NAME = "//th[normalize-space()='Customer Name']";
@@ -1502,13 +1504,13 @@ public class Locators extends BasePage {
 
 
     public static final String SHIPPING_SELECT_COUNTRY =
-            "//span[text()='Shipping Address']/ancestor::div[contains(@class,'MuiGrid-root')]//label[.//span[normalize-space()='Country']]/parent::div/following-sibling::div//input";
+            "(//span[text()='Shipping Address']/following::span[text()='Country']/following::input)[1]";
 
     public static final String SHIPPING_SELECT_STATE =
-            "//span[text()='Shipping Address']/ancestor::div[contains(@class,'MuiGrid-root')]//label[.//span[normalize-space()='State']]/parent::div/following-sibling::div//input";
+            "(//span[text()='Shipping Address']/following::span[text()='State']/following::input)[1]";
 
     public static final String SHIPPING_SELECT_CITY =
-            "//span[text()='Shipping Address']/ancestor::div[contains(@class,'MuiGrid-root')]//label[.//span[normalize-space()='City']]/parent::div/following-sibling::div//input";
+           "(//span[text()='Shipping Address']/following::span[text()='City']/following::input)[1]";
 
 
     public static final String INPUT_SHIPPING_PHONE = "//input[@name='shipping_phone_number']";
@@ -1522,6 +1524,7 @@ public class Locators extends BasePage {
     public static final String CC_ALREADY_ADDED_POPUP = "//p[normalize-space()='Contact Already Linked']";
 
     public static String CUSTOMER_CREATE_TOASTER = "//div[contains(normalize-space(), 'Customer Created Successfully')] | //div[text()='Customer created successfully']";
+    public static String CUSTOMER_UPDATE_TOASTER = "//div[contains(normalize-space(), 'Customer updated successfully')] | //div[text()='Customer updated successfully']";
     public static String CUSTOMER_DELETE_MSG = "//p[text()='Delete Customer']";
     public static String CUSTOMER_DELETE_MSG2 = "//p[text()='Are you sure you want to permanently delete this Customer?']";
 }
