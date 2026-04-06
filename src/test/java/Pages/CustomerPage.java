@@ -8,7 +8,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-
+import java.util.List;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
@@ -352,7 +352,172 @@ public class CustomerPage extends Locators {
         common.waitUntilElementToBeClickable(CC_CONTACT_SOURCE);
 
 //        common.checkChkBox("(//tbody//span[contains(@class,'MuiCheckbox-root')])[1]");
-        common.selectCheckBox("(//tbody//span[contains(@class,'MuiCheckbox-root')])[1]");
+        int i = 1;
+
+        do {
+            String checkboxXpath = "(//tbody//span[contains(@class,'MuiCheckbox-root')])[" + i + "]";
+            common.selectCheckBox(checkboxXpath);
+            common.pause(1);
+
+            List<WebElement> popupList = driver.findElements(By.xpath(CC_ALREADY_ADDED_POPUP));
+
+            if (!popupList.isEmpty() && popupList.get(0).isDisplayed()) {
+                common.logPrint("ALREADY ADDED POPUP for index: " + i);
+                common.click("//button[@aria-label='Close modal']");
+                i++; // move to next checkbox
+            } else {
+                common.logPrint("No popup → Checkbox selected successfully at index: " + i);
+                break; // EXIT loop immediately
+            }
+
+        } while (true);
+
+        common.click("(//span[text()='Save']/parent::button)[2]");
+
+        common.waitUntilElementToBeVisible(CC_SAVE);
+
+        // ===== Final Action =====
+        common.click(CC_SAVE);
+        common.logPrint("Clicked Save button - Customer creation attempted");
+
+        common.waitUntilElementToBeClickable(CUSTOMER_CREATE_TOASTER);
+        common.assertElementPresent(CUSTOMER_CREATE_TOASTER);
+
+        common.waitUntilElementToBeClickable(PHSEACRH);
+        common.click(PHSEACRH);
+        common.type(PHSEACRH, customerName);
+        common.waitUntilElementToBeVisible(SEARCHRESULT);
+        common.validateSearch(SEARCHRESULT, customerName);
+    }
+
+    public void editingACustomer() {
+        Faker faker = new Faker();
+
+        String description   = faker.company().industry();
+
+        String billingName   = faker.name().fullName();
+        String billingAddr1  = faker.address().streetAddress();
+        String billingAddr2  = faker.address().secondaryAddress();
+        String billingPhone  = "9" + faker.number().digits(9);
+        String billingEmail  = faker.internet().emailAddress();
+
+        String shippingName  = faker.name().fullName();
+        String shippingAddr1 = faker.address().streetAddress();
+        String shippingAddr2 = faker.address().secondaryAddress();
+        String shippingPhone = "9" + faker.number().digits(9);
+        String shippingEmail = faker.internet().emailAddress();
+
+        String contactName   = faker.name().fullName();
+
+        createCustomerWithValidData();
+
+        common.waitUntilElementToBeClickable(EDIT);
+        common.click(EDIT);
+
+        common.waitUntilElementToBeVisible(CC_NAME);
+
+        common.clear(CC_DESC);
+        common.type(CC_DESC, description);
+
+        // ===== Billing =====
+        common.clear(CC_BILLING_NAME);
+        common.type(CC_BILLING_NAME, billingName);
+
+        common.clear(CC_BILLING_ADDRESS_LINE_1);
+        common.type(CC_BILLING_ADDRESS_LINE_1, billingAddr1);
+
+        common.clear(CC_BILLING_ADDRESS_LINE_2);
+        common.type(CC_BILLING_ADDRESS_LINE_2, billingAddr2);
+
+        // Dropdowns (Billing)
+        common.click(CC_SELECT_COUNTRY);
+        common.twoDownKeyAndEnter();
+
+        common.waitUntilElementToBeClickable(CC_SELECT_STATE);
+        common.click(CC_SELECT_STATE);
+        common.twoDownKeyAndEnter();
+
+        common.waitUntilElementToBeClickable(CC_SELECT_CITY);
+        common.click(CC_SELECT_CITY);
+        common.twoDownKeyAndEnter();
+
+        common.waitUntilElementToBeClickable(CC_SELECT_CODE);
+        common.click(CC_SELECT_CODE);
+        common.twoDownKeyAndEnter();
+
+        common.clear(CC_BILLING_PHONE);
+        common.type(CC_BILLING_PHONE, billingPhone);
+
+        common.clear(CC_BILLING_EMAIL);
+        common.type(CC_BILLING_EMAIL, billingEmail);
+
+        // ===== Shipping =====
+        common.click(CC_SHIPPING);
+
+        common.clear(INPUT_SHIPPING_NAME);
+        common.type(INPUT_SHIPPING_NAME, shippingName);
+
+        common.clear(INPUT_SHIPPING_ADDR_LINE1);
+        common.type(INPUT_SHIPPING_ADDR_LINE1, shippingAddr1);
+
+        common.clear(INPUT_SHIPPING_ADDR_LINE2);
+        common.type(INPUT_SHIPPING_ADDR_LINE2, shippingAddr2);
+
+        // Dropdowns (Shipping)
+        common.waitUntilElementToBeClickable(SHIPPING_SELECT_COUNTRY);
+        common.click(SHIPPING_SELECT_COUNTRY);
+        common.twoDownKeyAndEnter();
+
+        common.waitUntilElementToBeClickable(SHIPPING_SELECT_STATE);
+        common.click(SHIPPING_SELECT_STATE);
+        common.twoDownKeyAndEnter();
+
+        common.waitUntilElementToBeClickable(SHIPPING_SELECT_CITY);
+        common.click(SHIPPING_SELECT_CITY);
+        common.twoDownKeyAndEnter();
+
+        common.waitUntilElementToBeClickable(CC_SELECT_CODE);
+        common.click(CC_SELECT_CODE);
+        common.twoDownKeyAndEnter();
+
+        common.clear(INPUT_SHIPPING_PHONE);
+        common.type(INPUT_SHIPPING_PHONE, shippingPhone);
+
+        common.clear(INPUT_SHIPPING_EMAIL);
+        common.type(INPUT_SHIPPING_EMAIL, shippingEmail);
+
+        // ===== Contacts =====
+        common.assertElementPresent(CC_CONTACT_HEADER);
+
+        common.clear(CC_CONTACT_NAME);
+        common.type(CC_CONTACT_NAME, contactName);
+        common.logPrint("Entered Contact Name: " + contactName);
+
+        common.assertElementPresent(CC_SELECT_CONTACT_BUTTON);
+        common.click(CC_SELECT_CONTACT_BUTTON);
+
+        common.waitUntilElementToBeClickable(CC_CONTACT_SOURCE);
+
+        int i = 1;
+
+        do {
+            String checkboxXpath = "(//tbody//span[contains(@class,'MuiCheckbox-root')])[" + i + "]";
+            common.selectCheckBox(checkboxXpath);
+            common.pause(1);
+
+            List<WebElement> popupList = driver.findElements(By.xpath(CC_ALREADY_ADDED_POPUP));
+
+            if (!popupList.isEmpty() && popupList.get(0).isDisplayed()) {
+                common.logPrint("ALREADY ADDED POPUP for index: " + i);
+                common.click("//button[@aria-label='Close modal']");
+                i++;
+            } else {
+                common.logPrint("No popup → Checkbox selected successfully at index: " + i);
+                break;
+            }
+
+        } while (true);
+
         common.click("(//span[text()='Save']/parent::button)[2]");
 
         common.waitUntilElementToBeVisible(CC_SAVE);
@@ -364,6 +529,51 @@ public class CustomerPage extends Locators {
         common.waitUntilElementToBeClickable(CUSTOMER_CREATE_TOASTER);
         common.assertElementPresent(CUSTOMER_CREATE_TOASTER);
     }
+
+    public void deleteACustomer(){
+        createCustomerWithValidData();
+        common.waitUntilElementToBeVisible(CMGMTDELETEBTN);
+        common.click(CMGMTDELETEBTN);
+
+        common.waitUntilElementToBeVisible(CUSTOMER_DELETE_MSG);
+        common.assertElementPresent(CUSTOMER_DELETE_MSG);
+        common.waitUntilElementToBeVisible(CUSTOMER_DELETE_MSG2);
+        common.assertElementPresent(CUSTOMER_DELETE_MSG2);
+        common.assertElementPresent(CDELETEMSGCANCEL);
+        common.assertElementPresent(CDELETEMSGDELETE);
+
+        common.click(CDELETEMSGCANCEL);
+
+        common.waitUntilElementToBeClickable(CDELETEMSGDELETE);
+        common.click(CMGMTDELETEBTN);
+
+        common.click(CDELETEMSGDELETE);
+
+        common.waitUntilElementToBeVisible(DeletedSuccessfully);
+        common.assertElementPresent(DeletedSuccessfully);
+
+
+    }
+
+    public void horizontalView() {
+        goToCustomerPage();
+        common.pause(2);
+        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"] | //h6[contains(text(),\"Customer\")]/following-sibling::div");
+    }
+
+    public void pagination(){
+        goToCustomerPage();
+        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]| //h6[contains(text(),\"Customer\")]/following-sibling::div");
+    }
+
+
+
+
+
+
+
+
+
 
 
 

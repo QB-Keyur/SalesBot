@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Customer Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <listeners>
+        <listener class-name="Utils.RetryListener"/>
+    </listeners>
+
+    <!-- Verify Customer page navigation -->
+    <test name="Verify Customer page navigation">
+        <classes>
+            <class name="Tests.CustomerTest">
+                <methods>
+                    <include name="goToCustomerPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Customer page elements -->
+    <test name="Verify Customer page elements">
+        <classes>
+            <class name="Tests.CustomerTest">
+                <methods>
+                    <include name="verifyCustomerPageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify Create Customer page -->
+    <test name="Verify Create Customer page elements">
+        <classes>
+            <class name="Tests.CustomerTest">
+                <methods>
+                    <include name="verifyCreatePageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Create Customer -->
+    <test name="Verify creating a new Customer with valid data">
+        <classes>
+            <class name="Tests.CustomerTest">
+                <methods>
+                    <include name="createCustomerWithValidData"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Edit Customer -->
+    <test name="Verify editing an existing Customer">
+        <classes>
+            <class name="Tests.CustomerTest">
+                <methods>
+                    <include name="editingACustomer"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Delete Customer -->
+    <test name="Verify deleting a Customer">
+        <classes>
+            <class name="Tests.CustomerTest">
+                <methods>
+                    <include name="deleteACustomer"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Horizontal View -->
+    <test name="Verify Customer horizontal view">
+        <classes>
+            <class name="Tests.CustomerTest">
+                <methods>
+                    <include name="horizontalView"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Pagination -->
+    <test name="Verify Customer pagination">
+        <classes>
+            <class name="Tests.CustomerTest">
+                <methods>
+                    <include name="pagination"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
