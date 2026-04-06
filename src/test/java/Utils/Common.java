@@ -1212,6 +1212,32 @@ public class Common extends Locators {
         throw new RuntimeException("FAILED :: Unable to type into → " + locator);
     }
 
+    public void Normaltype(String locator, String value) {
+        By by = findBy(locator);
+
+        try {
+            WebElement element = waitUntilElementToBeClickable(by);
+            scroll_To_Element(element);
+            highlightElementClick(element);
+
+            element.clear();
+            element.sendKeys(value);
+
+            logTypeSuccess(element, value);
+
+        } catch (Exception e) {
+            // JS fallback
+            try {
+                WebElement element = driver.findElement(by);
+                jsType(element, value);
+                logTypeSuccess(element, value);
+
+            } catch (Exception ex) {
+                throw new RuntimeException("Unable to type in element: " + locator, ex);
+            }
+        }
+    }
+
     public void typeAndTab(String locator, String keysToSend) {
 
 
@@ -1623,9 +1649,23 @@ public class Common extends Locators {
         element.click();
     }
 
-    public void twoDownKeyAndEnter() {
+    public void tabTwoDownKeyAndEnter() {
 
         pause(1);
+
+        Actions actions = new Actions(driver);
+
+         actions.sendKeys(Keys.TAB)
+                .sendKeys(org.openqa.selenium.Keys.ARROW_DOWN)
+                .sendKeys(org.openqa.selenium.Keys.ARROW_DOWN)
+                .sendKeys(org.openqa.selenium.Keys.ENTER)
+                .build()
+                .perform();
+    }
+
+    public void twoDownKeyAndEnter() {
+
+        pause(2);
 
         Actions actions = new Actions(driver);
 
@@ -1634,6 +1674,20 @@ public class Common extends Locators {
                 .build()
                 .perform();
     }
+
+    public void ctrlAAndBackspace() {
+        Actions actions = new Actions(driver);
+
+        actions
+                .keyDown(Keys.CONTROL)
+                .sendKeys("a")
+                .keyUp(Keys.CONTROL)
+                .sendKeys(Keys.BACK_SPACE)
+                .build()
+                .perform();
+    }
+
+
 
     public void pressEnter() {
         Actions actions = new Actions(driver);
@@ -3434,6 +3488,17 @@ public class Common extends Locators {
 
         // Format using MMddyyyy
         SimpleDateFormat sdf = new SimpleDateFormat("MMddyyyy");
+        return sdf.format(dob);
+    }
+
+    public String fakeDOB_DDMMYYYY() {
+        Faker faker = new Faker();
+
+        // Generate a random birthday for someone between 18 and 50 years old
+        Date dob = faker.date().birthday(18, 50);
+
+        // Format using MMddyyyy
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
         return sdf.format(dob);
     }
 
