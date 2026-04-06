@@ -1485,31 +1485,43 @@ public class Locators extends BasePage {
     public static final String CC_COMPANY_SIZE = "//input[@name=\"company_size\"]";
     public static final String CC_DESC = "//input[@name=\"description\"]";
 
-
     public static final String CC_BILLING_NAME = "//input[@name=\"billing_name\"]";
     public static final String CC_BILLING_ADDRESS_LINE_1 = "//input[@name=\"billing_address_line_1\"]";
     public static final String CC_BILLING_ADDRESS_LINE_2 = "//input[@name=\"billing_address_line_2\"]";
-    public static final String CC_SELECT_COUNTRY = "//input[@placeholder=\"Select Country\"]";
-    public static final String CC_SELECT_STATE = "//input[@placeholder=\"Select State\"]";
-    public static final String CC_SELECT_CITY = "//input[@placeholder=\"Select City\"]";
+    public static final String CC_SELECT_COUNTRY = "//input[@placeholder=\"Select Country\"]|(//label[.//span[text()='Country']]/following::input[@role='combobox'])[1]";
+    public static final String CC_SELECT_STATE = "//input[@placeholder=\"Select State\"]|(//label[.//span[text()='State']]/following::input[@role='combobox'])[1]";
+    public static final String CC_SELECT_CITY = "//input[@placeholder=\"Select City\"]|(//label[.//span[text()='City']]/following::input[@role='combobox'])[1]";
     public static final String CC_SELECT_CODE = "//input[@placeholder=\"Select code\"]";
     public static final String CC_BILLING_PHONE = "//input[@name=\"billing_phone_number\"]";
     public static final String CC_BILLING_EMAIL = "//input[@name=\"billing_email\"]";
     public static final String CC_SHIPPING = "//span[text()='Shipping Address']/parent::button";
 
-
-
     public static final String INPUT_SHIPPING_NAME        = "//input[@name='shipping_name']";
     public static final String INPUT_SHIPPING_ADDR_LINE1  = "//input[@name='shipping_address_line_1']";
     public static final String INPUT_SHIPPING_ADDR_LINE2  = "//input[@name='shipping_address_line_2']";
-    public static final String INPUT_SHIPPING_PHONE       = "//input[@name='shipping_phone_number']";
-    public static final String INPUT_SHIPPING_EMAIL       = "//input[@name='shipping_email']";
+
+
+    public static final String SHIPPING_SELECT_COUNTRY =
+            "//span[text()='Shipping Address']/ancestor::div[contains(@class,'MuiGrid-root')]//label[.//span[normalize-space()='Country']]/parent::div/following-sibling::div//input";
+
+    public static final String SHIPPING_SELECT_STATE =
+            "//span[text()='Shipping Address']/ancestor::div[contains(@class,'MuiGrid-root')]//label[.//span[normalize-space()='State']]/parent::div/following-sibling::div//input";
+
+    public static final String SHIPPING_SELECT_CITY =
+            "//span[text()='Shipping Address']/ancestor::div[contains(@class,'MuiGrid-root')]//label[.//span[normalize-space()='City']]/parent::div/following-sibling::div//input";
+
+
+    public static final String INPUT_SHIPPING_PHONE = "//input[@name='shipping_phone_number']";
+    public static final String INPUT_SHIPPING_EMAIL = "//input[@name='shipping_email']";
 
     public static final String CC_CONTACT_HEADER = "//h2[text()='Contacts']";
     public static final String CC_CONTACT_NAME = "//div[text()='Contact Name']";
     public static final String CC_CONTACT_SOURCE = "//div[text()='Contact Source']|(//div[text()='Contact Source'])[2]";
     public static final String CC_CONTACT_ACTION = "//div[text()='Action']";
     public static final String CC_SELECT_CONTACT_BUTTON = "//span[text()='Select Contacts']/parent::button";
+    public static final String CC_ALREADY_ADDED_POPUP = "//p[normalize-space()='Contact Already Linked']";
 
     public static String CUSTOMER_CREATE_TOASTER = "//div[contains(normalize-space(), 'Customer Created Successfully')] | //div[text()='Customer created successfully']";
+    public static String CUSTOMER_DELETE_MSG = "//p[text()='Delete Customer']";
+    public static String CUSTOMER_DELETE_MSG2 = "//p[text()='Are you sure you want to permanently delete this Customer?']";
 }

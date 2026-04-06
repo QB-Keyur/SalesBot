@@ -353,11 +353,6 @@ public class CompanyPortfolioPage extends Locators {
             common.logPrint("FAILED:  createdDateValue: "+createdDateValue+" editedDateValue: "+editedDateValue);
         }
 
-
-
-
-
-
     }
 
     public void verifyFilter(){
