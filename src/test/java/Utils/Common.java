@@ -1,5 +1,6 @@
 package Utils;
 
+import Config.EnvConfig;
 import com.github.javafaker.Faker;
 import com.google.gson.*;
 import io.restassured.response.Response;
@@ -902,61 +903,110 @@ public class Common extends Locators {
 //        // 6️⃣ Assertion (re-locate after grid refresh)
 //        assertElementPresent(searchResultXPath.toString());
 //    }
+//    public void searchCommon(String baseXPath) {
+//
+//        // 1️⃣ Click Search button (best-effort)
+//        try {
+//            common.click(SEARCH);
+//        } catch (Exception ignored) {
+//        }
+//
+//        // 2️⃣ Collect grid values
+//        List<WebElement> elements = waitForElements(baseXPath, 8);
+//        System.out.println("XPath: " + baseXPath + " -> matched count: " + elements.size());
+//
+//        List<String> values = collectTextsFromElements(elements);
+//
+//        if (values.isEmpty()) {
+//            throw new AssertionError(
+//                    "No values collected for xpath: " + baseXPath +
+//                            ". Check DOM, iframe/shadow-root, or waits."
+//            );
+//        }
+//
+//        // 3️⃣ Pick random value
+//        String randomValue = values
+//                .get(new Random().nextInt(values.size()))
+//                .trim();
+//
+//        System.out.println("Random Value Selected = " + randomValue);
+//
+//        // 4️⃣ Type into search box
+//        By searchBy = By.xpath("//input[@placeholder='Search...']");
+//        WebElement search = waitForElementVisible(searchBy, 8);
+//
+//        search.clear();
+//        search.sendKeys(randomValue);
+//        pause(2); // allow grid refresh
+//
+//        // 5️⃣ Build CASE + UNDERSCORE SAFE XPath
+//        String normalizedValue = randomValue
+//                .replace("_", "")
+//                .toLowerCase();
+//
+//        String finalXPath =
+//                baseXPath +
+//                        "[contains(" +
+//                        "translate(normalize-space(.), " +
+//                        "'ABCDEFGHIJKLMNOPQRSTUVWXYZ_', " +
+//                        "'abcdefghijklmnopqrstuvwxyz'" +
+//                        "), '" +
+//                        normalizedValue +
+//                        "')]";
+//
+//        System.out.println("Final Search Result XPATH = " + finalXPath);
+//
+//        // 6️⃣ Assertion (re-locate after grid refresh)
+//        assertElementPresent(finalXPath);
+//    }
+
     public void searchCommon(String baseXPath) {
 
-        // 1️⃣ Click Search button (best-effort)
-        try {
-            common.click(SEARCH);
-        } catch (Exception ignored) {
-        }
+        try { common.click(SEARCH); } catch (Exception ignored) {}
 
-        // 2️⃣ Collect grid values
         List<WebElement> elements = waitForElements(baseXPath, 8);
         System.out.println("XPath: " + baseXPath + " -> matched count: " + elements.size());
 
-        List<String> values = collectTextsFromElements(elements);
+        List<String> values = elements.stream()
+                .map(e -> {
+                    String t = e.getText();
+                    if (t == null || t.trim().isEmpty()) {
+                        t = e.getAttribute("textContent");
+                    }
+                    return t != null ? t.trim() : "";
+                })
+                .filter(t -> !t.isEmpty())
+                .toList();
 
         if (values.isEmpty()) {
-            throw new AssertionError(
-                    "No values collected for xpath: " + baseXPath +
-                            ". Check DOM, iframe/shadow-root, or waits."
-            );
+            throw new AssertionError("No values collected for xpath: " + baseXPath);
         }
 
-        // 3️⃣ Pick random value
-        String randomValue = values
-                .get(new Random().nextInt(values.size()))
-                .trim();
-
+        String randomValue = values.get(new Random().nextInt(values.size())).trim();
         System.out.println("Random Value Selected = " + randomValue);
 
-        // 4️⃣ Type into search box
-        By searchBy = By.xpath("//input[@placeholder='Search...']");
-        WebElement search = waitForElementVisible(searchBy, 8);
-
+        WebElement search = waitForElementVisible(By.xpath("//input[@placeholder='Search...']"), 8);
         search.clear();
         search.sendKeys(randomValue);
-        pause(2); // allow grid refresh
 
-        // 5️⃣ Build CASE + UNDERSCORE SAFE XPath
-        String normalizedValue = randomValue
-                .replace("_", "")
-                .toLowerCase();
+        String normalizedValue = randomValue.replace("_", "").toLowerCase();
 
-        String finalXPath =
-                baseXPath +
-                        "[contains(" +
-                        "translate(normalize-space(.), " +
-                        "'ABCDEFGHIJKLMNOPQRSTUVWXYZ_', " +
-                        "'abcdefghijklmnopqrstuvwxyz'" +
-                        "), '" +
-                        normalizedValue +
-                        "')]";
+        waitForElements(baseXPath, 8);
 
-        System.out.println("Final Search Result XPATH = " + finalXPath);
+        List<WebElement> filtered = waitForElements(baseXPath, 8);
 
-        // 6️⃣ Assertion (re-locate after grid refresh)
-        assertElementPresent(finalXPath);
+        WebElement foundElement = filtered.stream()
+                .filter(e -> e.getText().trim().toLowerCase().contains(normalizedValue))
+                .findFirst()
+                .orElse(null);
+
+        boolean found = foundElement != null;
+
+        if (!found) {
+            throw new AssertionError("Search failed. Value not found: " + randomValue);
+        }
+
+        highlightElement(foundElement);
     }
 
     public String selectDropdownAndGetSelectedText(By dropdownActivator, By optionLocator) {
@@ -1204,7 +1254,7 @@ public class Common extends Locators {
                     logTypeSuccess(el, keysToSend);
                     return;
                 } catch (Exception ignored) {
-                    common.pause(200); // retry
+                    pause(200); // retry
                 }
             }
         }
@@ -2731,7 +2781,6 @@ public class Common extends Locators {
 
     public void pagination(String fallbackMaxSrXpath) {
 
-        pause(2);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -2785,16 +2834,32 @@ public class Common extends Locators {
                 "//div[@aria-haspopup='listbox']";
 
         // 3️⃣ Decide rows-per-page dynamically
-        int[] rowOptions = totalCount < 10
-                ? new int[]{10}
-                : new int[]{10, 20, 30};
+        WebElement rowsDropdown = waitUntilElementToBeClickable(ROWS_PER_PAGE_DROPDOWN);
+        highlightElement(rowsDropdown);
+        rowsDropdown.click();
+
+        List<Integer> rowOptions = driver.findElements(By.xpath("//ul[@role='listbox']//li[@data-value]"))
+                .stream()
+                .map(option -> option.getAttribute("data-value"))
+                .filter(Objects::nonNull)
+                .map(String::trim)
+                .filter(value -> !value.isEmpty())
+                .map(Integer::parseInt)
+                .distinct()
+                .toList();
+
+        driver.findElement(By.tagName("body")).click();
+
+        if (rowOptions.isEmpty()) {
+            throw new AssertionError("No rows-per-page options found in dropdown");
+        }
 
         // 4️⃣ Loop for each rows-per-page option
         for (int rows : rowOptions) {
 
             logPrint("Validating SR with rows-per-page = " + rows);
 
-            WebElement rowsDropdown = waitUntilElementToBeClickable(ROWS_PER_PAGE_DROPDOWN);
+            rowsDropdown = waitUntilElementToBeClickable(ROWS_PER_PAGE_DROPDOWN);
             highlightElement(rowsDropdown);
             rowsDropdown.click();
 
@@ -3798,6 +3863,51 @@ public class Common extends Locators {
         }
     }
 
+    public boolean validateCurrentUrlContains(String endpoint) {
+        String currentUrl = driver.getCurrentUrl();
+        String expectedUrlPart = EnvConfig.getWebUrl() + endpoint;
+
+        boolean isMatched = currentUrl != null && currentUrl.contains(expectedUrlPart);
+
+        logPrint((isMatched ? "PASSED" : "FAILED") +
+                " Current URL: [" + currentUrl + "] | Expected to contain: [" + expectedUrlPart + "]");
+
+        return isMatched;
+    }
+
+    public boolean isElementActuallyVisible(String xpath, int timeoutSec) {
+        try {
+            long endTime = System.currentTimeMillis() + (timeoutSec * 1000);
+
+            while (System.currentTimeMillis() < endTime) {
+
+                List<WebElement> elements = driver.findElements(By.xpath(xpath));
+
+                for (WebElement el : elements) {
+                    try {
+                        if (el.isDisplayed()) {
+
+                            // 🔥 Highlight element here
+                            JavascriptExecutor js = (JavascriptExecutor) driver;
+                            js.executeScript(
+                                    "arguments[0].style.border='3px solid yellow';",
+                                    el
+                            );
+
+                            return true; // ✅ visible element found
+                        }
+                    } catch (Exception ignored) {}
+                }
+
+                Thread.sleep(500);
+            }
+
+            return false;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
 
 /* ---------------- Usage examples ----------------

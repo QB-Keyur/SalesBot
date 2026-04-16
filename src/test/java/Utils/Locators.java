@@ -68,7 +68,7 @@ public class Locators extends BasePage {
     //Locators for the Onboarding
 
     //Locators for the Product Page
-    public static String PRODUCTMENU = "//*[self::span or self::div][text()='Product / Service']";
+    public static String PRODUCTMENU = "//*[self::span or self::button][text()='Product / Service']";
     public static String SRNO = "//*[self::span or self::div][text()='#']";
     public static String PRODUCTNAMES = "//*[self::span or self::div][text()='Product Name']";
     public static String CATEGORY = "//*[self::span or self::div][text()='Category']";
@@ -1527,4 +1527,88 @@ public class Locators extends BasePage {
     public static String CUSTOMER_UPDATE_TOASTER = "//div[contains(normalize-space(), 'Customer updated successfully')] | //div[text()='Customer updated successfully']";
     public static String CUSTOMER_DELETE_MSG = "//p[text()='Delete Customer']";
     public static String CUSTOMER_DELETE_MSG2 = "//p[text()='Are you sure you want to permanently delete this Customer?']";
+
+
+    //Assets Sharing Page
+
+    public static final String COMAPNY_MENU = "//span[text()='Company']/ancestor::button";
+    public static final String ASSETS_SHARING_MENU = "//button[text()='Assets & Sharing']";
+    public static final String ASSETS_SHARING_HEADER = "//h6[text()='Assets & Sharing']";
+    public static final String ASSETS_COUNT_BADGE = "//h6[normalize-space()='Assets & Sharing']/following-sibling::div";
+    public static final String SEARCH_INPUT = "//input[@placeholder='Search...']";
+    public static final String FILTER_BUTTON = "//button[.//span[normalize-space()='Filters']]";
+    public static final String CREATE_BUTTON = "//button[.//span[normalize-space()='Create']]";
+
+    public static final String LIST_VIEW_TAB = "(//button[@role='tab'])[1]";
+    public static final String GRID_VIEW_TAB = "(//button[@role='tab'])[2]";
+
+    public static final String TABLE_HEADER_NAME = "//th[.//div[normalize-space()='Name']]";
+    public static final String TABLE_HEADER_DESCRIPTION = "//th[.//div[normalize-space()='Description']]";
+    public static final String TABLE_HEADER_STATUS = "//th[.//div[normalize-space()='Status']]";
+    public static final String TABLE_HEADER_ACTIONS = "//th[.//div[normalize-space()='Actions']]";
+
+    public static final String TABLE_ROWS = "//tbody/tr";
+    public static final String FIRST_ROW = "(//tbody/tr)[1]";
+
+    public static final String ROW_NAME = "//tbody/tr[%s]/td[2]";
+    public static final String ROW_DESCRIPTION = "//tbody/tr[%s]/td[3]";
+    public static final String ROW_STATUS = "//tbody/tr[%s]/td[4]//span";
+
+    public static final String VIEW_BUTTON = "(//tbody/tr[1]//span[@aria-label='View']/button)";
+    public static final String EDIT_BUTTON = "(//tbody/tr[1]//span[@aria-label='Edit']/button)";
+    public static final String DELETE_BUTTON = "(//tbody/tr[1]//span[@aria-label='Delete']/button)";
+
+    public static final String SHOW_DROPDOWN = "//div[@role='combobox']";
+    public static final String NEXT_PAGE_BUTTON = "//button[@aria-label='Go to next page']";
+    public static final String PREVIOUS_PAGE_BUTTON = "//button[@aria-label='Go to previous page']";
+
+    public static final String STATUS_ACTIVE = "//span[normalize-space()='Active']";
+
+    public static final String AS_CREATE_BUTTON = "//span[normalize-space()='Create']/parent::button";
+
+    public static final String AS_CREATE_HEADER = "//h6[normalize-space()='Create Assets & Sharing']";
+    public static final String AS_CREATE_BASIC_DETAILSHEADER = "//h2[normalize-space()='Basic Details']";
+
+    public static final String ASC_ASSET_NAME = "//span[text()='Asset Name']";
+    public static final String ASC_ASSET_NAME_INPUT = "//input[@placeholder='Enter Asset name']";
+    public static final String ASC_ASSET_NAME_INPUT_VAL = "//span[normalize-space()='Asset Name is required']";
+
+    public static final String ASC_DESCRIPTION = "//span[text()='Description']";
+    public static final String ASC_DESCRIPTION_INPUT = "//input[@placeholder='Enter Description']";
+    public static final String ASC_DESCRIPTION_INPUT_VAL = "//span[normalize-space()='Description is required']";
+
+    public static final String ASC_ADDITIONAL_INFO = "//span[text()='Additional Info']";
+    public static final String ASC_ADDITIONAL_INFO_INPUT = "//input[@placeholder='Enter Additional Info']";
+    public static final String ASC_ADDITIONAL_INFO_INPUT_VAL = "//span[normalize-space()='Additional Info is required']";
+
+    public static final String ASC_CAN_BE_SENT_FROM_AI_LABEL = "//p[normalize-space()='Can Be Send From AI']";
+    public static final String ASC_AI_YES_RADIO = "//input[@type='radio' and @value='true']";
+    public static final String ASC_AI_NO_RADIO = "//input[@type='radio' and @value='false']";
+    public static final String ASC_AI_YES_TEXT = "//p[normalize-space()='Yes']";
+    public static final String ASC_AI_NO_TEXT = "//p[normalize-space()='No']";
+
+    public static final String ASC_UPLOAD_ASSET_LABEL = "//span[text()='Upload Asset']";
+    public static final String ASC_UPLOAD_INPUT = "//input[@type='file']/parent::div";
+    public static final String ASC_UPLOAD_INPUT_VAL = "//input[@type='file']";
+    public static final String ASC_UPLOAD_INPUT_VALIDATION = "//span[normalize-space()='Upload Asset is required']";
+    public static final String ASC_SELECT_FILE_BUTTON = "//div[@role='button']//div[normalize-space()='Select file']";
+
+    public static final String ASC_CANCEL_BUTTON = "//button//span[normalize-space()='Cancel']";
+    public static final String ASC_SAVE_BUTTON = "//button//span[normalize-space()='Save']";
+    public static final String ASC_CREATE_TOASTER =  "//div[contains(normalize-space(), 'Assets & Sharing Created Successfully')] | //div[text()='Assets & Sharing created successfully']";;
+    public static final String ASC_UPDATE_TOASTER =  "//div[contains(normalize-space(), 'Assets & Sharing Updated Successfully')] | //div[text()='Assets & Sharing updated successfully']";;
+
+    public static final String ASC_FORM_CONTAINER = "//form";
+    public static final String ASC_BASIC_DETAILS_SECTION = "//h2[normalize-space()='Basic Details']/parent::div";
+    public static final String ASC_VIEW_ASSET_SHARING = "//p[normalize-space()='View Assets & Sharing']";
+    public static final String ASC_VIEW_NAME = "//span[contains(text(),'Name')]";
+    public static final String ASC_VIEW_NAME_VALUE = "//span[text()='Name']/following::input[1]";
+    public static final String ASC_VIEW_DESCRIPTION = "//span[contains(text(),'Description')]";
+    public static final String ASC_VIEW_DESCRIPTION_VALUE = "//span[text()='Description']/following::input[1]";
+
+    /* Recommended stable relative locators */
+    public static final String ASC_ASSET_NAME_INPUT_REL = "//span[text()='Asset Name']/ancestor::label/following::input[1]";
+    public static final String ASC_DESCRIPTION_INPUT_REL = "//span[text()='Description']/ancestor::label/following::input[1]";
+    public static final String ASC_ADDITIONAL_INFO_INPUT_REL = "//span[text()='Additional Info']/ancestor::label/following::input[1]";
+
 }

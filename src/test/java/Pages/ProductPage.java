@@ -41,6 +41,9 @@ public class ProductPage extends Locators {
 
     public void goToProductPage() {
 
+        common.waitUntilElementToBeVisible(COMAPNY_MENU);
+        common.click(COMAPNY_MENU);
+
         common.waitUntilElementToBeClickable(PRODUCTMENU);
         common.click(PRODUCTMENU);
 
