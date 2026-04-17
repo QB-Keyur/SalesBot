@@ -150,4 +150,15 @@
         </classes>
     </test>
 
+    <!-- Sorting -->
+    <test name="Verify Sorting">
+        <classes>
+            <class name="Tests.AssetsSharingTest">
+                <methods>
+                    <include name="validateSorting"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 </suite>

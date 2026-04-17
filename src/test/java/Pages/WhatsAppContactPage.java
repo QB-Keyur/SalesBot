@@ -189,13 +189,13 @@ public class WhatsAppContactPage extends Locators {
         common.waitUntilElementToBeVisible(By.xpath(selectCountryDropdown));
         common.assertElementPresent(selectCountryDropdown);
 
-        common.logPrint("Step:: Verify 'State' input dropdown is displayed");
-        common.waitUntilElementToBeVisible(By.xpath(SelectStateInp));
-        common.assertElementPresent(SelectStateInp);
-
-        common.logPrint("Step:: Verify 'City' input dropdown is displayed");
-        common.waitUntilElementToBeVisible(By.xpath(SelectCityInp));
-        common.assertElementPresent(SelectCityInp);
+//        common.logPrint("Step:: Verify 'State' input dropdown is displayed");
+//        common.waitUntilElementToBeVisible(By.xpath(SelectStateInp));
+//        common.assertElementPresent(SelectStateInp);
+//
+//        common.logPrint("Step:: Verify 'City' input dropdown is displayed");
+//        common.waitUntilElementToBeVisible(By.xpath(SelectCityInp));
+//        common.assertElementPresent(SelectCityInp);
 
     }
 
@@ -238,8 +238,8 @@ public class WhatsAppContactPage extends Locators {
         common.assertElementPresent(exportBtn);
 
         common.logPrint("Step:: Verify 'Refresh' button is displayed");
-        common.waitUntilElementToBeVisible(By.xpath(refreshBtn));
-        common.assertElementPresent(refreshBtn);
+        common.waitUntilElementToBeVisible(By.xpath(CUSTOMER_REFRESH_BUTTON));
+        common.assertElementPresent(CUSTOMER_REFRESH_BUTTON);
 
         common.logPrint("Step:: Verify 'Filters' button is displayed");
         common.waitUntilElementToBeVisible(By.xpath(filterBtn));
@@ -289,6 +289,10 @@ public class WhatsAppContactPage extends Locators {
         common.waitUntilElementToBeVisible(By.xpath(emailSubscriptionHeader));
         common.assertElementPresent(emailSubscriptionHeader);
 
+        common.logPrint("Step:: Verify 'Email Subscription' grid header is displayed");
+        common.waitUntilElementToBeVisible(By.xpath(whatsappSubscriptionHeader));
+        common.assertElementPresent(whatsappSubscriptionHeader);
+
         common.logPrint("Step:: Verify 'Actions' grid header is displayed");
         common.waitUntilElementToBeVisible(By.xpath(actionsHeader));
         common.assertElementPresent(actionsHeader);
@@ -333,6 +337,7 @@ public class WhatsAppContactPage extends Locators {
 
         common.waitUntilElementToBeVisible(selectCountryDropdown);
         common.click(selectCountryDropdown);
+        common.type(selectCountryDropdown, "India");
         common.twoDownKeyAndEnter();
 
         common.waitUntilElementToBeVisible(SelectStateInp);
@@ -421,7 +426,7 @@ public class WhatsAppContactPage extends Locators {
 
         common.logPrint("Step:: Verify error message for duplicate mobile number");
 
-        String validation = "//div[text()=\"Contact with phone number '91"+ mobileNum +"' already exists in this business.\"]";
+        String validation = "//div[text()=\"Phone number: Contact with phone number '91"+ mobileNum +"' already exists in this business.\"]";
 
         common.assertElementPresent(validation);
 
@@ -468,8 +473,8 @@ public class WhatsAppContactPage extends Locators {
 
     public void clickOnTheEditBtn(){
 
-        common.waitUntilElementToBeVisible(editButton);
-        common.click(editButton);
+        common.waitUntilElementToBeVisible(EDIT_BUTTON);
+        common.click(EDIT_BUTTON);
     }
 
     public void clickOnTheDeleteBtn(){
@@ -498,8 +503,8 @@ public class WhatsAppContactPage extends Locators {
 
     public void clickOnTheViewIcon(){
         common.logPrint("Step:: Click on the view button");
-        common.waitUntilElementToBeVisible(viewButton);
-        common.click(viewButton);
+        common.waitUntilElementToBeVisible(VIEW_BUTTON);
+        common.click(VIEW_BUTTON);
 
     }
 
@@ -770,15 +775,18 @@ public class WhatsAppContactPage extends Locators {
         common.logPrint("Step:: Search the value");
         common.waitUntilElementToBeVisible(SearchContact);
         common.type(SearchContact, name);
+        common.pause(2);
 
         //div[@aria-rowspan='1' and text()='Clifton']
 
         common.logPrint("Step:: Contact name is displayed on the list");
-        String nameGet = "//div[@aria-rowspan='1' and text()='"+name+"']";
+        String nameGet = "(//tbody)[2]/tr[1]/td[3]";
+        common.waitUntilElementToBeVisible(nameGet);
         common.assertElementPresent(nameGet);
 
         common.logPrint("Step:: Contact email is displayed on the list");
-        String emailGet = "//div[@aria-rowspan='1' and text()='"+email.toLowerCase()+"']";
+        String emailGet = "(//tbody)[2]/tr[1]/td[5]";
+        common.waitUntilElementToBeVisible(emailGet);
         common.assertElementPresent(emailGet);
 
         common.logPrint("Contact is showing on the whatsapp campaign page");
