@@ -77,7 +77,7 @@ public class ProductPage extends Locators {
 
     public void verifySearch() {
         goToProductPage();
-        common.searchCommon("//div[@aria-rowspan='1']/preceding-sibling::div[@aria-colindex='2'] | //tbody/child::tr[1]/child::td[2]");
+        common.searchCommon("//div[@aria-rowspan='1']/preceding-sibling::div[@aria-colindex='2'] | //tbody/tr[1]/td[2]");
     }
 
     public void verifyRefresh() {
@@ -484,7 +484,7 @@ public class ProductPage extends Locators {
 
         String newName = common.fakeProductName();
         common.click(PHPRODUCTNAME);
-        common.clear(PHPRODUCTNAME);
+        common.ctrlAAndBackspace();
         common.pause(1);
         common.type(PHPRODUCTNAME, newName);
 
@@ -497,16 +497,16 @@ public class ProductPage extends Locators {
 
         common.waitUntilElementToBeVisible(PHPRODUCTDESCRIPTION);
         common.click(PHPRODUCTDESCRIPTION);
-        common.clear(PHPRODUCTDESCRIPTION);
+        common.ctrlAAndBackspace();
         String newDescription = newName;
         common.type(PHPRODUCTDESCRIPTION, newDescription);
-
-        String newKb = common.selectDropdownAndGetSelectedText(
-                By.xpath(PHPRODUCTKB),
-                By.xpath(FILTERDROPDOWNVAL)
-        );
-        common.click(PHPRODUCTKB);
-        common.downKeyAndEnter();
+//
+//        String newKb = common.selectDropdownAndGetSelectedText(
+//                By.xpath(PHPRODUCTKB),
+//                By.xpath(FILTERDROPDOWNVAL)
+//        );
+//        common.click(PHPRODUCTKB);
+//        common.downKeyAndEnter();
 
         common.waitUntilElementToBeVisible(PHPRICELIST);
         common.click(PHPRICELIST);
@@ -528,6 +528,9 @@ public class ProductPage extends Locators {
 
         common.waitUntilElementToBeClickable(PHENTERAMOUNT);
         common.type(PHENTERAMOUNT,"100");
+
+        common.waitUntilElementToBeVisible("(//span[normalize-space()=\"Save\"])[2]/parent::button");
+        common.click("(//span[normalize-space()=\"Save\"])[2]/parent::button");
 
 //        common.waitUntilElementToBeClickable(PHENTERDISCOUNT);
 //        common.type(PHENTERDISCOUNT, "0");
@@ -559,6 +562,9 @@ public class ProductPage extends Locators {
         common.waitUntilElementToBeClickable(PHDISCOUNT);
         common.type(PHDISCOUNT,"1");
 
+        common.waitUntilElementToBeVisible("(//span[normalize-space()=\"Save\"])[2]/parent::button");
+        common.click("(//span[normalize-space()=\"Save\"])[2]/parent::button");
+
         common.click(SAVEBUTTON);
         common.assertElementPresent(UPDATEMESSAGE);
         common.waitUntilElementToBeVisible(CLOSEBUTTON);
@@ -579,23 +585,23 @@ public class ProductPage extends Locators {
         common.click(PHPRODUCTNAME);
         common.type(PHPRODUCTNAME, newName);
 
-        String newCategory = common.selectDropdownAndGetSelectedText(
-                By.xpath(PHPRODUCTCATEGORY),
-                By.xpath(FILTERDROPDOWNVAL)
-        );
-
-
-        common.waitUntilElementToBeVisible(PHPRODUCTDESCRIPTION);
-        common.click(PHPRODUCTDESCRIPTION);
-        String newDescription = newName;
-        common.type(PHPRODUCTDESCRIPTION, newDescription);
-
-        String newKb = common.selectDropdownAndGetSelectedText(
-                By.xpath(PHPRODUCTKB),
-                By.xpath(FILTERDROPDOWNVAL)
-        );
-        common.click(PHPRODUCTKB);
-        common.downKeyAndEnter();
+//        String newCategory = common.selectDropdownAndGetSelectedText(
+//                By.xpath(PHPRODUCTCATEGORY),
+//                By.xpath(FILTERDROPDOWNVAL)
+//        );
+//
+//
+//        common.waitUntilElementToBeVisible(PHPRODUCTDESCRIPTION);
+//        common.click(PHPRODUCTDESCRIPTION);
+//        String newDescription = newName;
+//        common.type(PHPRODUCTDESCRIPTION, newDescription);
+//
+//        String newKb = common.selectDropdownAndGetSelectedText(
+//                By.xpath(PHPRODUCTKB),
+//                By.xpath(FILTERDROPDOWNVAL)
+//        );
+//        common.click(PHPRODUCTKB);
+//        common.downKeyAndEnter();
 
         common.waitUntilElementToBeVisible(PHPRICELIST);
         common.click(PHPRICELIST);
@@ -660,23 +666,23 @@ public class ProductPage extends Locators {
         common.click(PHPRODUCTNAME);
         common.type(PHPRODUCTNAME, newName);
 
-        String newCategory = common.selectDropdownAndGetSelectedText(
-                By.xpath(PHPRODUCTCATEGORY),
-                By.xpath(FILTERDROPDOWNVAL)
-        );
-
-
-        common.waitUntilElementToBeVisible(PHPRODUCTDESCRIPTION);
-        common.click(PHPRODUCTDESCRIPTION);
-        String newDescription = newName;
-        common.type(PHPRODUCTDESCRIPTION, newDescription);
-
-        String newKb = common.selectDropdownAndGetSelectedText(
-                By.xpath(PHPRODUCTKB),
-                By.xpath(FILTERDROPDOWNVAL)
-        );
-        common.click(PHPRODUCTKB);
-        common.downKeyAndEnter();
+//        String newCategory = common.selectDropdownAndGetSelectedText(
+//                By.xpath(PHPRODUCTCATEGORY),
+//                By.xpath(FILTERDROPDOWNVAL)
+//        );
+//
+//
+//        common.waitUntilElementToBeVisible(PHPRODUCTDESCRIPTION);
+//        common.click(PHPRODUCTDESCRIPTION);
+//        String newDescription = newName;
+//        common.type(PHPRODUCTDESCRIPTION, newDescription);
+//
+//        String newKb = common.selectDropdownAndGetSelectedText(
+//                By.xpath(PHPRODUCTKB),
+//                By.xpath(FILTERDROPDOWNVAL)
+//        );
+//        common.click(PHPRODUCTKB);
+//        common.downKeyAndEnter();
 
         common.waitUntilElementToBeVisible(PHPLANLIST);
         common.click(PHPLANLIST);
@@ -962,22 +968,31 @@ public class ProductPage extends Locators {
     }
 
     public void verifyEditingEffectOnCreatedTime(){
-        goToProductPage();
+
+        verifyAddingANewProductWithValidData();
+        String nameOfTheProduct = "//tbody/tr[1]/td[2]";
         String createdDateXpath = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"created_at\"] | //tbody/tr[1]/td[6]";
         String createdEditXpath = "//div[@data-rowindex=\"0\"]//button[@aria-label=\"Edit\"]| (//span[@aria-label=\"Edit\"]/child::button)[1]";
 
 //        String createdDateValue = common.getAttribute(createdDateXpath,"title");
-        String createdDateValue = common.getText(createdDateXpath);
+        common.waitUntilElementToBeVisible(nameOfTheProduct);
+        common.waitUntilElementToBeVisible(createdDateXpath);
 
+        String nameVal = common.getText(nameOfTheProduct);
+        String createdDateValue = common.getText(createdDateXpath);
+        common.logPrint("Created time: "+createdDateValue);
         common.waitUntilElementToBeVisible(createdEditXpath);
         common.click(createdEditXpath);
         String newName = common.fakeProductName();
         common.click(PHPRODUCTNAME);
+        common.ctrlAAndBackspace();
         common.type(PHPRODUCTNAME, newName);
 
         common.click(SAVEBUTTON);
         common.assertElementPresent(UPDATEMESSAGE);
         common.click(CLOSEBUTTON);
+
+        common.validateSearch("//tbody/tr[1]/td[2]",nameVal);
 
         common.waitUntilElementToBeVisible(createdDateXpath);
 //        String editedDateValue = common.getAttribute(createdDateXpath,"title");

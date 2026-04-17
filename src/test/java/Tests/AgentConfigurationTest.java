@@ -77,11 +77,24 @@ public class AgentConfigurationTest extends BasePage {
         agentConfigurationPage.verifyCreatePageElements();
     }
 
+//    @Test
+//    public void verifyEditPageElements() {
+//        common.logPrint("Verifying all UI elements on the Edit Agent page");
+//        loginWithAdminUser();
+//        agentConfigurationPage.verifyEditPageElements();
+//    }
+
     @Test
-    public void verifyEditPageElements() {
-        common.logPrint("Verifying all UI elements on the Edit Agent page");
+    public void createSpotifyPremiumAgent(){
+
         loginWithAdminUser();
-        agentConfigurationPage.verifyEditPageElements();
+        agentConfigurationPage.createSpotifyPremiumAgent();
+    }
+
+    @Test
+    public void createYouTubePremiumAgent(){
+        loginWithAdminUser();
+        agentConfigurationPage.createYouTubePremiumAgent();
     }
 
     @Test
