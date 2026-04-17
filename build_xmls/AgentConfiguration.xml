@@ -264,4 +264,26 @@
         </classes>
     </test>
 
+    <!-- Verify alternate horizontal views -->
+    <test name="Create Spotify agent">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="createSpotifyPremiumAgent"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Verify alternate horizontal views -->
+    <test name="Create YouTube agent ">
+        <classes>
+            <class name="Tests.AgentConfigurationTest">
+                <methods>
+                    <include name="createYouTubePremiumAgent"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 </suite>
