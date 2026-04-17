@@ -229,6 +229,9 @@ public class Locators extends BasePage {
     public static String ACCRADIONO1 = "//p[normalize-space()='Allow Emojis']/following::label[.//p[normalize-space()='No']][1]";
     public static String ACCRADIOYES2 = "//p[normalize-space()='Allow Name Reference']/following::label[.//p[normalize-space()='Yes']][1]";
     public static String ACCRADIONO2 = "//p[normalize-space()='Allow Name Reference']/following::label[.//p[normalize-space()='No']][1]";
+    public static String ACCRADIOYES3 = "//p[normalize-space()='Enable Probing']/following::label[.//p[normalize-space()='Yes']][1]";
+    public static String ACCRADIONO3 = "//p[normalize-space()='Enable Probing']/following::label[.//p[normalize-space()='No']][1]";
+
     public static String ACCBUSINESSDETAILS = "//p[normalize-space()='Business Details']|//p[text()='Business Details']";
     public static String ACCCOREUSP = "//span[normalize-space()='Core USP']|//span[text()='Core USP']";
     public static String ACCCOREUSP1 = "//span[text()='{{core_usps}}']";

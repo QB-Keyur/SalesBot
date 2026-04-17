@@ -98,7 +98,8 @@ public class AgentConfigurationPage extends Locators {
 
     public void verifySearch() {
         goToAgentConfigurationPage();
-        common.searchCommon(ACNAMEINDEX);
+        common.waitUntilElementToBeVisible(SEARCH_INPUT);
+        common.searchCommon("//tbody/tr[1]/td[2]");
     }
 
     public void verifyRefresh() {
@@ -475,10 +476,10 @@ public class AgentConfigurationPage extends Locators {
         columns.put(ACEDITHEADER, "Header");
         columns.put(ACCCANCELBUTTON, "Cancel");
         columns.put(ACCINFO, "Calendy Info");
-        columns.put(ACRESETBUTTON, "Reset");
+//        columns.put(ACRESETBUTTON, "Reset");
         columns.put(ACCSAVEBUTTON, "Save");
-        columns.put(ACCPERSONA, "Persona");
-        columns.put(ACCSELECTPERSONA, "Select Persona");
+//        columns.put(ACCPERSONA, "Persona");
+//        columns.put(ACCSELECTPERSONA, "Select Persona");
         columns.put(ACCPROMPT, "Prompt");
         columns.put(ACCPERSONALITY1, "personality");
         columns.put(ACCTEXTAREAPROMPT, "ACCTEXTAREAPROMPT");
@@ -489,9 +490,9 @@ public class AgentConfigurationPage extends Locators {
         columns.put(ACCAGENT, "Agent Info");
         columns.put(ACCNAME, "Name");
         columns.put(ACCNAMEINPUT, "Enter Name");
-        columns.put(ACCNAME2, "ACCNAME2");
+//        columns.put(ACCNAME2, "ACCNAME2");
         columns.put(ACCCOMPANYNAME, "Company name");
-        columns.put(ACCCOMPANYNAME2, "{{company_name}}");
+//        columns.put(ACCCOMPANYNAME2, "{{company_name}}");
         columns.put(ACCCOMPANYNAMEINPUT, "Enter Company Name");
         columns.put(ACCGREETINGS, "Greeting Message");
         columns.put(ACCGREETINGINPUT, "greeting_message");
@@ -678,6 +679,152 @@ public class AgentConfigurationPage extends Locators {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public Map<String, String> createSpotifyPremiumAgent() {
+        return createPremiumMediaAgent(getSpotifyPremiumAgentData());
+    }
+
+    public Map<String, String> createYouTubePremiumAgent() {
+        return createPremiumMediaAgent(getYouTubePremiumAgentData());
+    }
+
+    public Map<String, String> createPremiumMediaAgent(Map<String, String> agentData) {
+        goToAgentConfigurationPage();
+        common.waitUntilElementToBeClickable(CREATE);
+        common.click(CREATE);
+
+        common.waitUntilElementToBeVisible(ACCNAMEINPUT);
+        fillPremiumAgentForm(agentData);
+        common.click(SAVEBUTTON);
+
+        String agentName = agentData.get("name");
+        String searchXpath = "//input[@placeholder=\"Search...\"]";
+
+        common.waitUntilElementToBeVisible(searchXpath);
+        common.type(searchXpath, agentName);
+        common.waitUntilElementToBeVisible(ACSEARCHRESULT);
+        common.validateSearch(ACSEARCHRESULT, agentName);
+        common.logPrint("Created premium agent: " + agentName);
+
+        return agentData;
+    }
+
+    private void fillPremiumAgentForm(Map<String, String> agentData) {
+        common.type(ACCNAMEINPUT, agentData.get("name"));
+        common.type(ACCCOMPANYNAMEINPUT, agentData.get("companyName"));
+        common.type(ACCGREETINGINPUT, agentData.get("greeting"));
+
+        common.type(ACCFOLLOWRETRYINPUT, agentData.get("objectionCountLimit"));
+        selectAutocompleteOption(ACCTIMEZONEINPUT, agentData.get("timezoneSearch"));
+
+        common.type(ACCPERSONALITYINPUT, agentData.get("personality"));
+        common.type(ACCGOALINPUT, agentData.get("goalType"));
+        selectAutocompleteOption(ACCLANGINPUT, agentData.get("language"));
+
+        common.type(ACCOBJECTION, agentData.get("objectionCountLimit"));
+        common.type(ACCRESETCOUNTLIMIT, agentData.get("resetCountLimit"));
+        common.type(ACCTHRESHOLD, agentData.get("probingThreshold"));
+        selectAutocompleteOption(ACCCTA, agentData.get("ctaType"));
+        selectAutocompleteOption(ACCCOUNTRY, agentData.get("country"));
+
+        setYesNoPreference(ACCRADIOYES1, ACCRADIONO1, Boolean.parseBoolean(agentData.get("allowEmojis")));
+        setYesNoPreference(ACCRADIOYES2, ACCRADIONO2, Boolean.parseBoolean(agentData.get("allowNameReference")));
+        setYesNoPreference(ACCRADIOYES3, ACCRADIONO3, Boolean.parseBoolean(agentData.get("enableProbing")));
+
+        common.type(ACCCOREUSPINPUT, agentData.get("coreUSP"));
+        common.type(ACCCOREFEATURESINPUT, agentData.get("coreFeatures"));
+        common.type(ACCCONTACTINFOINPUT, agentData.get("contactInfo"));
+        common.type(ACCCOMPANYDOMAININPUT, agentData.get("companyDomain"));
+        common.type(ACCBUSINESSFOCUINPUT, agentData.get("businessFocus"));
+        common.type(ACCOFFERINPUT, agentData.get("offerDescription"));
+        common.type(ACCCOMPANYINPUT, agentData.get("companyDescription"));
+
+        common.type(ACCTEXTAREAPROMPT, agentData.get("prompt"));
+        addRules(agentData.get("rules"));
+    }
+
+    private void selectAutocompleteOption(String locator, String value) {
+        common.waitUntilElementToBeClickable(locator).click();
+        common.type(locator, value);
+        common.pause(1);
+        common.downKeyAndEnter();
+    }
+
+    private void setYesNoPreference(String yesLocator, String noLocator, boolean enabled) {
+        common.click(yesLocator);
+    }
+
+    private void addRules(String rulesText) {
+        if (rulesText == null || rulesText.trim().isEmpty()) {
+            return;
+        }
+
+        String[] rules = rulesText.split("\\n");
+        for (String rule : rules) {
+            if (rule.trim().isEmpty()) {
+                continue;
+            }
+            common.type(ACCRULESDROPDOWN, rule.trim());
+            driver.findElement(By.xpath(ACCRULESDROPDOWN)).sendKeys(Keys.ENTER);
+            common.pause(1);
+        }
+    }
+
+    private Map<String, String> getSpotifyPremiumAgentData() {
+        Map<String, String> agentData = new LinkedHashMap<>();
+        agentData.put("name", "Spotify Assistant");
+        agentData.put("companyName", "Spotify");
+        agentData.put("objectionCountLimit", "3");
+        agentData.put("timezoneSearch", "Asia/Kolkata");
+        agentData.put("greeting", "Hi there! Welcome to Spotify Premium support. I'm here to help you enjoy ad-free music, offline listening, and more. What can I assist you with today?");
+        agentData.put("personality", "Empathetic, friendly, and music-savvy");
+        agentData.put("goalType", "FAQ assistance + Subscription conversion");
+        agentData.put("language", "English");
+        agentData.put("probingThreshold", "50");
+        agentData.put("ctaType", "Site Visit");
+        agentData.put("resetCountLimit", "2");
+        agentData.put("coreUSP", "Ad-free music experience\nOffline downloads for songs & podcasts\nBackground play on mobile\nUnlimited skips");
+        agentData.put("coreFeatures", "Download music and podcasts\nHigh-quality audio streaming\nPersonalized playlists (Discover Weekly, Daily Mix)\nCross-device listening (mobile, desktop, smart devices)");
+        agentData.put("country", "India");
+        agentData.put("contactInfo", "support@spotify.com | https://www.spotify.com");
+        agentData.put("companyDomain", "spotify.com");
+        agentData.put("businessFocus", "SaaS (Music Streaming Subscription)");
+        agentData.put("offerDescription", "Enjoy uninterrupted music with Spotify Premium. Stream your favorite songs without ads, download for offline listening, and experience superior sound quality anytime, anywhere.");
+        agentData.put("companyDescription", "Spotify is a leading global audio streaming platform offering millions of songs, podcasts, and personalized playlists. It provides both free and premium subscription plans tailored for music lovers worldwide.");
+        agentData.put("allowEmojis", "true");
+        agentData.put("allowNameReference", "true");
+        agentData.put("prompt", "You are a friendly and knowledgeable Spotify Premium assistant.\n\nYour goal is to help users understand the benefits of Spotify Premium and guide them toward subscribing.\n\nGuidelines:\n- Be empathetic and conversational\n- Highlight key benefits like ad-free listening, offline downloads, and better audio quality\n- Ask relevant probing questions to understand user needs\n- Handle objections politely (price, alternatives, etc.)\n- Encourage users to explore Premium via site visit CTA\n- Keep responses concise and helpful\n- Personalize responses using {{user_name}} when available");
+//        agentData.put("rules", "Always promote Spotify Premium benefits naturally\nDo not provide misleading pricing or offers\nKeep responses under 3-4 lines unless needed\nIf user hesitates, address objections before pushing CTA\nAlways end with a helpful suggestion or next step");
+        return agentData;
+    }
+
+    private Map<String, String> getYouTubePremiumAgentData() {
+        Map<String, String> agentData = new LinkedHashMap<>();
+        agentData.put("name", "YouTube Assistant");
+        agentData.put("companyName", "YouTube");
+        agentData.put("objectionCountLimit", "3");
+        agentData.put("timezoneSearch", "Asia/Kolkata");
+        agentData.put("greeting", "Hi there! Welcome to YouTube Premium support. I can help you enjoy ad-free videos, background play, and offline downloads. What would you like to know?");
+        agentData.put("personality", "Helpful, friendly, and informative");
+        agentData.put("goalType", "FAQ assistance + Subscription conversion");
+        agentData.put("language", "English");
+        agentData.put("probingThreshold", "50");
+        agentData.put("ctaType", "Site Visit");
+        agentData.put("resetCountLimit", "2");
+        agentData.put("coreUSP", "Ad-free video experience across YouTube\nBackground play on mobile\nOffline downloads\nIncludes YouTube Music Premium");
+        agentData.put("coreFeatures", "Watch videos without ads\nDownload videos for offline viewing\nPlay videos in background or picture-in-picture\nAccess YouTube Music Premium (ad-free music streaming)\nSeamless experience across devices");
+        agentData.put("country", "India");
+        agentData.put("contactInfo", "support.google.com/youtube | https://www.youtube.com/premium");
+        agentData.put("companyDomain", "youtube.com");
+        agentData.put("businessFocus", "SaaS (Video & Music Streaming Subscription)");
+        agentData.put("offerDescription", "Enjoy uninterrupted entertainment with YouTube Premium. Watch videos without ads, play content in the background, download for offline viewing, and get access to YouTube Music Premium-all in one subscription.");
+        agentData.put("companyDescription", "YouTube is a global video-sharing and streaming platform owned by Google, offering a vast library of user-generated and premium content. YouTube Premium enhances the experience with ad-free viewing and exclusive features.");
+        agentData.put("allowEmojis", "true");
+        agentData.put("allowNameReference", "true");
+        agentData.put("prompt", "You are a helpful and knowledgeable YouTube Premium assistant.\n\nYour goal is to explain the value of YouTube Premium and guide users toward subscribing.\n\nGuidelines:\n- Be friendly and clear in communication\n- Highlight benefits like ad-free videos, background play, and offline downloads\n- Mention inclusion of YouTube Music Premium when relevant\n- Ask probing questions to understand user needs\n- Handle objections (pricing, free alternatives) effectively\n- Encourage users to explore Premium via site visit CTA\n- Keep responses concise and engaging\n- Use {{user_name}} for personalization when available");
+//        agentData.put("rules", "Always emphasize real benefits (no exaggeration)\nDo not misstate pricing or availability\nKeep responses short and user-friendly\nAddress objections before pushing CTA\nEnd conversations with a clear next step or suggestion");
+        return agentData;
     }
 
     public Map<String, String> addANewAgentValidData() {
