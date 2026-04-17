@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
+import javax.swing.*;
 
 public class AssetsSharingTest extends BasePage {
 
@@ -115,13 +116,11 @@ public class AssetsSharingTest extends BasePage {
         assetsSharingPage.verifyCreatedDate(filePath);
     }
 
-
-
-
-
-
-
-
-
+    @Test
+    public void validateSorting(){
+        loginWithAdminUser();
+        assetsSharingPage.goToAssetsSharingPage();
+        productPage.validateSorting(2, "", null, SortOrder.ASCENDING,"//div[@class='MuiBox-root css-a7l4db'] | //h6[text()='Assets & Sharing']/following-sibling::div");
+    }
 
 }

@@ -23,7 +23,7 @@ public class Locators extends BasePage {
     public static String DeletedSuccessfully = "//div[contains(text(), 'Deleted Successfully')] | //div[contains(normalize-space(),'Delete')]";
     public static String RoleNameIsAlreadyExist = "//div[contains(text(), 'Role name already exists')]";
     public static String invitationSentSuccessfully = "//div[contains(text(), 'Invitation Sent Successfully')]";
-    public static String UpdatedSuccessfully = "//div[contains(text(), 'Updated successfully')]";
+    public static String UpdatedSuccessfully = "//div[contains(text(), 'Contact updated successfully')]";
     public static String yourAccountIsVerified = "//div[contains(text(), 'Your account is verified.')]";
     public static String passwordHasBeenUpdated = "//div[contains(text(), 'Password has been updated')]";
     public static String invalidOtpValidation = "//div[contains(text(), 'Invalid OTP or OTP is expired! Please Try Again.')]";
@@ -315,15 +315,16 @@ public class Locators extends BasePage {
     public static String GoToPreviousBtn = "//button[@aria-label='Go to previous page']";
 
     //grid page headers
-    public static String nameHeader = "//div[@role='presentation']//span[text()='Name']";
-    public static String phoneNumHeader = "//div[@role='presentation']//span[text()='Phone Number']";
-    public static String DOBHeader = "//div[@role='presentation']//span[text()='Date of Birth']";
-    public static String emailHeader = "//div[@role='presentation']//span[text()='Email']";
-    public static String companyHeader = "//div[@role='presentation']//span[text()='Company ']";
-    public static String contactGroupHeader = "//div[@role='presentation']//span[text()='Contact Group']";
-    public static String createdDateHeader = "//div[@role='presentation']//span[text()='Created Date']";
-    public static String emailSubscriptionHeader = "//div[@role='presentation']//span[text()='Whatsapp Subscription']";
-    public static String actionsHeader = "//div[@role='presentation']//span[text()='Actions']";
+    public static String nameHeader = "//div[@role='presentation']//span[text()='Name']|//th/child::div[text()=\"Name\"]";
+    public static String phoneNumHeader = "//div[@role='presentation']//span[text()='Phone Number']|//th/child::div[text()=\"Phone Number\"]";
+    public static String DOBHeader = "//div[@role='presentation']//span[text()='Date of Birth']|//th/child::div[text()=\"Date of Birth\"]";
+    public static String emailHeader = "//div[@role='presentation']//span[text()='Email']|//th/child::div[text()=\"Email\"]";
+    public static String companyHeader = "//div[@role='presentation']//span[text()='Company ']|//th/child::div[text()=\"Company Name\"]";
+    public static String contactGroupHeader = "//div[@role='presentation']//span[text()='Contact Group']|//th/child::div[text()=\"Contact Group\"]";
+    public static String createdDateHeader = "//div[@role='presentation']//span[text()='Created Date']|//th/child::div[text()=\"Created Date\"]";
+    public static String emailSubscriptionHeader = "//div[@role='presentation']//span[text()='Email Subscription']|//th/child::div[text()=\"Email Subscription\"]";
+    public static String whatsappSubscriptionHeader = "//div[@role='presentation']//span[text()='Whatsapp Subscription']|//th/child::div[text()=\"Whatsapp Subscription\"]";
+    public static String actionsHeader = "//div[@role='presentation']//span[text()='Actions']|//th/child::div[text()=\"Actions\"]";
     public static String actionHeader = "//div[@role='presentation']//span[text()='Action']";
 
     //Buttons
@@ -357,9 +358,9 @@ public class Locators extends BasePage {
     public static String cityLabel = "//span[text()='City']";
 
     //Contact page creation page validation message for mandatory fields
-    public static String nameFieldMsg = "//span[text()='Name is required']";
-    public static String contactGroupMsg = "//span[text()='Contact Group is required']";
-    public static String phoneNumberMsg = "//div[text()='Phone number is required']";
+    public static String nameFieldMsg = "//span[text()='Name is required']|//p[text()='Name is required']";
+    public static String contactGroupMsg = "//span[text()='Contact Group is required']|//p[text()='Contact Group is required']";
+    public static String phoneNumberMsg = "//div[text()='Phone number is required']|//p[text()='Contact Group is required']";
     public static String companyNameMsg = "//span[text()='Company Name is required']";
 
     //Import page locators
@@ -375,7 +376,7 @@ public class Locators extends BasePage {
     public static String deleteButton = "//button[@aria-label='Delete']";
     public static String editButton = "//button[@aria-label='Edit']";
     public static String viewHeader = "//h5[text()='Whatsapp Contact']";
-    public static String buttonMenuListView = "//div[contains(@class,'shrink-0 MuiBox-root css-0')]/child::button";
+    public static String buttonMenuListView = "//div[contains(@class,'shrink-0 MuiBox-root css-0')]/child::button|(//span[text()='subscribed']/following::button)[1]";
 
     //View page locators
     //label

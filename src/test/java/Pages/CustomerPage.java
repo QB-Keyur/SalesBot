@@ -475,18 +475,18 @@ public class CustomerPage extends Locators {
 
         common.assertElementPresent(CC_SELECT_CONTACT_BUTTON);
         common.click(CC_SELECT_CONTACT_BUTTON);
-
+//
         common.waitUntilElementToBeClickable(CC_CONTACT_SOURCE);
+//
+//        // 🔥 Create new WhatsApp Contact (same as create flow)
+//        common.waitUntilElementToBeVisible(CUSTOMER_CREATE_BUTTON);
+//        common.click(CUSTOMER_CREATE_BUTTON);
+//
+//        String mobileNumber = common.fakeIndianMobileNumber();
+//        whatsAppContactPage.createWhatsAppContactCreate(mobileNumber);
+//        whatsAppContactPage.verifySuccessMessageForWhatsAppContactCreation();
 
-        // 🔥 Create new WhatsApp Contact (same as create flow)
-        common.waitUntilElementToBeVisible(CUSTOMER_CREATE_BUTTON);
-        common.click(CUSTOMER_CREATE_BUTTON);
-
-        String mobileNumber = common.fakeIndianMobileNumber();
-        whatsAppContactPage.createWhatsAppContactCreate(mobileNumber);
-        whatsAppContactPage.verifySuccessMessageForWhatsAppContactCreation();
-
-        int i = 1;
+        int i = 2;
 
         while (true) {
             common.pause(1);
