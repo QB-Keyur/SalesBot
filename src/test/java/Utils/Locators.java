@@ -558,7 +558,7 @@ public class Locators extends BasePage {
     //WhatsApp Template
     public static String TEMPLATEMENU = "//span[text()='Templates']";
     public static String WHATSAPPTEMPLATEMENU = "//button[text()='Whatsapp Template']";
-    public static String WTHEADER = "//h6[text()='Whatsapp Template']";
+    public static String WTHEADER = "//h6[text()='Whatsapp Template']|//h6[text()='Whatsapp Templates']";
     public static String WTSEARCH = "//input[@placeholder=\"Search...\"]";
     public static String WTREFRESH = "//span[text()='Filters']/following::button[1] | //span[contains(@class,'css-1sh91j5')]/parent::button[contains(@class,'css-q8p1uw')]";
     public static String WTFILTERS = "//button[@type='button']/following::span[contains(text(),'Filters')]";
@@ -1162,7 +1162,7 @@ public class Locators extends BasePage {
     public static final String WIIHEADER = "//h6[text()='WhatsApp Integration']";
     public static final String WIIICON = "//h6[text()='WhatsApp Integration']/preceding-sibling::*[local-name()='svg']";
     public static final String WIIHEADERMESSAGE = "//p[text()='Set up your Whatsapp integration for the first time.']";
-    public static final String WIIINTEGRATIONBUTTON = "//button[@id=\"step1-header\"]";
+    public static final String WIIINTEGRATIONBUTTON = "//button[@id=\"step1-header\"]|//button[@id=\"Integration setup steps-header\"]";
     public static final String WIISTEPS = "//div[@class=\"MuiAccordionDetails-root css-l9xe8y\"]";
     public static final String WIIPHONEID = "//span[text()='Phone Id']";
     public static final String WIIPHONEIDINPUT = "//input[@name=\"phone_id\"]";
@@ -1328,7 +1328,7 @@ public class Locators extends BasePage {
     //Conversation Page
     public static String CONVERSATIONMENU = "//span[text()='Conversations']";
     public static String WACONVERSATIONMENU = "//button[text()='Whatsapp Conversations']";
-    public static String WACONVERSATIONHEADER = "//div[text()='WhatsApp Conversation']";
+    public static String WACONVERSATIONHEADER = "//div[text()='WhatsApp Conversation']|//h6[text()='WhatsApp Conversation']";
     public static String WACONVERSATIONINFO = "//p[text()='Select a contact to start chatting']";
     public static String WACONNECTED = "//span[text()='Connected']";
     public static String WADISCONNECTED = "//p[text()='To use this functionality, please connect your WhatsApp integration first.']";

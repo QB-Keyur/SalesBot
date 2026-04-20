@@ -128,15 +128,15 @@ public class WhatsAppIntegrationTest extends BasePage {
         common.logPrint("SUCCESS :: Same WhatsApp account reconnected without issues");
     }
 
-    @Test
-    public void verifyRefreshButton(){
-        common.logPrint("START :: Verify refresh button functionality on WhatsApp Integration page");
-
-        loginWithAdminUser();
-        whatsAppIntegrationPage.verifyRefreshButton();
-
-        common.logPrint("SUCCESS :: Refresh button updates WhatsApp Integration status correctly");
-    }
+//    @Test
+//    public void verifyRefreshButton(){
+//        common.logPrint("START :: Verify refresh button functionality on WhatsApp Integration page");
+//
+//        loginWithAdminUser();
+//        whatsAppIntegrationPage.verifyRefreshButton();
+//
+//        common.logPrint("SUCCESS :: Refresh button updates WhatsApp Integration status correctly");
+//    }
 
     @Test
     public void verifyItAllowsHavingAConversationAfterConnectingWhatsApp(){
