@@ -77,6 +77,7 @@ public class ProductPage extends Locators {
 
     public void verifySearch() {
         goToProductPage();
+        common.waitUntilElementToBeVisible("//tbody/tr[1]/td[2]");
         common.searchCommon("//div[@aria-rowspan='1']/preceding-sibling::div[@aria-colindex='2'] | //tbody/tr[1]/td[2]");
     }
 
