@@ -206,9 +206,9 @@ public class WhatsAppIntegrationPage extends Locators {
 
     public void verifyIntegrationWithWhiteSpaces(){
         goToWhatsAppIntegrationPage();
-        String phoneIDVal = "//span[text()='Phone Id']/following::span[text()='Only digits allowed (max 15 digits)']";
-        String wabaIDVal = "//span[text()='Waba Id']/following::span[text()='Only digits allowed (max 16 digits)'][1]";
-        String appIDVal = "//span[text()='App Id']/following::span[text()='Only digits allowed (max 16 digits)']";
+        String phoneIDVal = "//span[text()='Phone Id']/following::span[text()='Only digits allowed (max 20 digits)'][1]";
+        String wabaIDVal = "//span[text()='Waba Id']/following::span[text()='Only digits allowed (max 20 digits)'][1]";
+        String appIDVal = "//span[text()='App Id']/following::span[text()='Only digits allowed (max 20 digits)']";
 
         common.waitUntilElementToBeVisible(INTEGRATIONMENU);
 
@@ -222,24 +222,43 @@ public class WhatsAppIntegrationPage extends Locators {
 
         common.pause(1);
 
-        common.assertElementIsNotDisplayedWithMessage(
-                STATISTICS,
-                "FAILED: As an account was already used, use a new account for this test"
-        );
+        common.waitUntilElementToBeVisible(WIEDITBTN);
+        common.click(WIEDITBTN);
+
+//        common.assertElementIsNotDisplayedWithMessage(
+//                STATISTICS,
+//                "FAILED: As an account was already used, use a new account for this test"
+//        );
 
         common.waitUntilElementToBeVisible(WIIPHONEIDINPUT);
-        common.type(WIIPHONEIDINPUT,"    ");
+        common.ctrlAAndBackspace();
+        common.pause(1);
+
+
         common.waitUntilElementToBeVisible(WIIWABAIDINPUT);
-        common.type(WIIWABAIDINPUT,"    ");
+        common.ctrlAAndBackspace();
+        common.pause(1);
+
+
         common.waitUntilElementToBeVisible(WIITOKENINPUT);
-        common.type(WIITOKENINPUT,"    ");
+        common.ctrlAAndBackspace();
+        common.type(WIITOKENINPUT,"     ");
+
         common.waitUntilElementToBeVisible(WIIAPPIDINPUT);
-        common.type(WIIAPPIDINPUT,"    ");
+        common.ctrlAAndBackspace();
+        common.pause(1);
+
+
         common.waitUntilElementToBeVisible(WIIAPPSECRETINPUT);
-        common.type(WIIAPPSECRETINPUT,"    ");
+        common.ctrlAAndBackspace();
+        common.type(WIIAPPSECRETINPUT,"     ");
 
         common.waitUntilElementToBeVisible(WIICONNECT);
         common.click(WIICONNECT);
+
+        common.type(WIIPHONEIDINPUT,"     ");
+        common.type(WIIWABAIDINPUT,"     ");
+        common.type(WIIAPPIDINPUT,"     ");
 
         common.assertElementPresent(phoneIDVal);
         common.assertElementPresent(wabaIDVal);

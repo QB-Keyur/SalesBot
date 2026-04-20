@@ -1233,8 +1233,19 @@ public class Common extends Locators {
 
     private void jsType(WebElement element, String value) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].value=''; arguments[0].value=arguments[1];",
+        js.executeScript(
+                "arguments[0].value='';" +
+                        "arguments[0].value=arguments[1];" +
+                        "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));" +
+                        "arguments[0].dispatchEvent(new Event('change', { bubbles: true }));",
                 element, value);
+    }
+
+    private void clearAndType(WebElement element, String value) {
+        element.click();
+        element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        element.sendKeys(Keys.DELETE);
+        element.sendKeys(value);
     }
 
     private void logTypeSuccess(WebElement element, String value) {
@@ -1255,8 +1266,7 @@ public class Common extends Locators {
                 WebElement element = waitUntilElementToBeClickable(by);
                 highlightElementClick(element);
                 scroll_To_Element(element);
-                element.clear();
-                element.sendKeys(keysToSend);
+                clearAndType(element, keysToSend);
                 logTypeSuccess(element, keysToSend);
                 return;
 
@@ -1321,10 +1331,26 @@ public class Common extends Locators {
      * @param keysToSend the character sequence to send to the element
      */
     public void type(WebElement element, String keysToSend) {
-        waitUntilElementToBeClickable(element);
-        highlightElement(element);
-        element.clear();
-        element.sendKeys(keysToSend);
+        for (int i = 0; i < 3; i++) {
+            try {
+                waitUntilElementToBeClickable(element);
+                highlightElement(element);
+                scroll_To_Element(element);
+                clearAndType(element, keysToSend);
+                logTypeSuccess(element, keysToSend);
+                return;
+            } catch (Exception e) {
+                try {
+                    jsType(element, keysToSend);
+                    logTypeSuccess(element, keysToSend);
+                    return;
+                } catch (Exception ignored) {
+                    pause(1);
+                }
+            }
+        }
+
+        throw new RuntimeException("FAILED :: Unable to type into element");
     }
     /**
      * Click on a given element. If this causes a new page to load, you should discard

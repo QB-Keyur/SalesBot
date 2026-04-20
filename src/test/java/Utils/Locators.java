@@ -1148,7 +1148,7 @@ public class Locators extends BasePage {
 
     public static final String INTEGRATIONMENU = "//span[text()='Integration']";
     public static final String INTEGRATIONHEADER = "//h6[text()='Integration']";
-    public static final String WIMENU = "//p[text()='WhatsApp']/parent::div";
+    public static final String WIMENU = "//p[text()='WhatsApp']/parent::div|//p[text()='WhatsApp']/ancestor::div[1]";
     public static final String WIICON = "//p[text()='WhatsApp']/preceding::*[local-name()='svg'][1]";
     public static final String WIDISCONNECTED = "//p[text()='WhatsApp']/preceding::span[text()='Disconnected']";
     public static final String WICONNECTED = "//p[text()='WhatsApp']/preceding::span[text()='Connected']";

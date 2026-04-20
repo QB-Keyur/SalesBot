@@ -182,16 +182,28 @@ public class WorkingHoursPage extends Locators {
     public void verifyChangingTime() {
 
         goToWorkingHoursPage();
+        String secondarySaveButton = "(//span[text()='Save']/parent::button)[2]";
+        String expectedStartTime = "10:00";
+        String expectedEndTime   = "19:00";
 
-        String expectedStartTime = "10:30 AM";
-        String expectedEndTime   = "08:00 PM";
+        String[] typeInputs = {
+                WH_MONDAY_TYPE_INPUT,
+                WH_TUESDAY_TYPE_INPUT,
+                WH_WEDNESDAY_TYPE_INPUT,
+                WH_THURSDAY_TYPE_INPUT,
+                WH_FRIDAY_TYPE_INPUT,
+                WH_SATURDAY_TYPE_INPUT,
+                WH_SUNDAY_TYPE_INPUT
+        };
 
         String[] startInputs = {
                 WH_MONDAY_START_TIME_INPUT,
                 WH_TUESDAY_START_TIME_INPUT,
                 WH_WEDNESDAY_START_TIME_INPUT,
                 WH_THURSDAY_START_TIME_INPUT,
-                WH_FRIDAY_START_TIME_INPUT
+                WH_FRIDAY_START_TIME_INPUT,
+                WH_SATURDAY_START_TIME_INPUT,
+                WH_SUNDAY_START_TIME_INPUT
         };
 
         String[] endInputs = {
@@ -199,20 +211,30 @@ public class WorkingHoursPage extends Locators {
                 WH_TUESDAY_END_TIME_INPUT,
                 WH_WEDNESDAY_END_TIME_INPUT,
                 WH_THURSDAY_END_TIME_INPUT,
-                WH_FRIDAY_END_TIME_INPUT
+                WH_FRIDAY_END_TIME_INPUT,
+                WH_SATURDAY_END_TIME_INPUT,
+                WH_SUNDAY_END_TIME_INPUT
         };
 
-        // Set values
-        for (String locator : startInputs) {
-            common.type(locator, expectedStartTime);
+        for (int i = 0; i < typeInputs.length; i++) {
+            String dayType = common.getAttribute(typeInputs[i], "value");
+            if (!"Working".equalsIgnoreCase(dayType)) {
+                common.logPrint("Skipping non-working day: " + typeInputs[i] + " [" + dayType + "]");
+                continue;
+            }
+
+            common.highlightElement(startInputs[i]);
+            selectTimeFromPicker(startInputs[i], expectedStartTime);
+            clickWorkingHoursSave(secondarySaveButton);
+
+            common.highlightElement(endInputs[i]);
+            selectTimeFromPicker(endInputs[i], expectedEndTime);
+            clickWorkingHoursSave(secondarySaveButton);
         }
 
-        for (String locator : endInputs) {
-            common.type(locator, expectedEndTime);
-        }
-
-        common.scroll_To_Element(WH_SAVE_BUTTON);
+        common.waitUntilElementToBeVisible(WH_SAVE_BUTTON);
         common.click(WH_SAVE_BUTTON);
+
         common.assertElementPresent(SUCCESSMSG);
 
         common.refreshPage();
@@ -221,21 +243,28 @@ public class WorkingHoursPage extends Locators {
         DateTimeFormatter twelveHour = DateTimeFormatter.ofPattern("hh:mm a");
         DateTimeFormatter twentyFourHour = DateTimeFormatter.ofPattern("HH:mm");
 
-        LocalTime expectedStart = LocalTime.parse(expectedStartTime.toUpperCase(), twelveHour);
-        LocalTime expectedEnd   = LocalTime.parse(expectedEndTime.toUpperCase(), twelveHour);
+        LocalTime expectedStart = LocalTime.parse(expectedStartTime.toUpperCase(), twentyFourHour);
+        LocalTime expectedEnd   = LocalTime.parse(expectedEndTime.toUpperCase(), twentyFourHour);
 
         // ✅ Validate start times
-        for (String locator : startInputs) {
+        for (int i = 0; i < startInputs.length; i++) {
 
-            String actualValue = common.getAttribute(locator, "value");
+            String dayType = common.getAttribute(typeInputs[i], "value");
+            if (!"Working".equalsIgnoreCase(dayType)) {
+                common.logPrint("Skipping start time assertion for holiday/non-working day: " + startInputs[i]);
+                continue;
+            }
+
+            String actualValue = common.getAttribute(startInputs[i], "value");
 
             // ⛔ Skip non-time values
             if (actualValue == null ||
                     actualValue.trim().isEmpty() ||
+                    actualValue.equalsIgnoreCase("working") ||
                     actualValue.equalsIgnoreCase("holiday") ||
                     actualValue.equals("—")) {
 
-                common.logPrint("Skipping start time validation (non-working day): " + locator);
+                common.logPrint("Skipping start time validation (non-time value): " + startInputs[i]);
                 continue;
             }
 
@@ -247,22 +276,29 @@ public class WorkingHoursPage extends Locators {
             Assert.assertEquals(
                     actual,
                     expectedStart,
-                    "Start time mismatch for locator: " + locator
+                    "Start time mismatch for locator: " + startInputs[i]
             );
         }
 
         // ✅ Validate end times
-        for (String locator : endInputs) {
+        for (int i = 0; i < endInputs.length; i++) {
 
-            String actualValue = common.getAttribute(locator, "value");
+            String dayType = common.getAttribute(typeInputs[i], "value");
+            if (!"Working".equalsIgnoreCase(dayType)) {
+                common.logPrint("Skipping end time assertion for holiday/non-working day: " + endInputs[i]);
+                continue;
+            }
+
+            String actualValue = common.getAttribute(endInputs[i], "value");
 
             // ⛔ Skip non-time values
             if (actualValue == null ||
                     actualValue.trim().isEmpty() ||
+                    actualValue.equalsIgnoreCase("working") ||
                     actualValue.equalsIgnoreCase("holiday") ||
                     actualValue.equals("—")) {
 
-                common.logPrint("Skipping end time validation (non-working day): " + locator);
+                common.logPrint("Skipping end time validation (non-time value): " + endInputs[i]);
                 continue;
             }
 
@@ -274,7 +310,7 @@ public class WorkingHoursPage extends Locators {
             Assert.assertEquals(
                     actual,
                     expectedEnd,
-                    "End time mismatch for locator: " + locator
+                    "End time mismatch for locator: " + endInputs[i]
             );
         }
 
@@ -363,14 +399,37 @@ public class WorkingHoursPage extends Locators {
         common.click(WH_SAVE_BUTTON);
     }
 
+    private void clickWorkingHoursSave(String secondarySaveButton) {
+        common.pause(1);
+        if (common.isElementPresent(secondarySaveButton)) {
+            common.click(secondarySaveButton);
+        } else {
+            common.click(WH_SAVE_BUTTON);
+        }
+    }
+
+    private void selectTimeFromPicker(String inputLocator, String time) {
+        String[] parts = time.split(":");
+        String hour = parts[0];
+        String minute = parts[1];
+
+        common.click(inputLocator);
+        common.waitUntilElementToBeVisible("//p[text()='HOUR']");
+        common.waitUntilElementToBeVisible("//p[text()='MIN']");
+
+        common.click("//p[text()='HOUR']/following-sibling::div//p[normalize-space()='" + hour + "']");
+        common.click("//p[text()='MIN']/following-sibling::div//p[normalize-space()='" + minute + "']");
+    }
+
     public void verifyChangingHolidayToWorking() {
 
         goToWorkingHoursPage();
 
         common.waitUntilElementToBeVisible(WH_MONDAY_TYPE_INPUT);
+        String secondarySaveButton = "(//span[text()='Save']/parent::button)[2]";
 
-        String startTime = "10:30 AM";
-        String endTime   = "19:00 PM";
+        String startTime = "10:30";
+        String endTime   = "19:30";
 
         // ---------- STEP 1: All day TYPE inputs ----------
         List<String> allDayTypeInputs = Arrays.asList(
@@ -412,35 +471,27 @@ public class WorkingHoursPage extends Locators {
         common.pause(1);
 
         // ---------- STEP 5: Identify Start & End inputs for that row ----------
-        WebElement typeInput = driver.findElement(By.xpath(randomHoliday));
-
-        WebElement startInput = typeInput.findElement(
-                By.xpath("following::input[1]")
-        );
-
-        WebElement endInput = typeInput.findElement(
-                By.xpath("following::input[2]")
-        );
+        String startInputLocator = randomHoliday.replace("input[1]", "input[2]");
+        String endInputLocator = randomHoliday.replace("input[1]", "input[3]");
 
         // ---------- STEP 6: Fill timings ----------
-        common.highlightElement(startInput);
-        common.type(startInput, startTime);
-        common.pressEnter();
+        common.highlightElement(startInputLocator);
+        selectTimeFromPicker(startInputLocator, startTime);
+        clickWorkingHoursSave(secondarySaveButton);
 
-        common.pause(1);
-
-        common.highlightElement(endInput);
-        common.type(endInput, endTime);
-        common.pressEnter();
+        common.highlightElement(endInputLocator);
+        selectTimeFromPicker(endInputLocator, endTime);
+        clickWorkingHoursSave(secondarySaveButton);
 
 
         // ---------- STEP 7: Save ----------
+        common.waitUntilElementToBeVisible(WH_SAVE_BUTTON);
         common.click(WH_SAVE_BUTTON);
         common.assertElementPresent(SUCCESSMSG);
 
         // ---------- STEP 8: Validate timings are present ----------
-        String actualStart = startInput.getAttribute("value");
-        String actualEnd   = endInput.getAttribute("value");
+        String actualStart = common.getAttribute(startInputLocator, "value");
+        String actualEnd   = common.getAttribute(endInputLocator, "value");
 
         Assert.assertFalse(actualStart.equals("—") || actualStart.isEmpty(),
                 "Start time not set after converting Holiday to Working");
