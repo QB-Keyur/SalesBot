@@ -45,11 +45,12 @@ public class WhatsAppTemplatePage extends Locators {
         columns.put(WTSEARCH, "WT Search");
         columns.put(KBSRNUMBER, "WT Sr");
         columns.put(WTNAME, "WT Name");
-        columns.put(WTLANGUAGE, "WT Products");
-        columns.put(WTHEADERTEXT, "WT Status");
-        columns.put(WTCATEGORY, "WT Created Date");
-        columns.put(WTTEMPLATEMETASTATUS, "WT Actions");
-        columns.put(WTQUALITYSCORE, "WT Score");
+        columns.put(WTLANGUAGE, "WT Language");
+        columns.put(WTHEADERTEXT, "WT Header Text");
+        columns.put(WTCATEGORY, "WT Category");
+        columns.put(WTTEMPLATEMETASTATUS, "WT Meta Status");
+        columns.put(WTQUALITYSCORE, "WT Quality Score");
+        columns.put(WTCREATEDDATE, "WT Created Date");
         columns.put(WTACTIONS, "WT Rows per page");
         columns.put(WTREFRESH, "WT Refresh");
         columns.put(WTFILTERS, "WT Filters");
@@ -106,7 +107,7 @@ public class WhatsAppTemplatePage extends Locators {
         columns.put(WTCHEADERTYPEINPUT, "WTC Header Type Input");
         columns.put(WTCMESSAGECONTENT, "WTC Message Content");
         columns.put(WTCUPLOADFILES, "WTC File Upload Header");
-        columns.put(WTCFILEINPUT, "WTC File Upload Header Input");
+//        columns.put(WTCFILEINPUT, "WTC File Upload Header Input");
         columns.put(WTCFILEINPUT2, "WTC File Upload Button");
         columns.put(WTCBODY, "WTC Body");
         columns.put(WTCADDVARIABLES, "WTC Add Variable");
@@ -164,17 +165,28 @@ public class WhatsAppTemplatePage extends Locators {
 //        common.waitUntilElementToBeVisible(WTCBANNERTEXT);
 //        common.click(WTCBANNERTEXT);
 
+//        common.waitUntilElementToBeVisible("WTCHEADER");
+        common.waitUntilElementToBeVisible(WTCVIEWDETAILS);
+        common.click(WTCVIEWDETAILS);
+
         Map<String, String> columns = new LinkedHashMap<>();
 
         columns.put(FIRST, "FIRST");
         columns.put(SEC, "SEC");
         columns.put(THIRD, "THIRD");
+        common.scroll_To_Element(FOURTH);
         columns.put(FOURTH, "FOURTH");
+        common.scroll_To_Element(FIFTH);
         columns.put(FIFTH, "FIFTH");
+        common.scroll_To_Element(SIXTH);
         columns.put(SIXTH, "SIXTH");
+        common.scroll_To_Element(SEVENTH);
         columns.put(SEVENTH, "SEVENTH");
+        common.scroll_To_Element(EIGHTH);;
         columns.put(EIGHTH, "EIGHTH");
+        common.scroll_To_Element(NINTH);
         columns.put(NINTH, "NINTH");
+        common.scroll_To_Element(TENTH);
         columns.put(TENTH, "TENTH");
 
 
@@ -221,6 +233,7 @@ public class WhatsAppTemplatePage extends Locators {
         common.assertElementPresent(WTCCATEGORYMANDATORY);
         common.assertElementPresent(WTCLANGUAGEMANDATORY);
         common.assertElementPresent(WTCHEADERTYPEMANDATORY);
+        common.assertElementPresent(WTCFILEEMANDATORY);
         common.assertElementPresent(WTCBODYOFTEMPMANDATORY);
 
 
@@ -264,6 +277,9 @@ public class WhatsAppTemplatePage extends Locators {
         common.waitUntilElementToBeVisible(WTCHEADERTYPEINPUT);
         common.click(WTCHEADERTYPEINPUT);
         common.click(headerDropDownValue);
+
+        common.waitUntilElementToBeVisible(WTCHEADERTYPEINPUTTEXT);
+        common.type(WTCHEADERTYPEINPUTTEXT,"Header");
 
         switch (header) {
             case "Image":
@@ -368,20 +384,59 @@ public class WhatsAppTemplatePage extends Locators {
 
     public void verifyingHorizontalView(){
         goToWhatsAppTemplatePage();
-        common.validateHorizontalViewCardCount("//div[@class='MuiBox-root css-a7l4db']");
+        common.validateHorizontalViewCardCount("//div[@class='MuiBox-root css-a7l4db']|//h6[text()='Whatsapp Templates']/following::div[1]");
     }
 
     public void verifyingSearch(){
         goToWhatsAppTemplatePage();
+
         common.searchCommon(WTSEARCHRESULT);
+        common.waitUntilElementToBeVisible(WTSEARCHRESULT);
     }
 
-    public void verifyingAddVariable(int amountOfVariables){
+    public void verifyingAddVariable(int amountOfVariables,String category, String lang,  String header, String buttonType ){
         goToWhatsAppTemplatePage();
 
 
-        common.waitUntilElementToBeClickable(WTCREATE);
+        String dropDownValue = "//li[text()='"+category+"']";
+        String langDropDownValue = "//li[text()='"+lang+"']";
+        String headerDropDownValue = "//li[text()='"+header+"']";
+        String buttonTypeDropDownValue = "//li[text()='"+buttonType+"']";
+        String webSitePreview = common.fakeWebsite();
+        String fakeNameValue = common.fakeName();
+
+
+        String imagePath = Paths.get("TestData", "1.png").toAbsolutePath().toString();
+        String videoPath = Paths.get("TestData", "1.png").toAbsolutePath().toString();
+        String docPath   = Paths.get("TestData", "1.pdf").toAbsolutePath().toString();
+
+        String headerText = common.fakeCategory();
+        String bodyText = common.fakeProductName().toLowerCase();
+        String footerText = common.fakeProductName();
+
+        common.waitUntilElementToBeVisible(WTCREATE);
         common.click(WTCREATE);
+
+        common.waitUntilElementToBeVisible(WTCTEMPLATENAMEINPUT);
+        common.type(WTCTEMPLATENAMEINPUT,common.fakeName().toLowerCase());
+
+        common.waitUntilElementToBeVisible(WTCCATEGORYINPUT);
+        common.click(WTCCATEGORYINPUT);
+        common.click(dropDownValue);
+
+        common.waitUntilElementToBeVisible(WTCLANGUAGEINPUT);
+        common.click(WTCLANGUAGEINPUT);
+        common.click(langDropDownValue);
+
+        common.waitUntilElementToBeVisible(WTCHEADERTYPEINPUT);
+        common.click(WTCHEADERTYPEINPUT);
+        common.click(headerDropDownValue);
+
+        common.waitUntilElementToBeVisible(WTCHEADERTYPEINPUTTEXT);
+        common.type(WTCHEADERTYPEINPUTTEXT,footerText);
+
+
+
 
         for(int i=1;i<=amountOfVariables; i++) {
 
@@ -390,7 +445,7 @@ public class WhatsAppTemplatePage extends Locators {
             common.click(WTCADDVARIABLES);
             String variable = "//span[text()='Variable {{"+i+"}}']";
             String variableValue = "//input[@name=\"variables."+i+"\"]";
-            String variableValuePreview = "//p[text()='"+fakeName+"']";
+            String variableValuePreview = "//p[text()='"+fakeName+"']|//p[contains(text(),'"+fakeName+"')]";
             common.assertElementPresent(variable);
             common.type(variableValue,fakeName);
             common.assertElementPresent(variableValuePreview);
@@ -402,13 +457,13 @@ public class WhatsAppTemplatePage extends Locators {
 
     public void verifyingPagination(){
         goToWhatsAppTemplatePage();
-        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
+        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]|//h6[text()='Whatsapp Templates']/following::div[1]");
     }
 
     public void verifyRefreshButtonUpdatesTheServerSyncStatus(){
         verifyAddingANewTemplate("Marketing","English","Text","Phone Number");
 
-        String synced= common.getText(WTMETASTATUS).trim();
+//        String synced= common.getText(WTMETASTATUS).trim();
 
 //        while(synced.equals("Synced")){
 //            common.pause(2);

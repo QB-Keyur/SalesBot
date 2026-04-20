@@ -79,7 +79,7 @@ public class WhatsAppTemplateTest extends BasePage {
     public void verifyingAddVariable(){
         common.logPrint("Verifying Add Variable functionality in WhatsApp Template editor");
         loginWithAdminUser();
-        whatsAppTemplatePage.verifyingAddVariable(2);
+        whatsAppTemplatePage.verifyingAddVariable(2, "Marketing","English","Text","Quick Reply");
     }
 
     @Test
@@ -100,7 +100,7 @@ public class WhatsAppTemplateTest extends BasePage {
     public void validateSorting(){
         loginWithAdminUser();
         whatsAppTemplatePage.goToWhatsAppTemplatePage();
-        productPage.validateSorting(2, "", null, SortOrder.DESCENDING,"//div[@class=\"MuiBox-root css-a7l4db\"]");
+        productPage.validateSorting(2, "", null, SortOrder.DESCENDING,"//h6[text()='Whatsapp Templates']/following::div[1]");
     }
 
 }
