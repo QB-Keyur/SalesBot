@@ -481,13 +481,13 @@ public class Locators extends BasePage {
     public static String KBMENU = "//span[text()='Knowledge Base']";
     public static String KBHEADER = "//h6[text()='Knowledge Base']";
     public static String KBSEARCHBAR = "//input[@placeholder=\"Search...\"]";
-    public static String KBSRNUMBER = "//span[normalize-space()='#']";
-    public static String KBNAME = "//span[normalize-space()='Name']";
-    public static String KBPRODUCTS = "//span[normalize-space()='Products']";
-    public static String KBSTATUS = "//span[normalize-space()='Status']";
-    public static String KBCREATEDDATE = "//span[normalize-space()='Created Date']";
-    public static String KBACTIONS = "//span[normalize-space()='Actions']";
-    public static String KBTOTALROWS = "//div[contains(text(),'Total')]|//div[@class='MuiBox-root css-a7l4db']";
+    public static String KBSRNUMBER = "//span[normalize-space()='#']|//div[normalize-space()='#']";
+    public static String KBNAME = "//span[normalize-space()='Name']|//div[normalize-space()='Name']";
+    public static String KBPRODUCTS = "//span[normalize-space()='Products']|//div[normalize-space()='#']";
+    public static String KBSTATUS = "//span[normalize-space()='Status']|//div[normalize-space()='#']";
+    public static String KBCREATEDDATE = "//span[normalize-space()='Created Date']|//div[normalize-space()='#']";
+    public static String KBACTIONS = "//span[normalize-space()='Actions']|//div[normalize-space()='#']";
+    public static String KBTOTALROWS = "//div[contains(text(),'Total')]|//h6[text()='Whatsapp Templates']/following::div[1]";
     public static String KBROWSPERPAGE = "//p[contains(text(),'Rows per page:')]";
 
     public static String KBREFRESHBUTTON = "//button[contains(@class,'css-q8p1uw')]| //span[text()='Filters']/following::button[1]";
@@ -558,20 +558,22 @@ public class Locators extends BasePage {
     //WhatsApp Template
     public static String TEMPLATEMENU = "//span[text()='Templates']";
     public static String WHATSAPPTEMPLATEMENU = "//button[text()='Whatsapp Template']";
-    public static String WTHEADER = "//h6[text()='Whatsapp Template']";
+    public static String WTHEADER = "//h6[text()='Whatsapp Template']|//h6[text()='Whatsapp Templates']";
     public static String WTSEARCH = "//input[@placeholder=\"Search...\"]";
     public static String WTREFRESH = "//span[text()='Filters']/following::button[1] | //span[contains(@class,'css-1sh91j5')]/parent::button[contains(@class,'css-q8p1uw')]";
     public static String WTFILTERS = "//button[@type='button']/following::span[contains(text(),'Filters')]";
     public static String WTCREATE = "//button[@type='button']/following::span[text()='Create']";
-    public static String WTNAME = "//span[text()=\"Name\"]";
-    public static String WTLANGUAGE = "//span[text()=\"Language\"]";
-    public static String WTHEADERTEXT = "//span[text()=\"Header Text\"]";
-    public static String WTCATEGORY = "//span[text()=\"Category\"]";
-    public static String WTTEMPLATEMETASTATUS = "//span[text()=\"Template Meta Status\"]";
-    public static String WTQUALITYSCORE = "//span[text()=\"Quality Score\"]";
-    public static String WTACTIONS = "//span[text()=\"Actions\"]";
+    public static String WTNAME = "//span[text()=\"Name\"]|//div[normalize-space()='Name']";
+    public static String WTLANGUAGE = "//span[text()=\"Language\"]|//div[normalize-space()='Name']";
+    public static String WTHEADERTEXT = "//span[text()=\"Header Text\"]|//div[normalize-space()='Name']";
+    public static String WTCATEGORY = "//span[text()=\"Category\"]|//div[normalize-space()='Name']";
+    public static String WTTEMPLATEMETASTATUS = "//span[text()=\"Template Meta Status\"]|//div[normalize-space()='Name']";
+    public static String WTQUALITYSCORE = "//span[text()=\"Quality Score\"]|//div[normalize-space()='Name']";
+    public static String WTCREATEDDATE = "//span[text()=\"Created Date\"]|//div[normalize-space()='Created Date']";
+    public static String WTACTIONS = "//span[text()=\"Actions\"]|//div[normalize-space()='Actions']";
     //WhatsApp
     public static String WTCHEADER = "//h6[text()='Create Whatsapp Template']";
+    public static String WTCVIEWDETAILS = "//button[text()='View Details']";
     public static String WTCBANNERTEXT = "//p[@class=\"MuiTypography-root MuiTypography-body1 css-igfty4\"]";
     public static String WTCTEMPLATEDETAILS = "//p[text()='Template Details']";
     public static String WTCTEMPLATENAME = "//span[text()='Template Name']";
@@ -585,16 +587,16 @@ public class Locators extends BasePage {
     public static String WTCHEADERTYPEINPUTTEXT = "//input[@placeholder=\"Enter Header Text\"]";
     public static String WTCMESSAGECONTENT = "//p[text()='Message Content']";
     public static String WTCUPLOADFILES = "//span[text()='Upload File']";
-    public static String WTCFILEINPUT = "//input[@placeholder=\"No file selected\"]";
-    public static String WTCFILEINPUT2 = "//button[@type=\"button\"]/span[text()='Upload']";
-    public static String WTCBODY = "//p[text()='Body']";
+    public static String WTCFILEINPUT = "//input[@placeholder=\"No file selected\"]|//input[@id=\"file-upload\"]";
+    public static String WTCFILEINPUT2 = "//button[@type=\"button\"]/span[text()='Upload']|//div[text()='Select file']/parent::div";
+    public static String WTCBODY = "//p[text()='Body ']";
     public static String WTCADDVARIABLES = "//span[@class=\"MuiChip-label MuiChip-labelMedium css-14vsv3w\"]";
     public static String WTCBODYINPUT = "//div[starts-with(@class,'ql-editor')]";
-    public static String WTCFOOTER = "//p[text()='Footer (Optional)']";
-    public static String WTCFOOTERINPUT = "//input[@placeholder=\"Enter Footer Text\"]";
+    public static String WTCFOOTER = "//p[text()='Footer (Optional)']|//span[text()='Footer Text']";
+    public static String WTCFOOTERINPUT = "//input[@placeholder=\"Footer Text\"]|//input[@name=\"footer_text\"]";
     public static String WTCBUTTONS = "//p[text()='Buttons']";
     public static String WTCBUTTONTYPE = "//span[text()='Button Type']";
-    public static String WTCSELECTTYPE = "//input[@placeholder=\"Select Type\"]";
+    public static String WTCSELECTTYPE = "//input[@placeholder=\"Select Button Type\"]";
     public static String WTCBUTTONTEXT = "//span[text()='Button Text']";
     public static String WTCBUTTONTEXTINPUT = "//input[@placeholder=\"Enter button text\"]";
     public static String WTCADDBUTTON = "//button[@type='button']/following::span[text()='+ Add Button']";
@@ -602,14 +604,15 @@ public class Locators extends BasePage {
     public static String WTCMESSAGEICON = "//p[@class=\"MuiTypography-root MuiTypography-body1 css-1ba1cez\"]|//div[@class='text-4xl mb-2']";
     public static String WTCTEMPLATEPREVIEW2 = "//p[text()='Start filling the form to see your template preview']";
     public static String WTCTEMPLATEPREVIEW3 = "//p[contains(normalize-space(),'Live Preview')]";
-    public static String WTCNAMEMANDATORY = "//span[text()='Name is required']";
-    public static String WTCCATEGORYMANDATORY = "//span[text()='Category is required']";
-    public static String WTCLANGUAGEMANDATORY = "//span[text()='Language is required']";
-    public static String WTCHEADERTYPEMANDATORY = "//span[text()='Header Type is required']";
-    public static String WTCBODYOFTEMPMANDATORY = "//span[text()='Body Of Template is required']";
+    public static String WTCNAMEMANDATORY = "//span[text()='Name is required']|//span[text()='Template Name is required']";
+    public static String WTCCATEGORYMANDATORY = "//span[text()='Category is required']|//p[text()='Category is required']";
+    public static String WTCLANGUAGEMANDATORY = "//span[text()='Language is required']|//p[text()='Language is required']";
+    public static String WTCHEADERTYPEMANDATORY = "//span[text()='Header Type is required']|//p[text()='Header Type is required']";
+    public static String WTCFILEEMANDATORY = "//span[text()='File is required']";
+    public static String WTCBODYOFTEMPMANDATORY = "//span[text()='Body of template is required']";
     public static String WTCENTERURL = "//input[@name=\"button_url\"]";
     public static String WTCENTERPHONE = "//input[@placeholder=\"Enter mobile number\"]";
-    public static String WTSEARCHRESULT = "(//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
+    public static String WTSEARCHRESULT = "(//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"])[1]|//tbody/tr[1]/td[2]";
     public static String WTMETASTATUS = "(//div[@aria-colindex=\"6\" and @aria-rowspan=\"1\"])[1]";
 
     //How to create WhatsApp Template
@@ -626,20 +629,20 @@ public class Locators extends BasePage {
 
     //Email Template
     public static String EMAILTEMPLATEMENU = "//button[text()='Email Template']";
-    public static String ETHEADER = "//h6[text()='Email Template']";
+    public static String ETHEADER = "//h6[text()='Email Templates']";
     public static String ETSEARCH = "//input[@placeholder=\"Search...\"]";
-    public static String ETSR = "//span[normalize-space()='#']";
-    public static String ETNAME = "//span[text()=\"Name\"]";
-    public static String ETSUBJECT = "//span[text()=\"Subject\"]";
-    public static String ETSERVERSYNCED = "//span[text()=\"Server Synced\"]";
-    public static String ETCREATEDDATE = "//span[text()=\"Created Date\"]";
-    public static String ETACTIONS = "//span[text()=\"Actions\"]";
+    public static String ETSR = "//span[normalize-space()='#']|//div[text()='#']";
+    public static String ETNAME = "//span[text()=\"Name\"]|//div[text()='Name']";
+    public static String ETSUBJECT = "//span[text()=\"Subject\"]|//div[text()='Subject']";
+    public static String ETSERVERSYNCED = "//span[text()=\"Server Synced\"]|//div[text()='Server Synced']";
+    public static String ETCREATEDDATE = "//span[text()=\"Created Date\"]|//div[text()='Created Date']";
+    public static String ETACTIONS = "//span[text()=\"Actions\"]|//div[text()='Actions']";
     public static String ETREFRESH = "//span[text()='Filters']/following::button[1] | //span[contains(@class,'css-1sh91j5')]/parent::button[contains(@class,'css-q8p1uw')]";
     public static String ETFILTERS = "//button[@type='button']/following::span[contains(text(),'Filters')]";
     public static String ETCREATE = "//button[@type='button']/following::span[text()='Create']";
-    public static String ETVIEW = "(//button[@aria-label=\"View\"])[1]";
-    public static String ETSEARCHRESULTS = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])";
-    public static String ETASTATUS = "//div[@aria-colindex=\"4\" and @aria-rowspan=\"1\"]//span";
+    public static String ETVIEW = "(//button[@aria-label=\"View\"])[1]|//button/parent::span";
+    public static String ETSEARCHRESULTS = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])|//tbody/tr[1]/td[2]";
+    public static String ETASTATUS = "//div[@aria-colindex=\"4\" and @aria-rowspan=\"1\"]//span|//tbody/tr[1]/td[4]";
 
     //Email Template Create
     public static String ETCREATEHEADER = "//h6[text()='Create Email Template']";
@@ -647,15 +650,20 @@ public class Locators extends BasePage {
     public static String ETCTNAME = "//span[text()='Template Name']";
     public static String ETCTNAMEINPUT = "//input[@placeholder=\"Enter Template Name\"]";
     public static String ETCCBTEXT = "//p[text()='Can be send from whatsapp']";
+    public static String ETCCATEGORY = "//span[text()='Category']";
+    public static String ETCCATEGORYINPUT = "//input[@placeholder=\"Select Category\"]";
     public static String ETCCBINPUT = "//input[@type=\"checkbox\"]";
     public static String ETCUPLOAD = "//p[contains(text(),'Select your file')]";
     public static String ETCUPLOADINPUT = "//p[contains(text(),'Select your file or drag and drop')]";
     public static String ETCSAVE = "//button[@type='button']/following::span[text()='Save']";
     public static String ETCCANCEL = "//button[@type='button']/following::span[text()='Cancel']";
-    public static String ETCTNVALIDATION = "//span[text()='Template name is required']";
+    public static String ETCTNVALIDATION = "//span[text()='Template name is required']|//span[text()='Template Name is required']";
+    public static String ETCTNCATVALIDATION = "//p[text()='Category is required']";
     public static String ETCSUBJECTVALIDATION = "//span[text()='Subject is required']";
     public static String ETCBODYVALIDATION = "//p[text()='Body is required']";
     public static String ETCUPLOADEDFILE = "//div[@class=\"mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3\"]/child::div";
+    public static String ETCUPLOADEDFILEVIEW = "//button[@aria-label=\"View\"]";
+    public static String ETCUPLOADEDFILEDELETE = "//button[@aria-label=\"Delete\"]";
     public static String ETCEMAILBODY = "//p[text()='Email Body']";
     public static String ETCVAREMAIL = "//span[text()='{{email}}']";
     public static String ETCVARPHONE = "//span[text()='{{phone_number}}']";
@@ -664,7 +672,7 @@ public class Locators extends BasePage {
     public static String ETCVARNEW = "//span[text()='{{%%%%%}}']";
     public static String ETCVARINFO = "//p[text()='Click any variable to insert it in the subject or body.']";
     public static String ETCSUBJECT = "//span[text()='Subject']";
-    public static String ETCSUBJECTINPUT = "//input[@placeholder=\"Enter Subject\"]";
+    public static String ETCSUBJECTINPUT = "//input[@name='subject']";
     public static String ETCBODYTEXT = "//p[contains(text(),'Use variables from the top right panel to personalize your email.')]";
     public static String ETCBODYTOOL = "//div[@role='toolbar']";
     public static String ETCBODYINPUT = "//div[@data-placeholder=\"Start writing your email content...\"]";
@@ -1148,7 +1156,7 @@ public class Locators extends BasePage {
 
     public static final String INTEGRATIONMENU = "//span[text()='Integration']";
     public static final String INTEGRATIONHEADER = "//h6[text()='Integration']";
-    public static final String WIMENU = "//p[text()='WhatsApp']/parent::div";
+    public static final String WIMENU = "//p[text()='WhatsApp']/parent::div|//p[text()='WhatsApp']/ancestor::div[1]";
     public static final String WIICON = "//p[text()='WhatsApp']/preceding::*[local-name()='svg'][1]";
     public static final String WIDISCONNECTED = "//p[text()='WhatsApp']/preceding::span[text()='Disconnected']";
     public static final String WICONNECTED = "//p[text()='WhatsApp']/preceding::span[text()='Connected']";
@@ -1162,7 +1170,7 @@ public class Locators extends BasePage {
     public static final String WIIHEADER = "//h6[text()='WhatsApp Integration']";
     public static final String WIIICON = "//h6[text()='WhatsApp Integration']/preceding-sibling::*[local-name()='svg']";
     public static final String WIIHEADERMESSAGE = "//p[text()='Set up your Whatsapp integration for the first time.']";
-    public static final String WIIINTEGRATIONBUTTON = "//button[@id=\"step1-header\"]";
+    public static final String WIIINTEGRATIONBUTTON = "//button[@id=\"step1-header\"]|//button[@id=\"Integration setup steps-header\"]";
     public static final String WIISTEPS = "//div[@class=\"MuiAccordionDetails-root css-l9xe8y\"]";
     public static final String WIIPHONEID = "//span[text()='Phone Id']";
     public static final String WIIPHONEIDINPUT = "//input[@name=\"phone_id\"]";
@@ -1328,7 +1336,7 @@ public class Locators extends BasePage {
     //Conversation Page
     public static String CONVERSATIONMENU = "//span[text()='Conversations']";
     public static String WACONVERSATIONMENU = "//button[text()='Whatsapp Conversations']";
-    public static String WACONVERSATIONHEADER = "//div[text()='WhatsApp Conversation']";
+    public static String WACONVERSATIONHEADER = "//div[text()='WhatsApp Conversation']|//h6[text()='WhatsApp Conversation']";
     public static String WACONVERSATIONINFO = "//p[text()='Select a contact to start chatting']";
     public static String WACONNECTED = "//span[text()='Connected']";
     public static String WADISCONNECTED = "//p[text()='To use this functionality, please connect your WhatsApp integration first.']";

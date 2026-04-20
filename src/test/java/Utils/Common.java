@@ -834,7 +834,7 @@ public class Common extends Locators {
         List<String> texts = new ArrayList<>();
         for (WebElement e : elements) {
             try {
-                String t = e.getText().trim();
+                String t = readElementText(e);
                 if (!t.isEmpty()) {
                     texts.add(t);
                 }
@@ -844,6 +844,30 @@ public class Common extends Locators {
             }
         }
         return texts;
+    }
+
+    private String readElementText(WebElement element) {
+        try {
+            String text = element.getText();
+            if (text != null && !text.trim().isEmpty()) {
+                return text.trim();
+            }
+        } catch (StaleElementReferenceException ignored) {
+            return "";
+        }
+
+        try {
+            String text = element.getAttribute("textContent");
+            return text != null ? text.trim() : "";
+        } catch (StaleElementReferenceException ignored) {
+            return "";
+        }
+    }
+
+    private String normalizeSearchValue(String value) {
+        return value == null
+                ? ""
+                : value.replace("_", "").replaceAll("\\s+", " ").trim().toLowerCase();
     }
     /**
      * Main verifySearch method with safe collection, random pick and search entry.
@@ -967,16 +991,7 @@ public class Common extends Locators {
         List<WebElement> elements = waitForElements(baseXPath, 8);
         System.out.println("XPath: " + baseXPath + " -> matched count: " + elements.size());
 
-        List<String> values = elements.stream()
-                .map(e -> {
-                    String t = e.getText();
-                    if (t == null || t.trim().isEmpty()) {
-                        t = e.getAttribute("textContent");
-                    }
-                    return t != null ? t.trim() : "";
-                })
-                .filter(t -> !t.isEmpty())
-                .toList();
+        List<String> values = collectTextsFromElements(elements);
 
         if (values.isEmpty()) {
             throw new AssertionError("No values collected for xpath: " + baseXPath);
@@ -986,27 +1001,26 @@ public class Common extends Locators {
         System.out.println("Random Value Selected = " + randomValue);
 
         WebElement search = waitForElementVisible(By.xpath("//input[@placeholder='Search...']"), 8);
+        if (search == null) {
+            throw new AssertionError("Search input is not visible.");
+        }
         search.clear();
         search.sendKeys(randomValue);
 
-        String normalizedValue = randomValue.replace("_", "").toLowerCase();
+        String normalizedValue = normalizeSearchValue(randomValue);
 
-        waitForElements(baseXPath, 8);
+        boolean found = new WebDriverWait(driver, Duration.ofSeconds(8))
+                .ignoring(StaleElementReferenceException.class)
+                .until(d -> waitForElements(baseXPath, 2).stream()
+                        .map(this::readElementText)
+                        .map(this::normalizeSearchValue)
+                        .anyMatch(text -> !text.isEmpty() && text.contains(normalizedValue)));
 
-        List<WebElement> filtered = waitForElements(baseXPath, 8);
-
-        WebElement foundElement = filtered.stream()
-                .filter(e -> e.getText().trim().toLowerCase().contains(normalizedValue))
-                .findFirst()
-                .orElse(null);
-
-        boolean found = foundElement != null;
-
-        if (!found) {
+        if (!Boolean.TRUE.equals(found)) {
             throw new AssertionError("Search failed. Value not found: " + randomValue);
         }
 
-        highlightElement(foundElement);
+        highlightElement(baseXPath);
     }
 
     public String selectDropdownAndGetSelectedText(By dropdownActivator, By optionLocator) {
@@ -1219,8 +1233,19 @@ public class Common extends Locators {
 
     private void jsType(WebElement element, String value) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].value=''; arguments[0].value=arguments[1];",
+        js.executeScript(
+                "arguments[0].value='';" +
+                        "arguments[0].value=arguments[1];" +
+                        "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));" +
+                        "arguments[0].dispatchEvent(new Event('change', { bubbles: true }));",
                 element, value);
+    }
+
+    private void clearAndType(WebElement element, String value) {
+        element.click();
+        element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        element.sendKeys(Keys.DELETE);
+        element.sendKeys(value);
     }
 
     private void logTypeSuccess(WebElement element, String value) {
@@ -1241,8 +1266,7 @@ public class Common extends Locators {
                 WebElement element = waitUntilElementToBeClickable(by);
                 highlightElementClick(element);
                 scroll_To_Element(element);
-                element.clear();
-                element.sendKeys(keysToSend);
+                clearAndType(element, keysToSend);
                 logTypeSuccess(element, keysToSend);
                 return;
 
@@ -1307,10 +1331,26 @@ public class Common extends Locators {
      * @param keysToSend the character sequence to send to the element
      */
     public void type(WebElement element, String keysToSend) {
-        waitUntilElementToBeClickable(element);
-        highlightElement(element);
-        element.clear();
-        element.sendKeys(keysToSend);
+        for (int i = 0; i < 3; i++) {
+            try {
+                waitUntilElementToBeClickable(element);
+                highlightElement(element);
+                scroll_To_Element(element);
+                clearAndType(element, keysToSend);
+                logTypeSuccess(element, keysToSend);
+                return;
+            } catch (Exception e) {
+                try {
+                    jsType(element, keysToSend);
+                    logTypeSuccess(element, keysToSend);
+                    return;
+                } catch (Exception ignored) {
+                    pause(1);
+                }
+            }
+        }
+
+        throw new RuntimeException("FAILED :: Unable to type into element");
     }
     /**
      * Click on a given element. If this causes a new page to load, you should discard
