@@ -629,20 +629,20 @@ public class Locators extends BasePage {
 
     //Email Template
     public static String EMAILTEMPLATEMENU = "//button[text()='Email Template']";
-    public static String ETHEADER = "//h6[text()='Email Template']";
+    public static String ETHEADER = "//h6[text()='Email Templates']";
     public static String ETSEARCH = "//input[@placeholder=\"Search...\"]";
-    public static String ETSR = "//span[normalize-space()='#']";
-    public static String ETNAME = "//span[text()=\"Name\"]";
-    public static String ETSUBJECT = "//span[text()=\"Subject\"]";
-    public static String ETSERVERSYNCED = "//span[text()=\"Server Synced\"]";
-    public static String ETCREATEDDATE = "//span[text()=\"Created Date\"]";
-    public static String ETACTIONS = "//span[text()=\"Actions\"]";
+    public static String ETSR = "//span[normalize-space()='#']|//div[text()='#']";
+    public static String ETNAME = "//span[text()=\"Name\"]|//div[text()='Name']";
+    public static String ETSUBJECT = "//span[text()=\"Subject\"]|//div[text()='Subject']";
+    public static String ETSERVERSYNCED = "//span[text()=\"Server Synced\"]|//div[text()='Server Synced']";
+    public static String ETCREATEDDATE = "//span[text()=\"Created Date\"]|//div[text()='Created Date']";
+    public static String ETACTIONS = "//span[text()=\"Actions\"]|//div[text()='Actions']";
     public static String ETREFRESH = "//span[text()='Filters']/following::button[1] | //span[contains(@class,'css-1sh91j5')]/parent::button[contains(@class,'css-q8p1uw')]";
     public static String ETFILTERS = "//button[@type='button']/following::span[contains(text(),'Filters')]";
     public static String ETCREATE = "//button[@type='button']/following::span[text()='Create']";
-    public static String ETVIEW = "(//button[@aria-label=\"View\"])[1]";
-    public static String ETSEARCHRESULTS = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])";
-    public static String ETASTATUS = "//div[@aria-colindex=\"4\" and @aria-rowspan=\"1\"]//span";
+    public static String ETVIEW = "(//button[@aria-label=\"View\"])[1]|//button/parent::span";
+    public static String ETSEARCHRESULTS = "(//div[@aria-colindex=\"3\" and @aria-rowspan=\"1\"])|//tbody/tr[1]/td[2]";
+    public static String ETASTATUS = "//div[@aria-colindex=\"4\" and @aria-rowspan=\"1\"]//span|//tbody/tr[1]/td[4]";
 
     //Email Template Create
     public static String ETCREATEHEADER = "//h6[text()='Create Email Template']";
@@ -650,15 +650,20 @@ public class Locators extends BasePage {
     public static String ETCTNAME = "//span[text()='Template Name']";
     public static String ETCTNAMEINPUT = "//input[@placeholder=\"Enter Template Name\"]";
     public static String ETCCBTEXT = "//p[text()='Can be send from whatsapp']";
+    public static String ETCCATEGORY = "//span[text()='Category']";
+    public static String ETCCATEGORYINPUT = "//input[@placeholder=\"Select Category\"]";
     public static String ETCCBINPUT = "//input[@type=\"checkbox\"]";
     public static String ETCUPLOAD = "//p[contains(text(),'Select your file')]";
     public static String ETCUPLOADINPUT = "//p[contains(text(),'Select your file or drag and drop')]";
     public static String ETCSAVE = "//button[@type='button']/following::span[text()='Save']";
     public static String ETCCANCEL = "//button[@type='button']/following::span[text()='Cancel']";
-    public static String ETCTNVALIDATION = "//span[text()='Template name is required']";
+    public static String ETCTNVALIDATION = "//span[text()='Template name is required']|//span[text()='Template Name is required']";
+    public static String ETCTNCATVALIDATION = "//p[text()='Category is required']";
     public static String ETCSUBJECTVALIDATION = "//span[text()='Subject is required']";
     public static String ETCBODYVALIDATION = "//p[text()='Body is required']";
     public static String ETCUPLOADEDFILE = "//div[@class=\"mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3\"]/child::div";
+    public static String ETCUPLOADEDFILEVIEW = "//button[@aria-label=\"View\"]";
+    public static String ETCUPLOADEDFILEDELETE = "//button[@aria-label=\"Delete\"]";
     public static String ETCEMAILBODY = "//p[text()='Email Body']";
     public static String ETCVAREMAIL = "//span[text()='{{email}}']";
     public static String ETCVARPHONE = "//span[text()='{{phone_number}}']";
@@ -667,7 +672,7 @@ public class Locators extends BasePage {
     public static String ETCVARNEW = "//span[text()='{{%%%%%}}']";
     public static String ETCVARINFO = "//p[text()='Click any variable to insert it in the subject or body.']";
     public static String ETCSUBJECT = "//span[text()='Subject']";
-    public static String ETCSUBJECTINPUT = "//input[@placeholder=\"Enter Subject\"]";
+    public static String ETCSUBJECTINPUT = "//input[@name='subject']";
     public static String ETCBODYTEXT = "//p[contains(text(),'Use variables from the top right panel to personalize your email.')]";
     public static String ETCBODYTOOL = "//div[@role='toolbar']";
     public static String ETCBODYINPUT = "//div[@data-placeholder=\"Start writing your email content...\"]";

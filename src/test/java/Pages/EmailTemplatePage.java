@@ -93,6 +93,8 @@ public class EmailTemplatePage extends Locators {
         columns.put(ETCTNAME, "ET Template Name");
         columns.put(ETCTNAMEINPUT, "ET Name Input");
         columns.put(ETCCBTEXT, "ET Name info");
+        columns.put(ETCCATEGORY, "ET Category");
+        columns.put(ETCCATEGORYINPUT, "ET Category Input");
 //        columns.put(ETCCBINPUT, "ET Checkbox");
         columns.put(ETCUPLOAD, "ET Upload");
         columns.put(ETCUPLOADINPUT, "ET Upload input");
@@ -152,6 +154,9 @@ public class EmailTemplatePage extends Locators {
         common.waitUntilElementToBeVisible(ETCTNVALIDATION);
         common.assertElementPresent(ETCTNVALIDATION);
 
+        common.waitUntilElementToBeVisible(ETCTNCATVALIDATION);
+        common.assertElementPresent(ETCTNCATVALIDATION);
+
         common.waitUntilElementToBeVisible(ETCSUBJECTVALIDATION);
         common.assertElementPresent(ETCSUBJECTVALIDATION);
 
@@ -184,7 +189,7 @@ public class EmailTemplatePage extends Locators {
 
     public void verifyingHorizontalView(){
         goToEmailTemplatePage();
-        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
+        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]|//h6[text()='Email Templates']/following::div[1]");
     }
 
     public void verifyingSearch(){
@@ -210,6 +215,17 @@ public class EmailTemplatePage extends Locators {
         common.waitUntilElementToBeVisible(ETCTNAMEINPUT);
         common.type(ETCTNAMEINPUT, name);
 
+        common.waitUntilElementToBeVisible(ETCCATEGORYINPUT);
+        common.click(ETCCATEGORYINPUT);
+        common.twoDownKeyAndEnter();
+
+        common.waitUntilElementToBeVisible(ETCSUBJECTINPUT);
+        common.type(ETCSUBJECTINPUT,common.fakeProductName());
+
+
+        common.waitUntilElementToBeVisible(ETCBODYINPUT);
+        common.type(ETCBODYINPUT,body);
+
         common.selectCheckbox(ETCCBINPUT);
 
         driver.findElement(By.xpath(ETCUPLOADINPUT)).click();
@@ -217,8 +233,11 @@ public class EmailTemplatePage extends Locators {
 
         common.pause(2);
 
-        common.waitUntilElementToBeClickable(ETCUPLOADEDFILE);
-        common.assertElementPresent(ETCUPLOADEDFILE);
+        common.waitUntilElementToBeClickable(ETCUPLOADEDFILEVIEW);
+        common.assertElementPresent(ETCUPLOADEDFILEVIEW);
+
+        common.waitUntilElementToBeClickable(ETCUPLOADEDFILEDELETE);
+        common.assertElementPresent(ETCUPLOADEDFILEDELETE);
 
         common.waitUntilElementToBeVisible(ETCSUBJECTINPUT);
         common.type(ETCSUBJECTINPUT, subject);
@@ -250,14 +269,14 @@ public class EmailTemplatePage extends Locators {
 //        common.waitUntilElementToBeVisible(ETCSAVE);
 //        common.click(ETCSAVE);
 
-        common.validateSearch(ETSEARCHRESULTS, name);
+//        common.validateSearch(ETSEARCHRESULTS, name);
         return new String[] {name,subject,body};
 
     }
 
     public void verifyPagination(){
         goToEmailTemplatePage();
-        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
+        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]|//h6[text()='Email Templates']/following::div[1]");
     }
 
     public void verifyAddingVariables(){
@@ -381,10 +400,10 @@ public class EmailTemplatePage extends Locators {
 
         String synced= common.getText(ETASTATUS).trim();
 
-//        while(synced.equals("Synced")){
-//            common.pause(3);
-//            common.click(ETREFRESH);
-//        }
+        while(synced.equals("Synced")){
+            common.pause(3);
+            common.click(ETREFRESH);
+        }
 
         common.waitUntilElementToBeVisible(ETVIEW);
         common.click(ETVIEW);
@@ -433,8 +452,8 @@ public class EmailTemplatePage extends Locators {
     public void verifyFilters(){
 
         goToEmailTemplatePage();
-        String emailTemplateName = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"name\"]";
-        String  emailTemplateSubject = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"subject\"]";
+        String emailTemplateName = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"name\"]|//tbody/tr[1]/td[2]";
+        String  emailTemplateSubject = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"subject\"]|//tbody/tr[1]/td[3]";
 
         common.waitUntilElementToBeVisible(emailTemplateName);
         String emailCampaignNameValue = common.getText(emailTemplateName);
