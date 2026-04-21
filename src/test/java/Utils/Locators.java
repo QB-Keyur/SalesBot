@@ -693,7 +693,7 @@ public class Locators extends BasePage {
     public static String lastNameInp = "//input[@name='last_name']";
     public static String emailInp = "//input[@name='email']";
     public static String phoneNumInp = "//input[@name='phone_number']";
-    public static String nextBtn = "//span[contains(text(),'Next')]/ancestor::button";
+    public static String nextBtn = "//span[contains(text(),'Next')]/ancestor::button|//button[@type=\"submit\"]";
     public static String businessNameInp = "//input[@name='business_name']";
     public static String selectBusinessStrengthInp = "//input[@placeholder='Select Business Strength']";
     public static String businessType = "//input[@placeholder='Select Business Type']";
@@ -704,7 +704,12 @@ public class Locators extends BasePage {
     public static String pinCodeInp = "//input[@name='pincode']";
     public static String agreeCheckbox= "//input[@type='checkbox']";
     public static String startFreeTrialBtn = "//span[contains(text(),'Start Trial')]/ancestor::button";
-    public static String startFreeTrialBtnLastPage = "//span[contains(text(),'Start Free Plan')]/ancestor::button";
+    public static String startFreeTrialBtnLastPage = "//span[contains(text(),'Start Free Plan')]/ancestor::button|//span[text()='Complete Checkout']/parent::button";
+    public static String payAsYouGo = "//p[contains(text(),'Pay as you go')]/following::button[1]";
+    public static String businessName = "//input[@name=\"business_name\"]";
+    public static String industry = "//input[@name=\"industry\"]";
+    public static String category = "//input[@name=\"category\"]";
+    public static String subCategory = "//input[@name=\"subcategory\"]";
     public static String congratulationMessage = "(//h6[contains(text(),'Congratulations!')])[2]";
     public static String closeIconOnCongratulation = "(//div[contains(@class,'relative flex flex-col items-center justify-center')]//button)[2]";
     public static String getPlanDetail = "(//h4[contains(text(),'')])[2]";
@@ -906,15 +911,15 @@ public class Locators extends BasePage {
     public static String userInvitationHeader = "//h6[text()='User Invitation']";
 
     //Role and Permission
-    public static String enterRoleName = "//input[@placeholder='Enter Role Name']";
-    public static String roleDropdown = "//input[@placeholder='Select Role']";
+    public static String enterRoleName  = "//input[@placeholder='Enter Role Name']";
+    public static String roleDropdown   = "//input[@placeholder='Select Role']";
     public static String firstNameError = "//span[text()='First Name is required']";
-    public static String lastNameError = "//span[text()='Last Name is required']";
+    public static String lastNameError  = "//span[text()='Last Name is required']";
     public static String phoneError     = "//div[text()='Phone number is required']";
     public static String emailError     = "//span[text()='Email is required']";
     public static String roleError      = "//span[text()='Role is required']";
-    public static String RoleNameError      = "//span[text()='Role Name is required']";
-    public static String totalRows = "//td[text()='Total Rows: 22']";
+    public static String RoleNameError  = "//span[text()='Role Name is required']";
+    public static String totalRows      = "//td[text()='Total Rows: 22']";
 
     //grid page headers
     public static String firstNameHeader = "//div[@role='presentation']//span[text()='First Name']";

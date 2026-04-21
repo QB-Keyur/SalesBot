@@ -286,8 +286,8 @@ public class EmailTemplatePage extends Locators {
         String subject = common.generateBusinessFocus();
         String body = common.generateCompanyDescription();
         String ETCSUBJECTPREVIEW = "//p[text()='"+subject+"'] | //div[text()='"+subject+"']";
-        String ETCBODYPREVIEW = "//p[text()='"+body+"'] | //div[text()='\"+body+\"']";
-        String ETCBODYPREVIEWFULL = "//b[text()='"+subject+"']/following::div[1] | //div[contains(text(),'"+subject+"')]/following::p[2]";
+        String ETCBODYPREVIEW = "//p[text()='"+body+"'] | //div[text()='"+body+"']";
+        String ETCBODYPREVIEWFULL = "//b[text()='"+subject+"']/following::div[1] | //div[contains(text(),'"+subject+"')]/following::p";
 
         String imagePath = Paths.get("TestData", "1.png").toAbsolutePath().toString();
 
@@ -305,8 +305,8 @@ public class EmailTemplatePage extends Locators {
 
         common.pause(2);
 
-        common.waitUntilElementToBeClickable(ETCUPLOADEDFILE);
-        common.assertElementPresent(ETCUPLOADEDFILE);
+        common.waitUntilElementToBeClickable(ETCUPLOADEDFILEVIEW);
+        common.assertElementPresent(ETCUPLOADEDFILEVIEW);
 
         common.waitUntilElementToBeVisible(ETCSUBJECTINPUT);
         common.type(ETCSUBJECTINPUT, subject);

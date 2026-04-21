@@ -163,7 +163,7 @@
 <!--                        <suiteXmlFile>build_xmls/Login.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/WhatsAppContact.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/UserManagement.xml</suiteXmlFile>-->
-<!--                        <suiteXmlFile>build_xmls/profile.xml</suiteXmlFile>-->
+                        <suiteXmlFile>build_xmls/profile.xml</suiteXmlFile>
 
 <!--                        Rohini-->
 <!--                        <suiteXmlFile>build_xmls/LeadManagement.xml</suiteXmlFile>-->
@@ -180,7 +180,7 @@
 <!--                        <suiteXmlFile>build_xmls/AssetSharing.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/SMTPIntegration.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/WhatsAppIntegration.xml</suiteXmlFile>-->
-                        <suiteXmlFile>build_xmls/WhatsAppTemplate.xml</suiteXmlFile>
+<!--                        <suiteXmlFile>build_xmls/WhatsAppTemplate.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/WorkingHours.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/Customer.xml</suiteXmlFile>-->
 

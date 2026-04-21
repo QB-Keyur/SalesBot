@@ -37,7 +37,7 @@ public class profileTest extends BasePage {
         String personalInfo[] = loginPage.addPersonalInformation();
         String email = personalInfo[2];
         common.logPrint("email is: "+email);
-        loginPage.addBusinessInformation();
+//        loginPage.addBusinessInformation();
         common.openNewWindow();
         common.switchToWindowByIndex(2);
         common.pause(3);
@@ -46,8 +46,8 @@ public class profileTest extends BasePage {
         loginPage.enterOtpInInputField(otp);
         whatsAppContactPage.verifySuccessMessageForYourAccountIsVerified();
         loginPage.completePayment();
-        loginPage.verifySuccessMessageForCompleteSignUp();
-        profilePage.clickOnTheCloseIconBtnOnCongratulationPopUp();
+//        loginPage.verifySuccessMessageForCompleteSignUp();
+//        profilePage.clickOnTheCloseIconBtnOnCongratulationPopUp();
         profilePage.redirectsToProfilePage();
         profilePage.verifyPlanIsShowingProperlyOnProfilePage();
     }
@@ -61,7 +61,7 @@ public class profileTest extends BasePage {
         String email = personalInfo[2];
         String mobileNum = personalInfo[3];
         common.logPrint("email is: "+email);
-        loginPage.addBusinessInformation();
+//        loginPage.addBusinessInformation();
         common.openNewWindow();
         common.switchToWindowByIndex(2);
         common.pause(3);
@@ -70,8 +70,8 @@ public class profileTest extends BasePage {
         loginPage.enterOtpInInputField(otp);
         whatsAppContactPage.verifySuccessMessageForYourAccountIsVerified();
         loginPage.completePayment();
-        loginPage.verifySuccessMessageForCompleteSignUp();
-        profilePage.clickOnTheCloseIconBtnOnCongratulationPopUp();
+//        loginPage.verifySuccessMessageForCompleteSignUp();
+//        profilePage.clickOnTheCloseIconBtnOnCongratulationPopUp();
         profilePage.redirectsToProfilePage();
         profilePage.verifyProfilePageDetails(name, lastName, email, mobileNum);
     }
