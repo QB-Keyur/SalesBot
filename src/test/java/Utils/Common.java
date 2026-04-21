@@ -199,23 +199,38 @@ public class Common extends Locators {
     }
 
     public void switch_windows(Set<String> windowHandles, String title) {
-        // Iterate through the window handles
         for (String windowHandle : windowHandles) {
-            // Switch to the window handle
             driver.switchTo().window(windowHandle);
 
-            // Check the window title
             String windowTitle = driver.getTitle();
 
-            // If the window title matches "Plaid flow", break the loop and stay in this window
-            if (windowTitle.equals(title)) {
+            if (windowTitle.contains(title)) {   // <-- use contains instead of equals
                 logPrint("Switched to window with title: " + windowTitle);
-                break;
+                return;
+            }
+        }
+        throw new RuntimeException("No window found with title: " + title);
+    }
+
+    public void switchToWindowByTitle(String title) {
+
+        Set<String> handles = driver.getWindowHandles();
+
+        if (handles.size() <= 1) {
+            logPrint("Only one window present. Skipping window switch.");
+            return;
+        }
+
+        for (String handle : handles) {
+            driver.switchTo().window(handle);
+            if (driver.getTitle().contains(title)) {
+                logPrint("Switched to: " + driver.getTitle());
+                return;
             }
         }
 
+        throw new RuntimeException("Window not found: " + title);
     }
-
     public void switchToTab(int n) {
 
         List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -422,7 +437,7 @@ public class Common extends Locators {
     }
 
     public WebElement waitUntilElementToBeVisible(String locator) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
         // or use By.cssSelector(locator) or By.id(locator), etc.
         return getWait().ignoring(StaleElementReferenceException.class).until(ExpectedConditions.visibilityOf(element));

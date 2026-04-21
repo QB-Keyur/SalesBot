@@ -231,7 +231,7 @@ public class profilePage extends Locators {
         common.waitUntilElementToBeVisible(getPlanDetail);
         String planName = common.getText(getPlanDetail);
 
-        common.assertTwoValuesAreEqual(planName, "Trial");
+        common.assertTwoValuesAreEqual(planName, "Pay as you go");
 
     }
 

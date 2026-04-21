@@ -693,7 +693,7 @@ public class Locators extends BasePage {
     public static String lastNameInp = "//input[@name='last_name']";
     public static String emailInp = "//input[@name='email']";
     public static String phoneNumInp = "//input[@name='phone_number']";
-    public static String nextBtn = "//span[contains(text(),'Next')]/ancestor::button";
+    public static String nextBtn = "//span[contains(text(),'Next')]/ancestor::button|//button[@type=\"submit\"]";
     public static String businessNameInp = "//input[@name='business_name']";
     public static String selectBusinessStrengthInp = "//input[@placeholder='Select Business Strength']";
     public static String businessType = "//input[@placeholder='Select Business Type']";
@@ -704,7 +704,12 @@ public class Locators extends BasePage {
     public static String pinCodeInp = "//input[@name='pincode']";
     public static String agreeCheckbox= "//input[@type='checkbox']";
     public static String startFreeTrialBtn = "//span[contains(text(),'Start Trial')]/ancestor::button";
-    public static String startFreeTrialBtnLastPage = "//span[contains(text(),'Start Free Plan')]/ancestor::button";
+    public static String startFreeTrialBtnLastPage = "//span[contains(text(),'Start Free Plan')]/ancestor::button|//span[text()='Complete Checkout']/parent::button";
+    public static String payAsYouGo = "//p[contains(text(),'Pay as you go')]/following::button[1]";
+    public static String businessName = "//input[@name=\"business_name\"]";
+    public static String industry = "//input[@name=\"industry\"]";
+    public static String category = "//input[@name=\"category\"]";
+    public static String subCategory = "//input[@name=\"subcategory\"]";
     public static String congratulationMessage = "(//h6[contains(text(),'Congratulations!')])[2]";
     public static String closeIconOnCongratulation = "(//div[contains(@class,'relative flex flex-col items-center justify-center')]//button)[2]";
     public static String getPlanDetail = "(//h4[contains(text(),'')])[2]";
@@ -838,16 +843,16 @@ public class Locators extends BasePage {
     public static String ECREFRESHBUTTON = "//button[contains(@class,'5wqzvf')] | //button[contains(@class,'css-q8p1uw')]";
     public static String ECREFILTERBUTTON = "//button[contains(@class,'1wkzwh7')] | //button[contains(@class,'css-1yfm8su')]";
     public static String ECCREATEBUTTON = "//button[@type='button']/following::span[text()='Create']";
-    public static String ECNAME = "//span[text()=\"Name\"]";
-    public static String ECSR = "//span[text()=\"#\"]";
-    public static String ECCATEGORY = "//span[text()=\"Category\"]";
-    public static String ECPRODUCT = "//span[text()=\"Product\"]";
-    public static String ECEMAIL = "//span[text()=\"Integration Email\"]";
-    public static String ECCONTACT = "//span[text()=\"Contact\"] | //span[text()=\"Contact\"]/following::span[text()='Contact']";
-    public static String ECCONTACTGROUP = "//span[text()=\"Contact Group\"]";
-    public static String ECAI = "//span[text()=\"Enable AI\"]";
-    public static String ECSTATUS = "//span[text()=\"Status\"]";
-    public static String ECACTION = "//span[text()=\"Actions\"]";
+    public static String ECNAME = "//span[text()=\"Name\"]|//th/div[contains(text(),'Name')]";
+    public static String ECSR = "//span[text()=\"#\"]|//th/div[contains(text(),'#')]";
+    public static String ECCATEGORY = "//span[text()=\"Category\"]|//th/div[contains(text(),'Category')]";
+    public static String ECPRODUCT = "//span[text()=\"Product\"]|//th/div[contains(text(),'Product')]";
+    public static String ECEMAIL = "//span[text()=\"Integration Email\"]|//th/div[contains(text(),'Integration Email')]";
+    public static String ECCONTACT = "//th/div[contains(text(),'Contact')]";
+    public static String ECCONTACTGROUP = "//span[text()=\"Contact Group\"]|//th/div[contains(text(),'Contact Group')]|//th/div[contains(text(),'Contact Group')]";
+    public static String ECAI = "//span[text()=\"Enable AI\"]|//th/div[contains(text(),'Enable AI')]";
+    public static String ECSTATUS = "//span[text()=\"Status\"]|//th/div[contains(text(),'Status')]";
+    public static String ECACTION = "//span[text()=\"Actions\"]|//th/div[contains(text(),'Actions')]";
 
     //EMAIL CAMPAIGN CREATE PAGE
     public static String ECCHEADER= "//h6[text()='Create Email Campaign']";
@@ -860,7 +865,7 @@ public class Locators extends BasePage {
     public static String ECCTEMPLATEINPUT= "//input[@placeholder=\"Select template\"]";
     public static String ECCCATEGORYINPUT= "//input[@placeholder=\"Create or Select Category\"]";
     public static String ECCPRODUCTINPUT= "//input[@placeholder=\"Select product\"]";
-    public static String ECCCAMPAIGNCONTACTGROUP= "//input[@placeholder=\"Select contact groups\"]";
+    public static String ECCCAMPAIGNCONTACTGROUP= "//input[@placeholder=\"Select Contact Group\"]";
     public static String ECCVIEW= "//button[@type='button']/following::span[text()='View']";
     public static String ECCMESSAGECONTENT= "//p[text()='Message Content']";
     public static String ECCSUBJECT= "//span[text()='Subject']";
@@ -875,12 +880,12 @@ public class Locators extends BasePage {
     public static String ECCSEARCHCONTACTS= "//input[@placeholder=\"Search contacts...\"]";
     //  public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
     public static String ECCCHECKBOX= "(//span[@class=\"css-ysvidx\"])[1]";
-    public static String ECCSRNO= "//span[text()='#']";
-    public static String ECCNAME= "//span[text()='Name']";
-    public static String ECCCONTACTGROUP= "//span[text()='Contact group']";
-    public static String ECCPHONE= "//span[text()='Phone Number']";
-    public static String ECCEMAIL= "//span[text()='Email']";
-    public static String ECCTOTALROWS= "//div[text()='Total Rows: '] | //div[@class='MuiBox-root css-10u381a']";
+    public static String ECCSRNO= "//span[text()='#']|//th/div[contains(text(),'#')]";
+    public static String ECCNAME= "//span[text()='Name']|//th/div[contains(text(),'Name')]";
+    public static String ECCCONTACTGROUP= "//span[text()='Contact group']|//th/div[contains(text(),'Contact group')]";
+    public static String ECCPHONE= "//span[text()='Phone Number']|//th/div[contains(text(),'Phone Number')]";
+    public static String ECCEMAIL= "//span[text()='Email']|//th/div[contains(text(),'Email')]";
+    public static String ECCTOTALROWS= "//div[text()='Total Rows: '] | //div[@class='MuiBox-root css-10u381a']|//h6[contains(text(),'Email Campaign')]/following::div[1]";
     public static String ECCROWSPERPAGE= "//p[text()='Rows per page:'] | //p[text()='Show']";
     public static String ECCPREVIOUSPAGE= "//button[@aria-label=\"Go to previous page\"]";
     public static String ECCNEXTPAGE= "//button[@aria-label=\"Go to next page\"]";
@@ -894,9 +899,9 @@ public class Locators extends BasePage {
     public static String ECCPOPUPNO= "//button[@type='button']/following::span[text()='No']";
     public static String ECCPOPUPYES= "//button[@type='button']/following::span[text()='Yes'] | //button[@type='button']/following::span[text()='Run Campaign']";
     public static String ECCNAMEVAL= "//span[text()='Name is required']";
-    public static String ECCEMAILVAL= "//span[text()='Email template is required']";
-    public static String ECCCATEGORYVAL= "//span[text()='Category is required']";
-    public static String ECCPRODUCTVAL= "//span[text()='Product is required']";
+    public static String ECCEMAILVAL= "//span[text()='Email template is required']|//p[text()='Email template is required']";
+    public static String ECCCATEGORYVAL= "//span[text()='Category is required']|//p[contains(text(),'Category is required')]";
+    public static String ECCPRODUCTVAL= "//span[text()='Product is required']|//p[contains(text(),'Product is required')]";
 
     //User management page
     public static String userManagementMenu = "//span[contains(text(),'User Management')]";
@@ -906,15 +911,15 @@ public class Locators extends BasePage {
     public static String userInvitationHeader = "//h6[text()='User Invitation']";
 
     //Role and Permission
-    public static String enterRoleName = "//input[@placeholder='Enter Role Name']";
-    public static String roleDropdown = "//input[@placeholder='Select Role']";
+    public static String enterRoleName  = "//input[@placeholder='Enter Role Name']";
+    public static String roleDropdown   = "//input[@placeholder='Select Role']";
     public static String firstNameError = "//span[text()='First Name is required']";
-    public static String lastNameError = "//span[text()='Last Name is required']";
+    public static String lastNameError  = "//span[text()='Last Name is required']";
     public static String phoneError     = "//div[text()='Phone number is required']";
     public static String emailError     = "//span[text()='Email is required']";
     public static String roleError      = "//span[text()='Role is required']";
-    public static String RoleNameError      = "//span[text()='Role Name is required']";
-    public static String totalRows = "//td[text()='Total Rows: 22']";
+    public static String RoleNameError  = "//span[text()='Role Name is required']";
+    public static String totalRows      = "//td[text()='Total Rows: 22']";
 
     //grid page headers
     public static String firstNameHeader = "//div[@role='presentation']//span[text()='First Name']";
@@ -1610,12 +1615,12 @@ public class Locators extends BasePage {
     public static final String ASC_CREATE_TOASTER =  "//div[contains(normalize-space(), 'Assets & Sharing Created Successfully')] | //div[text()='Assets & Sharing created successfully']";;
     public static final String ASC_UPDATE_TOASTER =  "//div[contains(normalize-space(), 'Assets & Sharing Updated Successfully')] | //div[text()='Assets & Sharing updated successfully']";;
 
-    public static final String ASC_FORM_CONTAINER = "//form";
-    public static final String ASC_BASIC_DETAILS_SECTION = "//h2[normalize-space()='Basic Details']/parent::div";
-    public static final String ASC_VIEW_ASSET_SHARING = "//p[normalize-space()='View Assets & Sharing']";
-    public static final String ASC_VIEW_NAME = "//span[contains(text(),'Name')]";
-    public static final String ASC_VIEW_NAME_VALUE = "//span[text()='Name']/following::input[1]";
-    public static final String ASC_VIEW_DESCRIPTION = "//span[contains(text(),'Description')]";
+    public static final String ASC_FORM_CONTAINER         = "//form";
+    public static final String ASC_BASIC_DETAILS_SECTION  = "//h2[normalize-space()='Basic Details']/parent::div";
+    public static final String ASC_VIEW_ASSET_SHARING     = "//p[normalize-space()='View Assets & Sharing']";
+    public static final String ASC_VIEW_NAME              = "//span[contains(text(),'Name')]";
+    public static final String ASC_VIEW_NAME_VALUE        = "//span[text()='Name']/following::input[1]";
+    public static final String ASC_VIEW_DESCRIPTION       = "//span[contains(text(),'Description')]";
     public static final String ASC_VIEW_DESCRIPTION_VALUE = "//span[text()='Description']/following::input[1]";
 
     /* Recommended stable relative locators */

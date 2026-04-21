@@ -5,11 +5,14 @@ import Config.ReadProperties;
 import Utils.Common;
 import Utils.Locators;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class loginPage extends Locators {
 
@@ -343,8 +346,8 @@ public class loginPage extends Locators {
 
     public String[] addPersonalInformation(){
 
-        common.waitUntilElementToBeVisible(startFreeTrialBtn);
-        common.click(startFreeTrialBtn);
+        common.waitUntilElementToBeVisible(payAsYouGo);
+        common.click(payAsYouGo);
 
         String name = common.fakeName();
         common.waitUntilElementToBeVisible(firstNameInp);
@@ -359,8 +362,9 @@ public class loginPage extends Locators {
         common.type(emailInp, email);
 
         String mobileNum = common.fakeIndianMobileNumber();
+        common.logPrint(mobileNum);
         common.waitUntilElementToBeVisible(phoneNumInp);
-        common.type(phoneNumInp, mobileNum);
+        common.type(phoneNumInp, "+91"+mobileNum);
 
         String password = "Admin@1234";
         common.waitUntilElementToBeVisible(enterPasswordInp);
@@ -368,6 +372,17 @@ public class loginPage extends Locators {
 
         common.waitUntilElementToBeVisible(confirmPasswordInp);
         common.type(confirmPasswordInp, password);
+
+        common.waitUntilElementToBeVisible(businessName);
+        common.type(businessName, common.fakeProductName());
+        common.waitUntilElementToBeVisible(industry);
+        common.type(industry, "Industry");
+        common.waitUntilElementToBeVisible(category);
+        common.type(category, "Category");
+        common.waitUntilElementToBeVisible(subCategory);
+        common.type(subCategory, "SubCategory");
+
+
 
         common.waitUntilElementToBeVisible(nextBtn);
         common.click(nextBtn);
@@ -401,7 +416,7 @@ public class loginPage extends Locators {
         common.click(createAccountBtn);
     }
 
-    public void completePayment(){
+    public void completePayment() {
 
         String address = common.generateRandomChars(8);
         common.waitUntilElementToBeVisible(addressLineInp);
@@ -413,32 +428,93 @@ public class loginPage extends Locators {
 
         common.waitUntilElementToBeVisible(selectCountryDropdown);
         common.click(selectCountryDropdown);
-        common.downKeyAndEnter();
+        common.twoDownKeyAndEnter();
 
         common.waitUntilElementToBeVisible(SelectStateInp);
         common.click(SelectStateInp);
-        common.type(SelectStateInp,"Gujarat");
-        common.downKeyAndEnter();
+        common.type(SelectStateInp, "Gujarat");
+        common.twoDownKeyAndEnter();
 
         common.pause(1);
 
         common.waitUntilElementToBeVisible(SelectCityInp);
         common.click(SelectCityInp);
-        common.type(SelectStateInp,"Ahmedabad");
-        common.downKeyAndEnter();
+        common.type(SelectCityInp, "Ahmedabad");
+        common.twoDownKeyAndEnter();
 
         String pincode = "362220";
         common.waitUntilElementToBeVisible(pinCodeInp);
         common.type(pinCodeInp, pincode);
 
-        WebElement element = driver.findElement(By.xpath(agreeCheckbox));
-        element.click();
-//        common.waitUntilElementToBeVisible(agreeCheckbox);
-//        common.click(agreeCheckbox);
+        driver.findElement(By.xpath(agreeCheckbox)).click();
 
         common.waitUntilElementToBeVisible(startFreeTrialBtnLastPage);
         common.click(startFreeTrialBtnLastPage);
 
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        // 🔹 Switch to Razorpay iframe
+        WebElement razorpayFrame = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                        By.cssSelector("iframe.razorpay-checkout-frame")
+                )
+        );
+        driver.switchTo().frame(razorpayFrame);
+
+        // 🔹 Fill details inside iframe
+        common.waitUntilElementToBeVisible("//input[@name=\"contact\"]");
+        common.type("//input[@name=\"contact\"]", common.fakeIndianMobileNumber());
+
+        common.waitUntilElementToBeVisible("//div[@data-testid=\"netbanking\"]");
+        common.click("//div[@data-testid=\"netbanking\"]");
+
+        common.waitUntilElementToBeVisible("(//span[text()='Kotak Mahindra Bank']/parent::div)[1]");
+        common.click("(//span[text()='Kotak Mahindra Bank']/parent::div)[1]");
+
+        // 🔹 Wait for either processing OR new window
+        common.waitUntilElementToBeVisible("//h3[contains(text(),'Processing')]");
+
+        // 🔥 Handle window switch safely
+        wait.until(d -> d.getWindowHandles().size() >= 1);
+
+        Set<String> handles = driver.getWindowHandles();
+
+        if (handles.size() > 1) {
+            // Exit iframe before switching
+            driver.switchTo().defaultContent();
+
+            // Debug titles (optional)
+            for (String handle : handles) {
+                driver.switchTo().window(handle);
+                System.out.println("Window Title: " + driver.getTitle());
+            }
+
+            // Switch to Razorpay window (partial match)
+            for (String handle : handles) {
+                driver.switchTo().window(handle);
+                if (driver.getTitle().toLowerCase().contains("razorpay") ||
+                        driver.getCurrentUrl().toLowerCase().contains("razorpay")) {
+                    System.out.println("Switched to Razorpay window");
+                    break;
+                }
+            }
+        } else {
+            System.out.println("No new window, continuing inside iframe");
+        }
+
+        // 🔹 Continue payment
+        common.waitUntilElementToBeVisible("//button[text()='Success']");
+        common.click("//button[text()='Success']");
+
+        // 🔹 Post payment steps
+
+        common.switchToWindowByIndex(1);
+
+        common.waitUntilElementToBeVisible("(//span[text()='Go to Quick Start']/parent::button)[1]");
+        common.click("(//span[text()='Go to Quick Start']/parent::button)[1]");
+
+        common.waitUntilElementToBeVisible("(//span[text()='Skip']/parent::button)[1]");
+        common.click("(//span[text()='Skip']/parent::button)[1]");
     }
 
     public void verifySuccessMessageForCompleteSignUp(){
