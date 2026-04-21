@@ -163,7 +163,7 @@
 <!--                        <suiteXmlFile>build_xmls/Login.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/WhatsAppContact.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/UserManagement.xml</suiteXmlFile>-->
-                        <suiteXmlFile>build_xmls/profile.xml</suiteXmlFile>
+<!--                        <suiteXmlFile>build_xmls/profile.xml</suiteXmlFile>-->
 
 <!--                        Rohini-->
 <!--                        <suiteXmlFile>build_xmls/LeadManagement.xml</suiteXmlFile>-->
@@ -173,7 +173,7 @@
 <!--                        <suiteXmlFile>build_xmls/AgentConfiguration.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/CompanyManagement.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/CompanyPortfolio.xml</suiteXmlFile>-->
-<!--                        <suiteXmlFile>build_xmls/EmailCampaign.xml</suiteXmlFile>-->
+                        <suiteXmlFile>build_xmls/EmailCampaign.xml</suiteXmlFile>
 <!--                        <suiteXmlFile>build_xmls/EmailTemplate.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/KnowledgeBase.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/Product.xml</suiteXmlFile>-->

@@ -218,8 +218,9 @@ public class EmailCampaignPage extends Locators {
         common.click(ECCREATEBUTTON);
 
         common.scroll_To_Element(ECCROWSPERPAGE);
-        common.waitUntilElementToBeVisible("//div[@class=\"MuiBox-root css-10u381a\"]");
-        common.paginationForLargePageSizes("//div[@class=\"MuiBox-root css-10u381a\"]");
+        common.pagination("//p[text()='Contacts']/div");
+//        common.waitUntilElementToBeVisible("//div[@class=\"MuiBox-root css-10u381a\"]");
+//        common.paginationForLargePageSizes("//div[@class=\"MuiBox-root css-10u381a\"]");
     }
 
     public void verifyPaginationInsideViewContact() {
@@ -246,19 +247,23 @@ public class EmailCampaignPage extends Locators {
 
         common.waitUntilElementToBeVisible(ECCTEMPLATEINPUT);
         common.click(ECCTEMPLATEINPUT);
-        common.selectRandomDropDownValue(ECCDROPDOWNLIST);
+        common.twoDownKeyAndEnter();
+//        common.selectRandomDropDownValue(ECCDROPDOWNLIST);
 
         common.waitUntilElementToBeVisible(ECCCATEGORYINPUT);
         common.click(ECCCATEGORYINPUT);
-        common.selectRandomDropDownValue(ECCDROPDOWNLIST);
+        common.twoDownKeyAndEnter();
+//        common.selectRandomDropDownValue(ECCDROPDOWNLIST);
 
         common.waitUntilElementToBeVisible(ECCPRODUCTINPUT);
         common.click(ECCPRODUCTINPUT);
-        common.selectRandomDropDownValue(ECCDROPDOWNLIST);
+        common.twoDownKeyAndEnter();
+//        common.selectRandomDropDownValue(ECCDROPDOWNLIST);
 
         common.waitUntilElementToBeVisible(ECCCAMPAIGNCONTACTGROUP);
         common.click(ECCCAMPAIGNCONTACTGROUP);
-        common.selectRandomDropDownValue(ECCCAMPAIGNCONTACTGROUP);
+        common.twoDownKeyAndEnter();
+//        common.selectRandomDropDownValue(ECCCAMPAIGNCONTACTGROUP);
 
         String selectedTemplateSubject = common.getAttribute(ECCSUBJECTNPUT,"value");
         if (selectedTemplateSubject != null) {
@@ -371,30 +376,42 @@ public class EmailCampaignPage extends Locators {
     public void viewEmailCampaign() {
         goToEmailCampaignPage();
 
-        String firstRow = "//div[@data-rowindex=\"0\"]";
-        String firstRowView = "(//button[@aria-label=\"View\"])[1]";
-        String name =common.getText( "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"name\"]");
 
-        String catName = common.getText("//div[@data-rowindex=\"0\"]/child::div[@data-field=\"category__name\"]");
-
-        String desc = common.getText("//div[@data-rowindex=\"0\"]/child::div[@data-field=\"product__name\"]");
+        String firstRow = "//div[@data-rowindex=\"0\"]|//tbody/tr[1]";
+        String firstRowView = "(//button[@aria-label=\"View\"])[1]| //tr[1]//button";
 
 
+        common.pause(10);
+        common.waitUntilElementToBeVisible(firstRow);
+         String name =common.getText( "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"name\"] |//tr[1]/td[2]");
+
+        String catName = common.getText("//div[@data-rowindex=\"0\"]/child::div[@data-field=\"category__name\"] |//tr[1]/td[3]");
+
+        String desc = common.getText("//div[@data-rowindex=\"0\"]/child::div[@data-field=\"product__name\"] | //tr[1]/td[4]");
 
         common.waitUntilElementToBeVisible(firstRow);
         if(!common.isElementDisplayed(firstRow)){
         common.logPrint("No Data Found: ");
         }
         common.click(firstRowView);
+        common.pause(10);
+        common.waitUntilElementToBeVisible("//span[text()='Campaign Name']/following::input[1]");
 
-        String nameInput = "//span[text()='Name']/following::input[1]";
-        String catNameInput = "//span[text()='Name']/following::input[2]";
-        String descInput = "//span[text()='Name']/following::input[4]";
+        String nameInput = common.getAttribute("//span[text()='Name']/following::input[1]|//span[text()='Campaign Name']/following::input[1]","value");
+        String catNameInput = common.getAttribute("//span[text()='Name']/following::input[2]|//span[text()='Campaign Name']/following::input[3]","value");
+        String descInput = common.getAttribute("//span[text()='Name']/following::input[4]|//span[text()='Campaign Name']/following::input[4]","value");
 
-        common.click(firstRowView);
-        if(nameInput.equals(name) && catNameInput.equals(catName) && descInput.equals(desc)){
-            common.logPrint("Email Campaign Page Successfully loaded after View as: " +nameInput+" equlas "+name+" and "+catNameInput+" equals " +descInput+ " equals "+ descInput+ ".");
+        common.logPrint("Grid values -> Name: " + name + ", Category: " + catName + ", Product: " + desc);
+        common.logPrint("View values -> Name: " + nameInput + ", Category: " + catNameInput + ", Product: " + descInput);
+
+        if (nameInput.equals(name) && catNameInput.equals(catName) && descInput.equals(desc)) {
+            common.logPrint("Email Campaign Page successfully loaded after View. Name, Category, and Product values match.");
+        } else {
+            common.logPrint("Email Campaign Page view validation failed. Expected Name: " + name + ", Actual Name: " + nameInput
+                    + " | Expected Category: " + catName + ", Actual Category: " + catNameInput
+                    + " | Expected Product: " + desc + ", Actual Product: " + descInput);
         }
+        
 
 
 
@@ -404,8 +421,8 @@ public class EmailCampaignPage extends Locators {
 
         goToEmailCampaignPage();
 
-        String emailCampaignName = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"name\"]";
-        String  emailCampaignIntegration = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"integration_email\"]";
+        String emailCampaignName = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"name\"]|//tbody/tr[1]/td[2]";
+        String  emailCampaignIntegration = "//div[@data-rowindex=\"0\"]/child::div[@data-field=\"integration_email\"]|//tbody/tr[1]/td[5]";
 
         common.waitUntilElementToBeVisible(emailCampaignName);
         String emailCampaignNameValue = common.getText(emailCampaignName);
