@@ -132,7 +132,7 @@ public class BasePage {
             options.addArguments("--remote-allow-origins=*");
             options.addArguments(
                     "user-agent=Mozilla/5.0 (Linux; Android 8.0.0; TA-1053 Build/OPR1.170623.026) AppleWebKit/537.36 (HTML, like Gecko) Chrome/73.0.3683.0 Mobile Safari/537.36");
-            driver.set(new ChromeDriver(options));
+            driver.set(HealingWebDriver.wrap(new ChromeDriver(options)));
         }
         else if (browser.equalsIgnoreCase("edge")) {
 
@@ -147,7 +147,7 @@ public class BasePage {
                 options.addArguments("user-agent=Mozilla/5.0 (Linux; Android 8.0.0; TA-1053 Build/OPR1.170623.026) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.0 Mobile Safari/537.36");
             }
 
-            driver.set(new EdgeDriver(options)); // Pass options to EdgeDriver
+            driver.set(HealingWebDriver.wrap(new EdgeDriver(options))); // Pass options to EdgeDriver
 
         }
         else if (browser.equals("firefox")) {
@@ -160,7 +160,7 @@ public class BasePage {
                 options.addArguments("--headless");
             }
 
-            driver.set(new FirefoxDriver(options));
+            driver.set(HealingWebDriver.wrap(new FirefoxDriver(options)));
         }
 
         getDriver().manage().window().maximize();

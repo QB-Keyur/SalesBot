@@ -438,8 +438,7 @@ public class Common extends Locators {
 
     public WebElement waitUntilElementToBeVisible(String locator) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
-        // or use By.cssSelector(locator) or By.id(locator), etc.
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(findBy(locator)));
         return getWait().ignoring(StaleElementReferenceException.class).until(ExpectedConditions.visibilityOf(element));
     }
 
@@ -480,7 +479,7 @@ public class Common extends Locators {
 
     public boolean isElementDisabled(String locator) {
 
-        WebElement element = waitUntilElementToBeVisible(By.xpath(locator));
+        WebElement element = waitUntilElementToBeVisible(findBy(locator));
         if (!element.isEnabled()) {
             return true;
         }

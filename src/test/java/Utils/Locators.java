@@ -1637,7 +1637,7 @@ public class Locators extends BasePage {
     public static final String ORDERTEMPLATEHEADER = "//h6[contains(text(),'Order Template')]|//h6[contains(text(),'Order Templates')]";
     public static final String INVOICETEMPLATEHEADER = "//h6[contains(text(),'Invoice Template')]|//h6[contains(text(),'Invoice Templates')]";
 
-    public static final String DTSEARCH = "//input[@placeholder='Search...']";
+    public static final String DTSEARCH = "//input[@placeholder='search..']";
     public static final String DTFILTERS = "//button[@type='button']//span[contains(text(),'Filters')]";
     public static final String DTCREATE = "//button[@type='button']//span[contains(text(),'Create')]";
 
