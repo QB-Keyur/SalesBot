@@ -196,19 +196,20 @@ public class EmailCampaignPage extends Locators {
 
     public void verifySearch() {
         goToEmailCampaignPage();
-        common.searchCommon(ECCSEARCHRESULT);
+        common.waitUntilElementToBeVisible("//tbody/tr[1]/td[2]");
+        common.searchCommon("//tbody/tr[1]/td[2]");
     }
 
     public void verifyHorizontalView() {
 
         goToEmailCampaignPage();
-        common.validateHorizontalViewCardCount("//div[@class=\"MuiBox-root css-a7l4db\"]");
+        common.validateHorizontalViewCardCount("//h6[text()='Email Campaign']/following::div[1]");
 
     }
 
     public void verifyPagination() {
         goToEmailCampaignPage();
-        common.pagination("//div[@class=\"MuiBox-root css-a7l4db\"]");
+        common.pagination("//h6[text()='Email Campaign']/following::div[1]");
     }
 
     public void verifyPaginationInsideCreate() {
@@ -292,24 +293,40 @@ public class EmailCampaignPage extends Locators {
 
         common.scroll_To_Element(ECCSEARCHCONTACTS);
         common.waitUntilElementToBeVisible(ECCSEARCHCONTACTS);
-        By ROW_LOCATOR = By.xpath(
-                "//div[@role='rowgroup']//div[@data-rowindex]//div[@data-field='name']"
-        );
+
+        By ROW_LOCATOR = By.xpath("(//tbody)[2]/tr");
 
         common.waitUntilElementToBeVisible(ROW_LOCATOR);
+        common.pause(3);
 
         List<WebElement> rows = driver.findElements(ROW_LOCATOR);
 
         if (rows.isEmpty()) {
             throw new RuntimeException("No contact rows found in Create Email Campaign grid");
+        } else {
+            common.logPrint("Rows count: " + rows.size());
         }
 
         int randomIndex = new Random().nextInt(rows.size());
-        String rowText = rows.get(randomIndex).getText().trim();
 
-        common.type(ECCSEARCHCONTACTS,rowText);
+        common.logPrint("Random Index: " + randomIndex);
+
+        // ✅ Get row element
+        WebElement randomRow = rows.get(randomIndex);
+
+        // ✅ Get 3rd column text
+        WebElement cell = randomRow.findElement(By.xpath("./td[3]"));
+        String rowText = cell.getText().trim();
+
+        common.logPrint("Row Text: " + rowText);
+
+        // ✅ Now type actual value
+        common.type(ECCSEARCHCONTACTS, rowText);
+
         common.pause(1);
+
         common.waitUntilElementToBeVisible(ECCSEARCHCONTACTSVALUE);
+
         common.validateSearch(ECCSEARCHCONTACTSVALUE, rowText);
     }
 
@@ -376,10 +393,8 @@ public class EmailCampaignPage extends Locators {
     public void viewEmailCampaign() {
         goToEmailCampaignPage();
 
-
         String firstRow = "//div[@data-rowindex=\"0\"]|//tbody/tr[1]";
         String firstRowView = "(//button[@aria-label=\"View\"])[1]| //tr[1]//button";
-
 
         common.pause(10);
         common.waitUntilElementToBeVisible(firstRow);
@@ -394,12 +409,15 @@ public class EmailCampaignPage extends Locators {
         common.logPrint("No Data Found: ");
         }
         common.click(firstRowView);
+        common.scroll_To_Element("//p[text()='Campaign Details']");
         common.pause(10);
         common.waitUntilElementToBeVisible("//span[text()='Campaign Name']/following::input[1]");
 
         String nameInput = common.getAttribute("//span[text()='Name']/following::input[1]|//span[text()='Campaign Name']/following::input[1]","value");
         String catNameInput = common.getAttribute("//span[text()='Name']/following::input[2]|//span[text()='Campaign Name']/following::input[3]","value");
         String descInput = common.getAttribute("//span[text()='Name']/following::input[4]|//span[text()='Campaign Name']/following::input[4]","value");
+
+
 
         common.logPrint("Grid values -> Name: " + name + ", Category: " + catName + ", Product: " + desc);
         common.logPrint("View values -> Name: " + nameInput + ", Category: " + catNameInput + ", Product: " + descInput);

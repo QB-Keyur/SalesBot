@@ -774,7 +774,7 @@ public class Locators extends BasePage {
     public static String HomeMenu = "//span[text()='Home']";
     public static String CampaignMenu = "//span[text()='Campaign']";
     public static String whatsappCampaign = "//button[text()='Whatsapp Campaign']";
-    public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
+    public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]|(//tbody)[2]/tr[1]/td[3]";
     public static String WC_REFRESH = "//button[contains(@class,'MuiButton-root')] ";
     public static String WC_PAGEHEADER ="//h6[normalize-space()='WhatsApp Campaign']";
     public static String WCH_NAME ="//span[normalize-space()='Name']";
@@ -869,13 +869,13 @@ public class Locators extends BasePage {
     public static String ECCVIEW= "//button[@type='button']/following::span[text()='View']";
     public static String ECCMESSAGECONTENT= "//p[text()='Message Content']";
     public static String ECCSUBJECT= "//span[text()='Subject']";
-    public static String ECCSUBJECTNPUT= "//input[@placeholder=\"Email subject\"]";
+    public static String ECCSUBJECTNPUT= "//input[@placeholder=\"Email Subject\"]";
     public static String ECCBODY= "//p[text()='Body']";
     public static String ECCBODYTOOLBAR= "//div[@class=\"ql-toolbar ql-snow\"]";
     public static String ECCTEMPLATEBODY= "//div[@data-placeholder=\"Email template body will appear here\"]";
     public static String ECCENABLEAI= "//p[text()='Enable AI']";
-    public static String ECCENABLEAIYES= "//div[contains(@class,'css-1fw1vid')] | //div[contains(@class,'css-kg2as0')]";
-    public static String ECCENABLEAINO= "//div[contains(@class,'css-yf7rws')] | //div[contains(@class,'css-12xpge1')]";
+    public static String ECCENABLEAIYES= "//p[normalize-space()='Yes']";
+    public static String ECCENABLEAINO= "//p[normalize-space()='No']";
     public static String ECCCONTACTS= "//p[text()='Contacts']";
     public static String ECCSEARCHCONTACTS= "//input[@placeholder=\"Search contacts...\"]";
     //  public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
@@ -889,7 +889,7 @@ public class Locators extends BasePage {
     public static String ECCROWSPERPAGE= "//p[text()='Rows per page:'] | //p[text()='Show']";
     public static String ECCPREVIOUSPAGE= "//button[@aria-label=\"Go to previous page\"]";
     public static String ECCNEXTPAGE= "//button[@aria-label=\"Go to next page\"]";
-    public static String ECCSEARCHRESULT= "(//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
+    public static String ECCSEARCHRESULT= "(//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"])[1]|//tbody/tr[1]/td[2]";
     public static String ECCDROPDOWNLIST= "//ul[@class='MuiAutocomplete-listbox css-1sg36vf']";
     public static String ECCBODYVALUE= "//div[@data-placeholder=\"Email template body will appear here\"]/child::p";
     public static String ECCRUNCAMPAIGN= "//button[@type='button']/following::span[text()='Run Campaign'] | //span[text()=\"Save\"]/parent::button";
