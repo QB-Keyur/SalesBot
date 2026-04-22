@@ -51,6 +51,9 @@ public class BasePage {
     public LeadManagementPage lead;
     public KnowledgeBasePage knowledgeBasePage;
     public WhatsAppTemplatePage whatsAppTemplatePage;
+    public QuotationTemplatePage quotationTemplatePage;
+    public OrderTemplatePage orderTemplatePage;
+    public InvoiceTemplatePage invoiceTemplatePage;
     public profilePage profilePage;
     public WhatsAppCampaignPage WhatsAppCPage;
     public EmailTemplatePage emailTemplatePage;
@@ -170,6 +173,9 @@ public class BasePage {
         lead = new LeadManagementPage(getDriver());
         knowledgeBasePage = new KnowledgeBasePage(getDriver());
         whatsAppTemplatePage = new WhatsAppTemplatePage(getDriver());
+        quotationTemplatePage = new QuotationTemplatePage(getDriver());
+        orderTemplatePage = new OrderTemplatePage(getDriver());
+        invoiceTemplatePage = new InvoiceTemplatePage(getDriver());
         profilePage = new profilePage(getDriver());
         WhatsAppCPage = new WhatsAppCampaignPage(getDriver());
         emailTemplatePage = new EmailTemplatePage(getDriver());

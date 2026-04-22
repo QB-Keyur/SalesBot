@@ -173,7 +173,10 @@
 <!--                        <suiteXmlFile>build_xmls/AgentConfiguration.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/CompanyManagement.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/CompanyPortfolio.xml</suiteXmlFile>-->
-                        <suiteXmlFile>build_xmls/EmailCampaign.xml</suiteXmlFile>
+<!--                        <suiteXmlFile>build_xmls/EmailCampaign.xml</suiteXmlFile>-->
+                        <suiteXmlFile>build_xmls/QuotationTemplate.xml</suiteXmlFile>
+                        <suiteXmlFile>build_xmls/OrderTemplate.xml</suiteXmlFile>
+                        <suiteXmlFile>build_xmls/InvoiceTemplate.xml</suiteXmlFile>
 <!--                        <suiteXmlFile>build_xmls/EmailTemplate.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/KnowledgeBase.xml</suiteXmlFile>-->
 <!--                        <suiteXmlFile>build_xmls/Product.xml</suiteXmlFile>-->

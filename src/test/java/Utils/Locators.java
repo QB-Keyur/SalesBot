@@ -1628,4 +1628,56 @@ public class Locators extends BasePage {
     public static final String ASC_DESCRIPTION_INPUT_REL = "//span[text()='Description']/ancestor::label/following::input[1]";
     public static final String ASC_ADDITIONAL_INFO_INPUT_REL = "//span[text()='Additional Info']/ancestor::label/following::input[1]";
 
+    // ================= DOCUMENT TEMPLATES =================
+    public static final String QUOTATIONTEMPLATEMENU = "//button[text()='Quotation Template']";
+    public static final String ORDERTEMPLATEMENU = "//button[text()='Order Template']";
+    public static final String INVOICETEMPLATEMENU = "//button[text()='Invoice Template']";
+
+    public static final String QUOTATIONTEMPLATEHEADER = "//h6[contains(text(),'Quotation Template')]|//h6[contains(text(),'Quotation Templates')]";
+    public static final String ORDERTEMPLATEHEADER = "//h6[contains(text(),'Order Template')]|//h6[contains(text(),'Order Templates')]";
+    public static final String INVOICETEMPLATEHEADER = "//h6[contains(text(),'Invoice Template')]|//h6[contains(text(),'Invoice Templates')]";
+
+    public static final String DTSEARCH = "//input[@placeholder='Search...']";
+    public static final String DTFILTERS = "//button[@type='button']//span[contains(text(),'Filters')]";
+    public static final String DTCREATE = "//button[@type='button']//span[contains(text(),'Create')]";
+
+    public static final String DTCREATEHEADER = "//h6[contains(text(),'Create Quotation Template')] | //h6[contains(text(),'Create Order Template')] | //h6[contains(text(),'Create Invoice Template')]";
+    public static final String DTTEMPLATEDETAILS = "//p[contains(text(),'Template Details')]";
+    public static final String DTTEMPLATENAME = "//span[contains(text(),'Template Name')]";
+    public static final String DTTEMPLATENAMEINPUT = "//input[@placeholder='Enter template name' or @placeholder='Enter Template Name']";
+    public static final String DTUPLOADHEADERLOGO = "//input[@id='header-logo-upload']/following-sibling::div[@role='button']";
+    public static final String DTUPLOADHEADERLOGOINPUT = "//input[@id='header-logo-upload' and @type='file']|//input[@id='header-logo-upload' and @type='file']/parent::div";
+    public static final String DTUPLOADHEADERLOGOBUTTON = "//input[@id='header-logo-upload']/following-sibling::div[@role='button']";
+    public static final String DTDEFAULTTEMPLATE = "//span[contains(text(),'Is Default Template')]";
+    public static final String DTDEFAULTTEMPLATETOGGLE = "//button[@role='switch']";
+    public static final String DTFROMSECTION = "//p[contains(text(),'From')]";
+    public static final String DTFROMBODYTEXTAREA = "//textarea[@name='from_body']";
+    public static final String DTFROMADDCVARIABLE = "(//button[.//span[contains(text(),'Add Variable')]])[1]";
+    public static final String DTTOSECTION = "//p[contains(text(),'To')]";
+    public static final String DTTOBODYTEXTAREA = "//textarea[@name='to_body']";
+    public static final String DTTOADDCVARIABLE = "(//button[.//span[contains(text(),'Add Variable')]])[2]";
+    public static final String DTTERMSANDCONDITIONS = "//p[contains(text(),'Terms & Conditions')]";
+    public static final String DTTERMSANDCONDITIONSINPUT = "//textarea[@name='terms_and_conditions']";
+    public static final String DTFOOTERCONTENT = "//p[contains(text(),'Footer Content')]";
+    public static final String DTFOOTERINPUT = "//input[@name='footer']";
+    public static final String DTSIGNATUREUPLOAD = "//span[contains(text(),'Signature Upload')]";
+    public static final String DTSIGNATUREUPLOADINPUT = "//input[@id='signature-upload']|//input[@id='signature-upload']/parent::div";
+    public static final String DTLIVEPREVIEW = "//p[contains(text(),'Live Preview')]";
+    public static final String DTCANCELBUTTON = "//span[contains(text(),'Cancel')]/ancestor::button";
+    public static final String DTSAVEBUTTON = "//span[contains(text(),'Save')]/ancestor::button";
+    public static final String DTROWACTIONBUTTON = "(//tr//button)[1]";
+    public static final String DTVIEWMENUITEM = "//li[@role='menuitem'][.//span[normalize-space()='View']]";
+    public static final String DTEDITMENUITEM = "//li[@role='menuitem'][.//span[normalize-space()='Edit']]";
+    public static final String DTDELETEMENUITEM = "//li[@role='menuitem'][.//span[normalize-space()='Delete']]";
+    public static final String DTDELETECANCELBUTTON = "//span[contains(text(),'Cancel')]/ancestor::button";
+    public static final String DTDELETECONFIRMBUTTON = "//span[contains(text(),'Delete')]/ancestor::button";
+
+    public static final String DTTEMPLATENAMEVALIDATION = "//p[contains(text(),'Template name is required')]";
+    public static final String DTUPLOADHEADERLOGOVALIDATION = "//span[contains(text(),'Header logo is required')]";
+    public static final String DTFROMBODYVALIDATION = "//p[contains(text(),'From body is required')]";
+    public static final String DTTOBODYVALIDATION = "//p[contains(text(),'To body is required')]";
+    public static final String DTCREATEDSUCCESS = "//div[contains(text(),'created successfully') or contains(text(),'Created successfully')]";
+    public static final String DTUPDATEDSUCCESS = "//div[contains(text(),'updated successfully') or contains(text(),'Updated successfully')]";
+    public static final String DTDELETEDSUCCESS = "//div[contains(text(),'Delete successfully') or contains(text(),'delete successfully')]";
+
 }
