@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Quotation Template Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <listeners>
+        <listener class-name="Utils.RetryListener"/>
+    </listeners>
+
+    <test name="Navigate to Quotation Template Page">
+        <classes>
+            <class name="Tests.QuotationTemplateTest">
+                <methods>
+                    <include name="goToQuotationTemplatePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify Quotation Template page toolbar elements">
+        <classes>
+            <class name="Tests.QuotationTemplateTest">
+                <methods>
+                    <include name="verifyPageToolbarElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify Quotation Template create page UI elements">
+        <classes>
+            <class name="Tests.QuotationTemplateTest">
+                <methods>
+                    <include name="verifyCreatePageUIElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify mandatory fields on Quotation Template">
+        <classes>
+            <class name="Tests.QuotationTemplateTest">
+                <methods>
+                    <include name="verifyMandatoryFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify create quotation template">
+        <classes>
+            <class name="Tests.QuotationTemplateTest">
+                <methods>
+                    <include name="createQuotationTemplate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify read quotation template">
+        <classes>
+            <class name="Tests.QuotationTemplateTest">
+                <methods>
+                    <include name="readQuotationTemplate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify update quotation template">
+        <classes>
+            <class name="Tests.QuotationTemplateTest">
+                <methods>
+                    <include name="updateQuotationTemplate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify delete quotation template">
+        <classes>
+            <class name="Tests.QuotationTemplateTest">
+                <methods>
+                    <include name="deleteQuotationTemplate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify cancel button on Quotation Template">
+        <classes>
+            <class name="Tests.QuotationTemplateTest">
+                <methods>
+                    <include name="verifyCancelButton"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

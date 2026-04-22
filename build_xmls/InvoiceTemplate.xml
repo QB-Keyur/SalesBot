@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Invoice Template Module Test Cases"
+       verbose="10"
+       parallel="tests"
+       thread-count="3"
+       allow-return-values="true">
+
+    <listeners>
+        <listener class-name="Utils.RetryListener"/>
+    </listeners>
+
+    <test name="Navigate to Invoice Template Page">
+        <classes>
+            <class name="Tests.InvoiceTemplateTest">
+                <methods>
+                    <include name="goToInvoiceTemplatePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify Invoice Template page toolbar elements">
+        <classes>
+            <class name="Tests.InvoiceTemplateTest">
+                <methods>
+                    <include name="verifyPageToolbarElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify Invoice Template create page UI elements">
+        <classes>
+            <class name="Tests.InvoiceTemplateTest">
+                <methods>
+                    <include name="verifyCreatePageUIElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify mandatory fields on Invoice Template">
+        <classes>
+            <class name="Tests.InvoiceTemplateTest">
+                <methods>
+                    <include name="verifyMandatoryFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify create invoice template">
+        <classes>
+            <class name="Tests.InvoiceTemplateTest">
+                <methods>
+                    <include name="createInvoiceTemplate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify read invoice template">
+        <classes>
+            <class name="Tests.InvoiceTemplateTest">
+                <methods>
+                    <include name="readInvoiceTemplate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify update invoice template">
+        <classes>
+            <class name="Tests.InvoiceTemplateTest">
+                <methods>
+                    <include name="updateInvoiceTemplate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify delete invoice template">
+        <classes>
+            <class name="Tests.InvoiceTemplateTest">
+                <methods>
+                    <include name="deleteInvoiceTemplate"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify cancel button on Invoice Template">
+        <classes>
+            <class name="Tests.InvoiceTemplateTest">
+                <methods>
+                    <include name="verifyCancelButton"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

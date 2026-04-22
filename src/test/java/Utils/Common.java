@@ -3822,28 +3822,30 @@ public class Common extends Locators {
 
     public void selectRandomRowCheckbox() {
 
-        List<WebElement> rows = driver.findElements(
-                By.xpath("//div[@role='rowgroup']//div[@data-rowindex]")
-        );
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Wait until rows are loaded
+        List<WebElement> rows = wait.until(driver -> {
+            List<WebElement> elems = driver.findElements(
+                    By.xpath("(//tbody)[2]/tr")
+            );
+            return elems.size() > 0 ? elems : null;
+        });
 
         if (rows.isEmpty()) {
-            throw new RuntimeException("No rows found inside rowgroup");
+            throw new RuntimeException("No rows found in tbody[2]");
         }
 
+        // Pick random row
         int randomIndex = new Random().nextInt(rows.size());
         WebElement randomRow = rows.get(randomIndex);
 
-        // Read attribute before DOM update
-        String rowIndex = randomRow.getAttribute("data-rowindex");
+        // Click first column (checkbox cell)
+        WebElement checkboxCell = randomRow.findElement(By.xpath("./td[1]"));
 
-        // Build row-scoped checkbox XPath (STRING)
-        String checkboxXpath =
-                "//div[@role='rowgroup']//div[@data-rowindex='" + rowIndex + "']" +
-                        "//input[contains(@class,'css-j8yymo')]";
+        checkboxCell.click();
 
-        selectCheckbox(checkboxXpath);
-
-        logPrint("Checkbox selected for row index: " + rowIndex);
+        logPrint("Clicked checkbox for row index: " + (randomIndex + 1));
     }
 
     private String activeContext = "";

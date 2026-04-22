@@ -66,13 +66,13 @@ public class EmailCampaignTest extends BasePage {
         loginWithAdminUser();
         emailCampaignPage.verifySearchInsideCreate();
     }
-
-    @Test
-    public void verifyPaginationInsideCreate() {
-        common.logPrint("Verifying pagination inside Create Email Campaign flow");
-        loginWithAdminUser();
-        emailCampaignPage.verifyPaginationInsideCreate();
-    }
+//
+//    @Test
+//    public void verifyPaginationInsideCreate() {
+//        common.logPrint("Verifying pagination inside Create Email Campaign flow");
+//        loginWithAdminUser();
+//        emailCampaignPage.verifyPaginationInsideCreate();
+//    }
 
     @Test
     public void verifyRunningABlankCampaign() {

@@ -774,7 +774,7 @@ public class Locators extends BasePage {
     public static String HomeMenu = "//span[text()='Home']";
     public static String CampaignMenu = "//span[text()='Campaign']";
     public static String whatsappCampaign = "//button[text()='Whatsapp Campaign']";
-    public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
+    public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]|(//tbody)[2]/tr[1]/td[3]";
     public static String WC_REFRESH = "//button[contains(@class,'MuiButton-root')] ";
     public static String WC_PAGEHEADER ="//h6[normalize-space()='WhatsApp Campaign']";
     public static String WCH_NAME ="//span[normalize-space()='Name']";
@@ -869,13 +869,13 @@ public class Locators extends BasePage {
     public static String ECCVIEW= "//button[@type='button']/following::span[text()='View']";
     public static String ECCMESSAGECONTENT= "//p[text()='Message Content']";
     public static String ECCSUBJECT= "//span[text()='Subject']";
-    public static String ECCSUBJECTNPUT= "//input[@placeholder=\"Email subject\"]";
+    public static String ECCSUBJECTNPUT= "//input[@placeholder=\"Email Subject\"]";
     public static String ECCBODY= "//p[text()='Body']";
     public static String ECCBODYTOOLBAR= "//div[@class=\"ql-toolbar ql-snow\"]";
     public static String ECCTEMPLATEBODY= "//div[@data-placeholder=\"Email template body will appear here\"]";
     public static String ECCENABLEAI= "//p[text()='Enable AI']";
-    public static String ECCENABLEAIYES= "//div[contains(@class,'css-1fw1vid')] | //div[contains(@class,'css-kg2as0')]";
-    public static String ECCENABLEAINO= "//div[contains(@class,'css-yf7rws')] | //div[contains(@class,'css-12xpge1')]";
+    public static String ECCENABLEAIYES= "//p[normalize-space()='Yes']";
+    public static String ECCENABLEAINO= "//p[normalize-space()='No']";
     public static String ECCCONTACTS= "//p[text()='Contacts']";
     public static String ECCSEARCHCONTACTS= "//input[@placeholder=\"Search contacts...\"]";
     //  public static String ECCSEARCHCONTACTSVALUE = "(//div[@data-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
@@ -889,7 +889,7 @@ public class Locators extends BasePage {
     public static String ECCROWSPERPAGE= "//p[text()='Rows per page:'] | //p[text()='Show']";
     public static String ECCPREVIOUSPAGE= "//button[@aria-label=\"Go to previous page\"]";
     public static String ECCNEXTPAGE= "//button[@aria-label=\"Go to next page\"]";
-    public static String ECCSEARCHRESULT= "(//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"])[1]";
+    public static String ECCSEARCHRESULT= "(//div[@aria-colindex=\"2\" and @aria-rowspan=\"1\"])[1]|//tbody/tr[1]/td[2]";
     public static String ECCDROPDOWNLIST= "//ul[@class='MuiAutocomplete-listbox css-1sg36vf']";
     public static String ECCBODYVALUE= "//div[@data-placeholder=\"Email template body will appear here\"]/child::p";
     public static String ECCRUNCAMPAIGN= "//button[@type='button']/following::span[text()='Run Campaign'] | //span[text()=\"Save\"]/parent::button";
@@ -1627,5 +1627,57 @@ public class Locators extends BasePage {
     public static final String ASC_ASSET_NAME_INPUT_REL = "//span[text()='Asset Name']/ancestor::label/following::input[1]";
     public static final String ASC_DESCRIPTION_INPUT_REL = "//span[text()='Description']/ancestor::label/following::input[1]";
     public static final String ASC_ADDITIONAL_INFO_INPUT_REL = "//span[text()='Additional Info']/ancestor::label/following::input[1]";
+
+    // ================= DOCUMENT TEMPLATES =================
+    public static final String QUOTATIONTEMPLATEMENU = "//button[text()='Quotation Template']";
+    public static final String ORDERTEMPLATEMENU = "//button[text()='Order Template']";
+    public static final String INVOICETEMPLATEMENU = "//button[text()='Invoice Template']";
+
+    public static final String QUOTATIONTEMPLATEHEADER = "//h6[contains(text(),'Quotation Template')]|//h6[contains(text(),'Quotation Templates')]";
+    public static final String ORDERTEMPLATEHEADER = "//h6[contains(text(),'Order Template')]|//h6[contains(text(),'Order Templates')]";
+    public static final String INVOICETEMPLATEHEADER = "//h6[contains(text(),'Invoice Template')]|//h6[contains(text(),'Invoice Templates')]";
+
+    public static final String DTSEARCH = "//input[@placeholder='Search...']";
+    public static final String DTFILTERS = "//button[@type='button']//span[contains(text(),'Filters')]";
+    public static final String DTCREATE = "//button[@type='button']//span[contains(text(),'Create')]";
+
+    public static final String DTCREATEHEADER = "//h6[contains(text(),'Create Quotation Template')] | //h6[contains(text(),'Create Order Template')] | //h6[contains(text(),'Create Invoice Template')]";
+    public static final String DTTEMPLATEDETAILS = "//p[contains(text(),'Template Details')]";
+    public static final String DTTEMPLATENAME = "//span[contains(text(),'Template Name')]";
+    public static final String DTTEMPLATENAMEINPUT = "//input[@placeholder='Enter template name' or @placeholder='Enter Template Name']";
+    public static final String DTUPLOADHEADERLOGO = "//input[@id='header-logo-upload']/following-sibling::div[@role='button']";
+    public static final String DTUPLOADHEADERLOGOINPUT = "//input[@id='header-logo-upload' and @type='file']|//input[@id='header-logo-upload' and @type='file']/parent::div";
+    public static final String DTUPLOADHEADERLOGOBUTTON = "//input[@id='header-logo-upload']/following-sibling::div[@role='button']";
+    public static final String DTDEFAULTTEMPLATE = "//span[contains(text(),'Is Default Template')]";
+    public static final String DTDEFAULTTEMPLATETOGGLE = "//button[@role='switch']";
+    public static final String DTFROMSECTION = "//p[contains(text(),'From')]";
+    public static final String DTFROMBODYTEXTAREA = "//textarea[@name='from_body']";
+    public static final String DTFROMADDCVARIABLE = "(//button[.//span[contains(text(),'Add Variable')]])[1]";
+    public static final String DTTOSECTION = "//p[contains(text(),'To')]";
+    public static final String DTTOBODYTEXTAREA = "//textarea[@name='to_body']";
+    public static final String DTTOADDCVARIABLE = "(//button[.//span[contains(text(),'Add Variable')]])[2]";
+    public static final String DTTERMSANDCONDITIONS = "//p[contains(text(),'Terms & Conditions')]";
+    public static final String DTTERMSANDCONDITIONSINPUT = "//textarea[@name='terms_and_conditions']";
+    public static final String DTFOOTERCONTENT = "//p[contains(text(),'Footer Content')]";
+    public static final String DTFOOTERINPUT = "//input[@name='footer']";
+    public static final String DTSIGNATUREUPLOAD = "//span[contains(text(),'Signature Upload')]";
+    public static final String DTSIGNATUREUPLOADINPUT = "//input[@id='signature-upload']|//input[@id='signature-upload']/parent::div";
+    public static final String DTLIVEPREVIEW = "//p[contains(text(),'Live Preview')]";
+    public static final String DTCANCELBUTTON = "//span[contains(text(),'Cancel')]/ancestor::button";
+    public static final String DTSAVEBUTTON = "//span[contains(text(),'Save')]/ancestor::button";
+    public static final String DTROWACTIONBUTTON = "(//tr//button)[1]";
+    public static final String DTVIEWMENUITEM = "//li[@role='menuitem'][.//span[normalize-space()='View']]";
+    public static final String DTEDITMENUITEM = "//li[@role='menuitem'][.//span[normalize-space()='Edit']]";
+    public static final String DTDELETEMENUITEM = "//li[@role='menuitem'][.//span[normalize-space()='Delete']]";
+    public static final String DTDELETECANCELBUTTON = "//span[contains(text(),'Cancel')]/ancestor::button";
+    public static final String DTDELETECONFIRMBUTTON = "//span[contains(text(),'Delete')]/ancestor::button";
+
+    public static final String DTTEMPLATENAMEVALIDATION = "//p[contains(text(),'Template name is required')]";
+    public static final String DTUPLOADHEADERLOGOVALIDATION = "//span[contains(text(),'Header logo is required')]";
+    public static final String DTFROMBODYVALIDATION = "//p[contains(text(),'From body is required')]";
+    public static final String DTTOBODYVALIDATION = "//p[contains(text(),'To body is required')]";
+    public static final String DTCREATEDSUCCESS = "//div[contains(text(),'created successfully') or contains(text(),'Created successfully')]";
+    public static final String DTUPDATEDSUCCESS = "//div[contains(text(),'updated successfully') or contains(text(),'Updated successfully')]";
+    public static final String DTDELETEDSUCCESS = "//div[contains(text(),'Delete successfully') or contains(text(),'delete successfully')]";
 
 }

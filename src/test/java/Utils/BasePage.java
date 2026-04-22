@@ -51,6 +51,9 @@ public class BasePage {
     public LeadManagementPage lead;
     public KnowledgeBasePage knowledgeBasePage;
     public WhatsAppTemplatePage whatsAppTemplatePage;
+    public QuotationTemplatePage quotationTemplatePage;
+    public OrderTemplatePage orderTemplatePage;
+    public InvoiceTemplatePage invoiceTemplatePage;
     public profilePage profilePage;
     public WhatsAppCampaignPage WhatsAppCPage;
     public EmailTemplatePage emailTemplatePage;
@@ -170,6 +173,9 @@ public class BasePage {
         lead = new LeadManagementPage(getDriver());
         knowledgeBasePage = new KnowledgeBasePage(getDriver());
         whatsAppTemplatePage = new WhatsAppTemplatePage(getDriver());
+        quotationTemplatePage = new QuotationTemplatePage(getDriver());
+        orderTemplatePage = new OrderTemplatePage(getDriver());
+        invoiceTemplatePage = new InvoiceTemplatePage(getDriver());
         profilePage = new profilePage(getDriver());
         WhatsAppCPage = new WhatsAppCampaignPage(getDriver());
         emailTemplatePage = new EmailTemplatePage(getDriver());
@@ -214,11 +220,14 @@ public class BasePage {
 
         String testName = testResult.getName();
         Reporter.setCurrentTestResult(testResult);
+        WebDriver webDriver = getDriver();
 
         if (testResult.getStatus() == 2) {
             Reporter.log("<font color = 'red'><b><i><u><br>Fail :: " + testResult.getName() + "</u></i></b></font>");
-            makeScreenshot(getDriver(), testName);
-            Reporter.log("Failed page URL: "+getDriver().getCurrentUrl());
+            if (webDriver != null) {
+                makeScreenshot(webDriver, testName);
+                Reporter.log("Failed page URL: " + webDriver.getCurrentUrl());
+            }
         }
         // MyScreenRecorder.stopRecording();
         if (testResult.getStatus() == 1) {
@@ -232,9 +241,16 @@ public class BasePage {
 //        }
 //
         Common.printCurrentTime("Ending Time");
-        getDriver().manage().deleteAllCookies();
-        getDriver().quit();
-        driver.remove();
+        try {
+            if (webDriver != null) {
+                webDriver.manage().deleteAllCookies();
+                webDriver.quit();
+            }
+        } catch (Exception e) {
+            Reporter.log("Driver shutdown skipped or failed for " + testName + ": " + e.getMessage(), true);
+        } finally {
+            driver.remove();
+        }
     }
 
     public void makeScreenshot(WebDriver driver, String screenshotName) {
