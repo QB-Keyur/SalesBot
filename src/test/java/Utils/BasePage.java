@@ -220,11 +220,14 @@ public class BasePage {
 
         String testName = testResult.getName();
         Reporter.setCurrentTestResult(testResult);
+        WebDriver webDriver = getDriver();
 
         if (testResult.getStatus() == 2) {
             Reporter.log("<font color = 'red'><b><i><u><br>Fail :: " + testResult.getName() + "</u></i></b></font>");
-            makeScreenshot(getDriver(), testName);
-            Reporter.log("Failed page URL: "+getDriver().getCurrentUrl());
+            if (webDriver != null) {
+                makeScreenshot(webDriver, testName);
+                Reporter.log("Failed page URL: " + webDriver.getCurrentUrl());
+            }
         }
         // MyScreenRecorder.stopRecording();
         if (testResult.getStatus() == 1) {
@@ -238,9 +241,16 @@ public class BasePage {
 //        }
 //
         Common.printCurrentTime("Ending Time");
-        getDriver().manage().deleteAllCookies();
-        getDriver().quit();
-        driver.remove();
+        try {
+            if (webDriver != null) {
+                webDriver.manage().deleteAllCookies();
+                webDriver.quit();
+            }
+        } catch (Exception e) {
+            Reporter.log("Driver shutdown skipped or failed for " + testName + ": " + e.getMessage(), true);
+        } finally {
+            driver.remove();
+        }
     }
 
     public void makeScreenshot(WebDriver driver, String screenshotName) {
