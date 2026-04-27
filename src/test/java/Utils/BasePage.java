@@ -68,6 +68,7 @@ public class BasePage {
     public CustomerPage customerPage;
     public PreSalesPage preSalesPage;
     public LeadAndSalesPipelineLeadPage leadAndSalesPipelineLeadPage;
+    public LeadAndSalesPipelineOpportunityPage leadAndSalesPipelineOpportunityPage;
     public AssetsSharingPage assetsSharingPage;
 
     protected List<String> stringList = new ArrayList<>();
@@ -197,6 +198,7 @@ public class BasePage {
         customerPage = new CustomerPage(getDriver());
         preSalesPage = new PreSalesPage(getDriver());
         leadAndSalesPipelineLeadPage = new LeadAndSalesPipelineLeadPage(getDriver());
+        leadAndSalesPipelineOpportunityPage = new LeadAndSalesPipelineOpportunityPage(getDriver());
         assetsSharingPage = new AssetsSharingPage(getDriver());
         steps.set(1);
         Common.printCurrentTime("Starting Time");

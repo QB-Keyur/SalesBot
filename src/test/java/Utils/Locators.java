@@ -1780,4 +1780,66 @@ public class Locators extends BasePage {
     public static final String LEAD_PIPELINE_PRODUCT_DRAWER_SAVE = "//div[@role='dialog' and .//p[normalize-space()='Select Product']]//button[.//span[normalize-space()='Save']]";
     public static final String LEAD_PIPELINE_PRODUCT_DRAWER_CANCEL = "//div[@role='dialog' and .//p[normalize-space()='Select Product']]//button[.//span[normalize-space()='Cancel']]";
 
+    // Lead & Sales Pipeline Opportunity list page
+    public static final String OPPORTUNITY_HEADER = "//h6[normalize-space()='Opportunity']";
+    public static final String OPPORTUNITY_COUNT = "//h6[normalize-space()='Opportunity']/following-sibling::div";
+    public static final String OPPORTUNITY_SEARCH = "//input[@placeholder='Search...']";
+    public static final String OPPORTUNITY_FILTERS = "//button[.//span[normalize-space()='Filters']]";
+    public static final String OPPORTUNITY_CREATE = "//button[.//span[normalize-space()='Create']]";
+    public static final String OPPORTUNITY_LIST_TAB = "(//button[@role='tab'])[1]";
+    public static final String OPPORTUNITY_GRID_TAB = "(//button[@role='tab'])[2]";
+    public static final String OPPORTUNITY_SR_NO = "//th[.//div[normalize-space()='Sr No.']]";
+    public static final String OPPORTUNITY_NAME_HEADER = "//th[.//div[normalize-space()='Opportunity Name']]";
+    public static final String OPPORTUNITY_CUSTOMER_NAME_HEADER = "//th[.//div[normalize-space()='Customer Name']]";
+    public static final String OPPORTUNITY_ESTIMATED_BUDGET_HEADER = "//th[.//div[normalize-space()='Estimated Budget']]";
+    public static final String OPPORTUNITY_EXPECTED_CLOSE_DATE_HEADER = "//th[.//div[normalize-space()='Expected Close Date']]";
+    public static final String OPPORTUNITY_STATUS_HEADER = "//th[.//div[normalize-space()='Status']]";
+    public static final String OPPORTUNITY_CREATED_DATE_HEADER = "//th[.//div[normalize-space()='Created Date']]";
+    public static final String OPPORTUNITY_ACTIONS_HEADER = "//th[.//div[normalize-space()='Actions']]";
+    public static final String OPPORTUNITY_TABLE_ROWS = "//tbody/tr";
+    public static final String OPPORTUNITY_FIRST_ROW = "(//tbody/tr)[1]";
+    public static final String OPPORTUNITY_NAME_CELL = "(//tbody/tr)[1]/td[2]";
+    public static final String OPPORTUNITY_CUSTOMER_NAME_CELL = "(//tbody/tr)[1]/td[3]";
+    public static final String OPPORTUNITY_ESTIMATED_BUDGET_CELL = "(//tbody/tr)[1]/td[4]";
+    public static final String OPPORTUNITY_EXPECTED_CLOSE_DATE_CELL = "(//tbody/tr)[1]/td[5]";
+    public static final String OPPORTUNITY_STATUS_CELL = "(//tbody/tr)[1]/td[6]";
+    public static final String OPPORTUNITY_CREATED_DATE_CELL = "(//tbody/tr)[1]/td[7]";
+    public static final String OPPORTUNITY_VIEW_BUTTON = "(//tbody/tr)[1]/td[last()]//button[1]";
+    public static final String OPPORTUNITY_EDIT_BUTTON = "(//tbody/tr)[1]/td[last()]//button[2]";
+    public static final String OPPORTUNITY_DELETE_BUTTON = "(//tbody/tr)[1]/td[last()]//button[3]";
+    public static final String OPPORTUNITY_DELETE_CONFIRM_BUTTON = "//span[normalize-space()='Delete']/parent::button | //button[.//span[normalize-space()='Delete']]";
+    public static final String OPPORTUNITY_CANCEL_BUTTON = "//span[normalize-space()='Cancel']/parent::button | //button[.//span[normalize-space()='Cancel']]";
+
+    // Lead & Sales Pipeline Opportunity create page
+    public static final String OPPORTUNITY_CREATE_HEADER = "//h6[normalize-space()='Create Opportunity']";
+    public static final String OPPORTUNITY_CREATE_CANCEL = "//div[.//h6[normalize-space()='Create Opportunity']]//button[.//span[normalize-space()='Cancel']]";
+    public static final String OPPORTUNITY_CREATE_SAVE = "//div[.//h6[normalize-space()='Create Opportunity']]//button[.//span[normalize-space()='Save']]";
+    public static final String OPPORTUNITY_CREATE_BASIC_DETAILS = "//p[normalize-space()='Basic Details']";
+    public static final String OPPORTUNITY_CREATE_NAME = "//input[@name='name' and @placeholder='Enter name']";
+    public static final String OPPORTUNITY_CREATE_CONTACT = "//input[@placeholder='Select contact' and @role='combobox']";
+    public static final String OPPORTUNITY_CREATE_CUSTOMER = "//input[@name='customer' and @placeholder='Customer name']";
+    public static final String OPPORTUNITY_CREATE_ESTIMATED_BUDGET = "//input[@name='estimated_budget' and @placeholder='Enter estimated Budget']";
+    public static final String OPPORTUNITY_CREATE_CONVERSION_PROBABILITY = "//input[@name='conversion_probability' and @placeholder='Enter conversion probability']";
+    public static final String OPPORTUNITY_CREATE_EXPECTED_CLOSE_DATE = "//input[@placeholder='Select expected close date']";
+    public static final String OPPORTUNITY_CREATE_ASSIGNEE = "//input[@placeholder='Select assignee' and @role='combobox']";
+    public static final String OPPORTUNITY_CREATE_REQUIREMENT = "//input[@name='requirement' and @placeholder='Enter requirement']";
+    public static final String OPPORTUNITY_CREATE_PRODUCT_SECTION = "//h6[normalize-space()='Product']";
+    public static final String OPPORTUNITY_SELECT_PRODUCT = "//input[@placeholder=\"Select product\"]";
+    public static final String OPPORTUNITY_CREATE_PRODUCT_SEARCH = "//div[.//h6[normalize-space()='Product']]//input[@placeholder='Search...']";
+    public static final String OPPORTUNITY_CREATE_PRODUCT_ADD = "//div[@aria-label='Please select a product first']//button[.//span[normalize-space()='Add']] | //div[.//h6[normalize-space()='Product']]//button[.//span[normalize-space()='Add']]";
+    public static final String OPPORTUNITY_CREATE_PRODUCT_TABLE = "//div[.//h6[normalize-space()='Product']]//table";
+    public static final String OPPORTUNITY_CREATE_PRODUCT_TABLE_NAME = "//div[.//h6[normalize-space()='Product']]//th[.//div[normalize-space()='Name']]";
+    public static final String OPPORTUNITY_CREATE_PRODUCT_TABLE_QTY = "//div[.//h6[normalize-space()='Product']]//th[.//div[normalize-space()='QTY']]";
+    public static final String OPPORTUNITY_CREATE_PRODUCT_TABLE_UNIT = "//div[.//h6[normalize-space()='Product']]//th[.//div[normalize-space()='Unit']]";
+    public static final String OPPORTUNITY_CREATE_PRODUCT_TABLE_PRICE = "//div[.//h6[normalize-space()='Product']]//th[.//div[normalize-space()='Price per Unit']]";
+    public static final String OPPORTUNITY_CREATE_PRODUCT_TABLE_TAX = "//div[.//h6[normalize-space()='Product']]//th[.//div[normalize-space()='TAX%']]";
+    public static final String OPPORTUNITY_CREATE_PRODUCT_TABLE_DISCOUNT = "//div[.//h6[normalize-space()='Product']]//th[.//div[normalize-space()='Discount']]";
+    public static final String OPPORTUNITY_CREATE_PRODUCT_TABLE_TOTAL = "//div[.//h6[normalize-space()='Product']]//th[.//div[normalize-space()='Total']]";
+    public static final String OPPORTUNITY_CREATE_PRODUCT_TABLE_ACTION = "//div[.//h6[normalize-space()='Product']]//th[.//div[normalize-space()='Action']]";
+    public static final String OPPORTUNITY_CREATE_ORDER_SUMMARY = "//span[normalize-space()='Order Summary']";
+    public static final String OPPORTUNITY_CREATE_ORDER_SUBTOTAL = "//span[normalize-space()='Subtotal:']";
+    public static final String OPPORTUNITY_CREATE_ORDER_DISCOUNT = "//span[normalize-space()='Discount:']";
+    public static final String OPPORTUNITY_CREATE_ORDER_TAX = "//span[normalize-space()='Tax:']";
+    public static final String OPPORTUNITY_CREATE_ORDER_TOTAL = "//span[normalize-space()='Grand Total:']";
+
 }
