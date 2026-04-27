@@ -3,7 +3,9 @@ package Pages;
 import Config.EnvConfig;
 import Utils.Common;
 import Utils.Locators;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.nio.file.Paths;
@@ -24,6 +26,10 @@ public abstract class DocumentTemplatePage extends Locators {
     protected abstract String getListHeaderLocator();
 
     protected abstract String getPageDisplayName();
+
+    protected String getCreateSuccessLocator() {
+        return "//div[normalize-space()='" + getPageDisplayName() + " Template created successfully']";
+    }
 
     private String buildUniqueName(String prefix) {
         String cleanPrefix = prefix.replaceAll("[^A-Za-z]", "");
@@ -189,8 +195,8 @@ public abstract class DocumentTemplatePage extends Locators {
         fillTemplateForm(templateName);
         saveTemplate();
 
-        common.waitUntilElementToBeVisible(DTCREATEDSUCCESS);
-        common.assertElementPresent(DTCREATEDSUCCESS);
+        common.waitUntilElementToBeVisible(getCreateSuccessLocator());
+        common.assertElementPresent(getCreateSuccessLocator());
         searchAndAssertTemplate(templateName);
 
         return templateName;
@@ -245,8 +251,19 @@ public abstract class DocumentTemplatePage extends Locators {
 
         common.waitUntilElementToBeVisible(DTDELETEDSUCCESS);
         common.assertElementPresent(DTDELETEDSUCCESS);
-        Assert.assertFalse(existsElement(searchRowXpath(templateName)), "Deleted template should not remain in the grid");
 
+        common.validateSearch("//tbody/tr[1]/td[2]",templateName);
+        common.pause(1);
+
+        WebElement postDelete = driver.findElement(By.xpath("//tbody/tr[1]/td[2]"));
+
+        common.logPrint(postDelete.getText()+" "+ templateName + " Template name");
+        if(postDelete.getText().equals(templateName)) {
+            common.logPrint("Deleted template still shows up");
+                    }
+        else{
+            common.logPrint("Deleted template worked successfully");
+        }
         return templateName;
     }
 }

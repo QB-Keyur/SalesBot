@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Lead &amp; Sales Pipeline Lead Create Test Cases"
+       verbose="10"
+       parallel="false"
+       allow-return-values="true">
+
+    <listeners>
+        <listener class-name="Utils.RetryListener"/>
+    </listeners>
+
+    <test name="Verify create lead page elements">
+        <classes>
+            <class name="Tests.LeadAndSalesPipelineLeadTest">
+                <methods>
+                    <include name="verifyCreateLeadPageElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Create lead">
+        <classes>
+            <class name="Tests.LeadAndSalesPipelineLeadTest">
+                <methods>
+                    <include name="createLeadOnLeadPipelinePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Edit created lead">
+        <classes>
+            <class name="Tests.LeadAndSalesPipelineLeadTest">
+                <methods>
+                    <include name="editCreatedLeadOnLeadPipelinePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Delete created lead">
+        <classes>
+            <class name="Tests.LeadAndSalesPipelineLeadTest">
+                <methods>
+                    <include name="deleteCreatedLeadOnLeadPipelinePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

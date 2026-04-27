@@ -450,7 +450,7 @@ public class Locators extends BasePage {
     public static String ErrorOnWhatsAppCOntact ="//span[text()='Whatsapp Contact is Required']";
     public static String ErrorOnPrefrredDT ="//span[text()='Preferred Date and Time is required']";
     public static String ErrorOnProduct ="//span[text()='Please select a product']";
-    public static String LEADCREATEDMSG = "//*[contains(text(),'Lead Created successfully')]";
+    public static String LEADCREATEDMSG = "//div[normalize-space()='Lead created successfully'] | //div[normalize-space()='Lead Created successfully']";
     public static String LEADDELETED = "//div[text()='Deleted Successfully']";
     public static String LEADRESET ="//span[text()='Reset']";
     public static String Header_NAME = "//span[text()='Name']";
@@ -475,7 +475,6 @@ public class Locators extends BasePage {
     public static String VPreDT = "//label[.//span[text()='Preferred Date & Time']]/following::input[1]";
     public static String VCREATEAT ="//label[.//span[text()='Created At']]/following::input[1]";
     public static String VClose ="//span[text()='Close']";
-
 
     //Knowledge Base
     public static String KBMENU = "//span[text()='Knowledge Base']";
@@ -1545,6 +1544,38 @@ public class Locators extends BasePage {
     public static String CUSTOMER_DELETE_MSG = "//p[text()='Delete Customer']";
     public static String CUSTOMER_DELETE_MSG2 = "//p[text()='Are you sure you want to permanently delete this Customer?']";
 
+    //Pre-Sales Page
+    public static final String PRE_SALES_MENU = "//button[normalize-space()='Pre-Sales'] | //span[normalize-space()='Pre-Sales']/ancestor::button | //button[normalize-space()='Pre Sales'] | //span[normalize-space()='Pre Sales']/ancestor::button";
+    public static final String PRE_SALES_HEADER = "//h6[normalize-space()='Pre-Sales']";
+    public static final String PRE_SALES_COUNT = "//h6[normalize-space()='Pre-Sales']/following-sibling::div";
+    public static final String PRE_SALES_SEARCH = "//input[@placeholder='Search...']";
+    public static final String PRE_SALES_FILTERS = "//button[.//span[normalize-space()='Filters']]";
+    public static final String PRE_SALES_EXPORT = "//button[.//span[normalize-space()='Export']]";
+    public static final String PRE_SALES_LIST_TAB = "(//button[@role='tab'])[1]";
+    public static final String PRE_SALES_GRID_TAB = "(//button[@role='tab'])[2]";
+    public static final String PRE_SALES_SR_NO = "//th[.//div[normalize-space()='Sr No.']]";
+    public static final String PRE_SALES_CONTACT_NAME_HEADER = "//th[.//div[normalize-space()='Contact Name']]";
+    public static final String PRE_SALES_EMAIL_HEADER = "//th[.//div[normalize-space()='Email']]";
+    public static final String PRE_SALES_PHONE_HEADER = "//th[.//div[normalize-space()='Phone']]";
+    public static final String PRE_SALES_SOURCE_HEADER = "//th[.//div[normalize-space()='Source']]";
+    public static final String PRE_SALES_THRESHOLD_SCORE_HEADER = "//th[.//div[normalize-space()='Threshold Score']]";
+    public static final String PRE_SALES_PROBING_SCORE_HEADER = "//th[.//div[normalize-space()='Probing Score']]";
+    public static final String PRE_SALES_CREATED_DATE_HEADER = "//th[.//div[normalize-space()='Created Date']]";
+    public static final String PRE_SALES_ACTIONS_HEADER = "//th[.//div[normalize-space()='Actions']]";
+    public static final String PRE_SALES_TABLE_ROWS = "//tbody/tr";
+    public static final String PRE_SALES_FIRST_ROW = "(//tbody/tr)[1]";
+    public static final String PRE_SALES_CONTACT_NAME_CELL = "//tbody/tr/td[2]";
+    public static final String PRE_SALES_FIRST_CONTACT_NAME = "(//tbody/tr)[1]/td[2]";
+    public static final String PRE_SALES_FIRST_EMAIL = "(//tbody/tr)[1]/td[3]";
+    public static final String PRE_SALES_FIRST_PHONE = "(//tbody/tr)[1]/td[4]";
+    public static final String PRE_SALES_FIRST_SOURCE = "(//tbody/tr)[1]/td[5]";
+    public static final String PRE_SALES_FIRST_THRESHOLD_SCORE = "(//tbody/tr)[1]/td[6]";
+    public static final String PRE_SALES_FIRST_PROBING_SCORE = "(//tbody/tr)[1]/td[7]";
+    public static final String PRE_SALES_FIRST_CREATED_DATE = "(//tbody/tr)[1]/td[8]";
+    public static final String PRE_SALES_VIEW_BUTTON = "(//tbody/tr)[1]//span[@aria-label='View']/button";
+    public static final String PRE_SALES_DELETE_BUTTON = "(//tbody/tr)[1]//span[@aria-label='Delete']/button";
+    public static final String PRE_SALES_DELETE_CONFIRM_BUTTON = "//span[normalize-space()='Delete']/parent::button | //button[.//span[normalize-space()='Delete']]";
+
 
     //Assets Sharing Page
 
@@ -1637,7 +1668,7 @@ public class Locators extends BasePage {
     public static final String ORDERTEMPLATEHEADER = "//h6[contains(text(),'Order Template')]|//h6[contains(text(),'Order Templates')]";
     public static final String INVOICETEMPLATEHEADER = "//h6[contains(text(),'Invoice Template')]|//h6[contains(text(),'Invoice Templates')]";
 
-    public static final String DTSEARCH = "//input[@placeholder='search..']";
+    public static final String DTSEARCH = "//input[@placeholder='Search...']";
     public static final String DTFILTERS = "//button[@type='button']//span[contains(text(),'Filters')]";
     public static final String DTCREATE = "//button[@type='button']//span[contains(text(),'Create')]";
 
@@ -1676,8 +1707,77 @@ public class Locators extends BasePage {
     public static final String DTUPLOADHEADERLOGOVALIDATION = "//span[contains(text(),'Header logo is required')]";
     public static final String DTFROMBODYVALIDATION = "//p[contains(text(),'From body is required')]";
     public static final String DTTOBODYVALIDATION = "//p[contains(text(),'To body is required')]";
-    public static final String DTCREATEDSUCCESS = "//div[contains(text(),'created successfully') or contains(text(),'Created successfully')]";
-    public static final String DTUPDATEDSUCCESS = "//div[contains(text(),'updated successfully') or contains(text(),'Updated successfully')]";
-    public static final String DTDELETEDSUCCESS = "//div[contains(text(),'Delete successfully') or contains(text(),'delete successfully')]";
+    public static final String DTCREATEDSUCCESS = "//div[normalize-space()='Lead created successfully'] | //div[normalize-space()='Lead Created successfully']";
+    public static final String DTUPDATEDSUCCESS = "//div[contains(text(),'update')]";
+    public static final String DTDELETEDSUCCESS = "//div[contains(text(),'delete')]";
+
+    // Lead & Sales Pipeline Lead list page
+    public static final String LEAD_PIPELINE_HEADER = "//h6[normalize-space()='Leads']";
+    public static final String LEAD_PIPELINE_COUNT = "//h6[normalize-space()='Leads']/following-sibling::div";
+    public static final String LEAD_PIPELINE_SEARCH = "//input[@placeholder='Search...']";
+    public static final String LEAD_PIPELINE_FILTERS = "//button[.//span[normalize-space()='Filters']]";
+    public static final String LEAD_PIPELINE_EXPORT = "//button[.//span[normalize-space()='Export']]";
+    public static final String LEAD_PIPELINE_CREATE = "//button[.//span[normalize-space()='Create']]";
+    public static final String LEAD_PIPELINE_PIPELINE = "//button[.//span[normalize-space()='Pipeline']]";
+    public static final String LEAD_PIPELINE_LIST_TAB = "(//button[@role='tab'])[1]";
+    public static final String LEAD_PIPELINE_GRID_TAB = "(//button[@role='tab'])[2]";
+    public static final String LEAD_PIPELINE_SR_NO = "//th[.//div[normalize-space()='Sr No.']]";
+    public static final String LEAD_PIPELINE_LEAD_NAME_HEADER = "//th[.//div[normalize-space()='Lead Name']]";
+    public static final String LEAD_PIPELINE_CONTACT_HEADER = "//th[.//div[normalize-space()='Contact']]";
+    public static final String LEAD_PIPELINE_CONTACT_DETAILS_HEADER = "//th[.//div[normalize-space()='Contact details']]";
+    public static final String LEAD_PIPELINE_SOURCE_HEADER = "//th[.//div[normalize-space()='Lead Source']]";
+    public static final String LEAD_PIPELINE_TYPE_HEADER = "//th[.//div[normalize-space()='Lead Type']]";
+    public static final String LEAD_PIPELINE_STATUS_HEADER = "//th[.//div[normalize-space()='Pipeline Status']]";
+    public static final String LEAD_PIPELINE_ASSIGNEE_FIRST_HEADER = "//th[.//div[normalize-space()='Assignee First Name']]";
+    public static final String LEAD_PIPELINE_ASSIGNEE_LAST_HEADER = "//th[.//div[normalize-space()='Assignee Last Name']]";
+    public static final String LEAD_PIPELINE_CALENDLY_HEADER = "//th[.//div[normalize-space()='Calendly Status']]";
+    public static final String LEAD_PIPELINE_MEETING_HEADER = "//th[.//div[normalize-space()='Meeting']]";
+    public static final String LEAD_PIPELINE_PREFERRED_DATE_HEADER = "//th[.//div[normalize-space()='Preferred Date']]";
+    public static final String LEAD_PIPELINE_PREFERRED_TIME_HEADER = "//th[.//div[normalize-space()='Preferred Time']]";
+    public static final String LEAD_PIPELINE_CREATION_TYPE_HEADER = "//th[.//div[normalize-space()='Creation Type']]";
+    public static final String LEAD_PIPELINE_CREATED_DATE_HEADER = "//th[.//div[normalize-space()='Created Date']]";
+    public static final String LEAD_PIPELINE_ACTIONS_HEADER = "//th[.//div[normalize-space()='Actions']]";
+    public static final String LEAD_PIPELINE_TABLE_ROWS = "//tbody/tr";
+    public static final String LEAD_PIPELINE_FIRST_ROW = "(//tbody/tr)[1]";
+    public static final String LEAD_PIPELINE_LEAD_NAME_CELL = "(//tbody/tr)[1]/td[2]";
+    public static final String LEAD_PIPELINE_CONTACT_CELL = "(//tbody/tr)[1]/td[3]";
+    public static final String LEAD_PIPELINE_CONTACT_DETAILS_CELL = "(//tbody/tr)[1]/td[4]";
+    public static final String LEAD_PIPELINE_SOURCE_CELL = "(//tbody/tr)[1]/td[5]";
+    public static final String LEAD_PIPELINE_TYPE_CELL = "(//tbody/tr)[1]/td[6]";
+    public static final String LEAD_PIPELINE_STATUS_CELL = "(//tbody/tr)[1]/td[7]";
+    public static final String LEAD_PIPELINE_ASSIGNEE_FIRST_CELL = "(//tbody/tr)[1]/td[8]";
+    public static final String LEAD_PIPELINE_ASSIGNEE_LAST_CELL = "(//tbody/tr)[1]/td[9]";
+    public static final String LEAD_PIPELINE_CREATED_DATE_CELL = "(//tbody/tr)[1]/td[13]";
+    public static final String LEAD_PIPELINE_VIEW_BUTTON = "(//tbody/tr)[1]/td[last()]//button[1]";
+    public static final String LEAD_PIPELINE_EDIT_BUTTON = "(//tbody/tr)[1]/td[last()]//button[2]";
+    public static final String LEAD_PIPELINE_DELETE_BUTTON = "(//tbody/tr)[1]/td[last()]//button[3]";
+    public static final String LEAD_PIPELINE_DELETE_CONFIRM_BUTTON = "//span[normalize-space()='Delete']/parent::button | //button[.//span[normalize-space()='Delete']]";
+    public static final String LEAD_PIPELINE_CANCEL_BUTTON = "//span[normalize-space()='Cancel']/parent::button | //button[.//span[normalize-space()='Cancel']]";
+
+    // Lead & Sales Pipeline Lead create page
+    public static final String LEAD_PIPELINE_CREATE_HEADER = "//h6[normalize-space()='Create Leads']";
+    public static final String LEAD_PIPELINE_CREATE_CANCEL = "//div[.//h6[normalize-space()='Create Leads']]//button[.//span[normalize-space()='Cancel']]";
+    public static final String LEAD_PIPELINE_CREATE_SAVE = "//div[.//h6[normalize-space()='Create Leads']]//button[.//span[normalize-space()='Save']]";
+    public static final String LEAD_PIPELINE_CREATE_BASIC_DETAILS = "//p[normalize-space()='Basic Details']";
+    public static final String LEAD_PIPELINE_CREATE_LEAD_NAME = "//input[@name='name' and @placeholder='Enter name']";
+    public static final String LEAD_PIPELINE_CREATE_CONTACT = "//div[contains(@class,'MuiAutocomplete-root')][.//span[normalize-space()='Contact']]//input[@role='combobox']|//input[@placeholder=\"Select contact\"]";
+    public static final String LEAD_PIPELINE_CREATE_CONTACT_CLEAR = "//div[contains(@class,'MuiAutocomplete-root')][.//span[normalize-space()='Contact']]//button[@aria-label='Clear']";
+    public static final String LEAD_PIPELINE_CREATE_CUSTOMER = "//input[@name='customer' and @placeholder='Customer name']";
+    public static final String LEAD_PIPELINE_CREATE_LEAD_SOURCE = "//div[contains(@class,'MuiAutocomplete-root')][.//span[normalize-space()='Lead Source']]//input[@role='combobox']|//input[@placeholder=\"Select Source\"]";
+    public static final String LEAD_PIPELINE_CREATE_LEAD_TYPE = "//div[contains(@class,'MuiAutocomplete-root')][.//span[normalize-space()='Lead Type']]//input[@role='combobox']|//input[@placeholder=\"Select Lead Type\"]";
+    public static final String LEAD_PIPELINE_CREATE_PREFERRED_DATE = "//input[@placeholder='Select preferred Date']";
+    public static final String LEAD_PIPELINE_CREATE_PREFERRED_TIME = "//div[contains(@class,'MuiAutocomplete-root')][.//span[normalize-space()='Preferred Time Slot']]//input[@role='combobox']|//input[@placeholder=\"Select preferred time slot\"]";
+    public static final String LEAD_PIPELINE_CREATE_ASSIGNEE = "//div[contains(@class,'MuiAutocomplete-root')][.//span[normalize-space()='Assignee']]//input[@role='combobox']|//input[@placeholder=\"Select assignee\"]";
+    public static final String LEAD_PIPELINE_CREATE_DESCRIPTION = "//input[@name='notes' and @placeholder='Enter description']";
+    public static final String LEAD_PIPELINE_CREATE_PRODUCT_HEADER = "//h6[normalize-space()='Product']";
+    public static final String LEAD_PIPELINE_CREATE_SELECT_PRODUCT = "//button[.//span[normalize-space()='Select Product']]";
+    public static final String LEAD_PIPELINE_PRODUCT_DRAWER = "//div[@role='dialog' and .//p[normalize-space()='Select Product']]";
+    public static final String LEAD_PIPELINE_PRODUCT_DRAWER_TITLE = "//div[@role='dialog' and .//p[normalize-space()='Select Product']]//p[normalize-space()='Select Product']";
+    public static final String LEAD_PIPELINE_PRODUCT_DRAWER_SEARCH = "//div[@role='dialog' and .//p[normalize-space()='Select Product']]//input[@placeholder='Search...']";
+    public static final String LEAD_PIPELINE_PRODUCT_DRAWER_CREATE = "//div[@role='dialog' and .//p[normalize-space()='Select Product']]//button[.//span[normalize-space()='Create']]";
+    public static final String LEAD_PIPELINE_PRODUCT_DRAWER_NO_ROWS = "//div[@role='dialog' and .//p[normalize-space()='Select Product']]//div[normalize-space()='No rows']";
+    public static final String LEAD_PIPELINE_PRODUCT_DRAWER_FIRST_CHECKBOX = "(//div[@role='dialog' and .//p[normalize-space()='Select Product']]//tbody/tr[not(.//td[@colspan='5'])]//input[@type='checkbox'])[1]";
+    public static final String LEAD_PIPELINE_PRODUCT_DRAWER_SAVE = "//div[@role='dialog' and .//p[normalize-space()='Select Product']]//button[.//span[normalize-space()='Save']]";
+    public static final String LEAD_PIPELINE_PRODUCT_DRAWER_CANCEL = "//div[@role='dialog' and .//p[normalize-space()='Select Product']]//button[.//span[normalize-space()='Cancel']]";
 
 }

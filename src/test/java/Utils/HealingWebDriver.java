@@ -1,10 +1,13 @@
 package Utils;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Interactive;
+import org.openqa.selenium.interactions.Sequence;
 import org.testng.Reporter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,12 +15,14 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class HealingWebDriver implements WebDriver, JavascriptExecutor, TakesScreenshot {
+public class HealingWebDriver implements WebDriver, JavascriptExecutor, TakesScreenshot, Interactive {
 
     private static final ConcurrentMap<String, By> HEALED_CACHE = new ConcurrentHashMap<>();
     private static final Pattern QUOTED_TEXT = Pattern.compile("'([^']+)'|\"([^\"]+)\"");
     private static final String INTERACTIVE_SELECTOR =
             "button,input,textarea,select,a,[role='button'],[role='textbox'],[role='option'],[aria-label],[placeholder],[data-testid],[data-qa],[name],[id]";
+    private static final String ALERT_SELECTOR =
+            "[role='alert'],[class*='MuiAlert'],[class*='Snackbar'],[class*='toast'],[aria-live]";
 
     private final WebDriver delegate;
 
@@ -125,6 +130,32 @@ public class HealingWebDriver implements WebDriver, JavascriptExecutor, TakesScr
         return ((TakesScreenshot) delegate).getScreenshotAs(target);
     }
 
+    @Override
+    public void perform(Collection<Sequence> actions) {
+        if (delegate instanceof Interactive interactive) {
+            interactive.perform(actions);
+            return;
+        }
+
+        throw new UnsupportedOperationException(
+                "Underlying driver does not implement org.openqa.selenium.interactions.Interactive: "
+                        + delegate.getClass().getName()
+        );
+    }
+
+    @Override
+    public void resetInputState() {
+        if (delegate instanceof Interactive interactive) {
+            interactive.resetInputState();
+            return;
+        }
+
+        throw new UnsupportedOperationException(
+                "Underlying driver does not implement org.openqa.selenium.interactions.Interactive: "
+                        + delegate.getClass().getName()
+        );
+    }
+
     private WebElement healElement(By originalBy, RuntimeException originalError) {
         String cacheKey = originalBy.toString();
 
@@ -149,6 +180,16 @@ public class HealingWebDriver implements WebDriver, JavascriptExecutor, TakesScr
             } catch (RuntimeException ignored) {
                 // try the next candidate
             }
+        }
+
+        WebElement alertMatch = scoreAlertLikeElements(originalBy);
+        if (alertMatch != null) {
+            By healed = buildLocatorFromElement(alertMatch);
+            if (healed != null) {
+                cacheHealedLocator(cacheKey, healed);
+                logHealing(cacheKey, healed);
+            }
+            return alertMatch;
         }
 
         WebElement bestMatch = scoreInteractiveElements(originalBy);
@@ -221,6 +262,52 @@ public class HealingWebDriver implements WebDriver, JavascriptExecutor, TakesScr
         return candidates;
     }
 
+    private WebElement scoreAlertLikeElements(By originalBy) {
+        String raw = originalBy.toString();
+        String selector = raw.contains(": ") ? raw.substring(raw.indexOf(": ") + 2) : raw;
+        List<String> tokens = extractTokens(selector);
+        List<WebElement> elements = delegate.findElements(By.cssSelector(ALERT_SELECTOR));
+        WebElement best = null;
+        int bestScore = 0;
+
+        for (WebElement element : elements) {
+            if (!isVisible(element)) {
+                continue;
+            }
+
+            String text = safeText(element);
+            if (!isCompactText(text)) {
+                continue;
+            }
+
+            int score = 0;
+            String ariaLabel = safeLower(element.getAttribute("aria-label"));
+            String title = safeLower(element.getAttribute("title"));
+            String role = safeLower(element.getAttribute("role"));
+            String className = safeLower(element.getAttribute("class"));
+
+            if (role.equals("alert") || className.contains("alert") || className.contains("snackbar") || className.contains("toast")) {
+                score += 10;
+            }
+
+            for (String token : tokens) {
+                if (token.isBlank()) {
+                    continue;
+                }
+                if (containsAny(text.toLowerCase(), token) || containsAny(ariaLabel, token) || containsAny(title, token)) {
+                    score += 4;
+                }
+            }
+
+            if (score > bestScore) {
+                bestScore = score;
+                best = element;
+            }
+        }
+
+        return bestScore >= 8 ? best : null;
+    }
+
     private WebElement scoreInteractiveElements(By originalBy) {
         String raw = originalBy.toString();
         String selector = raw.contains(": ") ? raw.substring(raw.indexOf(": ") + 2) : raw;
@@ -233,6 +320,10 @@ public class HealingWebDriver implements WebDriver, JavascriptExecutor, TakesScr
 
         for (WebElement element : elements) {
             if (!isVisible(element)) {
+                continue;
+            }
+
+            if (!isCompactText(safeText(element))) {
                 continue;
             }
 
@@ -407,7 +498,7 @@ public class HealingWebDriver implements WebDriver, JavascriptExecutor, TakesScr
         }
 
         String text = safeText(element);
-        if (!text.isBlank()) {
+        if (isCompactText(text)) {
             return By.xpath("//" + safeTag(element.getTagName()) + "[normalize-space()=" + xpathLiteral(text) + "]");
         }
 
@@ -471,6 +562,27 @@ public class HealingWebDriver implements WebDriver, JavascriptExecutor, TakesScr
 
     private String safeLower(String value) {
         return value == null ? "" : value.trim().toLowerCase();
+    }
+
+    private boolean isCompactText(String text) {
+        if (text == null) {
+            return false;
+        }
+
+        String value = text.trim();
+        if (value.isEmpty()) {
+            return false;
+        }
+
+        if (value.length() > 140) {
+            return false;
+        }
+
+        if (value.chars().filter(ch -> ch == '\n').count() > 1) {
+            return false;
+        }
+
+        return value.split("\\s+").length <= 14;
     }
 
     private String xpathLiteral(String value) {

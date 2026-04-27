@@ -576,21 +576,8 @@ public class Common extends Locators {
             boolean present = isElementPresent(locator);
             Assert.assertTrue(present, "Element not present: " + locator);
 
-            WebElement element = driver.findElement(By.xpath(locator));
-
-            // Try multiple ways to extract meaningful text/value
-            String text =
-                    element.getAttribute("value") != null && !element.getAttribute("value").isEmpty()
-                            ? element.getAttribute("value")
-                            : element.getAttribute("placeholder") != null && !element.getAttribute("placeholder").isEmpty()
-                            ? element.getAttribute("placeholder")
-                            : element.getText() != null && !element.getText().trim().isEmpty()
-                            ? element.getText().trim()
-                            : element.getAttribute("innerText") != null
-                            ? element.getAttribute("innerText")
-                            : "No readable text/value";
-
-            logPrint("Asserted: " + text + " is displayed.");
+            driver.findElement(By.xpath(locator));
+            logPrint("Asserted locator is displayed: " + locator);
 
         } catch (Exception e) {
             logPrint("Assertion FAILED for locator: " + locator + " | Error: " + e.getMessage());
@@ -2479,7 +2466,10 @@ public class Common extends Locators {
 
     public void validateToaster(String expectedMessage) {
 
-        String toasterXpath = "//div[contains(text(),'" + expectedMessage + "')]";
+        String toasterXpath =
+                "//*[(@role='alert' or contains(@class,'MuiAlert') or contains(@class,'Snackbar') or contains(@class,'toast'))"
+                        + " and contains(normalize-space(.),'" + expectedMessage + "')]"
+                        + " | //*[normalize-space()='" + expectedMessage + "']";
 
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

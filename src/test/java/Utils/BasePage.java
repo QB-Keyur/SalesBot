@@ -66,6 +66,8 @@ public class BasePage {
     public WhatsAppIntegrationPage whatsAppIntegrationPage;
     public SMTPIntegrationPage smtpIntegrationPage;
     public CustomerPage customerPage;
+    public PreSalesPage preSalesPage;
+    public LeadAndSalesPipelineLeadPage leadAndSalesPipelineLeadPage;
     public AssetsSharingPage assetsSharingPage;
 
     protected List<String> stringList = new ArrayList<>();
@@ -78,10 +80,15 @@ public class BasePage {
         common.type("//input[@name='password']",password);
         common.waitUntilElementToBeVisible("//button[@type='submit']");
         common.click("//button[@type='submit']");
-        common.assertElementPresent("//div[contains(text(), 'Login successful')]|//p[text()='Dashboard']");
+        common.waitUntilElementToBeVisible("//p[text()='Dashboard']");
         common.logPrint("Login successfully.");
         String CLOSEBUTTON = "//button[@aria-label='Close alert'] | //button[@aria-label='Close']";
-        common.click(CLOSEBUTTON);
+        try {
+            if (existsElement(CLOSEBUTTON)) {
+                common.click(CLOSEBUTTON);
+            }
+        } catch (Exception ignored) {
+        }
     }
     // ================= LOGIN METHODS =================
     public void loginWithAdminUser() {
@@ -188,6 +195,8 @@ public class BasePage {
         whatsAppIntegrationPage = new WhatsAppIntegrationPage(getDriver());
         smtpIntegrationPage = new SMTPIntegrationPage(getDriver());
         customerPage = new CustomerPage(getDriver());
+        preSalesPage = new PreSalesPage(getDriver());
+        leadAndSalesPipelineLeadPage = new LeadAndSalesPipelineLeadPage(getDriver());
         assetsSharingPage = new AssetsSharingPage(getDriver());
         steps.set(1);
         Common.printCurrentTime("Starting Time");
@@ -249,7 +258,7 @@ public class BasePage {
         } catch (Exception e) {
             Reporter.log("Driver shutdown skipped or failed for " + testName + ": " + e.getMessage(), true);
         } finally {
-            driver.remove();
+//            driver.remove();
         }
     }
 
